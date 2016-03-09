@@ -1,0 +1,11 @@
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - gradle build
+  only:
+    - master          # Only build the master git branch
+  tags:
+    - gradle      # Matches the tags you created for your runner
