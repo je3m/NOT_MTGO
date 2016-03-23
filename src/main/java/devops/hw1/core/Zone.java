@@ -43,13 +43,18 @@ public enum Zone {
 
 	/**
 	 *
-	 * @return a list of cards that are within the zone
+	 * @return an array of cards that are within the zone
 	 */
 	public Card[] getCards(){
 
 		return this.cards.toArray(new Card[0]);
 	}
 
+	/**
+	 * Gets the index of the first occurrence of the given card
+	 * @param name name of card
+	 * @return index of the card in the zone
+	 */
 	public int getIndex(String name) {
 		int i = 0;
 		for (Card c : this.cards){
