@@ -8,8 +8,17 @@ import org.junit.Test;
 
 public class ZoneTest {
 
+	public void clearZones(){
+		Zone.BATTLE_FIELD.empty();
+		Zone.EXILE.empty();
+		Zone.GRAVEYARD.empty();
+		Zone.HAND.empty();
+		Zone.LIBRARY.empty();
+	}
+
 	@Test
 	public void testClearZone(){
+		this.clearZones();
 		for (int i = 0; i < 5; i++){
 			Zone.GRAVEYARD.addCard(new Card("Storm Crow"), i);
 		}
@@ -22,7 +31,7 @@ public class ZoneTest {
 
 	@Test
 	public void testContains(){
-		Zone.BATTLE_FIELD.empty();
+		this.clearZones();
 		String[] names = {"Storm Crow",
 				"Scornful Egotist", "One with Nothing", "Sorrow's Path",
 		"Fleshmad Steed"};
@@ -36,10 +45,48 @@ public class ZoneTest {
 		}
 	}
 
+	@Test
+	public void testGetContentsFromMultipleZones(){
+		this.clearZones();
+
+		Card c = new Card("Storm crow");
+		Zone.HAND.addCard(c, 0);
+
+		Card c1 = new Card("island");
+		Zone.BATTLE_FIELD.addCard(c1, 0);
+
+		Card c2 = new Card("Scornful egotist");
+		Zone.GRAVEYARD.addCard(c2, 0);
+
+		assertEquals(c, Zone.HAND.getCards()[0]);
+		assertEquals(c1, Zone.BATTLE_FIELD.getCards()[0]);
+		assertEquals(c2, Zone.GRAVEYARD.getCards()[0]);
+
+	}
+
+
+	@Test
+	public void testGetManyZoneContents(){
+		this.clearZones();
+
+		Card c = new Card("Storm crow");
+		Zone.HAND.addCard(c, 0);
+
+		Card c1 = new Card("island");
+		Zone.HAND.addCard(c1, 1);
+
+		Card c2 = new Card("Scornful egotist");
+		Zone.HAND.addCard(c2, 2);
+
+		assertEquals(c, Zone.HAND.getCards()[0]);
+		assertEquals(c1, Zone.HAND.getCards()[1]);
+		assertEquals(c2, Zone.HAND.getCards()[2]);
+	}
 
 	@Test
 	public void testGetZoneSize(){
-		Zone.BATTLE_FIELD.empty();
+		this.clearZones();
+
 		assertEquals(Zone.BATTLE_FIELD.getSize(), 0);
 
 		Zone.BATTLE_FIELD.addCard(new Card("Storm Crow"), 0);
@@ -58,7 +105,7 @@ public class ZoneTest {
 
 	@Test
 	public void testRemoveIndexFromZone(){
-		Zone.BATTLE_FIELD.empty();
+		this.clearZones();
 		String[] names = {"Storm Crow",
 				"Scornful Egotist", "One with Nothing", "Sorrow's Path",
 		"Fleshmad Steed"};
@@ -76,5 +123,4 @@ public class ZoneTest {
 
 		assertEquals(Zone.BATTLE_FIELD.getSize(), 4);
 	}
-
 }
