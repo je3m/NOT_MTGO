@@ -13,7 +13,16 @@ public class BackendTest {
 	}
 
 	@Test
-	public void testMakeCardWithName() {
-		Card c = new Card("Storm Crow");
+	public void testAddCardAndGetContents() {
+
+	}
+
+	@Test
+	public void testGetZoneContents(){
+		Backend bknd = new Backend();
+		Card c = new Card("Storm crow");
+		bknd.addCard(Zone.HAND, c, 0);
+		Card z = (bknd.getZoneContents(Zone.HAND)[0]);
+		assertEquals(c, z);
 	}
 }
