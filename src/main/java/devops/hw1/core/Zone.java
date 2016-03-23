@@ -36,4 +36,10 @@ public enum Zone {
 	public int getSize() {
 		return this.cards.size();
 	}
+
+
+	public void remove(int i) {
+		this.cards.remove(i);
+
+	}
 }
