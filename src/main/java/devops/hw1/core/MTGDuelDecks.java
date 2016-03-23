@@ -13,7 +13,11 @@ public class MTGDuelDecks {
 		JFrame MTGJFrame = setUpJFrame();
 	}
 	
-	public static JFrame setUpJFrame(){
+	/**
+	 * Sets up the JFrame to include all the default values for the game
+	 * @return initialized game JFrame
+	 */
+	private static JFrame setUpJFrame(){
 		JFrame Frame = new JFrame();
 		Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Frame.setVisible(true);

@@ -13,3 +13,6 @@ Window is split into appropriate sections for hand/library.
 
 Test 5
 Sections scale with window size.
+
+Test 6.
+Display the number of cards in library and graveyard.

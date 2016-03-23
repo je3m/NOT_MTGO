@@ -34,7 +34,8 @@ public class MTGComponent extends JComponent{
 	}
 	
 	/**
-	 * @param graphics2
+	 * Draws the basic format for the board
+	 * @param graphics2 The graphic2D to be drawn onto
 	 */
 	private void drawFormat(Graphics2D graphics2) {
 		graphics2.setColor(Color.BLACK);
