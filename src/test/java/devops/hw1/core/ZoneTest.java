@@ -7,6 +7,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class ZoneTest {
+	String[] names = {"Storm Crow",
+			"Scornful Egotist", "One with Nothing", "Sorrow's Path",
+	"Fleshmad Steed"};
 
 	public void clearZones(){
 		Zone.BATTLE_FIELD.empty();
@@ -14,6 +17,11 @@ public class ZoneTest {
 		Zone.GRAVEYARD.empty();
 		Zone.HAND.empty();
 		Zone.LIBRARY.empty();
+	}
+	public void populateZone(Zone z){
+		for (int i = 0; i < 5; i++){
+			z.addCard(new Card(this.names[i]), i);
+		}
 	}
 
 	@Test
@@ -32,16 +40,14 @@ public class ZoneTest {
 	@Test
 	public void testContains(){
 		this.clearZones();
-		String[] names = {"Storm Crow",
-				"Scornful Egotist", "One with Nothing", "Sorrow's Path",
-		"Fleshmad Steed"};
+
 
 		for (int i = 0; i < 5; i++){
-			Zone.BATTLE_FIELD.addCard(new Card(names[i]), i);
+			Zone.BATTLE_FIELD.addCard(new Card(this.names[i]), i);
 		}
 
 		for (int i = 0; i < 5; i++){
-			assertTrue(Zone.BATTLE_FIELD.contains(names[i]));
+			assertTrue(Zone.BATTLE_FIELD.contains(this.names[i]));
 		}
 	}
 
@@ -62,6 +68,18 @@ public class ZoneTest {
 		assertEquals(c1, Zone.BATTLE_FIELD.getCards()[0]);
 		assertEquals(c2, Zone.GRAVEYARD.getCards()[0]);
 
+	}
+
+	@Test
+	public void testGetIndex(){
+		this.clearZones();
+		this.populateZone(Zone.LIBRARY);
+
+		for(int i = 0; i < 5; i++){
+			assertEquals(i, Zone.LIBRARY.getIndex(this.names[i]));
+		}
+
+		assertEquals(-1, Zone.LIBRARY.getIndex("Break Open"));
 	}
 
 
