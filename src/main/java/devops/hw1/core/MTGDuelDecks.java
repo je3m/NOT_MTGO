@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 public class MTGDuelDecks {
-	private static final Dimension JFRAME_SIZE = new Dimension(1200, 800);
+	private static final Dimension JFRAME_SIZE = new Dimension(100, 800);
 	
 	
 	public static void main(String[] args){
