@@ -1,9 +1,8 @@
 package devops.hw1.core;
 
-import javax.smartcardio.Card;
 
 public class Backend {
-
+	Card c;
 	/**
 	 * Adds the given card to the given zone
 	 * @param z Zone to add card to
@@ -11,7 +10,7 @@ public class Backend {
 	 * @param i	position of the zone to add card
 	 */
 	void addCard(Zone z, Card c, int i){
-
+		this.c = c;
 	}
 
 	/**
@@ -20,7 +19,9 @@ public class Backend {
 	 * @return Array of Card's in the given zone
 	 */
 	Card[] getZoneContents(Zone zone){
-		return null;
+		Card[] cards = new Card[1];
+		cards[0] = this.c;
+		return cards;
 	}
 
 	/**
