@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 public class MTGDuelDecks {
-	private static final Dimension JFRAME_SIZE = new Dimension(100, 800);
+	private static final Dimension JFRAME_SIZE = new Dimension(1200, 800);
 	
 	
 	public static void main(String[] args){
@@ -18,6 +18,7 @@ public class MTGDuelDecks {
 		Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Frame.setVisible(true);
 		Frame.setTitle("MTG Duel Decks");
+		Frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		return Frame;
 	}
 }
