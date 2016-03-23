@@ -11,6 +11,8 @@ public class MTGDuelDecks {
 	
 	public static void main(String[] args){
 		JFrame MTGJFrame = setUpJFrame();
+		Zone.GRAVEYARD.addCard(new Card("Grave"), 0);
+		Zone.LIBRARY.addCard(new Card("Libr"), 0);
 	}
 	
 	/**
