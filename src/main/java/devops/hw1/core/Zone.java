@@ -15,6 +15,14 @@ public enum Zone {
 		this.cards.add(i, c);
 	}
 
+	public Boolean contains(String name) {
+		for (Card c : this.cards){
+			if(c.name.equals(name))
+				return true;
+		}
+		return false;
+	}
+
 	public void empty() {
 		this.cards.clear();
 
