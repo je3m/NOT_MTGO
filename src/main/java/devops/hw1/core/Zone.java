@@ -15,6 +15,11 @@ public enum Zone {
 		this.cards.add(i, c);
 	}
 
+	public void empty() {
+		this.cards.clear();
+
+	}
+
 	public Card[] getCards(){
 
 		return this.cards.toArray(new Card[0]);
