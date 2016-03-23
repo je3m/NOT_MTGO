@@ -7,7 +7,13 @@ public enum Zone {
 	GRAVEYARD,
 	LIBRARY,
 	HAND,
-	EXILE;
+	EXILE,
+	BATTLE_FIELD1,
+	GRAVEYARD1,
+	LIBRARY1,
+	HAND1,
+	EXILE1
+	;
 
 	private ArrayList<Card> cards = new ArrayList<Card>();
 
