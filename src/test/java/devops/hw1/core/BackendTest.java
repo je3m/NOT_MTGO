@@ -12,6 +12,22 @@ public class BackendTest {
 		assertEquals(c.getName(), "Storm crow");
 	}
 
+	@Test
+	public void testGetContentsFromMultipleZones(){
+		Backend bknd = new Backend();
+		Card c = new Card("Storm crow");
+		bknd.addCard(Zone.HAND, c, 0);
+
+		Card c1 = new Card("island");
+		bknd.addCard(Zone.BATTLE_FIELD, c1, 0);
+
+		Card c2 = new Card("Scornful egotist");
+		bknd.addCard(Zone.GRAVEYARD, c2, 0);
+
+		assertEquals(c, (bknd.getZoneContents(Zone.HAND)[0]));
+		assertEquals(c1, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
+		assertEquals(c2, (bknd.getZoneContents(Zone.GRAVEYARD)[0]));
+	}
 
 	@Test
 	public void testGetManyZoneContents(){
