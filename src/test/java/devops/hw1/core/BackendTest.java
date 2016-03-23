@@ -54,4 +54,22 @@ public class BackendTest {
 		Card z = (bknd.getZoneContents(Zone.HAND)[0]);
 		assertEquals(c, z);
 	}
+
+	@Test
+	public void testGetZoneSize(){
+		assertEquals(Zone.BATTLE_FIELD.getSize(), 0);
+
+		Zone.BATTLE_FIELD.addCard(new Card("Storm Crow"), 0);
+		assertEquals(Zone.BATTLE_FIELD.getSize(), 1);
+
+		Zone.BATTLE_FIELD.addCard(new Card("Scornful Egotist"), 1);
+		assertEquals(Zone.BATTLE_FIELD.getSize(), 2);
+
+		Zone.BATTLE_FIELD.addCard(new Card("One With Nothing"), 2);
+		assertEquals(Zone.BATTLE_FIELD.getSize(), 3);
+
+		Zone.BATTLE_FIELD.addCard(new Card("Sorrow's Path"), 3);
+		assertEquals(Zone.BATTLE_FIELD.getSize(), 4);
+
+	}
 }
