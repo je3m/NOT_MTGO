@@ -1,6 +1,7 @@
 package devops.hw1.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -36,22 +37,9 @@ public class ZoneTest {
 	}
 
 
-	//	@Test
-	//	public void testRemoveIndexFromZone(){
-	//		Zone.BATTLE_FIELD.empty();
-	//
-	//		for (int i = 0; i < 5; i++){
-	//			Zone.BATTLE_FIELD.addCard(new Card("Storm Crow"), i);
-	//		}
-	//
-	//		assertEquals(Zone.BATTLE_FIELD.getSize(), 5);
-	//
-	//		Zone.BATTLE_FIELD.remove(0);
-	//		assertEquals(Zone.BATTLE_FIELD.getSize(), 4);
-	//	}
-
 	@Test
 	public void testGetZoneSize(){
+		Zone.BATTLE_FIELD.empty();
 		assertEquals(Zone.BATTLE_FIELD.getSize(), 0);
 
 		Zone.BATTLE_FIELD.addCard(new Card("Storm Crow"), 0);
@@ -66,6 +54,27 @@ public class ZoneTest {
 		Zone.BATTLE_FIELD.addCard(new Card("Sorrow's Path"), 3);
 		assertEquals(Zone.BATTLE_FIELD.getSize(), 4);
 
+	}
+
+	@Test
+	public void testRemoveIndexFromZone(){
+		Zone.BATTLE_FIELD.empty();
+		String[] names = {"Storm Crow",
+				"Scornful Egotist", "One with Nothing", "Sorrow's Path",
+		"Fleshmad Steed"};
+
+		for (int i = 0; i < 5; i++){
+			Zone.BATTLE_FIELD.addCard(new Card(names[i]), i);
+		}
+
+		assertEquals(Zone.BATTLE_FIELD.getSize(), 5);
+
+		assertTrue(Zone.BATTLE_FIELD.contains(names[1]));
+
+		Zone.BATTLE_FIELD.remove(0);
+		assertFalse(Zone.BATTLE_FIELD.contains(names[0]));
+
+		assertEquals(Zone.BATTLE_FIELD.getSize(), 4);
 	}
 
 }
