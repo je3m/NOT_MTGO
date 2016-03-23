@@ -12,10 +12,6 @@ public class BackendTest {
 		assertEquals(c.getName(), "Storm crow");
 	}
 
-	@Test
-	public void testAddCardAndGetContents() {
-
-	}
 
 	@Test
 	public void testGetManyZoneContents(){
