@@ -50,6 +50,17 @@ public enum Zone {
 		return this.cards.toArray(new Card[0]);
 	}
 
+	public int getIndex(String name) {
+		int i = 0;
+		for (Card c : this.cards){
+			if(name.equals(c.getName()))
+				return i;
+			i++;
+		}
+		return -1;
+	}
+
+
 	/**
 	 *
 	 * @return the number of cards in the zone
