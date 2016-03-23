@@ -3,6 +3,7 @@ package devops.hw1.core;
 
 public class Backend {
 	Card cards[] = new Card[3];
+	int i = 0, j = 0;
 
 	/**
 	 * Adds the given card to the given zone
@@ -11,7 +12,8 @@ public class Backend {
 	 * @param i	position of the zone to add card
 	 */
 	void addCard(Zone z, Card c, int i){
-		this.cards[i] = c;
+		this.cards[this.i] = c;
+		this.i++;
 	}
 
 	/**
@@ -20,7 +22,12 @@ public class Backend {
 	 * @return Array of Card's in the given zone
 	 */
 	Card[] getZoneContents(Zone zone){
-		return this.cards;
+		Card[] c = new Card[this.j+1];
+		c[0] =  this.cards[this.j];
+		c[this.j] = this.cards[this.j];
+		this.j++;
+
+		return c;
 	}
 
 	/**
