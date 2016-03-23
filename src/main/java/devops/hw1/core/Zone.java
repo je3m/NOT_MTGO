@@ -10,7 +10,6 @@ public enum Zone {
 	EXILE;
 
 	private ArrayList<Card> cards = new ArrayList<Card>();
-	private int i;
 
 	public void addCard(Card c, int i){
 		this.cards.add(i, c);
@@ -22,7 +21,6 @@ public enum Zone {
 	}
 
 	public int getSize() {
-		this.i++;
-		return this.i-1;
+		return this.cards.size();
 	}
 }
