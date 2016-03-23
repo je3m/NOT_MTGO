@@ -7,6 +7,19 @@ import org.junit.Test;
 public class ZoneTest {
 
 	@Test
+	public void testClearZone(){
+		for (int i = 0; i < 5; i++){
+			Zone.GRAVEYARD.addCard(new Card("Storm Crow"), i);
+		}
+
+		assertEquals(Zone.GRAVEYARD.getSize(), 5);
+
+		Zone.GRAVEYARD.empty();
+		assertEquals(Zone.GRAVEYARD.getSize(), 0);
+	}
+
+
+	@Test
 	public void testGetZoneSize(){
 		assertEquals(Zone.BATTLE_FIELD.getSize(), 0);
 
@@ -23,6 +36,5 @@ public class ZoneTest {
 		assertEquals(Zone.BATTLE_FIELD.getSize(), 4);
 
 	}
-
 
 }
