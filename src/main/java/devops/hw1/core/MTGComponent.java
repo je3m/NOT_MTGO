@@ -8,8 +8,12 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
-
-
+ 
+/**
+ * The component that draws everything for the game.
+ * @author malinocr
+ *
+ */
 @SuppressWarnings("serial")
 public class MTGComponent extends JComponent{
 	private int windowX;
@@ -19,6 +23,11 @@ public class MTGComponent extends JComponent{
 	private ArrayList<GUICard> battleGUICards1;
 	private ArrayList<GUICard> battleGUICards2;
 	
+	/**
+	 * Constructor for a MTGComponent
+	 * @param x width of the usable space in the JFrame that the component is placed in
+	 * @param y height of the usable space in the JFrame that the component is placed in
+	 */
 	public MTGComponent(int x, int y){
 		this.windowX = x;
 		this.windowY = y;
@@ -102,6 +111,12 @@ public class MTGComponent extends JComponent{
 		graphics2.drawString(String.valueOf(Zone.EXILE1.getSize()),(int)Math.round(windowX*0.965),(int)Math.round(windowY*0.88) - 1);
 	}
 	
+	/**
+	 * Generates a GUICard object for each card in a given zone and puts them into a given arraylist
+	 * @param cardsAL an array list to place the created GUICard objects
+	 * @param zone the zone where the MTGCards are be created from
+	 * @param baseXLocation the base x percentage of the width of the screen where the cards rectangle should be placed 
+	 */
 	private void generateGUICards(ArrayList<GUICard> cardsAL, Zone zone, double baseXLocation){
 		cardsAL.clear();
 		int height = getCardHeight(zone);
@@ -114,6 +129,10 @@ public class MTGComponent extends JComponent{
 		}
 	}
 	
+	/**
+	 * Draw all the GUICards onto the graphics object
+	 * @param graphics2 the graphics object to draw onto
+	 */
 	private void drawGUICards(Graphics2D graphics2){
 		drawGUICardArrayList(handGUICards1, graphics2);
 		drawGUICardArrayList(handGUICards2, graphics2);
@@ -121,12 +140,24 @@ public class MTGComponent extends JComponent{
 		drawGUICardArrayList(battleGUICards2, graphics2);
 	}
 	
+	/**
+	 * Draw all the GUICards in a given arraylist
+	 * @param cardsAL the arraylist where the cards to draw are located
+	 * @param graphics2 the graphics object to draw onto
+	 */
 	private void drawGUICardArrayList(ArrayList<GUICard> cardsAL, Graphics2D graphics2 ){
 		for(int i = 0; i < cardsAL.size(); i++){
 			graphics2.draw(cardsAL.get(i).getRec());
+			graphics2.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+			graphics2.drawString(cardsAL.get(i).getCard().getName(), (int)cardsAL.get(i).getRec().getCenterX(), (int)cardsAL.get(i).getRec().getCenterY());
 		}
 	}
 	
+	/**
+	 * Determine the height a card in a given zone should be based on the window height
+	 * @param zone the zone the card is located in
+	 * @return the height of the card
+	 */
 	private int getCardHeight(Zone zone){
 		int HeightRec = 3*windowY/(5*zone.getSize()-1);
 		int heightWidthRec = (int)Math.round(HeightRec * 3.5/2.5);

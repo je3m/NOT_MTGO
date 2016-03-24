@@ -6,7 +6,15 @@ import java.awt.event.ComponentEvent;
 
 import javax.swing.JFrame;
 
+/**
+ * Main MTG Duel Deck class that runs the rest of the game.
+ *
+ */
 public class MTGDuelDecks {
+	/**
+	 * Main method that runs the game and sets up the GUI frame.
+	 * @param args
+	 */
 	public static void main(String[] args){
 		JFrame MTGJFrame = setUpJFrame();
 		
