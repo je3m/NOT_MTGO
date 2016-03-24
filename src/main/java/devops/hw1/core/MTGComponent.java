@@ -14,14 +14,18 @@ import javax.swing.JComponent;
 public class MTGComponent extends JComponent{
 	private int windowX;
 	private int windowY;
-	private ArrayList<GUICard> guiCards1;
-	private ArrayList<GUICard> guiCards2;
+	private ArrayList<GUICard> handGUICards1;
+	private ArrayList<GUICard> handGUICards2;
+	private ArrayList<GUICard> battleGUICards1;
+	private ArrayList<GUICard> battleGUICards2;
 	
 	public MTGComponent(int x, int y){
 		this.windowX = x;
 		this.windowY = y;
-		this.guiCards1 = new ArrayList<GUICard>();
-		this.guiCards2 = new ArrayList<GUICard>();
+		this.handGUICards1 = new ArrayList<GUICard>();
+		this.handGUICards2 = new ArrayList<GUICard>();
+		this.battleGUICards1 = new ArrayList<GUICard>();
+		this.battleGUICards2 = new ArrayList<GUICard>();
 	}
 	
 	public void setWindowX(int x){
@@ -39,8 +43,10 @@ public class MTGComponent extends JComponent{
 		drawFormat(graphics2);
 		drawCountedZones1(graphics2);
 		drawCountedZones2(graphics2);
-		generateGUICards1();
-		generateGUICards2();
+		generateGUICards(this.handGUICards1, Zone.HAND, 0);
+		generateGUICards(this.handGUICards2, Zone.HAND1, 0.9);
+		generateGUICards(this.battleGUICards1, Zone.BATTLE_FIELD, 0.1);
+		generateGUICards(this.battleGUICards2, Zone.BATTLE_FIELD1, 0.8);
 		drawGUICards(graphics2);
 	}
 	
@@ -80,36 +86,28 @@ public class MTGComponent extends JComponent{
 		graphics2.drawString(String.valueOf(Zone.EXILE1.getSize()),(int)Math.round(windowX*0.965),(int)Math.round(windowY*0.88) - 1);
 	}
 	
-	private void generateGUICards1(){
-		guiCards1.clear();
+	private void generateGUICards(ArrayList<GUICard> cardsAL, Zone zone, double baseXLocation){
+		cardsAL.clear();
 		int height = getCardHeight();
 		int width = (int)Math.round(height * 3.5/2.5);
 		int currentSpace = (int)Math.round(0.025*windowY);
-		Card[] cards = Zone.HAND.getCards();
-		for(int i = 0; i < Zone.HAND.getSize(); i++){
-			guiCards1.add(new GUICard(new Rectangle((int)Math.round(0.05*windowX - width/2), currentSpace, width, height), cards[i]));
-			currentSpace = currentSpace + (int)Math.round(1.25*height);
-		}
-	}
-	
-	private void generateGUICards2(){
-		guiCards2.clear();
-		int height = getCardHeight();
-		int width = (int)Math.round(height * 3.5/2.5);
-		int currentSpace = (int)Math.round(0.025*windowY);
-		Card[] cards = Zone.HAND1.getCards();
-		for(int i = 0; i < Zone.HAND1.getSize(); i++){
-			guiCards2.add(new GUICard(new Rectangle((int)Math.round(0.95*windowX - width/2), currentSpace, width, height), cards[i]));
+		Card[] cards = zone.getCards();
+		for(int i = 0; i < zone.getSize(); i++){
+			cardsAL.add(new GUICard(new Rectangle((int)Math.round((0.05 + baseXLocation)*windowX - width/2), currentSpace, width, height), cards[i]));
 			currentSpace = currentSpace + (int)Math.round(1.25*height);
 		}
 	}
 	
 	private void drawGUICards(Graphics2D graphics2){
-		for(int i = 0; i < guiCards1.size(); i++){
-			graphics2.draw(guiCards1.get(i).getRec());
-		}
-		for(int i = 0; i < guiCards2.size(); i++){
-			graphics2.draw(guiCards2.get(i).getRec());
+		drawGUICardArrayList(handGUICards1, graphics2);
+		drawGUICardArrayList(handGUICards2, graphics2);
+		drawGUICardArrayList(battleGUICards1, graphics2);
+		drawGUICardArrayList(battleGUICards2, graphics2);
+	}
+	
+	private void drawGUICardArrayList(ArrayList<GUICard> cardsAL, Graphics2D graphics2 ){
+		for(int i = 0; i < cardsAL.size(); i++){
+			graphics2.draw(cardsAL.get(i).getRec());
 		}
 	}
 	

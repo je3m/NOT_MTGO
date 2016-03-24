@@ -31,6 +31,8 @@ public class MTGDuelDecks {
 		Zone.HAND1.addCard(new Card("Hand5"), 0);
 		Zone.HAND1.addCard(new Card("Hand6"), 0);
 		Zone.HAND1.addCard(new Card("Hand7"), 0);
+		Zone.BATTLE_FIELD.addCard(new Card("BF1"), 0);
+		Zone.BATTLE_FIELD1.addCard(new Card("BF2"), 0);
 	}
 	
 	/**
