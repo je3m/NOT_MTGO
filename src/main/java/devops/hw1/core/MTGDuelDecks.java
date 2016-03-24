@@ -7,10 +7,10 @@ import java.awt.event.ComponentEvent;
 import javax.swing.JFrame;
 
 public class MTGDuelDecks {
-	
-	
 	public static void main(String[] args){
 		JFrame MTGJFrame = setUpJFrame();
+		
+		//Test
 		Zone.GRAVEYARD.addCard(new Card("Grave"), 0);
 		Zone.LIBRARY.addCard(new Card("Libr"), 0);
 		Zone.GRAVEYARD1.addCard(new Card("Grave"), 0);
@@ -53,6 +53,8 @@ public class MTGDuelDecks {
 		    	MTGComp.setWindowY(Frame.getContentPane().getHeight());
 		    }
 		});
+		ClickHandler ch = new ClickHandler(MTGComp);
+		Frame.addMouseListener(ch);
 		return Frame;
 	}
 }

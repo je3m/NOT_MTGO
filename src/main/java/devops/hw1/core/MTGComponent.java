@@ -28,6 +28,22 @@ public class MTGComponent extends JComponent{
 		this.battleGUICards2 = new ArrayList<GUICard>();
 	}
 	
+	public ArrayList<GUICard> getHandGUICards1() {
+		return handGUICards1;
+	}
+
+	public ArrayList<GUICard> getHandGUICards2() {
+		return handGUICards2;
+	}
+
+	public ArrayList<GUICard> getBattleGUICards1() {
+		return battleGUICards1;
+	}
+
+	public ArrayList<GUICard> getBattleGUICards2() {
+		return battleGUICards2;
+	}
+
 	public void setWindowX(int x){
 		this.windowX = x;
 	}
@@ -88,7 +104,7 @@ public class MTGComponent extends JComponent{
 	
 	private void generateGUICards(ArrayList<GUICard> cardsAL, Zone zone, double baseXLocation){
 		cardsAL.clear();
-		int height = getCardHeight();
+		int height = getCardHeight(zone);
 		int width = (int)Math.round(height * 3.5/2.5);
 		int currentSpace = (int)Math.round(0.025*windowY);
 		Card[] cards = zone.getCards();
@@ -111,8 +127,8 @@ public class MTGComponent extends JComponent{
 		}
 	}
 	
-	private int getCardHeight(){
-		int HeightRec = 3*windowY/(5*Zone.HAND.getSize()-1);
+	private int getCardHeight(Zone zone){
+		int HeightRec = 3*windowY/(5*zone.getSize()-1);
 		int heightWidthRec = (int)Math.round(HeightRec * 3.5/2.5);
 		int windowWidthRec = (int)Math.round(windowX*0.08);
 		if(heightWidthRec < windowWidthRec){
