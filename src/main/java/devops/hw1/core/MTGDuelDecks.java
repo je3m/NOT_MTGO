@@ -13,6 +13,24 @@ public class MTGDuelDecks {
 		JFrame MTGJFrame = setUpJFrame();
 		Zone.GRAVEYARD.addCard(new Card("Grave"), 0);
 		Zone.LIBRARY.addCard(new Card("Libr"), 0);
+		Zone.GRAVEYARD1.addCard(new Card("Grave"), 0);
+		Zone.LIBRARY1.addCard(new Card("Libr"), 0);
+		Zone.HAND.addCard(new Card("Hand1"), 0);
+		Zone.HAND.addCard(new Card("Hand2"), 0);
+		Zone.HAND.addCard(new Card("Hand3"), 0);
+		Zone.HAND.addCard(new Card("Hand4"), 0);
+		Zone.HAND.addCard(new Card("Hand5"), 0);
+		Zone.HAND.addCard(new Card("Hand6"), 0);
+		Zone.HAND.addCard(new Card("Hand7"), 0);
+		Zone.HAND.addCard(new Card("Hand8"), 0);
+		Zone.HAND.addCard(new Card("Hand9"), 0);
+		Zone.HAND1.addCard(new Card("Hand1"), 0);
+		Zone.HAND1.addCard(new Card("Hand2"), 0);
+		Zone.HAND1.addCard(new Card("Hand3"), 0);
+		Zone.HAND1.addCard(new Card("Hand4"), 0);
+		Zone.HAND1.addCard(new Card("Hand5"), 0);
+		Zone.HAND1.addCard(new Card("Hand6"), 0);
+		Zone.HAND1.addCard(new Card("Hand7"), 0);
 	}
 	
 	/**

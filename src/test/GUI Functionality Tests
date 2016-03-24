@@ -18,4 +18,4 @@ Test 6.
 Display the number of cards in library and graveyard.
 
 Test 7.
-Display cards on the screen.
+Display cards on the screen that scale with screen size.
