@@ -33,6 +33,8 @@ public class ClickHandler implements MouseListener {
 	public void handleClickCard(MouseEvent e){
 		handleSpecificZoneCardClick(e, MTGComp.getHandGUICards1(), Zone.HAND, Zone.BATTLE_FIELD);
 		handleSpecificZoneCardClick(e, MTGComp.getHandGUICards2(), Zone.HAND1, Zone.BATTLE_FIELD1);
+		handleSpecificZoneCardClick(e, MTGComp.getBattleGUICards1(), Zone.BATTLE_FIELD, Zone.GRAVEYARD);
+		handleSpecificZoneCardClick(e, MTGComp.getBattleGUICards2(), Zone.BATTLE_FIELD1, Zone.GRAVEYARD1);
 	}
 
 	/**
