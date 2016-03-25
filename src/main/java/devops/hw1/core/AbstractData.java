@@ -57,7 +57,7 @@ public abstract class AbstractData<T> implements IData<T> {
 		if (value == null) {
 			if (other.value != null)
 				return false;
-		} else if (!value.equals(other.value))//!#needs to handle value not null but other.value null case
+		} else if (!value.equals(other.value))
 			return false;
 		return true;
 	}	

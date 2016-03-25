@@ -86,7 +86,7 @@ public class AbstractDataTest {
 	public void testNonNullObjectNullOther() {
 		AbstractData<Integer> otherTestMock = new IntegerDataMock(this.id, null);
 		try {
-			assertTrue(this.dataTestMock.equals(otherTestMock));
+			assertFalse(this.dataTestMock.equals(otherTestMock));
 		} catch (NullPointerException e) {
 			assertTrue(false);
 		}
