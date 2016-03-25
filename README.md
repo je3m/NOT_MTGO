@@ -22,9 +22,19 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 Milestone 1
 
 Jim
-  -Wrote Zone enum to handle basic zone operations
-  -Made base for card class so that the GUI could interact with individual cards
+	-Wrote Zone enum to handle basic zone operations
+	-Made base for card class so that the GUI could interact with individual cards
 
 Chris
+	-Created GUI for the game that did not include any logic
+	-Wrote Functionality tests for the GUI that explain the features the GUI should have
+		-These features include:
+			-Sectioned zones
+			-Displayed cards in hand and battlefeild with their names
+			-Displayed number of cards in the other zones
+			-Cards in hand can be clicked on to move to the battlefield
+			-Cards on the battlefield can be moved to the hand
+			-GUI scales to the size of the window
+	-Known Bug: Cards can have issues being clicked and numbers don't scale well with very thin windows
 
 Scott
