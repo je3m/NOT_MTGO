@@ -22,7 +22,7 @@ public enum Zone {
 	 * @param c card to add
 	 * @param i index to place card
 	 */
-	public void addCard(Card c, int i){
+	public void addCard(Card c, int i){//!#should throw illegalargexcep for i val outside range of indices
 		this.cards.add(i, c);
 	}
 
@@ -85,7 +85,7 @@ public enum Zone {
 	 * Removes the card at the given index from the zone
 	 * @param i index of card to remove
 	 */
-	public void remove(int i) {
+	public void remove(int i) {//!#should throw illegalargexcep for i val outside range of indices
 		this.cards.remove(i);
 
 	}

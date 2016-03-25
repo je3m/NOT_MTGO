@@ -48,12 +48,12 @@ public class MTGDuelDecks {
 	 * @return initialized game JFrame
 	 */
 	private static JFrame setUpJFrame(){
-		JFrame Frame = new JFrame();
+		final JFrame Frame = new JFrame();
 		Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Frame.setVisible(true);
 		Frame.setTitle("MTG Duel Decks");
 		Frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		MTGComponent MTGComp = new MTGComponent(Frame.getContentPane().getWidth(), Frame.getContentPane().getHeight());
+		final MTGComponent MTGComp = new MTGComponent(Frame.getContentPane().getWidth(), Frame.getContentPane().getHeight());
 		Frame.add(MTGComp);
 		Frame.addComponentListener(new ComponentAdapter() {
 		    public void componentResized(ComponentEvent e) {

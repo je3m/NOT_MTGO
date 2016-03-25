@@ -27,6 +27,6 @@ public class Backend {
 	 * @param index of card to remove
 	 */
 	void removeCard(Zone z, int i){
-
+		z.remove(i);
 	}
 }

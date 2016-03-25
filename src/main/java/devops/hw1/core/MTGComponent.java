@@ -117,7 +117,7 @@ public class MTGComponent extends JComponent{
 	 * @param zone the zone where the MTGCards are be created from
 	 * @param baseXLocation the base x percentage of the width of the screen where the cards rectangle should be placed 
 	 */
-	private void generateGUICards(ArrayList<GUICard> cardsAL, Zone zone, double baseXLocation){
+	private void generateGUICards(ArrayList<GUICard> cardsAL, Zone zone, double baseXLocation){//!#stress-test this
 		cardsAL.clear();
 		int height = getCardHeight(zone);
 		int width = (int)Math.round(height * 3.5/2.5);
