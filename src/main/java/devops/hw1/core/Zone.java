@@ -22,7 +22,10 @@ public enum Zone {
 	 * @param c card to add
 	 * @param i index to place card
 	 */
-	public void addCard(Card c, int i){//!#should throw illegalargexcep for i val outside range of indices
+	public void addCard(Card c, int i){
+		if(i > this.getSize()) {
+			throw new IndexOutOfBoundsException("Index " + i + " is not valid for the " + this + " zone");
+		}
 		this.cards.add(i, c);
 	}
 
