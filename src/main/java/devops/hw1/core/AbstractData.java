@@ -50,7 +50,7 @@ public abstract class AbstractData<T> implements IData<T> {
 		if (getClass() != obj.getClass())
 			return false;
 
-		@SuppressWarnings("unchecked")//!# needs to handle the cast failing
+		@SuppressWarnings("unchecked")
 		AbstractData<T> other = (AbstractData<T>) obj;
 		if (id != other.id)
 			return false;

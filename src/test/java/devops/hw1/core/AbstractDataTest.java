@@ -18,6 +18,17 @@ public class AbstractDataTest {
 			return 0;
 		}		
 	}
+	
+	private class DoubleDataMock extends AbstractData<Double> {
+		public DoubleDataMock(long id, Double value) {
+			super(id, value);
+		}
+		
+		@Override
+		public int compareTo(IData<Double> o) {
+			return 0;
+		}
+	}
 
 	public AbstractDataTest() {
 		this.id = 1;
@@ -88,6 +99,16 @@ public class AbstractDataTest {
 		try {
 			assertFalse(this.dataTestMock.equals(otherTestMock));
 		} catch (NullPointerException e) {
+			assertTrue(false);
+		}
+	}
+	
+	@Test
+	public void testWrongTOtherObject() {
+		AbstractData<Double> otherTestMock = new DoubleDataMock(this.id, (1.1*this.value));
+		try {
+			assertFalse(this.dataTestMock.equals(otherTestMock));
+		} catch (ClassCastException e) {
 			assertTrue(false);
 		}
 	}

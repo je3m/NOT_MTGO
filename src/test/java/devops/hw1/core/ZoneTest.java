@@ -140,5 +140,11 @@ public class ZoneTest {
 		assertFalse(Zone.BATTLE_FIELD.contains(names[0]));
 
 		assertEquals(Zone.BATTLE_FIELD.getSize(), 4);
+		
+		try {
+			Zone.BATTLE_FIELD.remove(10000);;
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(e.getMessage(), "No object in this zone at that index");
+		}
 	}
 }

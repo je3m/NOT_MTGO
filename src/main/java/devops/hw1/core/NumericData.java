@@ -2,7 +2,7 @@ package devops.hw1.core;
 
 public class NumericData extends AbstractData<Long> {
 
-	public NumericData(long id, Long value) {//!#should throw IllegalArgumentException if id and value not equiv
+	public NumericData(long id, Long value) {
 		super(id, value);
 	}
 
