@@ -85,7 +85,10 @@ public enum Zone {
 	 * Removes the card at the given index from the zone
 	 * @param i index of card to remove
 	 */
-	public void remove(int i) {//!#should throw illegalargexcep for i val outside range of indices
+	public void remove(int i)  throws IndexOutOfBoundsException {
+		if(i>= this.getSize()) {
+			throw new IndexOutOfBoundsException("No object exists in the " + this + " zone at index " + i);
+		}
 		this.cards.remove(i);
 
 	}

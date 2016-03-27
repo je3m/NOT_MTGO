@@ -144,7 +144,7 @@ public class ZoneTest {
 		try {
 			Zone.BATTLE_FIELD.remove(10000);;
 		} catch (IndexOutOfBoundsException e) {
-			assertEquals(e.getMessage(), "No object in this zone at that index");
+			assertEquals(e.getMessage(), "No object exists in the BATTLE_FIELD zone at index 10000");
 		}
 	}
 }
