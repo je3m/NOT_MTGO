@@ -16,3 +16,25 @@ Please see the **build.gradle** and **.gitlab-ci.yml** for more detials.
 The project was setup using Eclipse (Mars 1 - Java Developer). It can be downloaded from the [On-Campus AFS Server](http://www.rose-hulman.edu/class/csse/binaries/Eclipse/mars/). You will also need to install Gradle plugin from [Eclipse Marketplace](https://marketplace.eclipse.org/content/gradle-integration-eclipse-0). After that, the project can be built within Eclipse IDE.
 
 To build the project in Eclipse, right-click on the project -> Run As -> Gradle Build ... -> Under Gradle task box, enter **build** -> Apply -> Run. Your build should start. Note that you must **install JDK 8 (not JRE)** for all of these to work. 
+
+
+--------------------------------------------------------------------------------------------------------
+Milestone 1
+
+Jim
+	-Wrote Zone enum to handle basic zone operations
+	-Made base for card class so that the GUI could interact with individual cards
+
+Chris
+	-Created GUI for the game that did not include any logic
+	-Wrote Functionality tests for the GUI that explain the features the GUI should have
+		-These features include:
+			-Sectioned zones
+			-Displayed cards in hand and battlefeild with their names
+			-Displayed number of cards in the other zones
+			-Cards in hand can be clicked on to move to the battlefield
+			-Cards on the battlefield can be moved to the hand
+			-GUI scales to the size of the window
+	-Known Bug: Cards can have issues being clicked and numbers don't scale well with very thin windows
+
+Scott
