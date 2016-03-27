@@ -25,6 +25,16 @@ public class ZoneTest {
 	}
 
 	@Test
+	public void testAddToZone(){
+		
+		try {
+			Zone.BATTLE_FIELD.addCard(new Card(this.names[2]), 10000);
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(e.getMessage(), "Index 10000 is not valid for the BATTLE_FIELD zone");
+		}
+	}
+	
+	@Test
 	public void testClearZone(){
 		this.clearZones();
 		for (int i = 0; i < 5; i++){
