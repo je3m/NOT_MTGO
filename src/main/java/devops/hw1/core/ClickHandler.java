@@ -31,10 +31,10 @@ public class ClickHandler implements MouseListener {
 	 * @param e the click event
 	 */
 	public void handleClickCard(MouseEvent e){
-		handleSpecificZoneCardClick(e, MTGComp.getHandGUICards1(), Zone.HAND, Zone.BATTLE_FIELD);
-		handleSpecificZoneCardClick(e, MTGComp.getHandGUICards2(), Zone.HAND1, Zone.BATTLE_FIELD1);
-		handleSpecificZoneCardClick(e, MTGComp.getBattleGUICards1(), Zone.BATTLE_FIELD, Zone.GRAVEYARD);
-		handleSpecificZoneCardClick(e, MTGComp.getBattleGUICards2(), Zone.BATTLE_FIELD1, Zone.GRAVEYARD1);
+		checkZoneForCardClick(e, MTGComp.getHandGUICards1(), Zone.HAND);
+		checkZoneForCardClick(e, MTGComp.getHandGUICards2(), Zone.HAND1);
+		checkZoneForCardClick(e, MTGComp.getBattleGUICards1(), Zone.BATTLE_FIELD);
+		checkZoneForCardClick(e, MTGComp.getBattleGUICards2(), Zone.BATTLE_FIELD1);
 	}
 
 	/**
@@ -44,11 +44,10 @@ public class ClickHandler implements MouseListener {
 	 * @param start starting zone of the cards in the arraylist
 	 * @param end zone to move clicked cards into
 	 */
-	public void handleSpecificZoneCardClick(MouseEvent e, ArrayList<GUICard> cardAL, Zone start, Zone end){
+	public void checkZoneForCardClick(MouseEvent e, ArrayList<GUICard> cardAL, Zone start){
 		for(int i = 0; i < cardAL.size(); i++){
 			if(cardAL.get(i).getRec().contains(e.getPoint())){
-				start.remove(i);
-				end.addCard(cardAL.get(i).getCard(),0);
+				Backend.handleCardClicked(start, i, cardAL.get(i).getCard());
 				MTGComp.repaint();
 			}
 		}

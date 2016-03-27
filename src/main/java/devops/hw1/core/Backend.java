@@ -4,6 +4,29 @@ package devops.hw1.core;
 public class Backend {
 
 	/**
+	 * TODO WRITE THIS
+	 */
+	static void handleCardClicked(Zone z, int currIndex, Card c) {
+		z.remove(currIndex);
+		switch(z) {
+		case HAND:
+			Zone.BATTLE_FIELD.addCard(c, 0);
+			break;
+		case HAND1:
+			Zone.BATTLE_FIELD1.addCard(c, 0);
+			break;
+		case BATTLE_FIELD:
+			Zone.GRAVEYARD.addCard(c, 0);
+			break;
+		case BATTLE_FIELD1:
+			Zone.GRAVEYARD1.addCard(c, 0);
+			break;
+		default:
+			throw new IllegalArgumentException(z + " zone is not a valid zone for card click events.");
+		}
+	}
+	
+	/**
 	 * Adds the given card to the given zone
 	 * @param z Zone to add card to
 	 * @param c Card to add
