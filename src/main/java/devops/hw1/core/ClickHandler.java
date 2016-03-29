@@ -46,11 +46,16 @@ public class ClickHandler implements MouseListener {
 	public void checkZoneForCardClick(MouseEvent e, ArrayList<GUICard> cardAL, Zone start){
 		for(int i = 0; i < cardAL.size(); i++){
 			if(cardAL.get(i).getRec().contains(MTGComp.getMousePosition())){
-				Backend.handleCardClicked(start, i, cardAL.get(i).getCard());
+				if(start == Zone.HAND || start == Zone.BATTLE_FIELD){
+					MTGComp.generateDispGUICard1(cardAL.get(i).getCard());
+				} else if (start == Zone.HAND1 || start == Zone.BATTLE_FIELD1){
+					MTGComp.generateDispGUICard2(cardAL.get(i).getCard());
+				}
 				MTGComp.repaint();
 			}
 		}
 	}
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {
 	}

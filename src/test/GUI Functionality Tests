@@ -33,5 +33,5 @@ Only for the purpose of testing movement between zones.
 	Test 11.
 	Click a card in a battlefield to move it to the graveyard.
 
-Text 12.
-Clicking a card opens up the image of the card.
+Test 12.
+Clicking a card in hand or battlefield opens up the image of the card for each player.

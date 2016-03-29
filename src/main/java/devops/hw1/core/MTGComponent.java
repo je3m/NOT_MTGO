@@ -19,7 +19,9 @@ public class MTGComponent extends JComponent{
 	private int windowX;
 	private int windowY;
 	private ArrayList<GUICard> handGUICards1;
+	private DispGUICard dispGUICard1;
 	private ArrayList<GUICard> handGUICards2;
+	private DispGUICard dispGUICard2;
 	private ArrayList<GUICard> battleGUICards1;
 	private ArrayList<GUICard> battleGUICards2;
 	
@@ -32,7 +34,9 @@ public class MTGComponent extends JComponent{
 		this.windowX = x;
 		this.windowY = y;
 		this.handGUICards1 = new ArrayList<GUICard>();
+		this.dispGUICard1 = null;
 		this.handGUICards2 = new ArrayList<GUICard>();
+		this.dispGUICard2 = null;
 		this.battleGUICards1 = new ArrayList<GUICard>();
 		this.battleGUICards2 = new ArrayList<GUICard>();
 	}
@@ -81,7 +85,7 @@ public class MTGComponent extends JComponent{
 	 */
 	private void drawFormat(Graphics2D graphics2) {
 		graphics2.setColor(Color.BLACK);
-		graphics2.fill(new Rectangle((int)Math.round(windowX*0.49),0,(int)Math.round(windowX*0.02),windowY));
+		graphics2.drawLine((int)Math.round(windowX*0.5), 0, (int)Math.round(windowX*0.5), windowY);
 		
 		graphics2.draw(new Rectangle(0,0,(int)Math.round(windowX*0.1), windowY - 1));
 		graphics2.draw(new Rectangle(0,(int)Math.round(windowY*0.8),(int)Math.round(windowX*0.1),(int)Math.round(windowY*0.1)));
@@ -138,8 +142,10 @@ public class MTGComponent extends JComponent{
 		drawGUICardArrayList(handGUICards2, graphics2);
 		drawGUICardArrayList(battleGUICards1, graphics2);
 		drawGUICardArrayList(battleGUICards2, graphics2);
+		drawBigGUICard(dispGUICard1, graphics2);
+		drawBigGUICard(dispGUICard2, graphics2);
 	}
-	
+
 	/**
 	 * Draw all the GUICards in a given arraylist
 	 * @param cardsAL the arraylist where the cards to draw are located
@@ -167,5 +173,26 @@ public class MTGComponent extends JComponent{
 		} else {
 			return (int)Math.round(windowWidthRec * 2.5/3.5);
 		}
+	}
+	
+	/**
+	 * Draws the large display for a card
+	 * @param dispCard display card object to be drawn
+	 * @param graphics2 graphics to draw the card on
+	 */
+	private void drawBigGUICard(DispGUICard dispCard, Graphics2D graphics2) {
+		if(dispCard != null){
+			graphics2.draw(dispCard.getRec());
+			graphics2.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+			graphics2.drawString(dispCard.getCard().getName(), (int)dispCard.getRec().getCenterX(), (int)dispCard.getRec().getCenterY());
+		}
+	}
+	
+	public void generateDispGUICard1(Card card){
+		this.dispGUICard1 = new DispGUICard(new Rectangle((int)Math.round(0.15*windowX), (int)Math.round(0.2*windowY), (int)Math.round(0.2*windowX), (int)Math.round(0.2*windowX*(3.5/2.5))),card);
+	}
+	
+	public void generateDispGUICard2(Card card){
+		this.dispGUICard2 = new DispGUICard(new Rectangle((int)Math.round(0.55*windowX), (int)Math.round(0.2*windowY), (int)Math.round(0.2*windowX), (int)Math.round(0.2*windowX*(3.5/2.5))),card);
 	}
 }
