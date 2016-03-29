@@ -38,15 +38,14 @@ public class ClickHandler implements MouseListener {
 	}
 
 	/**
-	 * Checks to see if any card in an array list is clicked, moving that card from its current zone to another zone if it is clicked 
+	 * Checks to see if any card in an array list is clicked and tells the backend if something is clicked 
 	 * @param e the click event
 	 * @param cardAL the array list containing all cards to be checked
 	 * @param start starting zone of the cards in the arraylist
-	 * @param end zone to move clicked cards into
 	 */
 	public void checkZoneForCardClick(MouseEvent e, ArrayList<GUICard> cardAL, Zone start){
 		for(int i = 0; i < cardAL.size(); i++){
-			if(cardAL.get(i).getRec().contains(e.getPoint())){
+			if(cardAL.get(i).getRec().contains(MTGComp.getMousePosition())){
 				Backend.handleCardClicked(start, i, cardAL.get(i).getCard());
 				MTGComp.repaint();
 			}
@@ -65,7 +64,7 @@ public class ClickHandler implements MouseListener {
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {	
+	public void mouseReleased(MouseEvent e) {
 	}
 
 }
