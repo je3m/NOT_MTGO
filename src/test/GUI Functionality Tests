@@ -26,8 +26,12 @@ Display cards on battlefield off the the side of the player that controls them.
 Test 9.
 Click a card in a hand to move it to the battlefield.
 
-Test 10.
-Displays name of card on it for hand and battlefield.
+Only for the purpose of testing movement between zones.
+	Test 10.
+	Displays name of card on it for hand and battlefield.
 
-Test 11.
-Click a card in a battlefield to move it to the graveyard.
+	Test 11.
+	Click a card in a battlefield to move it to the graveyard.
+
+Text 12.
+Clicking a card opens up the image of the card.
