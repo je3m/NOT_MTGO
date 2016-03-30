@@ -100,6 +100,11 @@ public class Card {
 
 	}
 
+	public void setPT(int p, int t){
+		this.toughness = t;
+		this.power = p;
+	}
+
 	public void setToughness(int i) {
 		this.toughness = i;
 
