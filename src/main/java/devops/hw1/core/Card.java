@@ -1,7 +1,7 @@
 package devops.hw1.core;
 
 public class Card {
-	String name;
+	private String name;
 	private String manaCost;
 	private String color;
 

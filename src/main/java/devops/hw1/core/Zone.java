@@ -36,7 +36,7 @@ public enum Zone {
 	 */
 	public Boolean contains(String name) {
 		for (Card c : this.cards){
-			if(c.name.equals(name))
+			if(c.getName().equals(name))
 				return true;
 		}
 		return false;
@@ -95,6 +95,6 @@ public enum Zone {
 		this.cards.remove(i);
 
 	}
-	
-	
+
+
 }
