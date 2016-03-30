@@ -77,6 +77,13 @@ public class TestCard {
 		assertEquals(c.getPower(), 1);
 		assertEquals(c.getToughness(), 1);
 
+		c = new Card("Fleshmad Steed");
+		c.setPT(2, 2);
+
+		assertEquals(c.getPower(), 2);
+		assertEquals(c.getToughness(), 2);
+
+
 	}
 
 	@Test
