@@ -21,7 +21,7 @@ public class TestCard {
 		assertEquals(c.getAbilities()[0], "Morph U");
 
 		c = new Card("Storm Crow");
-		c.addAbility("Flying");
+		c.addAbility("flying");
 		assertEquals(c.getAbilities()[0], "flying");
 
 	}
