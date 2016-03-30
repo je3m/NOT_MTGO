@@ -70,6 +70,13 @@ public class TestCard {
 		assertEquals(c.getPower(), 1);
 		assertEquals(c.getToughness(), 2);
 
+		c = new Card("Scornful Egotist");
+		c.setPower(1);
+		c.setToughness(1);
+
+		assertEquals(c.getPower(), 1);
+		assertEquals(c.getToughness(), 1);
+
 	}
 
 	@Test
