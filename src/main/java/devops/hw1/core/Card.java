@@ -4,6 +4,7 @@ public class Card {
 	private String name;
 	private String manaCost;
 	private String color;
+	private String type;
 
 	/**
 	 * Constructs a card object with the given name
@@ -38,7 +39,7 @@ public class Card {
 	}
 
 	public String getType() {
-		return "Creature- Bird";
+		return this.type;
 
 	}
 
@@ -64,7 +65,7 @@ public class Card {
 	}
 
 	public void setType(String s) {
-		return;
+		this.type = s;
 	}
 
 	@Override
