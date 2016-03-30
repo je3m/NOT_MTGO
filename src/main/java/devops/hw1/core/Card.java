@@ -52,6 +52,11 @@ public class Card {
 		return this.manaCost;
 	}
 
+	public String getImage() {
+		// TODO Auto-generated method stub
+		return "res/storm_crow.jpg";
+	}
+
 	/**
 	 *
 	 * @return the name of the card
@@ -93,6 +98,11 @@ public class Card {
 	 */
 	public void setCost(String s){
 		this.manaCost = s;
+	}
+
+	public void setImage(String string) {
+
+
 	}
 
 	public void setPower(int i) {
