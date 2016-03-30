@@ -13,6 +13,9 @@ public class Card {
 		this.name = s;
 	}
 
+	/**
+	 * @return color of card represented by [WUBRG]*
+	 */
 	public String getColor() {
 		return this.color;
 	}
@@ -34,6 +37,10 @@ public class Card {
 		return this.name;
 	}
 
+	/**
+	 * Sets the color of the card to given card
+	 * @param string color of card represented by [WUBRG]*
+	 */
 	public void setColor(String string) {
 		this.color = string;
 
