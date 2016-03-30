@@ -19,6 +19,11 @@ public class TestCard {
 		c = new Card("Scornful Egotist");
 		c.addAbility("Morph U");
 		assertEquals(c.getAbilities()[0], "Morph U");
+
+		c = new Card("Storm Crow");
+		c.addAbility("Flying");
+		assertEquals(c.getAbilities()[0], "flying");
+
 	}
 
 	@Test
