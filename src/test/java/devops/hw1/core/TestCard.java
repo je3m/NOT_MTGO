@@ -13,6 +13,15 @@ public class TestCard {
 	}
 
 	@Test
+	public void testManaCostGetSet(){
+		Card c;
+
+		c = new Card("Storm crow");
+		c.setCost("1U");
+		assertEquals(c.getCost(), "1U");
+	}
+
+	@Test
 	public void testToString(){
 		assertEquals("Storm Crow", new Card("Storm Crow").toString());
 		assertEquals("Scornful Egotist", new Card("Scornful Egotist").toString());
