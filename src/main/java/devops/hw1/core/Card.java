@@ -5,6 +5,7 @@ public class Card {
 	private String manaCost;
 	private String color;
 	private String type;
+	private String[] abilities = new String[1];
 
 	/**
 	 * Constructs a card object with the given name
@@ -20,7 +21,7 @@ public class Card {
 	 * @param string ability to add following TODO: format
 	 */
 	public void addAbility(String string) {
-		return;
+		this.abilities[0] = string;
 
 	}
 
@@ -29,7 +30,7 @@ public class Card {
 	 * @return a string of all abilities that card has
 	 */
 	public String[] getAbilities() {
-		return new String[] {"Morph U"};
+		return this.abilities;
 	}
 
 	/**
