@@ -255,7 +255,7 @@ public class MTGComponent extends JComponent{
 	 * @param dispGUICard1 
 	 */
 	public void setDispGUICard1(DispGUICard dispGUICard1) {
-		this.dispGUICard1 = null;
+		this.dispGUICard1 = dispGUICard1;
 	}
 
 	/**
@@ -263,8 +263,6 @@ public class MTGComponent extends JComponent{
 	 * @param dispGUICard2
 	 */
 	public void setDispGUICard2(DispGUICard dispGUICard2) {
-		this.dispGUICard2 = null;
+		this.dispGUICard2 = dispGUICard1;
 	}
-	
-	
 }
