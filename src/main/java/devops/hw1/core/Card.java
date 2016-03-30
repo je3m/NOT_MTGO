@@ -3,6 +3,7 @@ package devops.hw1.core;
 public class Card {
 	String name;
 	private String manaCost;
+	private String color;
 
 	/**
 	 * Constructs a card object with the given name
@@ -13,7 +14,7 @@ public class Card {
 	}
 
 	public String getColor() {
-		return "U";
+		return this.color;
 	}
 
 	/**
@@ -34,7 +35,7 @@ public class Card {
 	}
 
 	public void setColor(String string) {
-		return;
+		this.color = string;
 
 	}
 
