@@ -15,6 +15,24 @@ public class Card {
 	}
 
 	/**
+	 * Adds ability to card
+	 * TODO: come up with a good way to represent abilities (Mckee)
+	 * @param string ability to add following TODO: format
+	 */
+	public void addAbility(String string) {
+		return;
+
+	}
+
+	/**
+	 *
+	 * @return a string of all abilities that card has
+	 */
+	public String[] getAbilities() {
+		return new String[] {"Morph U"};
+	}
+
+	/**
 	 * @return color of card represented by [WUBRG]*
 	 */
 	public String getColor() {
