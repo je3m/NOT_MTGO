@@ -1,6 +1,7 @@
 package devops.hw1.core;
 
 import java.awt.Dimension;
+import java.awt.TextField;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 

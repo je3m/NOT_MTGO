@@ -76,6 +76,12 @@ public class MTGComponent extends JComponent{
 		generateGUICards(this.handGUICards2, Zone.HAND1, 0.9);
 		generateGUICards(this.battleGUICards1, Zone.BATTLE_FIELD, 0.1);
 		generateGUICards(this.battleGUICards2, Zone.BATTLE_FIELD1, 0.8);
+		if(this.dispGUICard1 != null){
+			generateDispGUICard1(this.dispGUICard1.getCard());
+		}
+		if(this.dispGUICard2 != null){
+			generateDispGUICard2(this.dispGUICard2.getCard());
+		}
 		drawGUICards(graphics2);
 	}
 	
@@ -98,10 +104,10 @@ public class MTGComponent extends JComponent{
 	 * @param graphics2
 	 */
 	private void drawCountedZones1(Graphics2D graphics2){
-		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, (int)Math.round(windowY*0.8*0.1))); 
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)Math.round(windowY*0.08), (int)Math.round(windowX*0.08)))); 
 		graphics2.drawString(String.valueOf(Zone.LIBRARY.getSize()),(int)Math.round(windowX*0.038),(int)Math.round(windowY*0.98) - 1);
-		graphics2.drawString(String.valueOf(Zone.GRAVEYARD.getSize()),(int)Math.round(windowX*0.015),(int)Math.round(windowY*0.88) - 1);
-		graphics2.drawString(String.valueOf(Zone.EXILE.getSize()),(int)Math.round(windowX*0.065),(int)Math.round(windowY*0.88) - 1);
+		graphics2.drawString(String.valueOf(Zone.GRAVEYARD.getSize()),(int)Math.round(windowX*0.010),(int)Math.round(windowY*0.88) - 1);
+		graphics2.drawString(String.valueOf(Zone.EXILE.getSize()),(int)Math.round(windowX*0.060),(int)Math.round(windowY*0.88) - 1);
 	}
 	
 	/**
@@ -109,10 +115,10 @@ public class MTGComponent extends JComponent{
 	 * @param graphics2
 	 */
 	private void drawCountedZones2(Graphics2D graphics2){
-		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, (int)Math.round(windowY*0.8*0.1))); 
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)Math.round(windowY*0.08), (int)Math.round(windowX*0.08)))); 
 		graphics2.drawString(String.valueOf(Zone.LIBRARY1.getSize()),(int)Math.round(windowX*0.938),(int)Math.round(windowY*0.98) - 1);
-		graphics2.drawString(String.valueOf(Zone.GRAVEYARD1.getSize()),(int)Math.round(windowX*0.915),(int)Math.round(windowY*0.88) - 1);
-		graphics2.drawString(String.valueOf(Zone.EXILE1.getSize()),(int)Math.round(windowX*0.965),(int)Math.round(windowY*0.88) - 1);
+		graphics2.drawString(String.valueOf(Zone.GRAVEYARD1.getSize()),(int)Math.round(windowX*0.910),(int)Math.round(windowY*0.88) - 1);
+		graphics2.drawString(String.valueOf(Zone.EXILE1.getSize()),(int)Math.round(windowX*0.960),(int)Math.round(windowY*0.88) - 1);
 	}
 	
 	/**

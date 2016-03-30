@@ -35,3 +35,6 @@ Only for the purpose of testing movement between zones.
 
 Test 12.
 Clicking a card in hand or battlefield opens up the image of the card for each player.
+
+Test 13.
+Clicking a displayed card closes it.
