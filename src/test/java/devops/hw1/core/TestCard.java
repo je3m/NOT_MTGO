@@ -24,6 +24,12 @@ public class TestCard {
 		c.addAbility("flying");
 		assertEquals(c.getAbilities()[0], "flying");
 
+		String s[] = {"FirstStrike", "attackingCreaturesHaveFirstStrike RT"};
+		c = new Card("Akki Coalflinger");
+		c.addAbility(s[0]);
+		c.addAbility(s[1]);
+		assertEquals(c.getAbilities(), s);
+
 	}
 
 	@Test
