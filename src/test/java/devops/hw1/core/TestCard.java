@@ -13,6 +13,15 @@ public class TestCard {
 	}
 
 	@Test
+	public void testColor(){
+		Card c;
+
+		c = new Card("Storm crow");
+		c.setColor("U");
+		assertEquals(c.getColor(), "U");
+	}
+
+	@Test
 	public void testManaCostGetSet(){
 		Card c;
 
