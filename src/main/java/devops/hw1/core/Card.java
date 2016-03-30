@@ -8,6 +8,7 @@ public class Card {
 	private String color;
 	private String type;
 	private ArrayList<String> abilities = new ArrayList<String>();
+	private int power, toughness;
 
 	/**
 	 * Constructs a card object with the given name
@@ -60,11 +61,11 @@ public class Card {
 	}
 
 	public int getPower() {
-		return 1;
+		return this.power;
 	}
 
 	public int getToughness() {
-		return 2;
+		return this.toughness;
 
 	}
 
@@ -95,12 +96,12 @@ public class Card {
 	}
 
 	public void setPower(int i) {
-
+		this.power = i;
 
 	}
 
 	public void setToughness(int i) {
-
+		this.toughness = i;
 
 	}
 
