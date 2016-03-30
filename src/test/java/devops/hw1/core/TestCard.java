@@ -45,4 +45,13 @@ public class TestCard {
 		assertEquals("Scornful Egotist", new Card("Scornful Egotist").toString());
 		assertEquals("One With Nothing", new Card("One With Nothing").toString());
 	}
+
+	@Test
+	public void testType(){
+		Card c;
+
+		c = new Card("Storm crow");
+		c.setType("Creature- Bird");
+		assertEquals(c.getType(), "Creature- Bird");
+	}
 }
