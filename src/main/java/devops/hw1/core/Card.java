@@ -2,6 +2,7 @@ package devops.hw1.core;
 
 public class Card {
 	String name;
+	private String manaCost;
 
 	/**
 	 * Constructs a card object with the given name
@@ -11,8 +12,13 @@ public class Card {
 		this.name = s;
 	}
 
+	/**
+	 * Gets the cost of the card expressed as oracle text
+	 * without curly braces.
+	 * Conforms to regex [0-9]*(WUBRG)*
+	 */
 	public String getCost(){
-		return "1U";
+		return this.manaCost;
 	}
 
 	/**
@@ -26,11 +32,13 @@ public class Card {
 	/**
 	 * Sets the cost of the card expressed as oracle text
 	 * without curly braces.
-	 * Ex: (Storm Crow -> '1U', Emrakul -> '96' or '555')
+	 * Conforms to regex [0-9]*(WUBRG)*
+	 *
+	 * Ex: (Storm Crow -> '1U', Emrakul -> '15')
 	 * @param s mana cost of card
 	 */
 	public void setCost(String s){
-		return;
+		this.manaCost = s;
 	}
 
 	@Override
