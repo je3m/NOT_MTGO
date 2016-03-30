@@ -19,6 +19,11 @@ public class TestCard {
 		c = new Card("Storm crow");
 		c.setCost("1U");
 		assertEquals(c.getCost(), "1U");
+
+		c = new Card("Scornful Egotist");
+		c.setCost("7U");
+		assertEquals(c.getCost(), "7U");
+
 	}
 
 	@Test
