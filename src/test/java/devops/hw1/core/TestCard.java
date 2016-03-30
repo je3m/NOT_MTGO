@@ -60,6 +60,19 @@ public class TestCard {
 	}
 
 	@Test
+	public void testPowerToughness(){
+		Card c;
+
+		c = new Card("Storm Crow");
+		c.setPower(1);
+		c.setToughness(2);
+
+		assertEquals(c.getPower(), 1);
+		assertEquals(c.getToughness(), 2);
+
+	}
+
+	@Test
 	public void testToString(){
 		assertEquals("Storm Crow", new Card("Storm Crow").toString());
 		assertEquals("Scornful Egotist", new Card("Scornful Egotist").toString());
