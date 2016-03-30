@@ -38,3 +38,6 @@ Clicking a card in hand or battlefield opens up the image of the card for each p
 
 Test 13.
 Clicking a displayed card closes it.
+
+Test 14.
+Having a displayed card makes other cards a player owns unclickable.
