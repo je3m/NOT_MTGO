@@ -59,6 +59,15 @@ public class Card {
 		return this.name;
 	}
 
+	public int getPower() {
+		return 1;
+	}
+
+	public int getToughness() {
+		return 2;
+
+	}
+
 	public String getType() {
 		return this.type;
 
@@ -83,6 +92,16 @@ public class Card {
 	 */
 	public void setCost(String s){
 		this.manaCost = s;
+	}
+
+	public void setPower(int i) {
+
+
+	}
+
+	public void setToughness(int i) {
+
+
 	}
 
 	public void setType(String s) {
