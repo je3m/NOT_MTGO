@@ -53,5 +53,10 @@ public class TestCard {
 		c = new Card("Storm crow");
 		c.setType("Creature- Bird");
 		assertEquals(c.getType(), "Creature- Bird");
+
+		c = new Card("Scornful Egotist");
+		c.setType("Creature- Human Wizard");
+		assertEquals(c.getCost(), "Creature- Human Wizard");
+
 	}
 }
