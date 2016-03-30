@@ -13,6 +13,15 @@ public class TestCard {
 	}
 
 	@Test
+	public void testAbilities(){
+		Card c;
+
+		c = new Card("Scornful Egotist");
+		c.addAbility("Morph U");
+		assertEquals(c.getAbilities(), "Morph U");
+	}
+
+	@Test
 	public void testColor(){
 		Card c;
 
