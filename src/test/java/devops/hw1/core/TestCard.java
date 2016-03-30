@@ -46,6 +46,14 @@ public class TestCard {
 	}
 
 	@Test
+	public void testImage(){
+		Card c;
+		c = new Card("Storm crow");
+		c.setImage("res/storm_crow.jpg");
+		assertEquals(c.getType(), "res/storm_crow.jpg");
+	}
+
+	@Test
 	public void testManaCostGetSet(){
 		Card c;
 
