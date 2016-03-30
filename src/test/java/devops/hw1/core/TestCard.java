@@ -19,6 +19,10 @@ public class TestCard {
 		c = new Card("Storm crow");
 		c.setColor("U");
 		assertEquals(c.getColor(), "U");
+
+		c = new Card("One with Nothing");
+		c.setColor("B");
+		assertEquals(c.getColor(), "B");
 	}
 
 	@Test
