@@ -1,11 +1,13 @@
 package devops.hw1.core;
 
+import java.util.ArrayList;
+
 public class Card {
 	private String name;
 	private String manaCost;
 	private String color;
 	private String type;
-	private String[] abilities = new String[1];
+	private ArrayList<String> abilities = new ArrayList<String>();
 
 	/**
 	 * Constructs a card object with the given name
@@ -21,7 +23,7 @@ public class Card {
 	 * @param string ability to add following TODO: format
 	 */
 	public void addAbility(String string) {
-		this.abilities[0] = string;
+		this.abilities.add(string);
 
 	}
 
@@ -30,7 +32,7 @@ public class Card {
 	 * @return a string of all abilities that card has
 	 */
 	public String[] getAbilities() {
-		return this.abilities;
+		return (this.abilities.toArray(new String[1]));
 	}
 
 	/**
