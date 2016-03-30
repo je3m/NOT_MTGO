@@ -53,6 +53,9 @@ public class Card {
 		return this.manaCost;
 	}
 
+	/**
+	 * @return path of image to card
+	 */
 	public String getImage() {
 		return this.image;
 	}
@@ -65,15 +68,28 @@ public class Card {
 		return this.name;
 	}
 
+	/**
+	 * @return power of card
+	 */
 	public int getPower() {
 		return this.power;
 	}
 
+	/**
+	 * @return toughness of card
+	 */
 	public int getToughness() {
 		return this.toughness;
 
 	}
 
+	/**
+	 * Type and subtype of card
+	 * <Type>- <subtype>*
+	 * types are seperated by spaces
+	 * (example Storm Crow -> "Creature- bird")
+	 * @return types of card
+	 */
 	public String getType() {
 		return this.type;
 
@@ -100,26 +116,49 @@ public class Card {
 		this.manaCost = s;
 	}
 
+	/**
+	 * sets image path for displaying the card
+	 * @param string filepath to image
+	 */
 	public void setImage(String string) {
 		this.image = string;
 
 	}
 
+	/**
+	 * sets the power of card (if creature)
+	 * @param i power of creature
+	 */
 	public void setPower(int i) {
 		this.power = i;
 
 	}
 
+	/**
+	 * Sets both the power and toughness of card
+	 * @param p power of card
+	 * @param t toughness of card
+	 */
 	public void setPT(int p, int t){
 		this.toughness = t;
 		this.power = p;
 	}
 
+	/**
+	 * sets toughness of card
+	 * @param i toughness
+	 */
 	public void setToughness(int i) {
 		this.toughness = i;
 
 	}
 
+	/**
+	 * Sets the type of given card defined as
+	 * <Type>- <subtype>*
+	 * (example Storm Crow -> "Creature- bird")
+	 * @param s type of card
+	 */
 	public void setType(String s) {
 		this.type = s;
 	}
