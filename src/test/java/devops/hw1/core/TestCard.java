@@ -50,7 +50,7 @@ public class TestCard {
 		Card c;
 		c = new Card("Storm crow");
 		c.setImage("res/storm_crow.jpg");
-		assertEquals(c.getType(), "res/storm_crow.jpg");
+		assertEquals(c.getImage(), "res/storm_crow.jpg");
 	}
 
 	@Test
