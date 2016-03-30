@@ -9,6 +9,7 @@ public class Card {
 	private String type;
 	private ArrayList<String> abilities = new ArrayList<String>();
 	private int power, toughness;
+	private String image;
 
 	/**
 	 * Constructs a card object with the given name
@@ -53,8 +54,7 @@ public class Card {
 	}
 
 	public String getImage() {
-		// TODO Auto-generated method stub
-		return "res/storm_crow.jpg";
+		return this.image;
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class Card {
 	}
 
 	public void setImage(String string) {
-
+		this.image = string;
 
 	}
 
