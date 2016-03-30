@@ -37,6 +37,11 @@ public class Card {
 		return this.name;
 	}
 
+	public String getType() {
+		return "Creature- Bird";
+
+	}
+
 	/**
 	 * Sets the color of the card to given card
 	 * @param string color of card represented by [WUBRG]*
@@ -56,6 +61,10 @@ public class Card {
 	 */
 	public void setCost(String s){
 		this.manaCost = s;
+	}
+
+	public void setType(String s) {
+		return;
 	}
 
 	@Override
