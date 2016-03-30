@@ -31,10 +31,36 @@ public class ClickHandler implements MouseListener {
 	 * @param e the click event
 	 */
 	public void handleClickCard(MouseEvent e){
-		checkZoneForCardClick(e, MTGComp.getHandGUICards1(), Zone.HAND);
-		checkZoneForCardClick(e, MTGComp.getHandGUICards2(), Zone.HAND1);
-		checkZoneForCardClick(e, MTGComp.getBattleGUICards1(), Zone.BATTLE_FIELD);
-		checkZoneForCardClick(e, MTGComp.getBattleGUICards2(), Zone.BATTLE_FIELD1);
+		checkZoneForCardClick(MTGComp.getHandGUICards1(), Zone.HAND);
+		checkZoneForCardClick(MTGComp.getHandGUICards2(), Zone.HAND1);
+		checkZoneForCardClick(MTGComp.getBattleGUICards1(), Zone.BATTLE_FIELD);
+		checkZoneForCardClick(MTGComp.getBattleGUICards2(), Zone.BATTLE_FIELD1);
+		checkDispCardClick1();
+		checkDispCardClick2();
+	}
+
+	/**
+	 * Handles click checking for the first players GUI card
+	 */
+	private void checkDispCardClick1() {
+		if(MTGComp.getDispGUICard1() != null){
+			if(MTGComp.getDispGUICard1().getRec().contains(MTGComp.getMousePosition())){
+				MTGComp.setDispGUICard1(null);
+				MTGComp.repaint();
+			}
+		}
+	}
+	
+	/**
+	 * Handles click checking for the second players GUI card
+	 */
+	private void checkDispCardClick2() {
+		if(MTGComp.getDispGUICard2() != null){
+			if(MTGComp.getDispGUICard2().getRec().contains(MTGComp.getMousePosition())){
+				MTGComp.setDispGUICard2(null);
+				MTGComp.repaint();
+			}
+		}
 	}
 
 	/**
@@ -43,7 +69,7 @@ public class ClickHandler implements MouseListener {
 	 * @param cardAL the array list containing all cards to be checked
 	 * @param start starting zone of the cards in the arraylist
 	 */
-	public void checkZoneForCardClick(MouseEvent e, ArrayList<GUICard> cardAL, Zone start){
+	public void checkZoneForCardClick(ArrayList<GUICard> cardAL, Zone start){
 		for(int i = 0; i < cardAL.size(); i++){
 			if(cardAL.get(i).getRec().contains(MTGComp.getMousePosition())){
 				if(start == Zone.HAND || start == Zone.BATTLE_FIELD){

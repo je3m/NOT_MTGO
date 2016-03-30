@@ -41,26 +41,50 @@ public class MTGComponent extends JComponent{
 		this.battleGUICards2 = new ArrayList<GUICard>();
 	}
 	
+	/**
+	 * Get GUI Cards in first player's hand
+	 * @return GUI cards
+	 */
 	public ArrayList<GUICard> getHandGUICards1() {
 		return handGUICards1;
 	}
 
+	/**
+	 * Get GUI Cards in second player's hand
+	 * @return GUI cards
+	 */
 	public ArrayList<GUICard> getHandGUICards2() {
 		return handGUICards2;
 	}
 
+	/**
+	 * Get GUI Cards on first player's battlefield
+	 * @return GUI cards
+	 */
 	public ArrayList<GUICard> getBattleGUICards1() {
 		return battleGUICards1;
 	}
 
+	/**
+	 * Get GUI Cards on second player's battlefield
+	 * @return GUI cards
+	 */
 	public ArrayList<GUICard> getBattleGUICards2() {
 		return battleGUICards2;
 	}
 
+	/**
+	 * Set the current width of the window the component is in
+	 * @param x width of the window
+	 */
 	public void setWindowX(int x){
 		this.windowX = x;
 	}
 	
+	/**
+	 * Set the current height of the window the component is in
+	 * @param x height of the window
+	 */
 	public void setWindowY(int y){
 		this.windowY = y;
 	}
@@ -194,11 +218,53 @@ public class MTGComponent extends JComponent{
 		}
 	}
 	
+	/**
+	 * Create a Displayed GUI card object for the first player
+	 * @param card card being displayed
+	 */
 	public void generateDispGUICard1(Card card){
 		this.dispGUICard1 = new DispGUICard(new Rectangle((int)Math.round(0.15*windowX), (int)Math.round(0.2*windowY), (int)Math.round(0.2*windowX), (int)Math.round(0.2*windowX*(3.5/2.5))),card);
 	}
 	
+	/**
+	 * Create a Displayed GUI card object for the second player
+	 * @param card card being displayed
+	 */
 	public void generateDispGUICard2(Card card){
 		this.dispGUICard2 = new DispGUICard(new Rectangle((int)Math.round(0.55*windowX), (int)Math.round(0.2*windowY), (int)Math.round(0.2*windowX), (int)Math.round(0.2*windowX*(3.5/2.5))),card);
 	}
+	
+	/**
+	 * Get the current Displayed GUI card for the first player
+	 * @return current displayed card
+	 */
+	public DispGUICard getDispGUICard1() {
+		return dispGUICard1;
+	}
+
+	/**
+	 * Get the current Displayed GUI card for the second player
+	 * @return current displayed card
+	 */
+	public DispGUICard getDispGUICard2() {
+		return dispGUICard2;
+	}
+
+	/**
+	 * Set the current Displayed GUI card for the first player
+	 * @param dispGUICard1 
+	 */
+	public void setDispGUICard1(DispGUICard dispGUICard1) {
+		this.dispGUICard1 = null;
+	}
+
+	/**
+	 * Set the current Displayed GUI card for the second player
+	 * @param dispGUICard2
+	 */
+	public void setDispGUICard2(DispGUICard dispGUICard2) {
+		this.dispGUICard2 = null;
+	}
+	
+	
 }
