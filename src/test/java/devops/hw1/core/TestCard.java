@@ -51,6 +51,10 @@ public class TestCard {
 		c = new Card("Storm crow");
 		c.setImage("res/storm_crow.jpg");
 		assertEquals(c.getImage(), "res/storm_crow.jpg");
+
+		c = new Card("Scornful egotist");
+		c.setImage("res/scornful_egotist.jpg");
+		assertEquals(c.getImage(), "res/scornful_egotist.jpg");
 	}
 
 	@Test
