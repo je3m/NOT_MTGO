@@ -18,7 +18,7 @@ public class TestCard {
 
 		c = new Card("Scornful Egotist");
 		c.addAbility("Morph U");
-		assertEquals(c.getAbilities(), "Morph U");
+		assertEquals(c.getAbilities()[0], "Morph U");
 	}
 
 	@Test
