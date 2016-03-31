@@ -27,7 +27,7 @@ public class MTGDuelDecks {
 		hand1.setImage("Forest.jpg");
 		Zone.HAND.addCard(hand1,0);
 		Card hand2 = new Card("Hand2");
-		hand2.addAbility("Cycling");
+		hand2.addAbility("Play this card");
 		hand2.setImage("Forest.jpg");
 		Zone.HAND.addCard(hand2, 0);
 		Zone.HAND.addCard(new Card("Hand3"), 0);

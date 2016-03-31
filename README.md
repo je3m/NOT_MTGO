@@ -19,7 +19,7 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 
 
 --------------------------------------------------------------------------------------------------------
-Milestone 1
+Milestone 2
 
 Jim
 	-Wrote Zone enum to handle basic zone operations
@@ -36,5 +36,17 @@ Chris
 			-Cards on the battlefield can be moved to the hand
 			-GUI scales to the size of the window
 	-Known Bug: Cards can have issues being clicked and numbers don't scale well with very thin windows
+
+Scott
+
+
+--------------------------------------------------------------------------------------------------------
+Milestone 3
+
+Jim
+  -Added a bunch of getters and setters for cards
+  -Added default action for ability 1 in card handling
+
+Chris
 
 Scott
