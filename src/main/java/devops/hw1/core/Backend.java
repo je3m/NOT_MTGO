@@ -28,9 +28,8 @@ public class Backend {
 
 
 	public void activateAbility(Card c, Zone z, int i) {
-		if (i == 0){
-			z.addCard(c, i);
-		}
+		z.remove(i);
+		this.addCard(z, c);
 
 
 	}
