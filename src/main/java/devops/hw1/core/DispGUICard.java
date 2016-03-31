@@ -14,6 +14,7 @@ public class DispGUICard extends GUICard{
 	 * Constructs a displayed GUI card
 	 * @param rec the rectangle that is drawn for the GUI card
 	 * @param card the card the GUI card represents
+	 * @param str array of the ability strings of the card
 	 */
 	public DispGUICard(Rectangle rec, Card card, String[] str) {
 		super(rec, card);

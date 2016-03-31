@@ -34,7 +34,7 @@ public class Card {
 	 * @return a string of all abilities that card has
 	 */
 	public String[] getAbilities() {
-		return (this.abilities.toArray(new String[1]));
+		return (this.abilities.toArray(new String[0]));
 	}
 
 	/**

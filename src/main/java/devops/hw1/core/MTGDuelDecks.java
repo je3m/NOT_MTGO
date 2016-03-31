@@ -22,8 +22,12 @@ public class MTGDuelDecks {
 		Zone.LIBRARY.addCard(new Card("Libr"), 0);
 		Zone.GRAVEYARD1.addCard(new Card("Grave"), 0);
 		Zone.LIBRARY1.addCard(new Card("Libr"), 0);
-		Zone.HAND.addCard(new Card("Hand1"), 0);
-		Zone.HAND.addCard(new Card("Hand2"), 0);
+		Card hand1 = new Card("Hand1");
+		hand1.addAbility("Play this card");
+		Zone.HAND.addCard(hand1,0);
+		Card hand2 = new Card("Hand2");
+		hand2.addAbility("Cycling");
+		Zone.HAND.addCard(hand2, 0);
 		Zone.HAND.addCard(new Card("Hand3"), 0);
 		Zone.HAND.addCard(new Card("Hand4"), 0);
 		Zone.HAND.addCard(new Card("Hand5"), 0);

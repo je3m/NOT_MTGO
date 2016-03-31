@@ -261,7 +261,6 @@ public class MTGComponent extends JComponent{
 		}
 	}
 	
-	String[] test = {"Cast this spell", "Ability 1"};
 	private static final double DISPLAY_CARD1_X_POSITION = 0.15;
 	private static final double DISPLAY_CARD1_Y_POSITION = 0.2;
 	/**
@@ -269,7 +268,7 @@ public class MTGComponent extends JComponent{
 	 * @param card card being displayed
 	 */
 	public void generateDispGUICard1(Card card){
-		this.dispGUICard1 = new DispGUICard(new Rectangle((int)(DISPLAY_CARD1_X_POSITION*windowX), (int)(DISPLAY_CARD1_Y_POSITION*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, test);
+		this.dispGUICard1 = new DispGUICard(new Rectangle((int)(DISPLAY_CARD1_X_POSITION*windowX), (int)(DISPLAY_CARD1_Y_POSITION*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, card.getAbilities());
 	}
 	
 	/**
@@ -277,7 +276,7 @@ public class MTGComponent extends JComponent{
 	 * @param card card being displayed
 	 */
 	public void generateDispGUICard2(Card card){
-		this.dispGUICard2 = new DispGUICard(new Rectangle((int)(0.55*windowX), (int)(0.2*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, test);
+		this.dispGUICard2 = new DispGUICard(new Rectangle((int)(0.55*windowX), (int)(0.2*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, card.getAbilities());
 	}
 	
 	/**
