@@ -11,12 +11,17 @@ public class BackendTest {
 
 	@Test
 	public void testAdd(){
+
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		Card c1 = EasyMock.niceMock(Card.class);
 
 		bknd.addCard(Zone.HAND, c);
 		bknd.addCard(Zone.HAND, c1);
+
+		Zone.HAND.addCard(c, 0);
+		Zone.HAND.addCard(c, 0);
+
 
 
 		assertEquals(c, bknd.getZoneContents(Zone.HAND)[0]);
