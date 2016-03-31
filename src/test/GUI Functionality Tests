@@ -47,3 +47,6 @@ Displayed cards have a list of abilities displayed next to them.
 
 Test 16.
 Cards display an actual image.
+
+Test 17.
+Clicking abilities tells the backend it has been clicked.
