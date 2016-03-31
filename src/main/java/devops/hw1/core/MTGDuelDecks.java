@@ -1,7 +1,5 @@
 package devops.hw1.core;
 
-import java.awt.Dimension;
-import java.awt.TextField;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -17,7 +15,7 @@ public class MTGDuelDecks {
 	 * @param args
 	 */
 	public static void main(String[] args){
-		JFrame MTGJFrame = setUpJFrame();
+		setUpJFrame();
 		
 		//Test
 		Zone.GRAVEYARD.addCard(new Card("Grave"), 0);

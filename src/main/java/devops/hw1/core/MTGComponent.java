@@ -16,6 +16,40 @@ import javax.swing.JComponent;
  */
 @SuppressWarnings("serial")
 public class MTGComponent extends JComponent{
+	private static final double BASE_HAND_CARDS_POSITION = 0;
+	private static final double BASE_HAND1_CARDS_POSITION = 0.9;
+	private static final double BASE_BATTLEFIELD_CARDS_POSITION = 0.1;
+	private static final double BASE_BATTLEFIELD1_CARDS_POSITION = 0.8;
+	private static final double CENTER_LINE_X_POSITION = 0.5;
+	private static final int CENTER_LINE_Y_POSITION = 0;
+	private static final double SIDEBAR_WIDTH = 0.1;
+	private static final double HAND_HEIGHT = 0.8;
+	private static final double EXILE_HEIGHT = 0.1;
+	private static final double LIBRARY_HEIGHT = 0.1;
+	private static final double SIDEBAR1_X_POSITION = 0;
+	private static final double SIDEBAR2_X_POSITION = 0.9;
+	private static final int HAND_Y_POSITION = 0;
+	private static final double SIDEBAR_ADJUSTMENT  = 0.5;
+	private static final double ZONES_MAX_FONT_WIDTH = 0.08;
+	private static final double ZONES_MAX_FONT_HEIGHT = 0.08;
+	private static final double LIBRARY_COUNT_X_POSITION = 0.038;
+	private static final double LIBRARY_COUNT_Y_POSITION = 0.98;
+	private static final double GRAVEYARD_COUNT_X_POSITION = 0.01;
+	private static final double GRAVEYARD_COUNT_Y_POSITION = 0.88;
+	private static final double EXILE_COUNT_X_POSITION = 0.06;
+	private static final double LIBRARY1_COUNT_X_POSITION = 0.938;
+	private static final double GRAVEYARD1_COUNT_X_POSITION = 0.91;
+	private static final double EXILE1_COUNT_X_POSITION = 0.96;
+	private static final double CARD_WIDTH_TO_HEIGHT_RATIO = 3.5/2.5;
+	private static final double HAND_BUFFER_FROM_TOP = 0.025;
+	private static final double HAND_BUFFER_FROM_LEFT = 0.05;
+	private static final double BUFFER_FROM_TOP_OF_PREV_CARD = 1.25;
+	private static final double MINIMUM_HAND_CARD_WIDTH = 0.08;
+	private static final double CARD_HEIGHT_TO_WIDTH_RATIO = 2.5/3.5;
+	private static final int ABILITY_FONT_SIZE = 25;
+	private static final double ABILITY_STRING_LEFT_BUFFER = 0.1;
+	private static final double ABILITY_STRING_Y_CENTER_SHIFT = 0.05;
+	
 	private int windowX;
 	private int windowY;
 	private ArrayList<GUICard> handGUICards1;
@@ -96,10 +130,10 @@ public class MTGComponent extends JComponent{
 		drawFormat(graphics2);
 		drawCountedZones1(graphics2);
 		drawCountedZones2(graphics2);
-		generateGUICards(this.handGUICards1, Zone.HAND, 0);
-		generateGUICards(this.handGUICards2, Zone.HAND1, 0.9);
-		generateGUICards(this.battleGUICards1, Zone.BATTLE_FIELD, 0.1);
-		generateGUICards(this.battleGUICards2, Zone.BATTLE_FIELD1, 0.8);
+		generateGUICards(this.handGUICards1, Zone.HAND, BASE_HAND_CARDS_POSITION);
+		generateGUICards(this.handGUICards2, Zone.HAND1, BASE_HAND1_CARDS_POSITION);
+		generateGUICards(this.battleGUICards1, Zone.BATTLE_FIELD, BASE_BATTLEFIELD_CARDS_POSITION);
+		generateGUICards(this.battleGUICards2, Zone.BATTLE_FIELD1, BASE_BATTLEFIELD1_CARDS_POSITION);
 		if(this.dispGUICard1 != null){
 			generateDispGUICard1(this.dispGUICard1.getCard());
 		}
@@ -115,12 +149,17 @@ public class MTGComponent extends JComponent{
 	 */
 	private void drawFormat(Graphics2D graphics2) {
 		graphics2.setColor(Color.BLACK);
-		graphics2.drawLine((int)Math.round(windowX*0.5), 0, (int)Math.round(windowX*0.5), windowY);
+		graphics2.drawLine((int)(windowX*CENTER_LINE_X_POSITION), CENTER_LINE_Y_POSITION, (int)(windowX*CENTER_LINE_X_POSITION), windowY);
 		
-		graphics2.draw(new Rectangle(0,0,(int)Math.round(windowX*0.1), windowY - 1));
-		graphics2.draw(new Rectangle(0,(int)Math.round(windowY*0.8),(int)Math.round(windowX*0.1),(int)Math.round(windowY*0.1)));
-		graphics2.draw(new Rectangle((int)Math.round(windowX*0.9)-1,0,(int)Math.round(windowX*0.1), windowY - 1));
-		graphics2.draw(new Rectangle((int)Math.round(windowX*0.9)-1,(int)Math.round(windowY*0.8),(int)Math.round(windowX*0.1),(int)Math.round(windowY*0.1)));
+		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,HAND_Y_POSITION,(int)(windowX*SIDEBAR_WIDTH), (int)(windowY*HAND_HEIGHT)));
+		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
+		graphics2.draw(new Rectangle((int)(SIDEBAR1_X_POSITION + windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2) + SIDEBAR_ADJUSTMENT),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
+		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,(int)(windowY*(HAND_HEIGHT + EXILE_HEIGHT)),(int)(windowX*SIDEBAR_WIDTH),(int)(windowY*LIBRARY_HEIGHT)));
+		
+		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX),HAND_Y_POSITION,(int)(windowX*SIDEBAR_WIDTH), (int)(windowY*HAND_HEIGHT)));
+		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2) + SIDEBAR_ADJUSTMENT),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
+		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX + windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
+		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX),(int)(windowY*(HAND_HEIGHT + EXILE_HEIGHT)),(int)(windowX*SIDEBAR_WIDTH),(int)(windowY*LIBRARY_HEIGHT)));
 	}
 	
 	/**
@@ -128,10 +167,10 @@ public class MTGComponent extends JComponent{
 	 * @param graphics2
 	 */
 	private void drawCountedZones1(Graphics2D graphics2){
-		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)Math.round(windowY*0.08), (int)Math.round(windowX*0.08)))); 
-		graphics2.drawString(String.valueOf(Zone.LIBRARY.getSize()),(int)Math.round(windowX*0.038),(int)Math.round(windowY*0.98) - 1);
-		graphics2.drawString(String.valueOf(Zone.GRAVEYARD.getSize()),(int)Math.round(windowX*0.010),(int)Math.round(windowY*0.88) - 1);
-		graphics2.drawString(String.valueOf(Zone.EXILE.getSize()),(int)Math.round(windowX*0.060),(int)Math.round(windowY*0.88) - 1);
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(windowY*ZONES_MAX_FONT_HEIGHT), (int)(windowX*ZONES_MAX_FONT_WIDTH)))); 
+		graphics2.drawString(String.valueOf(Zone.LIBRARY.getSize()),(int)(windowX*LIBRARY_COUNT_X_POSITION),(int)(windowY*LIBRARY_COUNT_Y_POSITION));
+		graphics2.drawString(String.valueOf(Zone.GRAVEYARD.getSize()),(int)(windowX*GRAVEYARD_COUNT_X_POSITION),(int)(windowY*GRAVEYARD_COUNT_Y_POSITION));
+		graphics2.drawString(String.valueOf(Zone.EXILE.getSize()),(int)(windowX*EXILE_COUNT_X_POSITION),(int)(windowY*GRAVEYARD_COUNT_Y_POSITION));
 	}
 	
 	/**
@@ -139,10 +178,10 @@ public class MTGComponent extends JComponent{
 	 * @param graphics2
 	 */
 	private void drawCountedZones2(Graphics2D graphics2){
-		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)Math.round(windowY*0.08), (int)Math.round(windowX*0.08)))); 
-		graphics2.drawString(String.valueOf(Zone.LIBRARY1.getSize()),(int)Math.round(windowX*0.938),(int)Math.round(windowY*0.98) - 1);
-		graphics2.drawString(String.valueOf(Zone.GRAVEYARD1.getSize()),(int)Math.round(windowX*0.910),(int)Math.round(windowY*0.88) - 1);
-		graphics2.drawString(String.valueOf(Zone.EXILE1.getSize()),(int)Math.round(windowX*0.960),(int)Math.round(windowY*0.88) - 1);
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(windowY*ZONES_MAX_FONT_HEIGHT), (int)(windowX*ZONES_MAX_FONT_WIDTH)))); 
+		graphics2.drawString(String.valueOf(Zone.LIBRARY1.getSize()),(int)(windowX*LIBRARY1_COUNT_X_POSITION),(int)(windowY*LIBRARY_COUNT_Y_POSITION));
+		graphics2.drawString(String.valueOf(Zone.GRAVEYARD1.getSize()),(int)(windowX*GRAVEYARD1_COUNT_X_POSITION),(int)(windowY*GRAVEYARD_COUNT_Y_POSITION));
+		graphics2.drawString(String.valueOf(Zone.EXILE1.getSize()),(int)(windowX*EXILE1_COUNT_X_POSITION),(int)(windowY*GRAVEYARD_COUNT_Y_POSITION));
 	}
 	
 	/**
@@ -154,12 +193,12 @@ public class MTGComponent extends JComponent{
 	private void generateGUICards(ArrayList<GUICard> cardsAL, Zone zone, double baseXLocation){//!#stress-test this
 		cardsAL.clear();
 		int height = getCardHeight(zone);
-		int width = (int)Math.round(height * 3.5/2.5);
-		int currentSpace = (int)Math.round(0.025*windowY);
+		int width = (int)Math.round(height * CARD_WIDTH_TO_HEIGHT_RATIO);
+		int currentSpace = (int)Math.round(HAND_BUFFER_FROM_TOP*windowY);
 		Card[] cards = zone.getCards();
 		for(int i = 0; i < zone.getSize(); i++){
-			cardsAL.add(new GUICard(new Rectangle((int)Math.round((0.05 + baseXLocation)*windowX - width/2), currentSpace, width, height), cards[i]));
-			currentSpace = currentSpace + (int)Math.round(1.25*height);
+			cardsAL.add(new GUICard(new Rectangle((int)((HAND_BUFFER_FROM_LEFT + baseXLocation)*windowX - width/2), currentSpace, width, height), cards[i]));
+			currentSpace = currentSpace + (int)(BUFFER_FROM_TOP_OF_PREV_CARD*height);
 		}
 	}
 	
@@ -172,8 +211,8 @@ public class MTGComponent extends JComponent{
 		drawGUICardArrayList(handGUICards2, graphics2);
 		drawGUICardArrayList(battleGUICards1, graphics2);
 		drawGUICardArrayList(battleGUICards2, graphics2);
-		drawBigGUICard(dispGUICard1, graphics2);
-		drawBigGUICard(dispGUICard2, graphics2);
+		drawDispGUICard(dispGUICard1, graphics2);
+		drawDispGUICard(dispGUICard2, graphics2);
 	}
 
 	/**
@@ -196,34 +235,41 @@ public class MTGComponent extends JComponent{
 	 */
 	private int getCardHeight(Zone zone){
 		int HeightRec = 3*windowY/(5*zone.getSize()-1);
-		int heightWidthRec = (int)Math.round(HeightRec * 3.5/2.5);
-		int windowWidthRec = (int)Math.round(windowX*0.08);
+		int heightWidthRec = (int)(HeightRec * CARD_WIDTH_TO_HEIGHT_RATIO);
+		int windowWidthRec = (int)(windowX*MINIMUM_HAND_CARD_WIDTH);
 		if(heightWidthRec < windowWidthRec){
 			return HeightRec;
 		} else {
-			return (int)Math.round(windowWidthRec * 2.5/3.5);
+			return (int)Math.round(windowWidthRec * CARD_HEIGHT_TO_WIDTH_RATIO);
 		}
 	}
 	
 	/**
-	 * Draws the large display for a card
+	 * Draws the displayed GUI card
 	 * @param dispCard display card object to be drawn
 	 * @param graphics2 graphics to draw the card on
 	 */
-	private void drawBigGUICard(DispGUICard dispCard, Graphics2D graphics2) {
+	private void drawDispGUICard(DispGUICard dispCard, Graphics2D graphics2) {
 		if(dispCard != null){
 			graphics2.draw(dispCard.getRec());
-			graphics2.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+			graphics2.setFont(new Font("Futura", Font.PLAIN, ABILITY_FONT_SIZE));
 			graphics2.drawString(dispCard.getCard().getName(), (int)dispCard.getRec().getCenterX(), (int)dispCard.getRec().getCenterY());
+			for(int i = 0; i < dispCard.getAbilityBoxes().length; i++){
+				graphics2.draw(dispCard.getAbilityBoxes()[i]);
+				graphics2.drawString(dispCard.getAbilityStrings()[i], (int)(dispCard.getAbilityBoxes()[i].getX() + (ABILITY_STRING_LEFT_BUFFER * dispCard.getAbilityBoxes()[i].getWidth())), (int)(dispCard.getAbilityBoxes()[i].getCenterY() + (ABILITY_STRING_Y_CENTER_SHIFT * dispCard.getAbilityBoxes()[i].getHeight())));
+			}
 		}
 	}
 	
+	String[] test = {"Cast this spell", "Ability 1"};
+	private static final double DISPLAY_CARD1_X_POSITION = 0.15;
+	private static final double DISPLAY_CARD1_Y_POSITION = 0.2;
 	/**
 	 * Create a Displayed GUI card object for the first player
 	 * @param card card being displayed
 	 */
 	public void generateDispGUICard1(Card card){
-		this.dispGUICard1 = new DispGUICard(new Rectangle((int)Math.round(0.15*windowX), (int)Math.round(0.2*windowY), (int)Math.round(0.2*windowX), (int)Math.round(0.2*windowX*(3.5/2.5))),card);
+		this.dispGUICard1 = new DispGUICard(new Rectangle((int)(DISPLAY_CARD1_X_POSITION*windowX), (int)(DISPLAY_CARD1_Y_POSITION*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, test);
 	}
 	
 	/**
@@ -231,7 +277,7 @@ public class MTGComponent extends JComponent{
 	 * @param card card being displayed
 	 */
 	public void generateDispGUICard2(Card card){
-		this.dispGUICard2 = new DispGUICard(new Rectangle((int)Math.round(0.55*windowX), (int)Math.round(0.2*windowY), (int)Math.round(0.2*windowX), (int)Math.round(0.2*windowX*(3.5/2.5))),card);
+		this.dispGUICard2 = new DispGUICard(new Rectangle((int)(0.55*windowX), (int)(0.2*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, test);
 	}
 	
 	/**

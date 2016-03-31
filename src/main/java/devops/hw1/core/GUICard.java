@@ -7,9 +7,8 @@ import java.awt.Rectangle;
  *
  */
 public class GUICard {
-	private Rectangle rec;
-	private Card card;
-	private Boolean clickable;
+	protected Rectangle rec;
+	protected Card card;
 	
 	/**
 	 * Constructs a GUI card object
@@ -19,7 +18,6 @@ public class GUICard {
 	public GUICard(Rectangle rec, Card card){
 		this.setRec(rec);
 		this.setCard(card);
-		this.clickable = true;
 	}
 
 	/**
