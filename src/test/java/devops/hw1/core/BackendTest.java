@@ -13,14 +13,17 @@ public class BackendTest {
 	public void testActivateAbility(){
 		Backend bknd = new Backend();
 		Card c = new Card("Storm Crow");
+		bknd.addCard(Zone.HAND, c);
 
-		bknd.activateAbility(c, Zone.HAND, 1);
+
+		bknd.activateAbility(c, Zone.HAND, 0);
 
 		assert(Zone.BATTLE_FIELD.contains(c.getName()));
 
 		Card c1 = new Card("Scornful Egotist");
 
-		bknd.activateAbility(c1, Zone.HAND1, 1);
+		bknd.addCard(Zone.HAND1, c1);
+		bknd.activateAbility(c1, Zone.HAND1, 0);
 		assert(Zone.BATTLE_FIELD1.contains(c1.getName()));
 	}
 
