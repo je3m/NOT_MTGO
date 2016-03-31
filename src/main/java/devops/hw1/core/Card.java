@@ -1,7 +1,15 @@
 package devops.hw1.core;
 
+import java.util.ArrayList;
+
 public class Card {
-	String name;
+	private String name;
+	private String manaCost;
+	private String color;
+	private String type;
+	private ArrayList<String> abilities = new ArrayList<String>();
+	private int power, toughness;
+	private String image;
 
 	/**
 	 * Constructs a card object with the given name
@@ -12,11 +20,147 @@ public class Card {
 	}
 
 	/**
+	 * Adds ability to card
+	 * TODO: come up with a good way to represent abilities (Mckee)
+	 * @param string ability to add following TODO: format
+	 */
+	public void addAbility(String string) {
+		this.abilities.add(string);
+
+	}
+
+	/**
+	 *
+	 * @return a string of all abilities that card has
+	 */
+	public String[] getAbilities() {
+		return (this.abilities.toArray(new String[1]));
+	}
+
+	/**
+	 * @return color of card represented by [WUBRG]*
+	 */
+	public String getColor() {
+		return this.color;
+	}
+
+	/**
+	 * Gets the cost of the card expressed as oracle text
+	 * without curly braces.
+	 * Conforms to regex [0-9]*[WUBRG]*
+	 */
+	public String getCost(){
+		return this.manaCost;
+	}
+
+	/**
+	 * @return path of image to card
+	 */
+	public String getImage() {
+		return this.image;
+	}
+
+	/**
 	 *
 	 * @return the name of the card
 	 */
 	public String getName(){
 		return this.name;
+	}
+
+	/**
+	 * @return power of card
+	 */
+	public int getPower() {
+		return this.power;
+	}
+
+	/**
+	 * @return toughness of card
+	 */
+	public int getToughness() {
+		return this.toughness;
+
+	}
+
+	/**
+	 * Type and subtype of card
+	 * <Type>- <subtype>*
+	 * types are seperated by spaces
+	 * (example Storm Crow -> "Creature- bird")
+	 * @return types of card
+	 */
+	public String getType() {
+		return this.type;
+
+	}
+
+	/**
+	 * Sets the color of the card to given card
+	 * @param string color of card represented by [WUBRG]*
+	 */
+	public void setColor(String string) {
+		this.color = string;
+
+	}
+
+	/**
+	 * Sets the cost of the card expressed as oracle text
+	 * without curly braces.
+	 * Conforms to regex [0-9]*[WUBRG]*
+	 *
+	 * Ex: (Storm Crow -> '1U', Emrakul -> '15')
+	 * @param s mana cost of card
+	 */
+	public void setCost(String s){
+		this.manaCost = s;
+	}
+
+	/**
+	 * sets image path for displaying the card
+	 * @param string filepath to image
+	 */
+	public void setImage(String string) {
+		this.image = string;
+
+	}
+
+	/**
+	 * sets the power of card (if creature)
+	 * @param i power of creature
+	 */
+	public void setPower(int i) {
+		this.power = i;
+
+	}
+
+	/**
+	 * Sets both the power and toughness of card
+	 * @param p power of card
+	 * @param t toughness of card
+	 */
+	public void setPT(int p, int t){
+		this.toughness = t;
+		this.power = p;
+	}
+
+	/**
+	 * sets toughness of card
+	 * @param i toughness
+	 */
+	public void setToughness(int i) {
+		this.toughness = i;
+
+	}
+
+	/**
+	 * Sets the type of given card defined as
+	 * <Type>- <subtype>*
+	 * (example Storm Crow -> "Creature- bird")
+	 * @param s type of card
+	 */
+	public void setType(String s) {
+		this.type = s;
 	}
 
 	@Override
