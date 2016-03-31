@@ -8,17 +8,23 @@ import java.awt.Rectangle;
  */
 public class DispGUICard extends GUICard{
 		String[] abilityStrings;
-		Rectangle[] abilityBoxes; 
+		Rectangle[] abilityBoxes;
+		int index;
+		Zone zone;
 
 	/**
 	 * Constructs a displayed GUI card
 	 * @param rec the rectangle that is drawn for the GUI card
 	 * @param card the card the GUI card represents
 	 * @param str array of the ability strings of the card
+	 * @param index index of the card in its original zone
+	 * @param zone zone of the card
 	 */
-	public DispGUICard(Rectangle rec, Card card, String[] str) {
+	public DispGUICard(Rectangle rec, Card card, String[] str, int index, Zone zone) {
 		super(rec, card);
 		this.abilityStrings = str;
+		this.index = index;
+		this.zone = zone;
 		generateAbilityBoxes();
 	}
 
@@ -56,5 +62,21 @@ public class DispGUICard extends GUICard{
 	 */
 	public Rectangle[] getAbilityBoxes() {
 		return abilityBoxes;
+	}
+	
+	/**
+	 * Gets the index of the card represented by the GUI card
+	 * @return index of the card
+	 */
+	public int getIndex() {
+		return index;
+	}
+	
+	/**
+	 * Gets the zone of the card represented by the GUI card
+	 * @return index of the card
+	 */
+	public Zone getZone() {
+		return zone;
 	}
 }

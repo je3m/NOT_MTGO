@@ -6,7 +6,7 @@ public class Backend {
 	/**
 	 * TODO WRITE THIS
 	 */
-	static void handleCardClicked(Zone z, int currIndex, Card c) {
+	public static void handleCardClicked(Zone z, int currIndex, Card c) {
 		z.remove(currIndex);
 		switch(z) {
 		case HAND:
@@ -27,18 +27,18 @@ public class Backend {
 	}
 
 
-	public void activateAbility(Card c, Zone z, int i) {
+	public static void activateAbility(Card c, Zone z, int i) {
 		z.remove(i);
 
 		if(z == Zone.HAND)
-			this.addCard(Zone.BATTLE_FIELD, c);
+			addCard(Zone.BATTLE_FIELD, c);
 
 		if(z == Zone.HAND1)
-			this.addCard(Zone.BATTLE_FIELD1, c);
+			addCard(Zone.BATTLE_FIELD1, c);
 
 	}
 
-	public void addCard(Zone z, Card c) {
+	public static void addCard(Zone z, Card c) {
 		z.addCard(c, z.getSize());
 	}
 

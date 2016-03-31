@@ -8,7 +8,6 @@ import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
@@ -139,10 +138,10 @@ public class MTGComponent extends JComponent{
 		generateGUICards(this.battleGUICards1, Zone.BATTLE_FIELD, BASE_BATTLEFIELD_CARDS_POSITION);
 		generateGUICards(this.battleGUICards2, Zone.BATTLE_FIELD1, BASE_BATTLEFIELD1_CARDS_POSITION);
 		if(this.dispGUICard1 != null){
-			generateDispGUICard1(this.dispGUICard1.getCard());
+			generateDispGUICard1(this.dispGUICard1.getCard(), this.dispGUICard1.getIndex(), this.dispGUICard1.getZone());
 		}
 		if(this.dispGUICard2 != null){
-			generateDispGUICard2(this.dispGUICard2.getCard());
+			generateDispGUICard2(this.dispGUICard2.getCard(), this.dispGUICard2.getIndex(), this.dispGUICard2.getZone());
 		}
 		drawGUICards(graphics2);
 	}
@@ -289,17 +288,19 @@ public class MTGComponent extends JComponent{
 	/**
 	 * Create a Displayed GUI card object for the first player
 	 * @param card card being displayed
+	 * @param index index of card being displayed
 	 */
-	public void generateDispGUICard1(Card card){
-		this.dispGUICard1 = new DispGUICard(new Rectangle((int)(DISPLAY_CARD1_X_POSITION*windowX), (int)(DISPLAY_CARD1_Y_POSITION*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, card.getAbilities());
+	public void generateDispGUICard1(Card card, int index, Zone zone){
+		this.dispGUICard1 = new DispGUICard(new Rectangle((int)(DISPLAY_CARD1_X_POSITION*windowX), (int)(DISPLAY_CARD1_Y_POSITION*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, card.getAbilities(), index, zone);
 	}
 	
 	/**
 	 * Create a Displayed GUI card object for the second player
 	 * @param card card being displayed
+	 * @param index index of card being displayed
 	 */
-	public void generateDispGUICard2(Card card){
-		this.dispGUICard2 = new DispGUICard(new Rectangle((int)(0.55*windowX), (int)(0.2*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, card.getAbilities());
+	public void generateDispGUICard2(Card card, int index, Zone zone){
+		this.dispGUICard2 = new DispGUICard(new Rectangle((int)(0.55*windowX), (int)(0.2*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, card.getAbilities(), index, zone);
 	}
 	
 	/**
