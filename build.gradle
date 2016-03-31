@@ -28,7 +28,7 @@ jacocoTestReport {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.+'
+    testCompile 'junit:junit:4.+', 'org.easymock:easymock:3.4'
 }
 
 test {
