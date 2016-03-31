@@ -10,6 +10,16 @@ public class BackendTest {
 
 
 	@Test
+	public void testActivateAbility(){
+		Backend bknd = new Backend();
+		Card c = new Card("Storm Crow");
+
+		bknd.activateAbility(c, Zone.HAND, 1);
+
+		assert(Zone.HAND.contains(c.getName()));
+	}
+
+	@Test
 	public void testAdd(){
 
 		Backend bknd = new Backend();
