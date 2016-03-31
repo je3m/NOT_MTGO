@@ -26,6 +26,18 @@ public class Backend {
 		}
 	}
 
+
+	public void activateAbility(Card c, Zone z, int i) {
+		z.remove(i);
+
+		if(z == Zone.HAND)
+			this.addCard(Zone.BATTLE_FIELD, c);
+
+		if(z == Zone.HAND1)
+			this.addCard(Zone.BATTLE_FIELD1, c);
+
+	}
+
 	public void addCard(Zone z, Card c) {
 		z.addCard(c, z.getSize());
 	}
@@ -48,6 +60,7 @@ public class Backend {
 	Card[] getZoneContents(Zone zone){
 		return zone.getCards();
 	}
+
 
 	/**
 	 * Removes the card at the given index from the zone
