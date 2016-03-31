@@ -25,7 +25,11 @@ public class Backend {
 			throw new IllegalArgumentException(z + " zone is not a valid zone for card click events.");
 		}
 	}
-	
+
+	public void addCard(Zone z, Card c) {
+		z.addCard(c, z.getSize());
+	}
+
 	/**
 	 * Adds the given card to the given zone
 	 * @param z Zone to add card to
