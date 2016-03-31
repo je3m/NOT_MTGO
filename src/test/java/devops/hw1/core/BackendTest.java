@@ -17,6 +17,11 @@ public class BackendTest {
 		bknd.activateAbility(c, Zone.HAND, 1);
 
 		assert(Zone.BATTLE_FIELD.contains(c.getName()));
+
+		Card c1 = new Card("Scornful Egotist");
+
+		bknd.activateAbility(c1, Zone.HAND1, 1);
+		assert(Zone.BATTLE_FIELD1.contains(c1.getName()));
 	}
 
 	@Test
