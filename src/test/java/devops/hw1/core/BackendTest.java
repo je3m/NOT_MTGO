@@ -16,7 +16,7 @@ public class BackendTest {
 
 		bknd.activateAbility(c, Zone.HAND, 1);
 
-		assert(Zone.HAND.contains(c.getName()));
+		assert(Zone.BATTLE_FIELD.contains(c.getName()));
 	}
 
 	@Test
