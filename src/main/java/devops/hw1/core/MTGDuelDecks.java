@@ -24,9 +24,11 @@ public class MTGDuelDecks {
 		Zone.LIBRARY1.addCard(new Card("Libr"), 0);
 		Card hand1 = new Card("Hand1");
 		hand1.addAbility("Play this card");
+		hand1.setImage("Forest.jpg");
 		Zone.HAND.addCard(hand1,0);
 		Card hand2 = new Card("Hand2");
 		hand2.addAbility("Cycling");
+		hand2.setImage("Forest.jpg");
 		Zone.HAND.addCard(hand2, 0);
 		Zone.HAND.addCard(new Card("Hand3"), 0);
 		Zone.HAND.addCard(new Card("Hand4"), 0);
@@ -35,15 +37,22 @@ public class MTGDuelDecks {
 		Zone.HAND.addCard(new Card("Hand7"), 0);
 		Zone.HAND.addCard(new Card("Hand8"), 0);
 		Zone.HAND.addCard(new Card("Hand9"), 0);
-		Zone.HAND1.addCard(new Card("Hand1"), 0);
+		Card hand11 = new Card("Hand11");
+		hand11.addAbility("Play this card");
+		hand11.setImage("Mountain.jpg");
+		Zone.HAND1.addCard(hand11, 0);
 		Zone.HAND1.addCard(new Card("Hand2"), 0);
 		Zone.HAND1.addCard(new Card("Hand3"), 0);
 		Zone.HAND1.addCard(new Card("Hand4"), 0);
 		Zone.HAND1.addCard(new Card("Hand5"), 0);
 		Zone.HAND1.addCard(new Card("Hand6"), 0);
 		Zone.HAND1.addCard(new Card("Hand7"), 0);
-		Zone.BATTLE_FIELD.addCard(new Card("BF1"), 0);
-		Zone.BATTLE_FIELD1.addCard(new Card("BF2"), 0);
+		Card BF1 = new Card("BF1");
+		BF1.setImage("Forest.jpg");
+		Zone.BATTLE_FIELD.addCard(BF1, 0);
+		Card BF2 = new Card("BF2");
+		BF2.setImage("Mountain.jpg");
+		Zone.BATTLE_FIELD1.addCard(BF2, 0);
 	}
 	
 	/**

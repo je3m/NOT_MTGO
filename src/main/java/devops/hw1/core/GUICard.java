@@ -1,6 +1,11 @@
 package devops.hw1.core;
 
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 /**
  * This class represents a card that is displayed in the GUI
  * @author malinocr
@@ -16,8 +21,8 @@ public class GUICard {
 	 * @param card the card the GUI object represents
 	 */
 	public GUICard(Rectangle rec, Card card){
-		this.setRec(rec);
-		this.setCard(card);
+		this.rec = rec;
+		this.card = card;
 	}
 
 	/**
@@ -50,5 +55,27 @@ public class GUICard {
 	 */
 	public void setCard(Card card) {
 		this.card = card;
+	}
+	
+	/**
+	 * Get the image of GUI card
+	 * @return the image of the GUI card
+	 */
+	public BufferedImage getImage(){
+		if(card.getImage() == null){
+			return null;
+		} else {
+			BufferedImage img = null;
+	
+			try 
+			{
+				img = ImageIO.read(new File(card.getImage()));
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+			return img;
+		}
 	}
 }

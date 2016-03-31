@@ -5,6 +5,10 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
@@ -207,10 +211,10 @@ public class MTGComponent extends JComponent{
 	 * @param graphics2 the graphics object to draw onto
 	 */
 	private void drawGUICards(Graphics2D graphics2){
-		drawGUICardArrayList(handGUICards1, graphics2);
-		drawGUICardArrayList(handGUICards2, graphics2);
-		drawGUICardArrayList(battleGUICards1, graphics2);
-		drawGUICardArrayList(battleGUICards2, graphics2);
+		drawGUICardArrayList(handGUICards1, graphics2, 90);
+		drawGUICardArrayList(handGUICards2, graphics2, -90);
+		drawGUICardArrayList(battleGUICards1, graphics2, 90);
+		drawGUICardArrayList(battleGUICards2, graphics2, -90);
 		drawDispGUICard(dispGUICard1, graphics2);
 		drawDispGUICard(dispGUICard2, graphics2);
 	}
@@ -219,12 +223,26 @@ public class MTGComponent extends JComponent{
 	 * Draw all the GUICards in a given arraylist
 	 * @param cardsAL the arraylist where the cards to draw are located
 	 * @param graphics2 the graphics object to draw onto
+	 * @param rotate the degrees which the image for the cards should be rotated
 	 */
-	private void drawGUICardArrayList(ArrayList<GUICard> cardsAL, Graphics2D graphics2 ){
+	private void drawGUICardArrayList(ArrayList<GUICard> cardsAL, Graphics2D graphics2, double rotate){
 		for(int i = 0; i < cardsAL.size(); i++){
-			graphics2.draw(cardsAL.get(i).getRec());
-			graphics2.setFont(new Font("TimesRoman", Font.PLAIN, 15));
-			graphics2.drawString(cardsAL.get(i).getCard().getName(), (int)cardsAL.get(i).getRec().getCenterX(), (int)cardsAL.get(i).getRec().getCenterY());
+			if(cardsAL.get(i).getImage() == null){
+				graphics2.draw(cardsAL.get(i).getRec());
+				graphics2.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+				graphics2.drawString(cardsAL.get(i).getCard().getName(), (int)cardsAL.get(i).getRec().getCenterX(), (int)cardsAL.get(i).getRec().getCenterY());
+			} else {
+				Rectangle rec = cardsAL.get(i).getRec();
+				BufferedImage img = cardsAL.get(i).getImage();
+				AffineTransform transform = new AffineTransform();
+				transform.translate(0.5*img.getHeight(), 0.5*img.getWidth());
+				transform.rotate(Math.toRadians(rotate));
+				transform.translate(-0.5*img.getWidth(), -0.5*img.getHeight());
+
+				AffineTransformOp transformOP = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+				img = transformOP.filter(img, null);
+				graphics2.drawImage(img, (int)rec.getX(), (int)rec.getY(), (int)rec.getWidth(), (int)rec.getHeight(), this);
+			}
 		}
 	}
 	
@@ -251,9 +269,14 @@ public class MTGComponent extends JComponent{
 	 */
 	private void drawDispGUICard(DispGUICard dispCard, Graphics2D graphics2) {
 		if(dispCard != null){
-			graphics2.draw(dispCard.getRec());
-			graphics2.setFont(new Font("Futura", Font.PLAIN, ABILITY_FONT_SIZE));
-			graphics2.drawString(dispCard.getCard().getName(), (int)dispCard.getRec().getCenterX(), (int)dispCard.getRec().getCenterY());
+			if(dispCard.getCard().getImage() == null){
+				graphics2.draw(dispCard.getRec());
+				graphics2.setFont(new Font("Futura", Font.PLAIN, ABILITY_FONT_SIZE));
+				graphics2.drawString(dispCard.getCard().getName(), (int)dispCard.getRec().getCenterX(), (int)dispCard.getRec().getCenterY());
+			} else {
+				Rectangle rec = dispCard.getRec();
+				graphics2.drawImage(dispCard.getImage(), (int)rec.getX(), (int)rec.getY(), (int)rec.getWidth(), (int)rec.getHeight(), this);
+			}
 			for(int i = 0; i < dispCard.getAbilityBoxes().length; i++){
 				graphics2.draw(dispCard.getAbilityBoxes()[i]);
 				graphics2.drawString(dispCard.getAbilityStrings()[i], (int)(dispCard.getAbilityBoxes()[i].getX() + (ABILITY_STRING_LEFT_BUFFER * dispCard.getAbilityBoxes()[i].getWidth())), (int)(dispCard.getAbilityBoxes()[i].getCenterY() + (ABILITY_STRING_Y_CENTER_SHIFT * dispCard.getAbilityBoxes()[i].getHeight())));

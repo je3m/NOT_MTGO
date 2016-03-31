@@ -34,7 +34,7 @@ Only for the purpose of testing movement between zones.
 	Click a card in a battlefield to move it to the graveyard.
 
 Test 12.
-Clicking a card in hand or battlefield opens up the image of the card for each player.
+Clicking a card in hand or battlefield opens up the "image" of the card for each player.
 
 Test 13.
 Clicking a displayed card closes it.
@@ -44,3 +44,6 @@ Having a displayed card makes other cards a player owns unclickable.
 
 Test 15.
 Displayed cards have a list of abilities displayed next to them.
+
+Test 16.
+Cards display an actual image.
