@@ -41,3 +41,6 @@ Clicking a displayed card closes it.
 
 Test 14.
 Having a displayed card makes other cards a player owns unclickable.
+
+Test 15.
+Displayed cards have a list of abilities displayed next to them.
