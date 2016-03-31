@@ -29,8 +29,12 @@ public class Backend {
 
 	public void activateAbility(Card c, Zone z, int i) {
 		z.remove(i);
-		this.addCard(z, c);
 
+		if(z == Zone.HAND)
+			this.addCard(Zone.BATTLE_FIELD, c);
+
+		if(z == Zone.HAND1)
+			this.addCard(Zone.BATTLE_FIELD1, c);
 
 	}
 
