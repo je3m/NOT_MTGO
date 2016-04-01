@@ -65,6 +65,14 @@ public class TestCard {
 		c = new Card("Scornful egotist");
 		c.setImage("res/scornful_egotist.jpg");
 		assertEquals(c.getImage(), "res/scornful_egotist.jpg");
+		
+		
+		try{
+			c.setImage("saeiwqrowd");
+			fail("Expected IllegalArgumentException");
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Card Scornful egotist: saeiwqrowd is not a valid file name");
+		}
 	}
 
 	@Test

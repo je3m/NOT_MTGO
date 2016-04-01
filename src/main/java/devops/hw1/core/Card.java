@@ -1,5 +1,6 @@
 package devops.hw1.core;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.*;
 
@@ -102,7 +103,7 @@ public class Card {
 	 * Sets the color of the card to given card
 	 * @param string color of card represented by [WUBRG]*
 	 */
-	public void setColor(String string) {//!# INPUT VALIDATE W/ REGEX
+	public void setColor(String string) {
 		String regex = "[WUBRG]*";
 		if(!string.matches(regex)) {
 			throw new PatternSyntaxException("Card " + this.name + ": " + string + " is not a valid color", regex, -1);
@@ -119,7 +120,7 @@ public class Card {
 	 * Ex: (Storm Crow -> '1U', Emrakul -> '15')
 	 * @param s mana cost of card
 	 */
-	public void setCost(String s){//!# INPUT VALIDATE W/ REGEX
+	public void setCost(String s){
 		String regex = "[0-9]*[WUBRG]*";
 		if(!s.matches(regex)) {
 			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid mana cost", regex, -1);
@@ -132,6 +133,7 @@ public class Card {
 	 * @param string filepath to image
 	 */
 	public void setImage(String string) {//!# INPUT VALIDATE W/ REGEX
+		
 		this.image = string;
 
 	}
