@@ -1,6 +1,7 @@
 package devops.hw1.core;
 
 import java.util.ArrayList;
+import java.util.regex.*;
 
 public class Card {
 	private String name;
@@ -102,7 +103,9 @@ public class Card {
 	 * @param string color of card represented by [WUBRG]*
 	 */
 	public void setColor(String string) {//!# INPUT VALIDATE W/ REGEX
-		
+		if(!string.matches("[WUBRG]*")) {
+			throw new PatternSyntaxException("Card " + this.name + ": " + string + " is not a valid color", "[WUBRG]*", 0);
+		}
 		this.color = string;
 
 	}

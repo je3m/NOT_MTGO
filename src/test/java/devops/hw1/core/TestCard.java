@@ -51,7 +51,7 @@ public class TestCard {
 			c.setColor("O");
 			fail("Expected PatternSyntaxException");
 		} catch (PatternSyntaxException e) {
-			assertEquals(e.getMessage(), "Card Storm crow: O is not a valid color");
+			assertEquals(e.getDescription(), "Card One with Nothing: O is not a valid color");
 		}
 	}
 
