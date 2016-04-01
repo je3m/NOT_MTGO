@@ -120,7 +120,10 @@ public class Card {
 	 * @param s mana cost of card
 	 */
 	public void setCost(String s){//!# INPUT VALIDATE W/ REGEX
-		
+		String regex = "[0-9]*[WUBRG]*";
+		if(!s.matches(regex)) {
+			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid mana cost", regex, -1);
+		}
 		this.manaCost = s;
 	}
 
