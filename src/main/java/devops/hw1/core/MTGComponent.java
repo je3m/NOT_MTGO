@@ -133,6 +133,9 @@ public class MTGComponent extends JComponent{
 	 * @param y height of the window
 	 */
 	public void setWindowY(int y){
+		if(y < 0) {
+			throw new IllegalArgumentException("MTGComponent: " + y + " is not a valid window height");
+		}
 		this.windowY = y;
 	}
 	
