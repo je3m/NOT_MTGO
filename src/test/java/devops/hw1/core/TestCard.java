@@ -11,8 +11,8 @@ public class TestCard {
 
 	@Test
 	public void makeCardGetName(){
-		Card c = new Card("Storm crow");
-		assertEquals(c.getName(), "Storm crow");
+		Card c = new Card("Storm Crow");
+		assertEquals(c.getName(), "Storm Crow");
 	}
 
 	@Test
@@ -39,7 +39,7 @@ public class TestCard {
 	public void testColor(){
 		Card c;
 
-		c = new Card("Storm crow");
+		c = new Card("Storm Crow");
 		c.setColor("U");
 		assertEquals(c.getColor(), "U");
 
@@ -79,7 +79,7 @@ public class TestCard {
 	public void testManaCostGetSet(){
 		Card c;
 
-		c = new Card("Storm crow");
+		c = new Card("Storm Crow");
 		c.setCost("1U");
 		assertEquals(c.getCost(), "1U");
 
@@ -134,13 +134,20 @@ public class TestCard {
 	public void testType(){
 		Card c;
 
-		c = new Card("Storm crow");
+		c = new Card("Storm Crow");
 		c.setType("Creature- Bird");
 		assertEquals(c.getType(), "Creature- Bird");
 
 		c = new Card("Scornful Egotist");
 		c.setType("Creature- Human Wizard");
 		assertEquals(c.getType(), "Creature- Human Wizard");
+		
+		try {
+			c.setType("ewonddl");
+			fail("Expected PatternSyntaxException");
+		} catch (PatternSyntaxException e) {
+			assertEquals(e.getDescription(), "Card Scornful Egotist: ewonddl is not a valid card typeline");
+		}
 
 	}
 }

@@ -178,6 +178,7 @@ public class Card {
 	 * @param s type of card
 	 */
 	public void setType(String s) {//!# INPUT VALIDATE W/ REGEX
+		
 		this.type = s;
 	}
 
