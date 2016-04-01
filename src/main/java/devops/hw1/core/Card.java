@@ -177,8 +177,11 @@ public class Card {
 	 * (example Storm Crow -> "Creature- bird")
 	 * @param s type of card
 	 */
-	public void setType(String s) {//!# INPUT VALIDATE W/ REGEX
-		
+	public void setType(String s) {
+		String regex = "[a-zA-Z]*\\-[a-zA-Z ]*";
+		if(!s.matches(regex)) {
+			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid card typeline", regex, -1);
+		}
 		this.type = s;
 	}
 
