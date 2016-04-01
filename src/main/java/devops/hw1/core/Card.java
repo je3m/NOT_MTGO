@@ -132,7 +132,7 @@ public class Card {
 	 * sets image path for displaying the card
 	 * @param string filepath to image
 	 */
-	public void setImage(String string) {//!# INPUT VALIDATE W/ REGEX
+	public void setImage(String string) {
 		File test = new File(string);
 		if(!test.exists()) {
 			throw new IllegalArgumentException("Card " + this.name + ": " + string + " is not a valid file name");
