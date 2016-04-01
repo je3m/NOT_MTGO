@@ -48,5 +48,9 @@ Jim
   -Added default action for ability 1 in card handling
 
 Chris
-
+ -Added GUI for clicking on cards and abilities
+ -Added constants to make GUI code more readable
+ -Fixed bug where cards can have issues being clicked
+ -Possible later content: Scale viewed cards and make GUI more efficient (currently a little laggy)
+ 
 Scott
