@@ -63,8 +63,12 @@ public class Backend {
 	 * @param c Card to add
 	 * @param i	position of the zone to add card
 	 */
-	void addCard(Zone z, Card c, int i){//!# Add error-handling!
-		z.addCard(c, i);
+	void addCard(Zone z, Card c, int i){
+		try {
+			z.addCard(c, i);
+		} catch (IndexOutOfBoundsException e) {
+			throw new IndexOutOfBoundsException("Backend: " + e.getMessage());
+		}
 	}
 
 	/**
