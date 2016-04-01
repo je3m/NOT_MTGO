@@ -19,6 +19,8 @@ public class Card {
 		this.name = s;
 	}
 
+	//!# add more constructors
+	
 	/**
 	 * Adds ability to card
 	 * TODO: come up with a good way to represent abilities (Mckee)
@@ -99,7 +101,7 @@ public class Card {
 	 * Sets the color of the card to given card
 	 * @param string color of card represented by [WUBRG]*
 	 */
-	public void setColor(String string) {
+	public void setColor(String string) {//!# INPUT VALIDATE W/ REGEX
 		this.color = string;
 
 	}
@@ -112,7 +114,7 @@ public class Card {
 	 * Ex: (Storm Crow -> '1U', Emrakul -> '15')
 	 * @param s mana cost of card
 	 */
-	public void setCost(String s){
+	public void setCost(String s){//!# INPUT VALIDATE W/ REGEX
 		this.manaCost = s;
 	}
 
@@ -120,7 +122,7 @@ public class Card {
 	 * sets image path for displaying the card
 	 * @param string filepath to image
 	 */
-	public void setImage(String string) {
+	public void setImage(String string) {//!# INPUT VALIDATE W/ REGEX
 		this.image = string;
 
 	}
@@ -129,7 +131,7 @@ public class Card {
 	 * sets the power of card (if creature)
 	 * @param i power of creature
 	 */
-	public void setPower(int i) {
+	public void setPower(int i) {//!# CHECK IF IS CREATURE
 		this.power = i;
 
 	}
@@ -139,7 +141,7 @@ public class Card {
 	 * @param p power of card
 	 * @param t toughness of card
 	 */
-	public void setPT(int p, int t){
+	public void setPT(int p, int t){//!# CHECK IF IS CREATURE
 		this.toughness = t;
 		this.power = p;
 	}
@@ -148,7 +150,7 @@ public class Card {
 	 * sets toughness of card
 	 * @param i toughness
 	 */
-	public void setToughness(int i) {
+	public void setToughness(int i) {//!# CHECK IF IS CREATURE
 		this.toughness = i;
 
 	}
@@ -159,7 +161,7 @@ public class Card {
 	 * (example Storm Crow -> "Creature- bird")
 	 * @param s type of card
 	 */
-	public void setType(String s) {
+	public void setType(String s) {//!# INPUT VALIDATE W/ REGEX
 		this.type = s;
 	}
 

@@ -120,7 +120,7 @@ public class MTGComponent extends JComponent{
 	
 	/**
 	 * Set the current height of the window the component is in
-	 * @param x height of the window
+	 * @param y height of the window
 	 */
 	public void setWindowY(int y){
 		this.windowY = y;

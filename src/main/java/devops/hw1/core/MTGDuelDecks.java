@@ -68,10 +68,10 @@ public class MTGDuelDecks {
 		Zone.LIBRARY1.addCard(new Card("Libr"), 0);
 		
 
-		Card hand11 = new Card("Hand11");
-		hand11.addAbility("Play this card");
-		hand11.setImage("Mountain.jpg");
-		Zone.HAND1.addCard(hand11, 0);
+		Card hand1 = new Card("Hand11");
+		hand1.addAbility("Play this card");
+		hand1.setImage("Mountain.jpg");
+		Zone.HAND1.addCard(hand1, 0);
 		Zone.HAND1.addCard(new Card("Hand2"), 0);
 		Zone.HAND1.addCard(new Card("Hand3"), 0);
 		Zone.HAND1.addCard(new Card("Hand4"), 0);

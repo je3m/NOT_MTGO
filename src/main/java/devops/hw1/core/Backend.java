@@ -3,8 +3,12 @@ package devops.hw1.core;
 
 public class Backend {
 
+	//!# Eliminate because irrelevant? otherwise ADD ERROR-HANDLING FOR INDEX
 	/**
-	 * TODO WRITE THIS
+	 * Handles logic for moving a card when it's clicked (prototype code)
+	 * @param z the zone the card's being moved from
+	 * @param currIndex the index that that card currently occupies in that zone
+	 * @param c the card that's being moved from its current zone
 	 */
 	public static void handleCardClicked(Zone z, int currIndex, Card c) {
 		z.remove(currIndex);
@@ -26,7 +30,13 @@ public class Backend {
 		}
 	}
 
-
+	//!# Refactor? add error-handling for invalid i
+	/**
+	 * Prototype function. Moves a card from its current zone to a new one when its ability is activated
+	 * @param c the card whose ability is being activated
+	 * @param z the zone the card is leaving
+	 * @param i the index the card currently occupies in that zone
+	 */
 	public static void activateAbility(Card c, Zone z, int i) {
 		z.remove(i);
 
@@ -38,6 +48,11 @@ public class Backend {
 
 	}
 
+	/**
+	 * Simply adds the card to the given zone at the end of that zone's list
+	 * @param z the zone being added to
+	 * @param c the card being added
+	 */
 	public static void addCard(Zone z, Card c) {
 		z.addCard(c, z.getSize());
 	}
@@ -48,7 +63,7 @@ public class Backend {
 	 * @param c Card to add
 	 * @param i	position of the zone to add card
 	 */
-	void addCard(Zone z, Card c, int i){
+	void addCard(Zone z, Card c, int i){//!# Add error-handling!
 		z.addCard(c, i);
 	}
 
@@ -66,7 +81,7 @@ public class Backend {
 	 * Removes the card at the given index from the zone
 	 * @param index of card to remove
 	 */
-	void removeCard(Zone z, int i){
+	void removeCard(Zone z, int i){//!# Add error-handling
 		z.remove(i);
 	}
 }
