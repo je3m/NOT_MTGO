@@ -103,8 +103,9 @@ public class Card {
 	 * @param string color of card represented by [WUBRG]*
 	 */
 	public void setColor(String string) {//!# INPUT VALIDATE W/ REGEX
-		if(!string.matches("[WUBRG]*")) {
-			throw new PatternSyntaxException("Card " + this.name + ": " + string + " is not a valid color", "[WUBRG]*", 0);
+		String regex = "[WUBRG]*";
+		if(!string.matches(regex)) {
+			throw new PatternSyntaxException("Card " + this.name + ": " + string + " is not a valid color", regex, -1);
 		}
 		this.color = string;
 
@@ -119,6 +120,7 @@ public class Card {
 	 * @param s mana cost of card
 	 */
 	public void setCost(String s){//!# INPUT VALIDATE W/ REGEX
+		
 		this.manaCost = s;
 	}
 

@@ -78,6 +78,13 @@ public class TestCard {
 		c = new Card("Scornful Egotist");
 		c.setCost("7U");
 		assertEquals(c.getCost(), "7U");
+		
+		try {
+			c.setCost("G2");
+			fail("Expected PatternSyntaxException");
+		} catch (PatternSyntaxException e) {
+			assertEquals(e.getDescription(), "Card Scornful Egotist: G2 is not a valid mana cost");
+		}
 
 	}
 
