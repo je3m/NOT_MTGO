@@ -122,6 +122,9 @@ public class MTGComponent extends JComponent{
 	 * @param x width of the window
 	 */
 	public void setWindowX(int x){
+		if(x < 0) {
+			throw new IllegalArgumentException("MTGComponent: " + x + " is not a valid window width");
+		}
 		this.windowX = x;
 	}
 	
