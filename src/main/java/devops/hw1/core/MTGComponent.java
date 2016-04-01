@@ -72,6 +72,10 @@ public class MTGComponent extends JComponent{
 			throw new IllegalArgumentException("MTGComponent: " + x + " is not a valid window width");
 		}
 		this.windowX = x;
+		
+		if(y < 0) {
+			throw new IllegalArgumentException("MTGComponent: " + y + " is not a valid window height");
+		}
 		this.windowY = y;
 		this.handGUICards1 = new ArrayList<GUICard>();
 		this.dispGUICard1 = null;
