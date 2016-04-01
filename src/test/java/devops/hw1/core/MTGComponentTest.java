@@ -13,7 +13,7 @@ public class MTGComponentTest {
 			MTGComponent comp = new MTGComponent(-10, 10);
 			fail("Expected IllegalArgumentException");
 		} catch (IllegalArgumentException e) {
-			assertEquals(e.getMessage(), "MTGComponent: -10 is an invalid window width");
+			assertEquals(e.getMessage(), "MTGComponent: -10 is not a valid window width");
 		}
 	}
 
