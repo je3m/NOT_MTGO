@@ -58,11 +58,11 @@ public class TestCard {
 	@Test
 	public void testImage(){
 		Card c;
-		c = new Card("Storm crow");
+		c = new Card("Storm Crow");
 		c.setImage("res/storm_crow.jpg");
 		assertEquals(c.getImage(), "res/storm_crow.jpg");
 
-		c = new Card("Scornful egotist");
+		c = new Card("Scornful Egotist");
 		c.setImage("res/scornful_egotist.jpg");
 		assertEquals(c.getImage(), "res/scornful_egotist.jpg");
 		
@@ -71,7 +71,7 @@ public class TestCard {
 			c.setImage("saeiwqrowd");
 			fail("Expected IllegalArgumentException");
 		} catch (IllegalArgumentException e) {
-			assertEquals(e.getMessage(), "Card Scornful egotist: saeiwqrowd is not a valid file name");
+			assertEquals(e.getMessage(), "Card Scornful Egotist: saeiwqrowd is not a valid file name");
 		}
 	}
 
