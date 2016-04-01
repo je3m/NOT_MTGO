@@ -37,5 +37,17 @@ public class MTGComponentTest {
 			assertEquals(e.getMessage(), "MTGComponent: -1 is not a valid window width");
 		}
 	}
+	
+	@Test
+	public void testSetWindowY() {
+		MTGComponent comp = new MTGComponent(10, 10);
+		
+		try {
+			comp.setWindowY(-1);
+			fail("Expected IllegalArgumentException");
+		} catch(IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "MTGComponent: -1 is not a valid window height");
+		}
+	}
 
 }
