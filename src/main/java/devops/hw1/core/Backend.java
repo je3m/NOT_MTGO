@@ -85,7 +85,12 @@ public class Backend {
 	 * Removes the card at the given index from the zone
 	 * @param index of card to remove
 	 */
-	void removeCard(Zone z, int i){//!# Add error-handling
-		z.remove(i);
+	void removeCard(Zone z, int i){
+		try {
+			z.remove(i);
+		} catch (IndexOutOfBoundsException e) {
+			throw new IndexOutOfBoundsException("Backend: " + e.getMessage());
+		}
+		
 	}
 }
