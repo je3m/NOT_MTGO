@@ -20,9 +20,14 @@ public class DispGUICard extends GUICard{
 	 * @param index index of the card in its original zone
 	 * @param zone zone of the card
 	 */
-	public DispGUICard(Rectangle rec, Card card, String[] str, int index, Zone zone) {
+	public DispGUICard(Rectangle rec, Card card, int index, Zone zone) {
 		super(rec, card);
-		this.abilityStrings = str;
+		this.abilityStrings = card.getAbilities();
+		
+		if(index > zone.getSize()) {
+			throw new IllegalArgumentException("DispGUICard " + card.getName() +
+					": " + index + " is not a valid index for zone " + zone);
+		}
 		this.index = index;
 		this.zone = zone;
 		generateAbilityBoxes();

@@ -1,6 +1,9 @@
 package devops.hw1.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.util.regex.*;
 
 import org.junit.Test;
 
@@ -8,8 +11,8 @@ public class TestCard {
 
 	@Test
 	public void makeCardGetName(){
-		Card c = new Card("Storm crow");
-		assertEquals(c.getName(), "Storm crow");
+		Card c = new Card("Storm Crow");
+		assertEquals(c.getName(), "Storm Crow");
 	}
 
 	@Test
@@ -36,38 +39,60 @@ public class TestCard {
 	public void testColor(){
 		Card c;
 
-		c = new Card("Storm crow");
+		c = new Card("Storm Crow");
 		c.setColor("U");
 		assertEquals(c.getColor(), "U");
 
 		c = new Card("One with Nothing");
 		c.setColor("B");
 		assertEquals(c.getColor(), "B");
+		
+		try {
+			c.setColor("O");
+			fail("Expected PatternSyntaxException");
+		} catch (PatternSyntaxException e) {
+			assertEquals(e.getDescription(), "Card One with Nothing: O is not a valid color");
+		}
 	}
 
 	@Test
 	public void testImage(){
 		Card c;
-		c = new Card("Storm crow");
+		c = new Card("Storm Crow");
 		c.setImage("res/storm_crow.jpg");
 		assertEquals(c.getImage(), "res/storm_crow.jpg");
 
-		c = new Card("Scornful egotist");
+		c = new Card("Scornful Egotist");
 		c.setImage("res/scornful_egotist.jpg");
 		assertEquals(c.getImage(), "res/scornful_egotist.jpg");
+		
+		
+		try{
+			c.setImage("saeiwqrowd");
+			fail("Expected IllegalArgumentException");
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Card Scornful Egotist: saeiwqrowd is not a valid file name");
+		}
 	}
 
 	@Test
 	public void testManaCostGetSet(){
 		Card c;
 
-		c = new Card("Storm crow");
+		c = new Card("Storm Crow");
 		c.setCost("1U");
 		assertEquals(c.getCost(), "1U");
 
 		c = new Card("Scornful Egotist");
 		c.setCost("7U");
 		assertEquals(c.getCost(), "7U");
+		
+		try {
+			c.setCost("G2");
+			fail("Expected PatternSyntaxException");
+		} catch (PatternSyntaxException e) {
+			assertEquals(e.getDescription(), "Card Scornful Egotist: G2 is not a valid mana cost");
+		}
 
 	}
 
@@ -109,13 +134,20 @@ public class TestCard {
 	public void testType(){
 		Card c;
 
-		c = new Card("Storm crow");
+		c = new Card("Storm Crow");
 		c.setType("Creature- Bird");
 		assertEquals(c.getType(), "Creature- Bird");
 
 		c = new Card("Scornful Egotist");
 		c.setType("Creature- Human Wizard");
 		assertEquals(c.getType(), "Creature- Human Wizard");
+		
+		try {
+			c.setType("ewonddl");
+			fail("Expected PatternSyntaxException");
+		} catch (PatternSyntaxException e) {
+			assertEquals(e.getDescription(), "Card Scornful Egotist: ewonddl is not a valid card typeline");
+		}
 
 	}
 }

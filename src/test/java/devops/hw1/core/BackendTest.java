@@ -1,6 +1,7 @@
 package devops.hw1.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.easymock.EasyMock;
 import org.junit.Test;
@@ -44,6 +45,28 @@ public class BackendTest {
 
 		assertEquals(c, bknd.getZoneContents(Zone.HAND)[0]);
 		assertEquals(c, bknd.getZoneContents(Zone.HAND)[1]);
+		
+		Card c2 = EasyMock.niceMock(Card.class);
+		
+		try {
+			bknd.addCard(Zone.HAND, c2, 10000);
+			fail("Expected IndexOutOfBoundsException");
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(e.getMessage(), "Backend: Index 10000 is not valid for the HAND zone");
+		}
+	}
+	
+	
+	@Test
+	public void testRemoveCardOutOfBounds() {
+		Backend bknd = new Backend();
+		
+		try {
+			bknd.removeCard(Zone.HAND, 10000);
+			fail("Expected IndexOutOfBoundsException");
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(e.getMessage(), "Backend: No object exists in the HAND zone at index 10000");
+		}
 	}
 
 	@Test

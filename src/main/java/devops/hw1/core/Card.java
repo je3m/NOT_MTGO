@@ -1,6 +1,8 @@
 package devops.hw1.core;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.regex.*;
 
 public class Card {
 	private String name;
@@ -19,6 +21,8 @@ public class Card {
 		this.name = s;
 	}
 
+	//!# add more constructors
+	
 	/**
 	 * Adds ability to card
 	 * TODO: come up with a good way to represent abilities (Mckee)
@@ -100,6 +104,10 @@ public class Card {
 	 * @param string color of card represented by [WUBRG]*
 	 */
 	public void setColor(String string) {
+		String regex = "[WUBRG]*";
+		if(!string.matches(regex)) {
+			throw new PatternSyntaxException("Card " + this.name + ": " + string + " is not a valid color", regex, -1);
+		}
 		this.color = string;
 
 	}
@@ -113,6 +121,10 @@ public class Card {
 	 * @param s mana cost of card
 	 */
 	public void setCost(String s){
+		String regex = "[0-9]*[WUBRG]*";
+		if(!s.matches(regex)) {
+			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid mana cost", regex, -1);
+		}
 		this.manaCost = s;
 	}
 
@@ -121,6 +133,12 @@ public class Card {
 	 * @param string filepath to image
 	 */
 	public void setImage(String string) {
+		File test = new File(string);
+		if(!test.exists()) {
+			throw new IllegalArgumentException("Card " + this.name + ": " + string + " is not a valid file name");
+		}
+		
+		
 		this.image = string;
 
 	}
@@ -129,7 +147,7 @@ public class Card {
 	 * sets the power of card (if creature)
 	 * @param i power of creature
 	 */
-	public void setPower(int i) {
+	public void setPower(int i) {//!# CHECK IF IS CREATURE
 		this.power = i;
 
 	}
@@ -139,7 +157,7 @@ public class Card {
 	 * @param p power of card
 	 * @param t toughness of card
 	 */
-	public void setPT(int p, int t){
+	public void setPT(int p, int t){//!# CHECK IF IS CREATURE
 		this.toughness = t;
 		this.power = p;
 	}
@@ -148,7 +166,7 @@ public class Card {
 	 * sets toughness of card
 	 * @param i toughness
 	 */
-	public void setToughness(int i) {
+	public void setToughness(int i) {//!# CHECK IF IS CREATURE
 		this.toughness = i;
 
 	}
@@ -160,6 +178,10 @@ public class Card {
 	 * @param s type of card
 	 */
 	public void setType(String s) {
+		String regex = "[a-zA-Z]*\\-[a-zA-Z ]*";
+		if(!s.matches(regex)) {
+			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid card typeline", regex, -1);
+		}
 		this.type = s;
 	}
 

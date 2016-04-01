@@ -25,7 +25,7 @@ public class ClickHandler implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		handleClickCard(e);
 	}
-	//!# following two methods need to be refactored so that they figure out the card that was clicked, pass that information on to the game logic engine and then implement at the gui level the changes mandated by the game logic engine 
+
 	/**
 	 * Handles clicking for displayed cards
 	 * @param e the click event

@@ -68,7 +68,14 @@ public class MTGComponent extends JComponent{
 	 * @param y height of the usable space in the JFrame that the component is placed in
 	 */
 	public MTGComponent(int x, int y){
+		if(x < 0) {
+			throw new IllegalArgumentException("MTGComponent: " + x + " is not a valid window width");
+		}
 		this.windowX = x;
+		
+		if(y < 0) {
+			throw new IllegalArgumentException("MTGComponent: " + y + " is not a valid window height");
+		}
 		this.windowY = y;
 		this.handGUICards1 = new ArrayList<GUICard>();
 		this.dispGUICard1 = null;
@@ -115,14 +122,20 @@ public class MTGComponent extends JComponent{
 	 * @param x width of the window
 	 */
 	public void setWindowX(int x){
+		if(x < 0) {
+			throw new IllegalArgumentException("MTGComponent: " + x + " is not a valid window width");
+		}
 		this.windowX = x;
 	}
 	
 	/**
 	 * Set the current height of the window the component is in
-	 * @param x height of the window
+	 * @param y height of the window
 	 */
 	public void setWindowY(int y){
+		if(y < 0) {
+			throw new IllegalArgumentException("MTGComponent: " + y + " is not a valid window height");
+		}
 		this.windowY = y;
 	}
 	
@@ -291,7 +304,7 @@ public class MTGComponent extends JComponent{
 	 * @param index index of card being displayed
 	 */
 	public void generateDispGUICard1(Card card, int index, Zone zone){
-		this.dispGUICard1 = new DispGUICard(new Rectangle((int)(DISPLAY_CARD1_X_POSITION*windowX), (int)(DISPLAY_CARD1_Y_POSITION*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, card.getAbilities(), index, zone);
+		this.dispGUICard1 = new DispGUICard(new Rectangle((int)(DISPLAY_CARD1_X_POSITION*windowX), (int)(DISPLAY_CARD1_Y_POSITION*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, index, zone);
 	}
 	
 	/**
@@ -300,7 +313,7 @@ public class MTGComponent extends JComponent{
 	 * @param index index of card being displayed
 	 */
 	public void generateDispGUICard2(Card card, int index, Zone zone){
-		this.dispGUICard2 = new DispGUICard(new Rectangle((int)(0.55*windowX), (int)(0.2*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, card.getAbilities(), index, zone);
+		this.dispGUICard2 = new DispGUICard(new Rectangle((int)(0.55*windowX), (int)(0.2*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, index, zone);
 	}
 	
 	/**
