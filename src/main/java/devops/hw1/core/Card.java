@@ -102,6 +102,7 @@ public class Card {
 	 * @param string color of card represented by [WUBRG]*
 	 */
 	public void setColor(String string) {//!# INPUT VALIDATE W/ REGEX
+		
 		this.color = string;
 
 	}

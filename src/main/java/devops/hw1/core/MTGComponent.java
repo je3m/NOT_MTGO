@@ -291,7 +291,7 @@ public class MTGComponent extends JComponent{
 	 * @param index index of card being displayed
 	 */
 	public void generateDispGUICard1(Card card, int index, Zone zone){
-		this.dispGUICard1 = new DispGUICard(new Rectangle((int)(DISPLAY_CARD1_X_POSITION*windowX), (int)(DISPLAY_CARD1_Y_POSITION*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, card.getAbilities(), index, zone);
+		this.dispGUICard1 = new DispGUICard(new Rectangle((int)(DISPLAY_CARD1_X_POSITION*windowX), (int)(DISPLAY_CARD1_Y_POSITION*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, index, zone);
 	}
 	
 	/**
@@ -300,7 +300,7 @@ public class MTGComponent extends JComponent{
 	 * @param index index of card being displayed
 	 */
 	public void generateDispGUICard2(Card card, int index, Zone zone){
-		this.dispGUICard2 = new DispGUICard(new Rectangle((int)(0.55*windowX), (int)(0.2*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, card.getAbilities(), index, zone);
+		this.dispGUICard2 = new DispGUICard(new Rectangle((int)(0.55*windowX), (int)(0.2*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, index, zone);
 	}
 	
 	/**

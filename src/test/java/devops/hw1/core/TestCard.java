@@ -1,6 +1,9 @@
 package devops.hw1.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.util.regex.*;
 
 import org.junit.Test;
 
@@ -43,6 +46,13 @@ public class TestCard {
 		c = new Card("One with Nothing");
 		c.setColor("B");
 		assertEquals(c.getColor(), "B");
+		
+		try {
+			c.setColor("O");
+			fail("Expected PatternSyntaxException");
+		} catch (PatternSyntaxException e) {
+			assertEquals(e.getMessage(), "Card Storm crow: O is not a valid color");
+		}
 	}
 
 	@Test
