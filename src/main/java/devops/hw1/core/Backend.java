@@ -120,6 +120,9 @@ public class Backend {
 			this.phase = Phase.START_COMBAT1;
 			break;
 		case START_COMBAT1:
+			this.phase = Phase.DECLARE_ATTACKERS1;
+			break;
+		case DECLARE_ATTACKERS1:
 			break;
 		default:
 			break;
