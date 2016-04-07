@@ -174,6 +174,9 @@ public class Backend {
 			this.phase = Phase.END2;
 			break;
 		case END2:
+			this.phase = Phase.CLEANUP2;
+			break;
+		case CLEANUP2:
 			break;
 		default:
 			break;

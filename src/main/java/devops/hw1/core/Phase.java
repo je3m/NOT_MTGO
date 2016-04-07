@@ -23,5 +23,6 @@ public enum Phase {
 	COMBAT_DAMAGE2,
 	END_OF_COMBAT2,
 	SECOND_MAIN2,
-	END2;
+	END2,
+	CLEANUP2;
 }
