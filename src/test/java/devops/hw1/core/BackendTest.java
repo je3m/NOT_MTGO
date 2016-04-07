@@ -349,4 +349,27 @@ public class BackendTest {
 		bknd.changePhase();
 		assertEquals(bknd.getPhase(), Phase.START_COMBAT2);
 	}
+	
+	@Test
+	public void testPhase18(){
+		Backend bknd = new Backend();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.DECLARE_ATTACKERS2);
+	}
 }
