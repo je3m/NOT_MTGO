@@ -15,5 +15,6 @@ public enum Phase {
 	CLEANUP1,
 	UNTAP2,
 	UPKEEP2,
-	DRAW2;
+	DRAW2,
+	FIRST_MAIN2;
 }
