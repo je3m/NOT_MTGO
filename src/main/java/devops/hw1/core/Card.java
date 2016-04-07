@@ -51,7 +51,7 @@ public class Card {
 	/**
 	 * Gets the cost of the card expressed as oracle text
 	 * without curly braces.
-	 * Conforms to regex [0-9]*[WUBRG]*
+	 * Conforms to regex [0-9]*W*U*B*R*G*
 	 */
 	public String getCost(){
 		return this.manaCost;
@@ -121,7 +121,7 @@ public class Card {
 	 * @param s mana cost of card
 	 */
 	public void setCost(String s){
-		String regex = "[0-9]*[WUBRG]*";
+		String regex = "[0-9]*W*U*B*R*G*";
 		if(!s.matches(regex)) {
 			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid mana cost", regex, -1);
 		}

@@ -1,9 +1,15 @@
 package devops.hw1.core;
 
-
+/**
+ * Backend object that handles a lot of game logic and information
+ *
+ */
 public class Backend {
 	Phase phase;
 	
+	/**
+	 * Constructs a backend object
+	 */
 	public Backend(){
 		this.phase = Phase.UNTAP1;
 	}
@@ -100,11 +106,17 @@ public class Backend {
 	}
 	
 
-
+	/**
+	 * Gets the current phase
+	 * @return the current phase
+	 */
 	public Phase getPhase() {
 		return this.phase;
 	}
 
+	/**
+	 * Changes the current phase to the next phase
+	 */
 	public void changePhase() {
 		switch(this.phase) {
 		case UNTAP1:
