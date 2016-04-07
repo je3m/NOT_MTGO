@@ -112,5 +112,17 @@ public class BackendTest {
 		assertEquals(c, z);
 	}
 
+	@Test
+	public void testPhase1(){
+		Backend bknd = new Backend();
+		assertEquals(bknd.getPhase(), Phase.UNTAP1);
+	}
+	
+	@Test
+	public void testPhase2(){
+		Backend bknd = new Backend();
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.UPKEEP1);
+	}
 
 }

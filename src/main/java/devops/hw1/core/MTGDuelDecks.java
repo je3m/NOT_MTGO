@@ -111,14 +111,4 @@ public class MTGDuelDecks {
 		Frame.addMouseListener(ch);
 		return Frame;
 	}
-
-
-	public Phase getPhase() {
-		return Phase.UNTAP1;
-	}
-
-	public void changePhase() {
-		// TODO Auto-generated method stub
-		
-	}
 }
