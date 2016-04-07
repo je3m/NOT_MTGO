@@ -171,6 +171,9 @@ public class Backend {
 			this.phase = Phase.SECOND_MAIN2;
 			break;
 		case SECOND_MAIN2:
+			this.phase = Phase.END2;
+			break;
+		case END2:
 			break;
 		default:
 			break;
