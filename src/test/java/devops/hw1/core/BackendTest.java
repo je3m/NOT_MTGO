@@ -124,5 +124,13 @@ public class BackendTest {
 		bknd.changePhase();
 		assertEquals(bknd.getPhase(), Phase.UPKEEP1);
 	}
+	
+	@Test
+	public void testPhase3(){
+		Backend bknd = new Backend();
+		bknd.changePhase();
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.DRAW1);
+	}
 
 }
