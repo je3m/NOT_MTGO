@@ -13,5 +13,6 @@ public enum Phase {
 	SECOND_MAIN1,
 	END1,
 	CLEANUP1,
-	UNTAP2;
+	UNTAP2,
+	UPKEEP2;
 }

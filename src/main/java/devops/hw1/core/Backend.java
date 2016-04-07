@@ -144,6 +144,9 @@ public class Backend {
 			this.phase = Phase.UNTAP2;
 			break;
 		case UNTAP2:
+			this.phase = Phase.UPKEEP2;
+			break;
+		case UPKEEP2:
 			break;
 		default:
 			break;
