@@ -147,6 +147,9 @@ public class Backend {
 			this.phase = Phase.UPKEEP2;
 			break;
 		case UPKEEP2:
+			this.phase = Phase.DRAW2;
+			break;
+		case DRAW2:
 			break;
 		default:
 			break;
