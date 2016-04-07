@@ -114,6 +114,9 @@ public class Backend {
 			this.phase = Phase.DRAW1;
 			break;
 		case DRAW1:
+			this.phase = Phase.FIRST_MAIN_PHASE1;
+			break;
+		case FIRST_MAIN_PHASE1:
 			break;
 		default:
 			break;
