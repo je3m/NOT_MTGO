@@ -113,8 +113,12 @@ public class MTGDuelDecks {
 	}
 
 
-	public Object[] getPhase() {
+	public Phase getPhase() {
+		return Phase.UNTAP1;
+	}
+
+	public void changePhase() {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 }
