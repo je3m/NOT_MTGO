@@ -168,6 +168,9 @@ public class Backend {
 			this.phase = Phase.END_OF_COMBAT2;
 			break;
 		case END_OF_COMBAT2:
+			this.phase = Phase.SECOND_MAIN2;
+			break;
+		case SECOND_MAIN2:
 			break;
 		default:
 			break;
