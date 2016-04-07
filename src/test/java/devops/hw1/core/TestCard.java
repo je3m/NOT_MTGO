@@ -53,6 +53,13 @@ public class TestCard {
 		} catch (PatternSyntaxException e) {
 			assertEquals(e.getDescription(), "Card One with Nothing: O is not a valid color");
 		}
+		
+		try {
+			c.setColor("BW");
+			fail("Expected PatternSyntaxException");
+		} catch (PatternSyntaxException e) {
+			assertEquals(e.getDescription(), "Card One with Nothing: BW is not a valid color");
+		}
 	}
 
 	@Test
