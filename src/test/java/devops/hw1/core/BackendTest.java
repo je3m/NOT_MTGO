@@ -529,6 +529,6 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.CLEENUP2);
+		assertEquals(bknd.getPhase(), Phase.CLEANUP2);
 	}
 }
