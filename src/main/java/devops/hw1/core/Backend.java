@@ -106,6 +106,17 @@ public class Backend {
 	}
 
 	public void changePhase() {
-		this.phase = Phase.UPKEEP1;
+		switch(this.phase) {
+		case UNTAP1:
+			this.phase = Phase.UPKEEP1;
+			break;
+		case UPKEEP1:
+			this.phase = Phase.DRAW1;
+			break;
+		case DRAW1:
+			break;
+		default:
+			break;
+		}
 	}
 }
