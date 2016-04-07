@@ -12,5 +12,6 @@ public enum Phase {
 	END_OF_COMBAT1,
 	SECOND_MAIN1,
 	END1,
-	CLEANUP1;
+	CLEANUP1,
+	UNTAP2;
 }
