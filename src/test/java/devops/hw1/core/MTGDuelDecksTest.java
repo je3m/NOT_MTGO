@@ -10,4 +10,11 @@ public class MTGDuelDecksTest {
 		MTGDuelDecks game = new MTGDuelDecks();
 		assertEquals(game.getPhase(), Phase.UNTAP1);
 	}
+	
+	@Test
+	public void testPhase2(){
+		MTGDuelDecks game = new MTGDuelDecks();
+		game.changePhase();
+		assertEquals(game.getPhase(), Phase.UPKEEP1);
+	}
 }
