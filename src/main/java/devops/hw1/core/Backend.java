@@ -162,6 +162,9 @@ public class Backend {
 			this.phase = Phase.DECLARE_BLOCKERS2;
 			break;
 		case DECLARE_BLOCKERS2:
+			this.phase = Phase.COMBAT_DAMAGE2;
+			break;
+		case COMBAT_DAMAGE2:
 			break;
 		default:
 			break;
