@@ -114,9 +114,9 @@ public class Backend {
 			this.phase = Phase.DRAW1;
 			break;
 		case DRAW1:
-			this.phase = Phase.FIRST_MAIN_PHASE1;
+			this.phase = Phase.FIRST_MAIN1;
 			break;
-		case FIRST_MAIN_PHASE1:
+		case FIRST_MAIN1:
 			this.phase = Phase.START_COMBAT1;
 			break;
 		case START_COMBAT1:
@@ -132,15 +132,15 @@ public class Backend {
 			this.phase = Phase.END_OF_COMBAT1;
 			break;
 		case END_OF_COMBAT1:
-			this.phase = Phase.SECOND_MAIN_PHASE1;
+			this.phase = Phase.SECOND_MAIN1;
 			break;
-		case SECOND_MAIN_PHASE1:
-			this.phase = Phase.END_STEP1;
+		case SECOND_MAIN1:
+			this.phase = Phase.END1;
 			break;
-		case END_STEP1:
-			this.phase = Phase.CLEAN_UP1;
+		case END1:
+			this.phase = Phase.CLEANUP1;
 			break;
-		case CLEAN_UP1:
+		case CLEANUP1:
 			break;
 		default:
 			break;

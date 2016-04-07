@@ -139,7 +139,7 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.FIRST_MAIN_PHASE1);
+		assertEquals(bknd.getPhase(), Phase.FIRST_MAIN1);
 	}
 	
 	@Test
@@ -214,7 +214,7 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.SECOND_MAIN_PHASE1);
+		assertEquals(bknd.getPhase(), Phase.SECOND_MAIN1);
 	}
 	
 	@Test
@@ -230,7 +230,7 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.END_STEP1);
+		assertEquals(bknd.getPhase(), Phase.END1);
 	}
 	
 	@Test
@@ -247,6 +247,6 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.CLEAN_UP1);
+		assertEquals(bknd.getPhase(), Phase.CLEANUP1);
 	}
 }
