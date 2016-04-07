@@ -16,5 +16,6 @@ public enum Phase {
 	UNTAP2,
 	UPKEEP2,
 	DRAW2,
-	FIRST_MAIN2;
+	FIRST_MAIN2,
+	START_COMBAT2;
 }
