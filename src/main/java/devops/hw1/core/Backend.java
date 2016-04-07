@@ -4,6 +4,10 @@ package devops.hw1.core;
 public class Backend {
 	Phase phase;
 	
+	public Backend(){
+		this.phase = Phase.UNTAP1;
+	}
+	
 	//!# Eliminate because irrelevant? otherwise ADD ERROR-HANDLING FOR INDEX
 	/**
 	 * Handles logic for moving a card when it's clicked (prototype code)
@@ -98,10 +102,10 @@ public class Backend {
 
 
 	public Phase getPhase() {
-		return Phase.UNTAP1;
+		return this.phase;
 	}
 
 	public void changePhase() {
-		
+		this.phase = Phase.UPKEEP1;
 	}
 }
