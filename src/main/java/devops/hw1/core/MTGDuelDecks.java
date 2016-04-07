@@ -111,4 +111,10 @@ public class MTGDuelDecks {
 		Frame.addMouseListener(ch);
 		return Frame;
 	}
+
+
+	public Object[] getPhase() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
