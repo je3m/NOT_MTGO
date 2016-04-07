@@ -162,5 +162,16 @@ public class BackendTest {
 		bknd.changePhase();
 		assertEquals(bknd.getPhase(), Phase.DECLARE_ATTACKERS1);
 	}
-
+	
+	@Test
+	public void testPhase7(){
+		Backend bknd = new Backend();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.DECLARE_BLOCKERS1);
+	}
 }
