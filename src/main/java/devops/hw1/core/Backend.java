@@ -2,6 +2,7 @@ package devops.hw1.core;
 
 
 public class Backend {
+	Phase phase;
 	
 	//!# Eliminate because irrelevant? otherwise ADD ERROR-HANDLING FOR INDEX
 	/**
@@ -91,6 +92,16 @@ public class Backend {
 		} catch (IndexOutOfBoundsException e) {
 			throw new IndexOutOfBoundsException("Backend: " + e.getMessage());
 		}
+		
+	}
+	
+
+
+	public Phase getPhase() {
+		return Phase.UNTAP1;
+	}
+
+	public void changePhase() {
 		
 	}
 }
