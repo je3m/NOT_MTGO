@@ -42,7 +42,7 @@ public class Card {
 	}
 
 	/**
-	 * @return color of card represented by W*U*B*R*G*
+	 * @return color of card represented by W?U?B?R?G?
 	 */
 	public String getColor() {
 		return this.color;
@@ -101,10 +101,10 @@ public class Card {
 
 	/**
 	 * Sets the color of the card to given card
-	 * @param string color of card represented by W*U*B*R*G*
+	 * @param string color of card represented by W?U?B?R?G?
 	 */
 	public void setColor(String string) {
-		String regex = "W*U*B*R*G*";
+		String regex = "W?U?B?R?G?";
 		if(!string.matches(regex)) {
 			throw new PatternSyntaxException("Card " + this.name + ": " + string + " is not a valid color", regex, -1);
 		}
