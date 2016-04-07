@@ -185,6 +185,6 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.END_OF_COMBAT1);
+		assertEquals(bknd.getPhase(), Phase.COMBAT_DAMAGE1);
 	}
 }
