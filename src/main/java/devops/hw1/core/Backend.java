@@ -215,6 +215,6 @@ public class Backend {
 	}
 
 	public void passPriority() {
-		this.priority = false;
+		this.priority = !this.priority;
 	}
 }
