@@ -18,7 +18,7 @@ public class ManaPoolTest {
 	
 	@Test
 	public void testMana3(){
-		ManaPool.RED1.add(3);
-		assertEquals(ManaPool.RED1.getAmount(), 3);
+		ManaPool.RED1.add(2);
+		assertEquals(ManaPool.RED1.getAmount(), 4);
 	}
 }
