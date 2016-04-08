@@ -9,6 +9,7 @@ public class Card {
 	private String manaCost;
 	private String color;
 	private String type;
+	private String manaAbility;
 	private ArrayList<String> abilities = new ArrayList<String>();
 	private int power, toughness;
 	private String image;
@@ -188,5 +189,13 @@ public class Card {
 	@Override
 	public String toString() {
 		return this.name;
+	}
+
+	public void addManaAbility(String manaAbility) {
+		this.manaAbility = manaAbility;
+	}
+
+	public String getManaAbility() {
+		return this.manaAbility;
 	}
 }
