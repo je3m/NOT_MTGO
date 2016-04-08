@@ -1,5 +1,9 @@
 package devops.hw1.core;
 
+/**
+ * Represents the mana pool for both players
+ *
+ */
 public enum ManaPool {
 	WHITE1,
 	BLUE1,
@@ -23,14 +27,25 @@ public enum ManaPool {
 		return amount;
 	}
 
+	/**
+	 * Adds mana to the mana pool
+	 * @param i amount of mana to be added
+	 */
 	public void add(int i) {
 		amount = amount + i;
 	}
 
+	/**
+	 * Removes mana from the mana pool
+	 * @param i amount of mana to be removed
+	 */
 	public void remove(int i) {
 		amount = amount - i;
 	}
 
+	/**
+	 * Empty the mana pool
+	 */
 	public void empty() {
 		amount = 0;
 	}
