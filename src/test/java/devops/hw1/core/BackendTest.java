@@ -8,9 +8,6 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 public class BackendTest {
-
-
-
 	@Test
 	public void testActivateAbility(){
 		Backend bknd = new Backend();
