@@ -135,6 +135,23 @@ public class BackendTest {
 	}
 	
 	@Test
+	public void testComplexPriorityPassing1(){
+		Backend bknd = new Backend();
+		bknd.passPriority();
+		assertEquals(bknd.getPhase(), Phase.UNTAP1);
+		assertFalse(bknd.getPriority());
+	}
+	
+	@Test
+	public void testComplexPriorityPassing2(){
+		Backend bknd = new Backend();
+		bknd.passPriority();
+		bknd.passPriority();
+		assertEquals(bknd.getPhase(), Phase.UPKEEP1);
+		assertTrue(bknd.getPriority());
+	}
+	
+	@Test
 	public void testTurn1(){
 		Backend bknd = new Backend();
 		assertTrue(bknd.getTurn());
