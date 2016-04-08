@@ -31,6 +31,7 @@ public class BackendTest {
 	
 	@Test
 	public void testActivateManaAbility(){
+		ManaPool.GREEN1.empty();
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:G");
@@ -47,6 +48,7 @@ public class BackendTest {
 	
 	@Test
 	public void testActivateManaAbility1(){
+		ManaPool.RED2.empty();
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:R");
@@ -59,6 +61,74 @@ public class BackendTest {
 		assertEquals(ManaPool.RED2.getAmount(), 1);
 		EasyMock.verify(c);
 		ManaPool.RED2.empty();
+	}
+	
+	@Test
+	public void testActivateManaAbility2(){
+		ManaPool.WHITE2.empty();
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getManaAbility()).andReturn("T:W");
+		EasyMock.replay(c);
+		
+		c.addAbility("T:W");
+		bknd.addCard(Zone.BATTLE_FIELD, c);
+		bknd.activateManaAbility(c, false);
+		
+		assertEquals(ManaPool.WHITE2.getAmount(), 1);
+		EasyMock.verify(c);
+		ManaPool.WHITE2.empty();
+	}
+	
+	@Test
+	public void testActivateManaAbility3(){
+		ManaPool.GREEN2.empty();
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getManaAbility()).andReturn("G:R");
+		EasyMock.replay(c);
+		
+		c.addAbility("G:R");
+		bknd.addCard(Zone.BATTLE_FIELD, c);
+		bknd.activateManaAbility(c, false);
+		
+		assertEquals(ManaPool.GREEN2.getAmount(), 1);
+		EasyMock.verify(c);
+		ManaPool.GREEN2.empty();
+	}
+	
+	@Test
+	public void testActivateManaAbility4(){
+		ManaPool.BLUE2.empty();
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getManaAbility()).andReturn("T:U");
+		EasyMock.replay(c);
+		
+		c.addAbility("T:U");
+		bknd.addCard(Zone.BATTLE_FIELD, c);
+		bknd.activateManaAbility(c, false);
+		
+		assertEquals(ManaPool.BLUE2.getAmount(), 1);
+		EasyMock.verify(c);
+		ManaPool.BLUE2.empty();
+	}
+	
+	@Test
+	public void testActivateManaAbility5(){
+		ManaPool.BLACK2.empty();
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getManaAbility()).andReturn("T:B");
+		EasyMock.replay(c);
+		
+		c.addAbility("T:B");
+		bknd.addCard(Zone.BATTLE_FIELD, c);
+		bknd.activateManaAbility(c, false);
+		
+		assertEquals(ManaPool.BLACK2.getAmount(), 1);
+		EasyMock.verify(c);
+		ManaPool.BLACK2.empty();
 	}
 
 	@Test
