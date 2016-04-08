@@ -14,11 +14,16 @@ public enum ManaPool {
 	GREEN2,
 	COLORLESS2;
 	
+	int amount;
 	/**
 	 * Returns the total amount of mana in the pool
 	 * @return amount of mana in the pool
 	 */
 	public int getAmount() {
-		return 0;
+		return amount;
+	}
+
+	public void add(int i) {
+		amount = amount + i;
 	}
 }
