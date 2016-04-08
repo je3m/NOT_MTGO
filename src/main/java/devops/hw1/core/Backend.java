@@ -245,10 +245,30 @@ public class Backend {
 		}
 		if(player){
 			switch (strToken.nextToken()) {
+			case "W":
+				ManaPool.WHITE1.add(1);
+			case "U":
+				ManaPool.BLUE1.add(1);
+			case "B":
+				ManaPool.BLACK1.add(1);
+			case "R":
+				ManaPool.RED1.add(1);
 			case "G":
 				ManaPool.GREEN1.add(1);
 			}
-		} else {	
+		} else {
+			switch (strToken.nextToken()) {
+			case "W":
+				ManaPool.WHITE2.add(1);
+			case "U":
+				ManaPool.BLUE2.add(1);
+			case "B":
+				ManaPool.BLACK2.add(1);
+			case "R":
+				ManaPool.RED2.add(1);
+			case "G":
+				ManaPool.GREEN2.add(1);
+			}
 		}
 	}
 }
