@@ -36,6 +36,12 @@ public class TestCard {
 	}
 	
 	@Test
+	public void testTap1(){
+		Card c = new Card("Forest");
+		assertFalse(c.getTapped());
+	}
+	
+	@Test
 	public void testManaAbility(){
 		Card c = new Card("Forest");
 		c.addManaAbility("T:G");
