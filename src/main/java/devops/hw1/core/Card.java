@@ -13,6 +13,7 @@ public class Card {
 	private ArrayList<String> abilities = new ArrayList<String>();
 	private int power, toughness;
 	private String image;
+	private Boolean tapped;
 
 	/**
 	 * Constructs a card object with the given name
@@ -20,6 +21,8 @@ public class Card {
 	 */
 	public Card(String s){
 		this.name = s;
+		this.tapped = false;
+		this.manaAbility = null;
 	}
 
 	//!# add more constructors
@@ -191,15 +194,34 @@ public class Card {
 		return this.name;
 	}
 
+	/**
+	 * Adds a mana ability to the card
+	 * @param manaAbility added mana ability
+	 */
 	public void addManaAbility(String manaAbility) {
 		this.manaAbility = manaAbility;
 	}
 
+	/**
+	 * Gets the mana ability of the card
+	 * @return mana ability
+	 */
 	public String getManaAbility() {
 		return this.manaAbility;
 	}
 
+	/**
+	 * Determines if a card is tapped
+	 * @return true if tapped, false if not
+	 */
 	public Boolean getTapped() {
-		return false;
+		return this.tapped;
+	}
+
+	/**
+	 * Taps a card
+	 */
+	public void tap() {
+		this.tapped = true;
 	}
 }
