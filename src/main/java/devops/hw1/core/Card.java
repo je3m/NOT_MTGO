@@ -224,4 +224,11 @@ public class Card {
 	public void tap() {
 		this.tapped = true;
 	}
+
+	/**
+	 * Untaps a card
+	 */
+	public void untap() {
+		this.tapped = false;
+	}
 }
