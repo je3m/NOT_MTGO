@@ -34,7 +34,14 @@ public class TestCard {
 		assertEquals(c.getAbilities(), s);
 
 	}
-
+	
+	@Test
+	public void testManaAbility(){
+		Card c = new Card("Forest");
+		c.addManaAbility("T:G");
+		assertEquals(c.getManaAbility(), "T:G");
+	}
+	
 	@Test
 	public void testColor(){
 		Card c;
