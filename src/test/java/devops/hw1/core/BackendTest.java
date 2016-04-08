@@ -711,4 +711,14 @@ public class BackendTest {
 		bknd.changePhase();
 		assertEquals(ManaPool.RED1.getAmount(), 0);
 	}
+	
+	@Test
+	public void testEmptyManaPhases1(){
+		Backend bknd = new Backend();
+		ManaPool.RED1.add(2);
+		ManaPool.RED2.add(2);
+		bknd.changePhase();
+		assertEquals(ManaPool.RED1.getAmount(), 0);
+		assertEquals(ManaPool.RED2.getAmount(), 0);
+	}
 }
