@@ -195,4 +195,12 @@ public class Backend {
 			break;
 		}
 	}
+
+	/**
+	 * Returns the current turn
+	 * @return true if it is the first players turn, false if it is the second players
+	 */
+	public Boolean getTurn() {
+		return true;
+	}
 }
