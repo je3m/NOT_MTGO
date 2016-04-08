@@ -7,6 +7,7 @@ package devops.hw1.core;
 public class Backend {
 	Phase phase;
 	Boolean turn;
+	Boolean priority;
 	
 	/**
 	 * Constructs a backend object
@@ -14,6 +15,7 @@ public class Backend {
 	public Backend(){
 		this.phase = Phase.UNTAP1;
 		this.turn = true;
+		this.priority = true;
 	}
 	
 	//!# Eliminate because irrelevant? otherwise ADD ERROR-HANDLING FOR INDEX
@@ -205,10 +207,14 @@ public class Backend {
 	 * @return true if it is the first players turn, false if it is the second players
 	 */
 	public Boolean getTurn() {
-		return turn;
+		return this.turn;
 	}
 
 	public boolean getPriority() {
-		return true;
+		return this.priority;
+	}
+
+	public void passPriority() {
+		this.priority = false;
 	}
 }
