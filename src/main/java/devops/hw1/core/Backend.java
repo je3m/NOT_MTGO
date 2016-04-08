@@ -207,4 +207,8 @@ public class Backend {
 	public Boolean getTurn() {
 		return turn;
 	}
+
+	public boolean getPriority() {
+		return true;
+	}
 }
