@@ -29,21 +29,19 @@ public class BackendTest {
 		assert(Zone.BATTLE_FIELD1.contains(c1.getName()));
 	}
 	
-//	@Test
-//	public void testActivateManaAbility(){
-//		Backend bknd = new Backend();
-//		Card c = EasyMock.niceMock(Card.class);
-//		EasyMock.expect();
-//		EasyMock.replay(c);
-//		
-//		c.addAbility("T:G");
-//		bknd.addCard(Zone.BATTLE_FIELD, c);
-//		bknd.activateManaAbility(c, Zone.BATTLE_FIELD, 0);
-//		
-//		assertEquals(c.get)
-//		assertEquals(ManaPool.GREEN1.getAmount(), 1);
-//		EasyMock.verify(c);
-//	}
+	@Test
+	public void testActivateManaAbility(){
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.replay(c);
+		
+		c.addAbility("T:G");
+		bknd.addCard(Zone.BATTLE_FIELD, c);
+		bknd.activateManaAbility(c);
+		
+		assertEquals(ManaPool.GREEN1.getAmount(), 1);
+		EasyMock.verify(c);
+	}
 
 	@Test
 	public void testAdd(){
