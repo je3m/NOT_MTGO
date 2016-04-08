@@ -27,4 +27,10 @@ public class ManaPoolTest {
 		ManaPool.RED1.remove(2);
 		assertEquals(ManaPool.RED1.getAmount(), 2);
 	}
+	
+	@Test
+	public void testMana5(){
+		ManaPool.RED1.empty();
+		assertEquals(ManaPool.RED1.getAmount(), 0);
+	}
 }
