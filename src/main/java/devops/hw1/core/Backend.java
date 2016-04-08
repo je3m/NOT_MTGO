@@ -193,6 +193,7 @@ public class Backend {
 			break;
 		case CLEANUP2:
 			this.phase = Phase.UNTAP1;
+			this.turn = true;
 			break;
 		default:
 			break;
