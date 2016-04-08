@@ -30,4 +30,8 @@ public enum ManaPool {
 	public void remove(int i) {
 		amount = amount - i;
 	}
+
+	public void empty() {
+		amount = 0;
+	}
 }
