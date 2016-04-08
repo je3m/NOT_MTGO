@@ -1,6 +1,6 @@
 package devops.hw1.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -117,6 +117,41 @@ public class BackendTest {
 	public void testTurn1(){
 		Backend bknd = new Backend();
 		assertTrue(bknd.getTurn());
+	}
+	
+	@Test
+	public void testTurn2(){
+		Backend bknd = new Backend();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		assertTrue(bknd.getTurn());
+	}
+	
+	@Test
+	public void testTurn3(){
+		Backend bknd = new Backend();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		assertFalse(bknd.getTurn());
 	}
 	
 	@Test
