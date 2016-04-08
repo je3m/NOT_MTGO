@@ -37,7 +37,7 @@ public class BackendTest {
 		EasyMock.expect(c.getManaAbility()).andReturn("T:G");
 		EasyMock.replay(c);
 		
-		c.addAbility("T:G");
+		c.addManaAbility("T:G");
 		bknd.addCard(Zone.BATTLE_FIELD, c);
 		bknd.activateManaAbility(c, true);
 		
@@ -54,7 +54,7 @@ public class BackendTest {
 		EasyMock.expect(c.getManaAbility()).andReturn("T:R");
 		EasyMock.replay(c);
 		
-		c.addAbility("T:R");
+		c.addManaAbility("T:R");
 		bknd.addCard(Zone.BATTLE_FIELD, c);
 		bknd.activateManaAbility(c, false);
 		
@@ -71,7 +71,7 @@ public class BackendTest {
 		EasyMock.expect(c.getManaAbility()).andReturn("T:W");
 		EasyMock.replay(c);
 		
-		c.addAbility("T:W");
+		c.addManaAbility("T:W");
 		bknd.addCard(Zone.BATTLE_FIELD, c);
 		bknd.activateManaAbility(c, false);
 		
@@ -88,7 +88,7 @@ public class BackendTest {
 		EasyMock.expect(c.getManaAbility()).andReturn("G:R");
 		EasyMock.replay(c);
 		
-		c.addAbility("G:R");
+		c.addManaAbility("G:R");
 		bknd.addCard(Zone.BATTLE_FIELD, c);
 		bknd.activateManaAbility(c, false);
 		
@@ -105,7 +105,7 @@ public class BackendTest {
 		EasyMock.expect(c.getManaAbility()).andReturn("T:U");
 		EasyMock.replay(c);
 		
-		c.addAbility("T:U");
+		c.addManaAbility("T:U");
 		bknd.addCard(Zone.BATTLE_FIELD, c);
 		bknd.activateManaAbility(c, false);
 		
@@ -122,7 +122,7 @@ public class BackendTest {
 		EasyMock.expect(c.getManaAbility()).andReturn("T:B");
 		EasyMock.replay(c);
 		
-		c.addAbility("T:B");
+		c.addManaAbility("T:B");
 		bknd.addCard(Zone.BATTLE_FIELD, c);
 		bknd.activateManaAbility(c, false);
 		
@@ -822,5 +822,20 @@ public class BackendTest {
 		bknd.changePhase();
 		assertEquals(ManaPool.RED1.getAmount(), 0);
 		assertEquals(ManaPool.RED2.getAmount(), 0);
+	}
+	
+	@Test
+	public void testIntegrateActivateManaAbility(){
+		ManaPool.GREEN1.empty();
+		Backend bknd = new Backend();
+		Card c = new Card("Forest");
+		
+		c.addManaAbility("T:G");
+		bknd.addCard(Zone.BATTLE_FIELD, c);
+		bknd.activateManaAbility(c, true);
+		
+		assertEquals(ManaPool.GREEN1.getAmount(), 1);
+		assertTrue(c.getTapped());
+		ManaPool.GREEN1.empty();
 	}
 }
