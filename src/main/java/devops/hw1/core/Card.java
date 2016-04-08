@@ -198,4 +198,8 @@ public class Card {
 	public String getManaAbility() {
 		return this.manaAbility;
 	}
+
+	public Boolean getTapped() {
+		return false;
+	}
 }
