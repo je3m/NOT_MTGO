@@ -236,7 +236,8 @@ public class Backend {
 
 	/**
 	 * Activates the mana ability of a card
-	 * @param c
+	 * @param c card with the mana ability
+	 * @param player player who activated the mana ability
 	 */
 	public void activateManaAbility(Card c, Boolean player) {
 		StringTokenizer strToken = new StringTokenizer(c.getManaAbility(),":");
