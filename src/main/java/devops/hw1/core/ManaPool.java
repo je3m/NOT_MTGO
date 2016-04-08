@@ -49,4 +49,22 @@ public enum ManaPool {
 	public void empty() {
 		amount = 0;
 	}
+	
+	/**
+	 * Empties the mana from all mana pools
+	 */
+	public static void emptyMana(){
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		ManaPool.WHITE2.empty();
+		ManaPool.BLUE2.empty();
+		ManaPool.BLACK2.empty();
+		ManaPool.RED2.empty();
+		ManaPool.GREEN2.empty();
+		ManaPool.COLORLESS2.empty();
+	}
 }
