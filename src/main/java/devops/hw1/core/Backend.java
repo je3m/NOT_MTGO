@@ -124,7 +124,7 @@ public class Backend {
 	 * Changes the current phase to the next phase
 	 */
 	public void changePhase() {
-		ManaPool.RED1.empty();
+		ManaPool.emptyMana();
 		switch(this.phase) {
 		case UNTAP1:
 			this.phase = Phase.UPKEEP1;
