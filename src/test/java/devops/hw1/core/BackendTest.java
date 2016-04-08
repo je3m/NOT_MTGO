@@ -114,6 +114,12 @@ public class BackendTest {
 	}
 	
 	@Test
+	public void testBasicPriorityPassing1(){
+		Backend bknd = new Backend();
+		assertTrue(bknd.getPriority());
+	}
+	
+	@Test
 	public void testTurn1(){
 		Backend bknd = new Backend();
 		assertTrue(bknd.getTurn());
