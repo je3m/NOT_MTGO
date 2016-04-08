@@ -24,6 +24,6 @@ public enum ManaPool {
 	}
 
 	public void add(int i) {
-		amount = amount + i;
+		amount = amount + 2;
 	}
 }
