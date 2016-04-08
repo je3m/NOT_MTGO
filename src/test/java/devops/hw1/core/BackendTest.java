@@ -671,33 +671,44 @@ public class BackendTest {
 		assertEquals(bknd.getPhase(), Phase.CLEANUP2);
 	}
 		
-		@Test
-		public void testPhaseReset(){
-			Backend bknd = new Backend();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			bknd.changePhase();
-			assertEquals(bknd.getPhase(), Phase.UNTAP1);
+	@Test
+	public void testPhaseReset(){
+		Backend bknd = new Backend();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.UNTAP1);
+	}
+	
+	/**
+	 * Integration Test
+	 */
+	@Test
+	public void testEmptyManaPhases(){
+		Backend bknd = new Backend();
+		ManaPool.RED1.add(2);
+		bknd.changePhase();
+		assertEquals(ManaPool.RED1.getAmount(), 0);
 	}
 }
