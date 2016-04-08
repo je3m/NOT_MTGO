@@ -9,4 +9,10 @@ public class ManaPoolTest {
 	public void testMana1(){
 		assertEquals(ManaPool.RED1.getAmount(), 0);
 	}
+	
+	@Test
+	public void testMana2(){
+		ManaPool.RED1.add(2);
+		assertEquals(ManaPool.RED1.getAmount(), 2);
+	}
 }
