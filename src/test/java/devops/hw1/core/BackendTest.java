@@ -113,6 +113,12 @@ public class BackendTest {
 	}
 	
 	@Test
+	public void testTurn1(){
+		Backend bknd = new Backend();
+		assertTrue(bknd.getTurn());
+	}
+	
+	@Test
 	public void testPhase1(){
 		Backend bknd = new Backend();
 		assertEquals(bknd.getPhase(), Phase.UNTAP1);
