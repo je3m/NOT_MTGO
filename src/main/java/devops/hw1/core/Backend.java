@@ -6,12 +6,14 @@ package devops.hw1.core;
  */
 public class Backend {
 	Phase phase;
+	Boolean turn;
 	
 	/**
 	 * Constructs a backend object
 	 */
 	public Backend(){
 		this.phase = Phase.UNTAP1;
+		this.turn = true;
 	}
 	
 	//!# Eliminate because irrelevant? otherwise ADD ERROR-HANDLING FOR INDEX
@@ -154,6 +156,7 @@ public class Backend {
 			break;
 		case CLEANUP1:
 			this.phase = Phase.UNTAP2;
+			this.turn = false;
 			break;
 		case UNTAP2:
 			this.phase = Phase.UPKEEP2;
@@ -201,6 +204,6 @@ public class Backend {
 	 * @return true if it is the first players turn, false if it is the second players
 	 */
 	public Boolean getTurn() {
-		return true;
+		return turn;
 	}
 }
