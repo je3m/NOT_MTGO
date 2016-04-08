@@ -8,6 +8,7 @@ public class Backend {
 	Phase phase;
 	Boolean turn;
 	Boolean priority;
+	Boolean passed;
 	
 	/**
 	 * Constructs a backend object
@@ -16,6 +17,7 @@ public class Backend {
 		this.phase = Phase.UNTAP1;
 		this.turn = true;
 		this.priority = true;
+		this.passed = false;
 	}
 	
 	//!# Eliminate because irrelevant? otherwise ADD ERROR-HANDLING FOR INDEX
@@ -203,18 +205,29 @@ public class Backend {
 	}
 
 	/**
-	 * Returns the current turn
-	 * @return true if it is the first players turn, false if it is the second players
+	 * Returns the current player whose turn it is
+	 * @return true if it is the first player's turn, false if it is the second player's
 	 */
 	public Boolean getTurn() {
 		return this.turn;
 	}
 
+	/**
+	 * Returns the current player who had priority
+	 * @return true if it is the first player's priority, false if it is the second player's
+	 */
 	public boolean getPriority() {
 		return this.priority;
 	}
 
+	/**
+	 * Passes priority for players
+	 */
 	public void passPriority() {
 		this.priority = !this.priority;
+		if(this.passed){
+			changePhase();
+		}
+		this.passed = true;
 	}
 }
