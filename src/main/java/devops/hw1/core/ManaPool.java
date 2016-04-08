@@ -26,4 +26,8 @@ public enum ManaPool {
 	public void add(int i) {
 		amount = amount + i;
 	}
+
+	public void remove(int i) {
+		amount = amount - i;
+	}
 }
