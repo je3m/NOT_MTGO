@@ -33,14 +33,16 @@ public class BackendTest {
 	public void testActivateManaAbility(){
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getManaAbility()).andReturn("T:G");
 		EasyMock.replay(c);
 		
 		c.addAbility("T:G");
 		bknd.addCard(Zone.BATTLE_FIELD, c);
-		bknd.activateManaAbility(c);
+		bknd.activateManaAbility(c, true);
 		
 		assertEquals(ManaPool.GREEN1.getAmount(), 1);
 		EasyMock.verify(c);
+		ManaPool.GREEN1.empty();
 	}
 
 	@Test

@@ -1,5 +1,7 @@
 package devops.hw1.core;
 
+import java.util.StringTokenizer;
+
 /**
  * Backend object that handles a lot of game logic and information
  *
@@ -230,5 +232,23 @@ public class Backend {
 			changePhase();
 		}
 		this.passed = true;
+	}
+
+	/**
+	 * Activates the mana ability of a card
+	 * @param c
+	 */
+	public void activateManaAbility(Card c, Boolean player) {
+		StringTokenizer strToken = new StringTokenizer(c.getManaAbility(),":");
+		if(strToken.nextToken().equals("T")){
+			c.tap();
+		}
+		if(player){
+			switch (strToken.nextToken()) {
+			case "G":
+				ManaPool.GREEN1.add(1);
+			}
+		} else {	
+		}
 	}
 }
