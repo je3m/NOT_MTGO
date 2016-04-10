@@ -1,5 +1,6 @@
 package devops.hw1.core;
 
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 /**
@@ -11,6 +12,7 @@ public class Backend {
 	Boolean turn;
 	Boolean priority;
 	Boolean passed;
+	Stack<ItemOnStack> stack;
 	
 	/**
 	 * Constructs a backend object
@@ -20,6 +22,7 @@ public class Backend {
 		this.turn = true;
 		this.priority = true;
 		this.passed = false;
+		this.stack = new Stack<ItemOnStack>();
 	}
 	
 	//!# Eliminate because irrelevant? otherwise ADD ERROR-HANDLING FOR INDEX
@@ -228,8 +231,15 @@ public class Backend {
 	 */
 	public void passPriority() {
 		this.priority = !this.priority;
-		if(this.passed){
+		if(this.passed && this.stack.empty()){
 			changePhase();
+		} else if (this.passed) {
+			ItemOnStack item = this.stack.pop();
+			if(item.getPlayer()){
+				Zone.BATTLE_FIELD.addCard(item.getC(), 0);
+			} else {
+				Zone.BATTLE_FIELD1.addCard(item.getC(), 0);
+			}
 		}
 		this.passed = true;
 	}
@@ -271,5 +281,126 @@ public class Backend {
 				ManaPool.GREEN2.add(1);
 			}
 		}
+	}
+
+	public boolean castSpell(Zone zone, Card c, int index, Boolean player) {
+		int whiteCost = 0;
+		int blueCost = 0;
+		int blackCost = 0;
+		int redCost = 0;
+		int greenCost = 0;
+		int genericCost = 0;
+		int i = 0;
+		
+		while(isInteger(c.getCost().substring(i, i+1))){
+			i++;
+		}
+		
+		if(i != 0){
+			genericCost = Integer.parseInt(c.getCost().substring(0,i));
+		}
+		
+		for(int g = i;g < c.getCost().length(); g++){
+			switch (c.getCost().substring(g, g+1)){
+			case "W":
+				whiteCost++;
+				break;
+			case "U":
+				blueCost++;
+				break;
+			case "B":
+				blackCost++;
+				break;
+			case "R":
+				redCost++;
+				break;
+			case "G":
+				greenCost++;
+				break;
+			}
+		}
+		if(player){
+			if((whiteCost <= ManaPool.WHITE1.getAmount()) &&
+					(blueCost <= ManaPool.BLUE1.getAmount()) &&
+					(blackCost <= ManaPool.BLACK1.getAmount()) &&
+					(redCost <= ManaPool.RED1.getAmount()) &&
+					(greenCost <= ManaPool.GREEN1.getAmount()) &&
+					((whiteCost + blueCost + blackCost + redCost + greenCost + genericCost)<=
+							(ManaPool.WHITE1.getAmount() + ManaPool.BLUE1.getAmount() + ManaPool.BLACK1.getAmount() + ManaPool.RED1.getAmount() + ManaPool.GREEN1.getAmount() + ManaPool.COLORLESS1.getAmount()))){
+				ManaPool.WHITE1.remove(whiteCost);
+				ManaPool.BLUE1.remove(blueCost);
+				ManaPool.BLACK1.remove(blackCost);
+				ManaPool.RED1.remove(redCost);
+				ManaPool.GREEN1.remove(greenCost);
+				
+				System.out.println(blueCost);
+				System.out.println(genericCost);
+				
+				genericCost = handleGeneric(ManaPool.COLORLESS1, genericCost);
+				genericCost = handleGeneric(ManaPool.BLUE1, genericCost);
+				genericCost = handleGeneric(ManaPool.BLACK1, genericCost);
+				genericCost = handleGeneric(ManaPool.WHITE1, genericCost);
+				genericCost = handleGeneric(ManaPool.RED1, genericCost);
+				genericCost = handleGeneric(ManaPool.GREEN1, genericCost);
+				
+				stack.push(new ItemOnStack(c, true));
+				
+				zone.remove(index);
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			if((whiteCost <= ManaPool.WHITE2.getAmount()) &&
+					(blueCost <= ManaPool.BLUE2.getAmount()) &&
+					(blackCost <= ManaPool.BLACK2.getAmount()) &&
+					(redCost <= ManaPool.RED2.getAmount()) &&
+					(greenCost <= ManaPool.GREEN2.getAmount()) &&
+					((whiteCost + blueCost + blackCost + redCost + greenCost + genericCost)<=
+							(ManaPool.WHITE2.getAmount() + ManaPool.BLUE2.getAmount() + ManaPool.BLACK2.getAmount() + ManaPool.RED2.getAmount() + ManaPool.GREEN2.getAmount() + ManaPool.COLORLESS2.getAmount()))){
+				ManaPool.WHITE2.remove(whiteCost);
+				ManaPool.BLUE2.remove(blueCost);
+				ManaPool.BLACK2.remove(blackCost);
+				ManaPool.RED2.remove(redCost);
+				ManaPool.GREEN2.remove(greenCost);
+				
+				genericCost = handleGeneric(ManaPool.COLORLESS2, genericCost);
+				genericCost = handleGeneric(ManaPool.BLUE2, genericCost);
+				genericCost = handleGeneric(ManaPool.BLACK2, genericCost);
+				genericCost = handleGeneric(ManaPool.WHITE2, genericCost);
+				genericCost = handleGeneric(ManaPool.RED2, genericCost);
+				genericCost = handleGeneric(ManaPool.GREEN2, genericCost);
+				
+				stack.push(new ItemOnStack(c, false));
+				
+				zone.remove(index);
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	public int handleGeneric(ManaPool manaPool, int genericCost){
+		if(genericCost != 0){
+			if(manaPool.getAmount() >= genericCost){
+				manaPool.remove(genericCost);
+				return 0;
+			} else {
+				int temp = genericCost - manaPool.getAmount();
+				manaPool.empty();
+				return temp;
+			}
+		}
+		return 0;
+	}
+	
+	public static boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(Exception e) { 
+	        return false; 
+	    }
+	    return true;
 	}
 }
