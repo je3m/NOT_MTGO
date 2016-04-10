@@ -35,7 +35,7 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setColor("10U");
+		c.setColor("1U");
 		
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
@@ -58,6 +58,149 @@ public class BackendTest {
 		Zone.HAND.empty();
 		Zone.HAND1.empty();
 		Zone.BATTLE_FIELD.empty();
+	}
+	
+	@Test
+	public void testBasicCastSpell1(){
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+		
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getType()).andReturn("Creature- bird");
+		EasyMock.expect(c.getCost()).andReturn("2U");
+		EasyMock.expect(c.getCost()).andReturn("2U");
+		EasyMock.expect(c.getCost()).andReturn("2U");
+		EasyMock.expect(c.getCost()).andReturn("2U");
+		EasyMock.expect(c.getCost()).andReturn("2U");
+		EasyMock.expect(c.getCost()).andReturn("2U");
+		EasyMock.replay(c);
+		
+		ManaPool.BLUE1.add(1);
+		ManaPool.COLORLESS1.add(1);
+		bknd.addCard(Zone.HAND, c, 0);
+		c.setType("Creature- bird");
+		c.setColor("2U");
+		
+		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true));
+		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
+		assertEquals(c, (bknd.getZoneContents(Zone.HAND)[0]));
+		assertEquals(1, ManaPool.BLUE1.getAmount());
+		assertEquals(1, ManaPool.COLORLESS1.getAmount());
+		
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+	}
+	
+	public void testBasicCastSpell2(){
+		ManaPool.WHITE2.empty();
+		ManaPool.BLUE2.empty();
+		ManaPool.BLACK2.empty();
+		ManaPool.RED2.empty();
+		ManaPool.GREEN2.empty();
+		ManaPool.COLORLESS2.empty();
+		Zone.HAND1.empty();
+		Zone.HAND.empty();
+		Zone.BATTLE_FIELD1.empty();
+		
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getType()).andReturn("Creature- bird");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.replay(c);
+		
+		ManaPool.BLUE2.add(1);
+		ManaPool.COLORLESS2.add(1);
+		bknd.addCard(Zone.HAND1, c, 0);
+		c.setType("Creature- bird");
+		c.setColor("1U");
+		
+		assertTrue(bknd.castSpell(Zone.HAND1, c, 0, true));
+		assertArrayEquals(bknd.getZoneContents(Zone.HAND1),bknd.getZoneContents(Zone.HAND));
+		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD1),bknd.getZoneContents(Zone.HAND));
+		
+		bknd.passPriority();
+		bknd.passPriority();
+		
+		assertArrayEquals(bknd.getZoneContents(Zone.HAND1),bknd.getZoneContents(Zone.HAND));
+		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD1)[0]));
+		assertEquals(0, ManaPool.BLUE2.getAmount());
+		assertEquals(0, ManaPool.COLORLESS2.getAmount());
+		
+		ManaPool.WHITE2.empty();
+		ManaPool.BLUE2.empty();
+		ManaPool.BLACK2.empty();
+		ManaPool.RED2.empty();
+		ManaPool.GREEN2.empty();
+		ManaPool.COLORLESS2.empty();
+		Zone.HAND1.empty();
+		Zone.HAND.empty();
+		Zone.BATTLE_FIELD1.empty();
+	}
+	
+	@Test
+	public void testBasicCastSpell3(){
+		ManaPool.WHITE2.empty();
+		ManaPool.BLUE2.empty();
+		ManaPool.BLACK2.empty();
+		ManaPool.RED2.empty();
+		ManaPool.GREEN2.empty();
+		ManaPool.COLORLESS2.empty();
+		Zone.HAND1.empty();
+		Zone.HAND.empty();
+		Zone.BATTLE_FIELD1.empty();
+		
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getType()).andReturn("Creature- bird");
+		EasyMock.expect(c.getCost()).andReturn("2U");
+		EasyMock.expect(c.getCost()).andReturn("2U");
+		EasyMock.expect(c.getCost()).andReturn("2U");
+		EasyMock.expect(c.getCost()).andReturn("2U");
+		EasyMock.expect(c.getCost()).andReturn("2U");
+		EasyMock.expect(c.getCost()).andReturn("2U");
+		EasyMock.replay(c);
+		
+		ManaPool.BLUE2.add(1);
+		ManaPool.COLORLESS2.add(1);
+		bknd.addCard(Zone.HAND1, c, 0);
+		c.setType("Creature- bird");
+		c.setColor("2U");
+		
+		assertFalse(bknd.castSpell(Zone.HAND1, c, 0, true));
+		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD1),bknd.getZoneContents(Zone.HAND));
+		assertEquals(c, (bknd.getZoneContents(Zone.HAND1)[0]));
+		assertEquals(1, ManaPool.BLUE2.getAmount());
+		assertEquals(1, ManaPool.COLORLESS2.getAmount());
+		
+		ManaPool.WHITE2.empty();
+		ManaPool.BLUE2.empty();
+		ManaPool.BLACK2.empty();
+		ManaPool.RED2.empty();
+		ManaPool.GREEN2.empty();
+		ManaPool.COLORLESS2.empty();
+		Zone.HAND1.empty();
+		Zone.HAND.empty();
+		Zone.BATTLE_FIELD1.empty();
 	}
 	
 	@Test
@@ -300,6 +443,105 @@ public class BackendTest {
 		bknd.passPriority();
 		assertEquals(bknd.getPhase(), Phase.UPKEEP1);
 		assertTrue(bknd.getPriority());
+	}
+	
+	@Test
+	public void testComplexPriorityPassing3(){
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+		
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getType()).andReturn("Creature- bird");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.replay(c);
+		
+		ManaPool.BLUE1.add(1);
+		ManaPool.COLORLESS1.add(1);
+		bknd.addCard(Zone.HAND, c, 0);
+		c.setType("Creature- bird");
+		c.setColor("1U");
+		
+		bknd.passPriority();
+		
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true));
+		
+		bknd.passPriority();
+		
+		assertEquals(bknd.getPhase(), Phase.UNTAP1);
+		assertTrue(bknd.getPriority());
+		
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+	}
+	
+	@Test
+	public void testComplexPriorityPassing4(){
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+		
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getType()).andReturn("Creature- bird");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.replay(c);
+		
+		ManaPool.BLUE1.add(1);
+		ManaPool.COLORLESS1.add(1);
+		bknd.addCard(Zone.HAND, c, 0);
+		c.setType("Creature- bird");
+		c.setColor("1U");
+		
+		bknd.passPriority();
+		
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true));
+		
+		bknd.passPriority();
+		bknd.passPriority();
+		
+		assertEquals(bknd.getPhase(), Phase.UNTAP1);
+		assertFalse(bknd.getPriority());
+		
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
 	}
 	
 	@Test

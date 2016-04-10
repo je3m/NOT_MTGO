@@ -333,9 +333,6 @@ public class Backend {
 				ManaPool.RED1.remove(redCost);
 				ManaPool.GREEN1.remove(greenCost);
 				
-				System.out.println(blueCost);
-				System.out.println(genericCost);
-				
 				genericCost = handleGeneric(ManaPool.COLORLESS1, genericCost);
 				genericCost = handleGeneric(ManaPool.BLUE1, genericCost);
 				genericCost = handleGeneric(ManaPool.BLACK1, genericCost);
