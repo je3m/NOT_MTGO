@@ -238,10 +238,13 @@ public class Backend {
 			} else {
 				Zone.BATTLE_FIELD1.addCard(item.getC(), 0);
 			}
+			this.passed = false;
 		} else if(this.passed){
 			changePhase();
+			this.passed = true;
+		} else {
+			this.passed = true;
 		}
-		this.passed = true;
 	}
 
 	/**
