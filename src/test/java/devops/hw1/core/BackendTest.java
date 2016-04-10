@@ -8,6 +8,34 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 public class BackendTest {
+	@Test void testBasicCastSpell(){
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+		
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getType()).andReturn("Creature- bird");
+		EasyMock.replay(c);
+		
+		bknd.addCard(Zone.HAND, c, 0);
+		c.setType("Creature- bird");
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0));
+		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
+		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
+		
+		bknd.passPriority();
+		bknd.passPriority();
+		
+		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
+		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
+		
+		EasyMock.verify(c);
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+	}
+	
 	@Test
 	public void testActivateAbility(){
 		Backend bknd = new Backend();
