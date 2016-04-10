@@ -543,6 +543,56 @@ public class BackendTest {
 	}
 	
 	@Test
+	public void testComplexPriorityPassing5(){
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+		
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getType()).andReturn("Creature- bird");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.expect(c.getCost()).andReturn("1U");
+		EasyMock.replay(c);
+		
+		ManaPool.BLUE1.add(1);
+		ManaPool.COLORLESS1.add(1);
+		bknd.addCard(Zone.HAND, c, 0);
+		c.setType("Creature- bird");
+		c.setColor("1U");
+		
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true));
+		
+		bknd.passPriority();
+		bknd.passPriority();
+		bknd.passPriority();
+		bknd.passPriority();
+		
+		assertEquals(bknd.getPhase(), Phase.UPKEEP1);
+		assertTrue(bknd.getPriority());
+		
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+	}
+	
+	@Test
 	public void testTurn1(){
 		Backend bknd = new Backend();
 		assertTrue(bknd.getTurn());
