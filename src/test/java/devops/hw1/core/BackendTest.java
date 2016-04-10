@@ -474,10 +474,9 @@ public class BackendTest {
 		c.setType("Creature- bird");
 		c.setColor("1U");
 		
-		bknd.passPriority();
-		
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true));
 		
+		bknd.passPriority();
 		bknd.passPriority();
 		
 		assertEquals(bknd.getPhase(), Phase.UNTAP1);
@@ -523,10 +522,9 @@ public class BackendTest {
 		c.setType("Creature- bird");
 		c.setColor("1U");
 		
-		bknd.passPriority();
-		
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true));
 		
+		bknd.passPriority();
 		bknd.passPriority();
 		bknd.passPriority();
 		
