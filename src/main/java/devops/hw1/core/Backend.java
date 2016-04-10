@@ -231,15 +231,15 @@ public class Backend {
 	 */
 	public void passPriority() {
 		this.priority = !this.priority;
-		if(this.passed && this.stack.empty()){
-			changePhase();
-		} else if (this.passed) {
+		if (this.passed && !this.stack.empty()) {
 			ItemOnStack item = this.stack.pop();
 			if(item.getPlayer()){
 				Zone.BATTLE_FIELD.addCard(item.getC(), 0);
 			} else {
 				Zone.BATTLE_FIELD1.addCard(item.getC(), 0);
 			}
+		} else if(this.passed){
+			changePhase();
 		}
 		this.passed = true;
 	}
@@ -343,6 +343,7 @@ public class Backend {
 				stack.push(new ItemOnStack(c, true));
 				
 				zone.remove(index);
+				this.passed = false;
 				return true;
 			} else {
 				return false;
@@ -371,6 +372,7 @@ public class Backend {
 				stack.push(new ItemOnStack(c, false));
 				
 				zone.remove(index);
+				this.passed = false;
 				return true;
 			} else {
 				return false;
