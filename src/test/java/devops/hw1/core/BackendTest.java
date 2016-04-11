@@ -1404,14 +1404,30 @@ public class BackendTest {
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.replay(c);
 		
+		Card c1 = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c1.getType()).andReturn("Creature- bird");
+		EasyMock.expect(c1.getCost()).andReturn("1U");
+		EasyMock.expect(c1.getCost()).andReturn("1U");
+		EasyMock.expect(c1.getCost()).andReturn("1U");
+		EasyMock.expect(c1.getCost()).andReturn("1U");
+		EasyMock.expect(c1.getCost()).andReturn("1U");
+		EasyMock.expect(c1.getCost()).andReturn("1U");
+		EasyMock.replay(c1);
+		
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
 		c.setColor("1U");
 		
+		ManaPool.BLUE1.add(1);
+		ManaPool.COLORLESS1.add(1);
+		bknd.addCard(Zone.HAND, c1, 0);
+		c1.setType("Creature- bird");
+		c1.setColor("1U");
+		
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true));
-		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true));
+		assertFalse(bknd.castSpell(Zone.HAND, c1, 0, true));
 		
 		assertEquals(bknd.getPhase(), Phase.UNTAP1);
 		assertTrue(bknd.getPriority());
