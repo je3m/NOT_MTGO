@@ -624,7 +624,7 @@ public class BackendTest {
 		bknd.passPriority();
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true));
 		
-		assertEquals(bknd.getPhase(), Phase.UPKEEP1);
+		assertEquals(bknd.getPhase(), Phase.UNTAP1);
 		assertFalse(bknd.getPriority());
 		
 		ManaPool.WHITE1.empty();
