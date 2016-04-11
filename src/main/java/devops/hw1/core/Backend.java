@@ -334,7 +334,7 @@ public class Backend {
 				break;
 			}
 		}
-		if(this.turn != player){
+		if((this.turn != player) || (!this.stack.isEmpty())){
 			return false;
 		}
 		if(player){
