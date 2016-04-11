@@ -401,7 +401,7 @@ public class Backend {
 	 * @return amount of mana left to pay
 	 */
 	public int handleGeneric(ManaPool manaPool, int genericCost){
-		if(genericCost != 0){
+		if(genericCost > 0){
 			if(manaPool.getAmount() >= genericCost){
 				manaPool.remove(genericCost);
 				return 0;
@@ -410,8 +410,12 @@ public class Backend {
 				manaPool.empty();
 				return temp;
 			}
+		} else if (genericCost == 0){
+			return 0;
+		} else {
+			//Needs tested
+			throw new IllegalArgumentException(genericCost + " is not a valid amount of generic mana cost.");
 		}
-		return 0;
 	}
 	
 	/**

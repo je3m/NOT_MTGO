@@ -883,7 +883,6 @@ public class BackendTest {
 		EasyMock.replay(c);
 		
 		c.addManaAbility("T:G");
-		bknd.addCard(Zone.BATTLE_FIELD, c);
 		bknd.activateManaAbility(c, true);
 		
 		assertEquals(ManaPool.GREEN1.getAmount(), 1);
@@ -900,7 +899,6 @@ public class BackendTest {
 		EasyMock.replay(c);
 		
 		c.addManaAbility("T:R");
-		bknd.addCard(Zone.BATTLE_FIELD, c);
 		bknd.activateManaAbility(c, false);
 		
 		assertEquals(ManaPool.RED2.getAmount(), 1);
@@ -917,7 +915,6 @@ public class BackendTest {
 		EasyMock.replay(c);
 		
 		c.addManaAbility("T:W");
-		bknd.addCard(Zone.BATTLE_FIELD, c);
 		bknd.activateManaAbility(c, false);
 		
 		assertEquals(ManaPool.WHITE2.getAmount(), 1);
@@ -934,7 +931,6 @@ public class BackendTest {
 		EasyMock.replay(c);
 		
 		c.addManaAbility("G:R");
-		bknd.addCard(Zone.BATTLE_FIELD, c);
 		bknd.activateManaAbility(c, false);
 		
 		assertEquals(ManaPool.GREEN2.getAmount(), 1);
@@ -951,7 +947,6 @@ public class BackendTest {
 		EasyMock.replay(c);
 		
 		c.addManaAbility("T:U");
-		bknd.addCard(Zone.BATTLE_FIELD, c);
 		bknd.activateManaAbility(c, false);
 		
 		assertEquals(ManaPool.BLUE2.getAmount(), 1);
@@ -968,12 +963,91 @@ public class BackendTest {
 		EasyMock.replay(c);
 		
 		c.addManaAbility("T:B");
-		bknd.addCard(Zone.BATTLE_FIELD, c);
 		bknd.activateManaAbility(c, false);
 		
 		assertEquals(ManaPool.BLACK2.getAmount(), 1);
 		EasyMock.verify(c);
 		ManaPool.BLACK2.empty();
+	}
+	
+	@Test
+	public void testActivateManaAbility6(){
+		ManaPool.RED1.empty();
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getManaAbility()).andReturn("T:R");
+		EasyMock.replay(c);
+		
+		c.addManaAbility("T:R");
+		bknd.activateManaAbility(c, true);
+		
+		assertEquals(ManaPool.RED1.getAmount(), 1);
+		EasyMock.verify(c);
+		ManaPool.RED1.empty();
+	}
+	
+	@Test
+	public void testActivateManaAbility7(){
+		ManaPool.WHITE1.empty();
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getManaAbility()).andReturn("T:W");
+		EasyMock.replay(c);
+		
+		c.addManaAbility("T:W");
+		bknd.activateManaAbility(c, true);
+		
+		assertEquals(ManaPool.WHITE1.getAmount(), 1);
+		EasyMock.verify(c);
+		ManaPool.WHITE1.empty();
+	}
+	
+	@Test
+	public void testActivateManaAbility8(){
+		ManaPool.BLUE1.empty();
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getManaAbility()).andReturn("T:U");
+		EasyMock.replay(c);
+		
+		c.addManaAbility("T:U");
+		bknd.activateManaAbility(c, true);
+		
+		assertEquals(ManaPool.BLUE1.getAmount(), 1);
+		EasyMock.verify(c);
+		ManaPool.BLUE1.empty();
+	}
+	
+	@Test
+	public void testActivateManaAbility9(){
+		ManaPool.BLACK1.empty();
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getManaAbility()).andReturn("T:B");
+		EasyMock.replay(c);
+		
+		c.addManaAbility("T:B");
+		bknd.activateManaAbility(c, true);
+		
+		assertEquals(ManaPool.BLACK1.getAmount(), 1);
+		EasyMock.verify(c);
+		ManaPool.BLACK1.empty();
+	}
+	
+	@Test
+	public void testActivateManaAbility10(){
+		ManaPool.COLORLESS1.empty();
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getManaAbility()).andReturn("T:1");
+		EasyMock.replay(c);
+		
+		c.addManaAbility("T:1");
+		bknd.activateManaAbility(c, true);
+		
+		assertEquals(ManaPool.COLORLESS1.getAmount(), 1);
+		EasyMock.verify(c);
+		ManaPool.COLORLESS1.empty();
 	}
 
 	@Test
@@ -1919,5 +1993,45 @@ public class BackendTest {
 		Zone.HAND.empty();
 		Zone.HAND1.empty();
 		Zone.BATTLE_FIELD.empty();
+	}
+	
+	@Test
+	public void isIntegerTest(){
+		assertFalse(Backend.isInteger(""));
+		assertFalse(Backend.isInteger("a"));
+		assertTrue(Backend.isInteger("1"));
+	}
+	
+	@Test
+	public void handleGenericTest1(){
+		ManaPool.WHITE1.empty();
+		Backend bknd = new Backend();
+		
+		ManaPool.WHITE1.add(1);
+		assertEquals(0,bknd.handleGeneric(ManaPool.WHITE1, 1));
+		assertEquals(0,ManaPool.WHITE1.getAmount());
+		ManaPool.WHITE1.empty();
+	}
+	
+	@Test
+	public void handleGenericTest2(){
+		ManaPool.WHITE1.empty();
+		Backend bknd = new Backend();
+		
+		ManaPool.WHITE1.add(2);
+		assertEquals(0,bknd.handleGeneric(ManaPool.WHITE1, 1));
+		assertEquals(1,ManaPool.WHITE1.getAmount());
+		ManaPool.WHITE1.empty();
+	}
+	
+	@Test
+	public void handleGenericTest3(){
+		ManaPool.WHITE1.empty();
+		Backend bknd = new Backend();
+		
+		ManaPool.WHITE1.add(1);
+		assertEquals(0,bknd.handleGeneric(ManaPool.WHITE1, 0));
+		assertEquals(1,ManaPool.WHITE1.getAmount());
+		ManaPool.WHITE1.empty();
 	}
 }
