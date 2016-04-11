@@ -234,9 +234,9 @@ public class Backend {
 		if (this.passed && !this.stack.empty()) {
 			ItemOnStack item = this.stack.pop();
 			if(item.getPlayer()){
-				Zone.BATTLE_FIELD.addCard(item.getC(), 0);
+				Zone.BATTLE_FIELD.addCard(item.getCard(), 0);
 			} else {
-				Zone.BATTLE_FIELD1.addCard(item.getC(), 0);
+				Zone.BATTLE_FIELD1.addCard(item.getCard(), 0);
 			}
 			this.passed = false;
 		} else if(this.passed){
@@ -286,6 +286,14 @@ public class Backend {
 		}
 	}
 
+	/**
+	 * Casts a spell, removing mana from the players mana pool acordingly
+	 * @param zone the zone the spell is being cast from
+	 * @param c the spell being cast
+	 * @param index the index the spell is in
+	 * @param player the player that owns the spell
+	 * @return true if the spell is cast, false if not
+	 */
 	public boolean castSpell(Zone zone, Card c, int index, Boolean player) {
 		int whiteCost = 0;
 		int blueCost = 0;
@@ -321,6 +329,9 @@ public class Backend {
 				greenCost++;
 				break;
 			}
+		}
+		if(this.turn != player){
+			return false;
 		}
 		if(player){
 			if((whiteCost <= ManaPool.WHITE1.getAmount()) &&
@@ -369,8 +380,8 @@ public class Backend {
 				genericCost = handleGeneric(ManaPool.BLUE2, genericCost);
 				genericCost = handleGeneric(ManaPool.BLACK2, genericCost);
 				genericCost = handleGeneric(ManaPool.WHITE2, genericCost);
-				genericCost = handleGeneric(ManaPool.RED2, genericCost);
 				genericCost = handleGeneric(ManaPool.GREEN2, genericCost);
+				genericCost = handleGeneric(ManaPool.RED2, genericCost);
 				
 				stack.push(new ItemOnStack(c, false));
 				
