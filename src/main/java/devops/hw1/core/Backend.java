@@ -284,6 +284,8 @@ public class Backend {
 				ManaPool.RED2.add(1);
 			case "G":
 				ManaPool.GREEN2.add(1);
+			case "1":
+				ManaPool.COLORLESS2.add(1);
 			}
 		}
 	}
