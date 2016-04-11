@@ -394,6 +394,12 @@ public class Backend {
 		}
 	}
 	
+	/**
+	 * Handles paying generic costs with mana from a specific mana pool
+	 * @param manaPool mana pool to play mana with
+	 * @param genericCost amount of generic mana to pay
+	 * @return amount of mana left to pay
+	 */
 	public int handleGeneric(ManaPool manaPool, int genericCost){
 		if(genericCost != 0){
 			if(manaPool.getAmount() >= genericCost){
@@ -408,6 +414,11 @@ public class Backend {
 		return 0;
 	}
 	
+	/**
+	 * Determines if a string is an integer
+	 * @param s string to check
+	 * @return true if the string is an integer
+	 */
 	public static boolean isInteger(String s) {
 	    try { 
 	        Integer.parseInt(s); 
