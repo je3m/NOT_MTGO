@@ -269,6 +269,8 @@ public class Backend {
 				ManaPool.RED1.add(1);
 			case "G":
 				ManaPool.GREEN1.add(1);
+			case "1":
+				ManaPool.COLORLESS1.add(1);
 			}
 		} else {
 			switch (strToken.nextToken()) {
