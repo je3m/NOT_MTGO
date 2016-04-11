@@ -25,13 +25,6 @@ public class ItemOnStack {
 	public Card getCard() {
 		return c;
 	}
-	/**
-	 * Sets the card for the item on stack
-	 * @param c new card
-	 */
-	public void setCard(Card c) {
-		this.c = c;
-	}
 	
 	/**
 	 * Gets the player that owns the item on stack
@@ -40,14 +33,4 @@ public class ItemOnStack {
 	public Boolean getPlayer() {
 		return player;
 	}
-	
-	/**
-	 * Sets the player that owns the item on the stack
-	 * @param player the new player
-	 */
-	public void setPlayer(Boolean player) {
-		this.player = player;
-	}
-	
-	
 }
