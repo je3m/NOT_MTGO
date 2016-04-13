@@ -8,11 +8,11 @@ import java.util.StringTokenizer;
  *
  */
 public class Backend {
-	Phase phase;
-	Boolean turn;
-	Boolean priority;
-	Boolean passed;
-	Stack<ItemOnStack> stack;
+	private Phase phase;
+	private Boolean turn;
+	private Boolean priority;
+	private Boolean passed;
+	private Stack<ItemOnStack> stack;
 	
 	/**
 	 * Constructs a backend object
