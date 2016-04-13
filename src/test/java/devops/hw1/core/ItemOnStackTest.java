@@ -24,7 +24,7 @@ public class ItemOnStackTest {
 	
 	@Test
 	public void testGetCardAndPlayer3(){
-		Card c = EasyMock.niceMock(Card.class);
+		
 		ItemOnStack item = new ItemOnStack(null,null);
 		assertEquals(null,item.getPlayer());
 		assertEquals(null, item.getCard());

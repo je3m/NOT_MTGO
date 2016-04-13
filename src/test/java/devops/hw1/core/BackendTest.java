@@ -1,6 +1,8 @@
 package devops.hw1.core;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -872,19 +874,19 @@ public class BackendTest {
 	
 	@Test
 	public void testActivateAbility(){
-		Backend bknd = new Backend();
+		
 		Card c = new Card("Storm Crow");
-		bknd.addCard(Zone.HAND, c);
+		Backend.addCard(Zone.HAND, c);
 
 
-		bknd.activateAbility(c, Zone.HAND, 0);
+		Backend.activateAbility(c, Zone.HAND, 0);
 
 		assert(Zone.BATTLE_FIELD.contains(c.getName()));
 
 		Card c1 = new Card("Scornful Egotist");
 
-		bknd.addCard(Zone.HAND1, c1);
-		bknd.activateAbility(c1, Zone.HAND1, 0);
+		Backend.addCard(Zone.HAND1, c1);
+		Backend.activateAbility(c1, Zone.HAND1, 0);
 		assert(Zone.BATTLE_FIELD1.contains(c1.getName()));
 	}
 	
@@ -1087,8 +1089,8 @@ public class BackendTest {
 		Card c = EasyMock.niceMock(Card.class);
 		Card c1 = EasyMock.niceMock(Card.class);
 
-		bknd.addCard(Zone.HAND, c);
-		bknd.addCard(Zone.HAND, c1);
+		Backend.addCard(Zone.HAND, c);
+		Backend.addCard(Zone.HAND, c1);
 
 		Zone.HAND.addCard(c, 0);
 		Zone.HAND.addCard(c, 0);
@@ -2035,7 +2037,7 @@ public class BackendTest {
 		Card c = new Card("Forest");
 		
 		c.addManaAbility("T:G");
-		bknd.addCard(Zone.BATTLE_FIELD, c);
+		Backend.addCard(Zone.BATTLE_FIELD, c);
 		bknd.activateManaAbility(c, true);
 		
 		assertEquals(ManaPool.GREEN1.getAmount(), 1);

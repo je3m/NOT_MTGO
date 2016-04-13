@@ -30,7 +30,7 @@ public class TestCard {
 		c = new Card("Akki Coalflinger");
 		c.addAbility(s[0]);
 		c.addAbility(s[1]);
-		assertEquals(c.getAbilities(), s);
+		assert(c.getAbilities().equals(s));
 
 	}
 	

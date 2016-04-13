@@ -52,7 +52,6 @@ public class Backend {
 		}
 	}
 
-	//!# Refactor? add error-handling for invalid i
 	/**
 	 * Prototype function. Moves a card from its current zone to a new one when its ability is activated
 	 * @param c the card whose ability is being activated
