@@ -2,7 +2,6 @@ package devops.hw1.core;
 
 import java.util.Stack;
 import java.util.StringTokenizer;
-import java.util.regex.Pattern;
 
 /**
  * Backend object that handles a lot of game logic and information
@@ -429,6 +428,6 @@ public class Backend {
 	 * @return true if the string is an integer
 	 */
 	public static boolean isInteger(String s) {
-	    return Pattern.matches("%d", s);
+	    return s.matches("\\d+");
 	}
 }

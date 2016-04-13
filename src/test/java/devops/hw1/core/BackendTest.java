@@ -576,6 +576,15 @@ public class BackendTest {
 	public void testIsInteger(){
 		String s = "5";
 		assert(Backend.isInteger(s));
+		
+		s = "w";
+		assertFalse(Backend.isInteger(s));
+		
+		s = "5w";
+		assertFalse(Backend.isInteger(s));
+		
+		s = "3e";
+		assertFalse(Backend.isInteger(s));
 	}
 	@Test
 	public void testBasicCastSpell11(){
