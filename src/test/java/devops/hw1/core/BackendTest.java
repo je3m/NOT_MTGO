@@ -573,6 +573,11 @@ public class BackendTest {
 	}
 	
 	@Test
+	public void testIsInteger(){
+		String s = "5";
+		assert(Backend.isInteger(s));
+	}
+	@Test
 	public void testBasicCastSpell11(){
 		ManaPool.WHITE1.empty();
 		ManaPool.BLUE1.empty();
