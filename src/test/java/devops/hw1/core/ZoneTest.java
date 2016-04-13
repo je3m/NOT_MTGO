@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 public class ZoneTest {
@@ -26,9 +27,20 @@ public class ZoneTest {
 
 	@Test
 	public void testAddToZone(){
-		
+		this.clearZones();
+		boolean nopass = false;
+		Card c = EasyMock.niceMock(Card.class);
+	
 		try {
-			Zone.BATTLE_FIELD.addCard(new Card(this.names[2]), 10000);
+			Zone.HAND.addCard(c, -1);
+			nopass = true;
+		} catch (IndexOutOfBoundsException e){
+			assertEquals(e.getMessage(), "Index -1 is not valid for the HAND zone");
+		}
+		
+		assertFalse(nopass);
+		try {
+			Zone.BATTLE_FIELD.addCard(c, 10000);
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(e.getMessage(), "Index 10000 is not valid for the BATTLE_FIELD zone");
 		}
