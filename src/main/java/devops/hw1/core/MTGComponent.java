@@ -59,6 +59,16 @@ public class MTGComponent extends JComponent{
 	private static final double MANA_POOLS_Y_POSITION = 0.8;
 	private static final double MANA_POOLS_MAX_FONT_HEIGHT = 0.06;
 	private static final double MANA_POOLS_MAX_FONT_WIDTH = 0.06;
+	private static final double MANA_POOLS_ADJUSTMENT= 0.5;
+	private static final double PHASES_WIDTH = 0.8;
+	private static final double PHASES_HEIGHT = 0.1;
+	private static final double PHASE_WIDTH = PHASES_WIDTH/12.0;
+	private static final double PHASES_X_POSITION = 0.1;
+	private static final double PHASES_Y_POSITION = 0.9;
+	private static final double PHASES_MAX_FONT_HEIGHT = 0.02;
+	private static final double PHASES_MAX_FONT_WIDTH = 0.02;
+	private static final double PHASES_ADJUSTMENT = 0.5;
+	
 	
 	
 	
@@ -167,7 +177,8 @@ public class MTGComponent extends JComponent{
 		drawFormat(graphics2);
 		drawCountedZones1(graphics2);
 		drawCountedZones2(graphics2);
-		drawManaPools1(graphics2);
+		drawManaPools(graphics2);
+		drawPhases(graphics2);
 		generateGUICards(this.handGUICards1, Zone.HAND, BASE_HAND_CARDS_POSITION);
 		generateGUICards(this.handGUICards2, Zone.HAND1, BASE_HAND1_CARDS_POSITION);
 		generateGUICards(this.battleGUICards1, Zone.BATTLE_FIELD, BASE_BATTLEFIELD_CARDS_POSITION);
@@ -193,6 +204,10 @@ public class MTGComponent extends JComponent{
 			graphics2.draw(new Rectangle((int) (windowX*MANA_POOLS_X_POSITION + i*windowX*MANA_POOL_COLOR_WIDTH), (int)(windowY*MANA_POOLS_Y_POSITION), (int)(windowX*MANA_POOL_COLOR_WIDTH), (int)(windowY*MANA_POOL_HEIGHT)));
 		}
 		
+		for(int i =0; i < 12; i++) {
+			graphics2.draw(new Rectangle((int) (windowX*PHASES_X_POSITION + i*windowX*PHASE_WIDTH), (int)(windowY*PHASES_Y_POSITION), (int)(windowX*PHASE_WIDTH), (int)(windowY*PHASES_HEIGHT)));
+		}
+		
 		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,HAND_Y_POSITION,(int)(windowX*SIDEBAR_WIDTH), (int)(windowY*HAND_HEIGHT)));
 		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
 		graphics2.draw(new Rectangle((int)(SIDEBAR1_X_POSITION + windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2) + SIDEBAR_ADJUSTMENT),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
@@ -209,15 +224,40 @@ public class MTGComponent extends JComponent{
 	 * Draws the mana pools of various colors for players 1 and 2
 	 * @param graphics2
 	 */
-	private void drawManaPools1(Graphics2D graphics2) {
+	private void drawManaPools(Graphics2D graphics2) {
 		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(windowY*MANA_POOLS_MAX_FONT_HEIGHT), (int)(windowX*MANA_POOLS_MAX_FONT_WIDTH))));
 		
 		String[] labels = {"W", "U", "B","R","G","C", "W","U","B","R","G","C"};
 		ManaPool[] pools = ManaPool.values();
 		for(int p = 0; p < pools.length; p++) {
 				graphics2.drawString(labels[p] + ":" + String.valueOf(pools[p].getAmount()), 
-						(int)(windowX*MANA_POOLS_X_POSITION + p*windowX*MANA_POOL_COLOR_WIDTH), (int)(windowY*MANA_POOLS_Y_POSITION + windowY*MANA_POOL_HEIGHT));
+						(int)(windowX*MANA_POOLS_X_POSITION + p*windowX*MANA_POOL_COLOR_WIDTH), (int)(windowY*MANA_POOLS_Y_POSITION + windowY*MANA_POOLS_ADJUSTMENT*MANA_POOL_HEIGHT));
 		}
+		
+	}
+	
+	/**
+	 * Draws the phase labels and colors one to indicate which phase the game is in and on which player's turn
+	 * @param graphics2
+	 */
+	private void drawPhases(Graphics2D graphics2) {
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(windowY*PHASES_MAX_FONT_HEIGHT), (int)(windowX*PHASES_MAX_FONT_WIDTH))));
+		
+		Phase[] phases = Phase.values();
+		for(int p=0; p< 12; p++) {
+			if(this.bkd.getPhase() == phases[p]) {
+				if(this.bkd.getTurn()) {
+					graphics2.setColor(Color.GREEN);
+				} else {
+					graphics2.setColor(Color.ORANGE);
+				}				
+			}
+			
+			graphics2.drawString(phases[p].toString(), (int)(windowX*PHASES_X_POSITION + p*windowX*PHASE_WIDTH), (int)(windowY*PHASES_Y_POSITION + windowY*PHASES_ADJUSTMENT*PHASES_HEIGHT));
+			
+			graphics2.setColor(Color.BLACK);
+		}
+		
 		
 	}
 	

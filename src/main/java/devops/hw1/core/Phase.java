@@ -1,28 +1,148 @@
 package devops.hw1.core;
 
 public enum Phase {
-	UNTAP1,
-	UPKEEP1,
-	DRAW1,
-	FIRST_MAIN1,
-	START_COMBAT1,
-	DECLARE_ATTACKERS1,
-	DECLARE_BLOCKERS1,
-	COMBAT_DAMAGE1,
-	END_OF_COMBAT1,
-	SECOND_MAIN1,
-	END1,
-	CLEANUP1,
-	UNTAP2,
-	UPKEEP2,
-	DRAW2,
-	FIRST_MAIN2,
-	START_COMBAT2,
-	DECLARE_ATTACKERS2,
-	DECLARE_BLOCKERS2,
-	COMBAT_DAMAGE2,
-	END_OF_COMBAT2,
-	SECOND_MAIN2,
-	END2,
-	CLEANUP2;
+	UNTAP1 {
+        @Override
+        public String toString() {
+            return "Untap";
+        }
+    },
+	UPKEEP1 {
+        @Override
+        public String toString() {
+            return "Upkeep";
+        }
+    },
+	DRAW1 {
+        @Override
+        public String toString() {
+            return "Draw";
+        }
+    },
+	FIRST_MAIN1 {
+        @Override
+        public String toString() {
+            return "Main 1";
+        }
+    },
+	START_COMBAT1 {
+        @Override
+        public String toString() {
+            return "Begin Combat";
+        }
+    },
+	DECLARE_ATTACKERS1 {
+        @Override
+        public String toString() {
+            return "Declare Attacks";
+        }
+    },
+	DECLARE_BLOCKERS1 {
+        @Override
+        public String toString() {
+            return "Declare Blocks";
+        }
+    },
+	COMBAT_DAMAGE1 {
+        @Override
+        public String toString() {
+            return "Combat Damage";
+        }
+    },
+	END_OF_COMBAT1 {
+        @Override
+        public String toString() {
+            return "End Combat";
+        }
+    },
+	SECOND_MAIN1 {
+        @Override
+        public String toString() {
+            return "Main 2";
+        }
+    },
+	END1 {
+        @Override
+        public String toString() {
+            return "End Turn";
+        }
+    },
+	CLEANUP1 {
+        @Override
+        public String toString() {
+            return "Cleanup";
+        }
+    },
+	UNTAP2 {
+        @Override
+        public String toString() {
+            return "Untap";
+        }
+    },
+	UPKEEP2 {
+        @Override
+        public String toString() {
+            return "Upkeep";
+        }
+    },
+	DRAW2 {
+        @Override
+        public String toString() {
+            return "Draw";
+        }
+    },
+	FIRST_MAIN2 {
+        @Override
+        public String toString() {
+            return "Main 1";
+        }
+    },
+	START_COMBAT2 {
+        @Override
+        public String toString() {
+            return "Begin Combat";
+        }
+    },
+	DECLARE_ATTACKERS2 {
+        @Override
+        public String toString() {
+            return "Declare Attacks";
+        }
+    },
+	DECLARE_BLOCKERS2 {
+        @Override
+        public String toString() {
+            return "Declare Blocks";
+        }
+    },
+	COMBAT_DAMAGE2 {
+        @Override
+        public String toString() {
+            return "Combat Damage";
+        }
+    },
+	END_OF_COMBAT2 {
+        @Override
+        public String toString() {
+            return "End Combat";
+        }
+    },
+	SECOND_MAIN2 {
+        @Override
+        public String toString() {
+            return "Main 2";
+        }
+    },
+	END2 {
+        @Override
+        public String toString() {
+            return "End Turn";
+        }
+    },
+	CLEANUP2 {
+        @Override
+        public String toString() {
+            return "Cleanup";
+        }
+    };
 }
