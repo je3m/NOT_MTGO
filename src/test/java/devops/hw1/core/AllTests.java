@@ -13,7 +13,8 @@ import org.junit.runners.Suite.SuiteClasses;
 				MTGComponentTest.class,
 				NumericDataTest.class,
 				TestCard.class,
-				ZoneTest.class})
+				ZoneTest.class,
+				SMELParserTest.class})
 public class AllTests {
 
 }
