@@ -48,6 +48,7 @@ public class ManaPoolTest {
 	@Test
 	public void testChoosePool(){
 		assertEquals(ManaPool.WHITE1, ManaPool.getPool("w", true));
+		assertEquals(ManaPool.WHITE2, ManaPool.getPool("w", false));
 	}
 
 	@Test
