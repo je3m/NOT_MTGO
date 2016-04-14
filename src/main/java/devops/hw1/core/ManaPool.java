@@ -17,14 +17,14 @@ public enum ManaPool {
 	RED2,
 	GREEN2,
 	COLORLESS2;
-	
+
 	int amount;
 	/**
 	 * Returns the total amount of mana in the pool
 	 * @return amount of mana in the pool
 	 */
 	public int getAmount() {
-		return amount;
+		return this.amount;
 	}
 
 	/**
@@ -32,7 +32,7 @@ public enum ManaPool {
 	 * @param i amount of mana to be added
 	 */
 	public void add(int i) {
-		amount = amount + i;
+		this.amount = this.amount + i;
 	}
 
 	/**
@@ -40,16 +40,16 @@ public enum ManaPool {
 	 * @param i amount of mana to be removed
 	 */
 	public void remove(int i) {
-		amount = amount - i;
+		this.amount = this.amount - i;
 	}
 
 	/**
 	 * Empty the mana pool
 	 */
 	public void empty() {
-		amount = 0;
+		this.amount = 0;
 	}
-	
+
 	/**
 	 * Empties the mana from all mana pools
 	 */
@@ -66,5 +66,10 @@ public enum ManaPool {
 		ManaPool.RED2.empty();
 		ManaPool.GREEN2.empty();
 		ManaPool.COLORLESS2.empty();
+	}
+
+	public static ManaPool getPool(String color, boolean player){
+		return ManaPool.WHITE1;
+
 	}
 }
