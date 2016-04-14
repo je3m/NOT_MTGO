@@ -17,6 +17,19 @@ public class SMELParserTest {
 		parse = new SMELParser(smel);
 		
 		assertEquals("B", parse.getCost());
+		
+		smel = "";
+		parse = new SMELParser(smel);
+		
+		try{
+			parse.getCost();
+			fail("expected exception");
+		} catch (RuntimeException e){
+			assertEquals(e.getMessage(), "SMEL: no cost");
+		}
+		
+		
+		
 	}
 
 }
