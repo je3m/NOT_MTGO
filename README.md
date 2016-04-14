@@ -56,3 +56,18 @@ Chris
 Scott
  -Added metric: Method Lines of Code at max of 25. Refactored MTGDuelDecks.main to satisfy this
  -Added a good deal of input validation, mostly checking for indices being beyond the list's size and certain data strings not matching regex expressions.
+ 
+------------------------------------------------------------------------------------------------------
+Milestone 4
+ 
+Jim
+ 
+ 
+Chris
+ 
+ 
+Scott
+ -Added display of mana abilities on cards
+ -Added display of mana pools on GUI
+ -Added display of the phases and which phase/turn the game is currently in
+ -Added button for each player to pass priority 
