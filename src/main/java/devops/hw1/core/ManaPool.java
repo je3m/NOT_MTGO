@@ -68,9 +68,46 @@ public enum ManaPool {
 		ManaPool.COLORLESS2.empty();
 	}
 
-	public static ManaPool getPool(String color, boolean player){
-		if (player)
-			return ManaPool.WHITE1;
-		return ManaPool.WHITE2;
+	/**
+	 * easy way to select a mana pool to prevent duplicate code
+	 * @param color color of mana pool (wubrgc)
+	 * @param player True if player 1, false otherwise
+	 * @return ManaPool of player
+	 */
+	public static ManaPool getPool(char color, boolean player){
+		switch(color){
+		case 'w':
+			if (player)
+				return ManaPool.WHITE1;
+
+			return ManaPool.WHITE2;
+
+		case 'u':
+			if (player)
+				return ManaPool.BLUE1;
+
+			return ManaPool.BLUE2;
+
+		case 'b':
+			if (player)
+				return ManaPool.BLACK1;
+
+			return ManaPool.BLACK2;
+
+		case 'r':
+			if (player)
+				return ManaPool.RED1;
+
+			return ManaPool.RED2;
+		case 'g':
+			if (player)
+				return ManaPool.GREEN1;
+
+			return ManaPool.GREEN2;
+
+		default:
+			return null;
+
+		}
 	}
 }
