@@ -106,7 +106,7 @@ public enum ManaPool {
 			return ManaPool.GREEN2;
 
 		default:
-			return null;
+			throw new IllegalArgumentException("invalid color '" + color + "'");
 
 		}
 	}
