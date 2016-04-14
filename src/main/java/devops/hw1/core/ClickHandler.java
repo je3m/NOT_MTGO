@@ -50,7 +50,7 @@ public class ClickHandler implements MouseListener {
 			} else {
 				for(int i = 0; i < MTGComp.getDispGUICard1().getAbilityBoxes().length; i++){
 					if(MTGComp.getDispGUICard1().getAbilityBoxes()[i].contains(MTGComp.getMousePosition())){
-						Backend.activateAbility(MTGComp.getDispGUICard1().getCard(), MTGComp.getDispGUICard1().getZone(), MTGComp.getDispGUICard1().getIndex());
+						Backend.activateAbility(MTGComp.getDispGUICard1().getCard(), MTGComp.getDispGUICard1().getZone(), MTGComp.getDispGUICard1().getIndex(), i);
 						MTGComp.setDispGUICard1(null);
 						MTGComp.repaint();
 						break;
@@ -71,7 +71,7 @@ public class ClickHandler implements MouseListener {
 			} else {
 				for(int i = 0; i < MTGComp.getDispGUICard2().getAbilityBoxes().length; i++){
 					if(MTGComp.getDispGUICard2().getAbilityBoxes()[i].contains(MTGComp.getMousePosition())){
-						Backend.activateAbility(MTGComp.getDispGUICard2().getCard(), MTGComp.getDispGUICard2().getZone(), MTGComp.getDispGUICard2().getIndex());
+						Backend.activateAbility(MTGComp.getDispGUICard2().getCard(), MTGComp.getDispGUICard2().getZone(), MTGComp.getDispGUICard2().getIndex(), i);
 						MTGComp.setDispGUICard2(null);
 						MTGComp.repaint();
 						break;

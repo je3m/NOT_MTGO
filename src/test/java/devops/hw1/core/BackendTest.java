@@ -863,14 +863,14 @@ public class BackendTest {
 		bknd.addCard(Zone.HAND, c);
 
 
-		bknd.activateAbility(c, Zone.HAND, 0);
+		bknd.activateAbility(c, Zone.HAND, 0, 0);
 
 		assert(Zone.BATTLE_FIELD.contains(c.getName()));
 
 		Card c1 = new Card("Scornful Egotist");
 
 		bknd.addCard(Zone.HAND1, c1);
-		bknd.activateAbility(c1, Zone.HAND1, 0);
+		bknd.activateAbility(c1, Zone.HAND1, 0, 0);
 		assert(Zone.BATTLE_FIELD1.contains(c1.getName()));
 	}
 	

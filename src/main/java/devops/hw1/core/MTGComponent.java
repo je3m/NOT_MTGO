@@ -52,6 +52,15 @@ public class MTGComponent extends JComponent{
 	private static final int ABILITY_FONT_SIZE = 25;
 	private static final double ABILITY_STRING_LEFT_BUFFER = 0.1;
 	private static final double ABILITY_STRING_Y_CENTER_SHIFT = 0.05;
+	private static final double MANA_POOL_WIDTH = 0.4;
+	private static final double MANA_POOL_HEIGHT = 0.1;
+	private static final double MANA_POOL_COLOR_WIDTH = MANA_POOL_WIDTH/6.0;
+	private static final double MANA_POOLS_X_POSITION = 0.1;
+	private static final double MANA_POOLS_Y_POSITION = 0.8;
+	private static final double MANA_POOLS_MAX_FONT_HEIGHT = 0.06;
+	private static final double MANA_POOLS_MAX_FONT_WIDTH = 0.06;
+	
+	
 	
 	private int windowX;
 	private int windowY;
@@ -146,6 +155,7 @@ public class MTGComponent extends JComponent{
 		drawFormat(graphics2);
 		drawCountedZones1(graphics2);
 		drawCountedZones2(graphics2);
+		drawManaPools1(graphics2);
 		generateGUICards(this.handGUICards1, Zone.HAND, BASE_HAND_CARDS_POSITION);
 		generateGUICards(this.handGUICards2, Zone.HAND1, BASE_HAND1_CARDS_POSITION);
 		generateGUICards(this.battleGUICards1, Zone.BATTLE_FIELD, BASE_BATTLEFIELD_CARDS_POSITION);
@@ -167,6 +177,10 @@ public class MTGComponent extends JComponent{
 		graphics2.setColor(Color.BLACK);
 		graphics2.drawLine((int)(windowX*CENTER_LINE_X_POSITION), CENTER_LINE_Y_POSITION, (int)(windowX*CENTER_LINE_X_POSITION), windowY);
 		
+		for(int i =0; i < 12; i++) {
+			graphics2.draw(new Rectangle((int) (windowX*MANA_POOLS_X_POSITION + i*windowX*MANA_POOL_COLOR_WIDTH), (int)(windowY*MANA_POOLS_Y_POSITION), (int)(windowX*MANA_POOL_COLOR_WIDTH), (int)(windowY*MANA_POOL_HEIGHT)));
+		}
+		
 		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,HAND_Y_POSITION,(int)(windowX*SIDEBAR_WIDTH), (int)(windowY*HAND_HEIGHT)));
 		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
 		graphics2.draw(new Rectangle((int)(SIDEBAR1_X_POSITION + windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2) + SIDEBAR_ADJUSTMENT),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
@@ -177,6 +191,24 @@ public class MTGComponent extends JComponent{
 		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX + windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
 		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX),(int)(windowY*(HAND_HEIGHT + EXILE_HEIGHT)),(int)(windowX*SIDEBAR_WIDTH),(int)(windowY*LIBRARY_HEIGHT)));
 	}
+	
+	
+	/**
+	 * Draws the mana pools of various colors for players 1 and 2
+	 * @param graphics2
+	 */
+	private void drawManaPools1(Graphics2D graphics2) {
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(windowY*MANA_POOLS_MAX_FONT_HEIGHT), (int)(windowX*MANA_POOLS_MAX_FONT_WIDTH))));
+		
+		String[] labels = {"W", "U", "B","R","G","C", "W","U","B","R","G","C"};
+		ManaPool[] pools = ManaPool.values();
+		for(int p = 0; p < pools.length; p++) {
+				graphics2.drawString(labels[p] + ":" + String.valueOf(pools[p].getAmount()), 
+						(int)(windowX*MANA_POOLS_X_POSITION + p*windowX*MANA_POOL_COLOR_WIDTH), (int)(windowY*MANA_POOLS_Y_POSITION + windowY*MANA_POOL_HEIGHT));
+		}
+		
+	}
+	
 	
 	/**
 	 * Draws counted library, graveyard, and exile for player 1
@@ -246,13 +278,16 @@ public class MTGComponent extends JComponent{
 			} else {
 				Rectangle rec = cardsAL.get(i).getRec();
 				BufferedImage img = cardsAL.get(i).getImage();
-				AffineTransform transform = new AffineTransform();
-				transform.translate(0.5*img.getHeight(), 0.5*img.getWidth());
-				transform.rotate(Math.toRadians(rotate));
-				transform.translate(-0.5*img.getWidth(), -0.5*img.getHeight());
-
-				AffineTransformOp transformOP = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
-				img = transformOP.filter(img, null);
+				if(cardsAL.get(i).card.getTapped())
+				{
+					AffineTransform transform = new AffineTransform();
+					transform.translate(0.5*img.getHeight(), 0.5*img.getWidth());
+					transform.rotate(Math.toRadians(rotate));
+					transform.translate(-0.5*img.getWidth(), -0.5*img.getHeight());
+					
+					AffineTransformOp transformOP = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+					img = transformOP.filter(img, null);
+				}
 				graphics2.drawImage(img, (int)rec.getX(), (int)rec.getY(), (int)rec.getWidth(), (int)rec.getHeight(), this);
 			}
 		}

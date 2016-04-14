@@ -32,12 +32,16 @@ public class MTGDuelDecks {
 		Zone.LIBRARY.addCard(new Card("Libr"), 0);
 		
 		Card hand1 = new Card("Hand1");
+		hand1.addAbility("Tap: Add G to your mana pool");
 		hand1.addAbility("Play this card");
+		hand1.addManaAbility("G");
 		hand1.setImage("Forest.jpg");
 		Zone.HAND.addCard(hand1,0);
 		
 		Card hand2 = new Card("Hand2");
+		hand2.addAbility("Tap: Add G to your mana pool");
 		hand2.addAbility("Play this card");
+		hand2.addManaAbility("G");
 		hand2.setImage("Forest.jpg");
 		Zone.HAND.addCard(hand2, 0);
 		
@@ -51,6 +55,8 @@ public class MTGDuelDecks {
 		
 		Card BF1 = new Card("BF1");
 		BF1.setImage("Forest.jpg");
+		BF1.addAbility("Tap: Add G to your mana pool");
+		BF1.addManaAbility("G");
 		Zone.BATTLE_FIELD.addCard(BF1, 0);
 		
 		
@@ -69,7 +75,9 @@ public class MTGDuelDecks {
 		
 
 		Card hand1 = new Card("Hand11");
+		hand1.addAbility("Tap: Add R to your mana pool");
 		hand1.addAbility("Play this card");
+		hand1.addManaAbility("R");
 		hand1.setImage("Mountain.jpg");
 		Zone.HAND1.addCard(hand1, 0);
 		Zone.HAND1.addCard(new Card("Hand2"), 0);
@@ -81,6 +89,8 @@ public class MTGDuelDecks {
 		
 		Card BF2 = new Card("BF2");
 		BF2.setImage("Mountain.jpg");
+		BF2.addAbility("Tap: Add R to your mana pool");
+		BF2.addManaAbility("R");
 		Zone.BATTLE_FIELD1.addCard(BF2, 0);
 		
 		
