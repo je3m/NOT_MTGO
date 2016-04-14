@@ -58,8 +58,9 @@ public class Backend {
 	 * @param c the card whose ability is being activated
 	 * @param z the zone the card is leaving
 	 * @param i the index the card currently occupies in that zone
+	 * @param abInd the index of the card's ability that is being activated
 	 */
-	public static void activateAbility(Card c, Zone z, int i) {
+	public static void activateAbility(Card c, Zone z, int i, int abInd) {
 		z.remove(i);
 
 		if(z == Zone.HAND)
@@ -67,6 +68,9 @@ public class Backend {
 
 		if(z == Zone.HAND1)
 			addCard(Zone.BATTLE_FIELD1, c);
+		
+		
+		
 
 	}
 
@@ -261,31 +265,43 @@ public class Backend {
 			switch (strToken.nextToken()) {
 			case "W":
 				ManaPool.WHITE1.add(1);
+				break;
 			case "U":
 				ManaPool.BLUE1.add(1);
+				break;
 			case "B":
 				ManaPool.BLACK1.add(1);
+				break;
 			case "R":
 				ManaPool.RED1.add(1);
+				break;
 			case "G":
 				ManaPool.GREEN1.add(1);
+				break;
 			case "1":
 				ManaPool.COLORLESS1.add(1);
+				break;
 			}
 		} else {
 			switch (strToken.nextToken()) {
 			case "W":
 				ManaPool.WHITE2.add(1);
+				break;
 			case "U":
 				ManaPool.BLUE2.add(1);
+				break;
 			case "B":
 				ManaPool.BLACK2.add(1);
+				break;
 			case "R":
 				ManaPool.RED2.add(1);
+				break;
 			case "G":
 				ManaPool.GREEN2.add(1);
+				break;
 			case "1":
 				ManaPool.COLORLESS2.add(1);
+				break;
 			}
 		}
 	}
