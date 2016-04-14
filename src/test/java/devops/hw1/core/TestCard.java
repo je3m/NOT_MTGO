@@ -1,8 +1,11 @@
 package devops.hw1.core;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.util.regex.*;
+import java.util.regex.PatternSyntaxException;
 
 import org.junit.Test;
 
@@ -12,6 +15,13 @@ public class TestCard {
 	public void makeCardGetName(){
 		Card c = new Card("Storm Crow");
 		assertEquals(c.getName(), "Storm Crow");
+	}
+
+	@Test
+	public void testTapTwice(){
+		Card c = new Card("Scornful Egotist");
+		assert(c.tap());
+		assert(!c.tap());
 	}
 
 	@Test
@@ -33,20 +43,20 @@ public class TestCard {
 		assert(c.getAbilities().equals(s));
 
 	}
-	
+
 	@Test
 	public void testTap1(){
 		Card c = new Card("Forest");
 		assertFalse(c.getTapped());
 	}
-	
+
 	@Test
 	public void testTap2(){
 		Card c = new Card("Forest");
 		c.tap();
 		assertTrue(c.getTapped());
 	}
-	
+
 	@Test
 	public void testTap3(){
 		Card c = new Card("Forest");
@@ -54,14 +64,14 @@ public class TestCard {
 		c.untap();
 		assertFalse(c.getTapped());
 	}
-	
+
 	@Test
 	public void testManaAbility(){
 		Card c = new Card("Forest");
 		c.addManaAbility("T:G");
 		assertEquals(c.getManaAbility(), "T:G");
 	}
-	
+
 	@Test
 	public void testColor(){
 		Card c;
@@ -73,21 +83,21 @@ public class TestCard {
 		c = new Card("One with Nothing");
 		c.setColor("B");
 		assertEquals(c.getColor(), "B");
-		
+
 		try {
 			c.setColor("O");
 			fail("Expected PatternSyntaxException");
 		} catch (PatternSyntaxException e) {
 			assertEquals(e.getDescription(), "Card One with Nothing: O is not a valid color");
 		}
-		
+
 		try {
 			c.setColor("BW");
 			fail("Expected PatternSyntaxException");
 		} catch (PatternSyntaxException e) {
 			assertEquals(e.getDescription(), "Card One with Nothing: BW is not a valid color");
 		}
-		
+
 		try {
 			c.setColor("BB");
 			fail("Expected PatternSyntaxException");
@@ -106,8 +116,8 @@ public class TestCard {
 		c = new Card("Scornful Egotist");
 		c.setImage("res/scornful_egotist.jpg");
 		assertEquals(c.getImage(), "res/scornful_egotist.jpg");
-		
-		
+
+
 		try{
 			c.setImage("saeiwqrowd");
 			fail("Expected IllegalArgumentException");
@@ -127,17 +137,17 @@ public class TestCard {
 		c = new Card("Scornful Egotist");
 		c.setCost("7U");
 		assertEquals(c.getCost(), "7U");
-		
+
 		c.setCost("7GG");
 		assertEquals(c.getCost(), "7GG");
-		
+
 		try {
 			c.setCost("G2");
 			fail("Expected PatternSyntaxException");
 		} catch (PatternSyntaxException e) {
 			assertEquals(e.getDescription(), "Card Scornful Egotist: G2 is not a valid mana cost");
 		}
-		
+
 		try {
 			c.setCost("GW");
 			fail("Expected PatternSyntaxException");
@@ -192,7 +202,7 @@ public class TestCard {
 		c = new Card("Scornful Egotist");
 		c.setType("Creature- Human Wizard");
 		assertEquals(c.getType(), "Creature- Human Wizard");
-		
+
 		try {
 			c.setType("ewonddl");
 			fail("Expected PatternSyntaxException");
