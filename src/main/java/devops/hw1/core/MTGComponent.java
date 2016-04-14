@@ -64,6 +64,7 @@ public class MTGComponent extends JComponent{
 	
 	private int windowX;
 	private int windowY;
+	private Backend bkd;
 	private ArrayList<GUICard> handGUICards1;
 	private DispGUICard dispGUICard1;
 	private ArrayList<GUICard> handGUICards2;
@@ -76,7 +77,7 @@ public class MTGComponent extends JComponent{
 	 * @param x width of the usable space in the JFrame that the component is placed in
 	 * @param y height of the usable space in the JFrame that the component is placed in
 	 */
-	public MTGComponent(int x, int y){
+	public MTGComponent(int x, int y, Backend bkd){
 		if(x < 0) {
 			throw new IllegalArgumentException("MTGComponent: " + x + " is not a valid window width");
 		}
@@ -86,12 +87,23 @@ public class MTGComponent extends JComponent{
 			throw new IllegalArgumentException("MTGComponent: " + y + " is not a valid window height");
 		}
 		this.windowY = y;
+		
+		this.bkd= bkd;
 		this.handGUICards1 = new ArrayList<GUICard>();
 		this.dispGUICard1 = null;
 		this.handGUICards2 = new ArrayList<GUICard>();
 		this.dispGUICard2 = null;
 		this.battleGUICards1 = new ArrayList<GUICard>();
 		this.battleGUICards2 = new ArrayList<GUICard>();
+	}
+	
+	
+	/**
+	 * Get the Backend object that stores the game state
+	 * @return Backend the game state
+	 */
+	public Backend getBackend() {
+		return bkd;
 	}
 	
 	/**

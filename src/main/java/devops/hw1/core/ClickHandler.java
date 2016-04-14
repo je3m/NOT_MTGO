@@ -50,7 +50,12 @@ public class ClickHandler implements MouseListener {
 			} else {
 				for(int i = 0; i < MTGComp.getDispGUICard1().getAbilityBoxes().length; i++){
 					if(MTGComp.getDispGUICard1().getAbilityBoxes()[i].contains(MTGComp.getMousePosition())){
-						Backend.activateAbility(MTGComp.getDispGUICard1().getCard(), MTGComp.getDispGUICard1().getZone(), MTGComp.getDispGUICard1().getIndex(), i);
+						if(MTGComp.getDispGUICard1().getCard().getManaAbility() != null && i==0) {
+							MTGComp.getBackend().activateManaAbility(MTGComp.getDispGUICard1().getCard(), true);
+						} else {
+							Backend.activateAbility(MTGComp.getDispGUICard1().getCard(), MTGComp.getDispGUICard1().getZone(), MTGComp.getDispGUICard1().getIndex(), i);
+						}
+						
 						MTGComp.setDispGUICard1(null);
 						MTGComp.repaint();
 						break;
@@ -71,7 +76,11 @@ public class ClickHandler implements MouseListener {
 			} else {
 				for(int i = 0; i < MTGComp.getDispGUICard2().getAbilityBoxes().length; i++){
 					if(MTGComp.getDispGUICard2().getAbilityBoxes()[i].contains(MTGComp.getMousePosition())){
-						Backend.activateAbility(MTGComp.getDispGUICard2().getCard(), MTGComp.getDispGUICard2().getZone(), MTGComp.getDispGUICard2().getIndex(), i);
+						if(MTGComp.getDispGUICard2().getCard().getManaAbility() != null && i==0) {
+							MTGComp.getBackend().activateManaAbility(MTGComp.getDispGUICard2().getCard(), false);
+						} else {
+							Backend.activateAbility(MTGComp.getDispGUICard2().getCard(), MTGComp.getDispGUICard2().getZone(), MTGComp.getDispGUICard2().getIndex(), i);
+						}
 						MTGComp.setDispGUICard2(null);
 						MTGComp.repaint();
 						break;
