@@ -69,7 +69,8 @@ public enum ManaPool {
 	}
 
 	public static ManaPool getPool(String color, boolean player){
-		return ManaPool.WHITE1;
-
+		if (player)
+			return ManaPool.WHITE1;
+		return ManaPool.WHITE2;
 	}
 }
