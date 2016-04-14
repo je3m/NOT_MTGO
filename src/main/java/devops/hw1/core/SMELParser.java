@@ -5,7 +5,7 @@ public class SMELParser {
 	String cost;
 	
 	public SMELParser(String smel) {
-		if (smel == "")
+		if (smel == "" || smel == null)
 			return;
 		
 		int start = smel.indexOf('{') + 1;
