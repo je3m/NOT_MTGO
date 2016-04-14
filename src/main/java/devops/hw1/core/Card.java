@@ -2,7 +2,7 @@ package devops.hw1.core;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.regex.*;
+import java.util.regex.PatternSyntaxException;
 
 public class Card {
 	private String name;
@@ -26,7 +26,7 @@ public class Card {
 	}
 
 	//!# add more constructors
-	
+
 	/**
 	 * Adds ability to card
 	 * TODO: come up with a good way to represent abilities (Mckee)
@@ -141,8 +141,8 @@ public class Card {
 		if(!test.exists()) {
 			throw new IllegalArgumentException("Card " + this.name + ": " + string + " is not a valid file name");
 		}
-		
-		
+
+
 		this.image = string;
 
 	}
@@ -220,9 +220,14 @@ public class Card {
 
 	/**
 	 * Taps a card
+	 * @return true if the card was previously untapped, false otherwise
 	 */
-	public void tap() {
+	public boolean tap() {
+		if (this.tapped)
+			return false;
+
 		this.tapped = true;
+		return true;
 	}
 
 	/**
