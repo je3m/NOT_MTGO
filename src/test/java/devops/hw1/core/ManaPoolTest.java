@@ -1,6 +1,7 @@
 package devops.hw1.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -50,6 +51,13 @@ public class ManaPoolTest {
 		assertEquals(ManaPool.WHITE1, ManaPool.getPool('w', true));
 		assertEquals(ManaPool.WHITE2, ManaPool.getPool('w', false));
 		assertEquals(ManaPool.RED2, ManaPool.getPool('r', false));
+
+		try{
+			ManaPool.getPool('o', true);
+			fail("no exception thrown");
+		} catch (IllegalArgumentException e){
+			assertEquals(e.getMessage(), "invalid color 'o'");
+		}
 	}
 
 	@Test
