@@ -11,7 +11,12 @@ public class SMELParserTest {
 		String smel = "COST {7U}";
 		SMELParser parse = new SMELParser(smel);
 		
-		assert(parse.getCost().equals("7U"));
+		assertEquals(parse.getCost(), "7U");
+		
+		smel = "COST {B}";
+		parse = new SMELParser(smel);
+		
+		assertEquals("B", parse.getCost());
 	}
 
 }
