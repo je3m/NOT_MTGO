@@ -1,8 +1,6 @@
 package devops.hw1.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.easymock.EasyMock;
 import org.junit.Test;
@@ -28,21 +26,25 @@ public class ZoneTest {
 	@Test
 	public void testAddToZone(){
 		this.clearZones();
-		boolean nopass = false;
+		
 		Card c = EasyMock.niceMock(Card.class);
-	
+		
+		Zone.HAND.addCard(c, 0);
+		
+		assert(Zone.HAND.getCards()[0] == c);
+		
 		try {
 			Zone.HAND.addCard(c, -1);
-			nopass = true;
+			fail("did not throw error");
 		} catch (IndexOutOfBoundsException e){
 			assertEquals(e.getMessage(), "Index -1 is not valid for the HAND zone");
 		}
 		
-		assertFalse(nopass);
+		Zone.HAND.addCard(c, Zone.HAND.getSize());
 		try {
-			Zone.BATTLE_FIELD.addCard(c, 10000);
+			Zone.HAND.addCard(c, Zone.HAND.getSize() + 1);
 		} catch (IndexOutOfBoundsException e) {
-			assertEquals(e.getMessage(), "Index 10000 is not valid for the BATTLE_FIELD zone");
+			assertEquals(e.getMessage(), "Index 3 is not valid for the HAND zone");
 		}
 	}
 	
