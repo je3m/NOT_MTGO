@@ -13,7 +13,7 @@ public class Backend {
 	private Boolean priority;
 	private Boolean passed;
 	private Stack<ItemOnStack> stack;
-	
+
 	/**
 	 * Constructs a backend object
 	 */
@@ -24,7 +24,7 @@ public class Backend {
 		this.passed = false;
 		this.stack = new Stack<ItemOnStack>();
 	}
-	
+
 	//!# Eliminate because irrelevant? otherwise ADD ERROR-HANDLING FOR INDEX
 	/**
 	 * Handles logic for moving a card when it's clicked (prototype code)
@@ -112,9 +112,9 @@ public class Backend {
 		} catch (IndexOutOfBoundsException e) {
 			throw new IndexOutOfBoundsException("Backend: " + e.getMessage());
 		}
-		
+
 	}
-	
+
 
 	/**
 	 * Gets the current phase
@@ -239,7 +239,7 @@ public class Backend {
 			}
 			this.passed = false;
 		} else if(this.passed){
-			changePhase();
+			this.changePhase();
 			this.passed = true;
 		} else {
 			this.passed = true;
@@ -260,31 +260,43 @@ public class Backend {
 			switch (strToken.nextToken()) {
 			case "W":
 				ManaPool.WHITE1.add(1);
+				break;
 			case "U":
 				ManaPool.BLUE1.add(1);
+				break;
 			case "B":
 				ManaPool.BLACK1.add(1);
+				break;
 			case "R":
 				ManaPool.RED1.add(1);
+				break;
 			case "G":
 				ManaPool.GREEN1.add(1);
+				break;
 			case "1":
 				ManaPool.COLORLESS1.add(1);
+				break;
 			}
 		} else {
 			switch (strToken.nextToken()) {
 			case "W":
 				ManaPool.WHITE2.add(1);
+				break;
 			case "U":
 				ManaPool.BLUE2.add(1);
+				break;
 			case "B":
 				ManaPool.BLACK2.add(1);
+				break;
 			case "R":
 				ManaPool.RED2.add(1);
+				break;
 			case "G":
 				ManaPool.GREEN2.add(1);
+				break;
 			case "1":
 				ManaPool.COLORLESS2.add(1);
+				break;
 			}
 		}
 	}
@@ -305,15 +317,15 @@ public class Backend {
 		int greenCost = 0;
 		int genericCost = 0;
 		int i = 0;
-		
+
 		while(isInteger(c.getCost().substring(i, i+1))){
 			i++;
 		}
-		
+
 		if(i != 0){
 			genericCost = Integer.parseInt(c.getCost().substring(0,i));
 		}
-		
+
 		for(int g = i;g < c.getCost().length(); g++){
 			switch (c.getCost().substring(g, g+1)){
 			case "W":
@@ -343,22 +355,22 @@ public class Backend {
 					(redCost <= ManaPool.RED1.getAmount()) &&
 					(greenCost <= ManaPool.GREEN1.getAmount()) &&
 					((whiteCost + blueCost + blackCost + redCost + greenCost + genericCost)<=
-							(ManaPool.WHITE1.getAmount() + ManaPool.BLUE1.getAmount() + ManaPool.BLACK1.getAmount() + ManaPool.RED1.getAmount() + ManaPool.GREEN1.getAmount() + ManaPool.COLORLESS1.getAmount()))){
+					(ManaPool.WHITE1.getAmount() + ManaPool.BLUE1.getAmount() + ManaPool.BLACK1.getAmount() + ManaPool.RED1.getAmount() + ManaPool.GREEN1.getAmount() + ManaPool.COLORLESS1.getAmount()))){
 				ManaPool.WHITE1.remove(whiteCost);
 				ManaPool.BLUE1.remove(blueCost);
 				ManaPool.BLACK1.remove(blackCost);
 				ManaPool.RED1.remove(redCost);
 				ManaPool.GREEN1.remove(greenCost);
-				
-				genericCost = handleGeneric(ManaPool.COLORLESS1, genericCost);
-				genericCost = handleGeneric(ManaPool.BLUE1, genericCost);
-				genericCost = handleGeneric(ManaPool.BLACK1, genericCost);
-				genericCost = handleGeneric(ManaPool.WHITE1, genericCost);
-				genericCost = handleGeneric(ManaPool.RED1, genericCost);
-				genericCost = handleGeneric(ManaPool.GREEN1, genericCost);
-				
-				stack.push(new ItemOnStack(c, true));
-				
+
+				genericCost = this.handleGeneric(ManaPool.COLORLESS1, genericCost);
+				genericCost = this.handleGeneric(ManaPool.BLUE1, genericCost);
+				genericCost = this.handleGeneric(ManaPool.BLACK1, genericCost);
+				genericCost = this.handleGeneric(ManaPool.WHITE1, genericCost);
+				genericCost = this.handleGeneric(ManaPool.RED1, genericCost);
+				genericCost = this.handleGeneric(ManaPool.GREEN1, genericCost);
+
+				this.stack.push(new ItemOnStack(c, true));
+
 				zone.remove(index);
 				this.passed = false;
 				return true;
@@ -372,22 +384,22 @@ public class Backend {
 					(redCost <= ManaPool.RED2.getAmount()) &&
 					(greenCost <= ManaPool.GREEN2.getAmount()) &&
 					((whiteCost + blueCost + blackCost + redCost + greenCost + genericCost)<=
-							(ManaPool.WHITE2.getAmount() + ManaPool.BLUE2.getAmount() + ManaPool.BLACK2.getAmount() + ManaPool.RED2.getAmount() + ManaPool.GREEN2.getAmount() + ManaPool.COLORLESS2.getAmount()))){
+					(ManaPool.WHITE2.getAmount() + ManaPool.BLUE2.getAmount() + ManaPool.BLACK2.getAmount() + ManaPool.RED2.getAmount() + ManaPool.GREEN2.getAmount() + ManaPool.COLORLESS2.getAmount()))){
 				ManaPool.WHITE2.remove(whiteCost);
 				ManaPool.BLUE2.remove(blueCost);
 				ManaPool.BLACK2.remove(blackCost);
 				ManaPool.RED2.remove(redCost);
 				ManaPool.GREEN2.remove(greenCost);
-				
-				genericCost = handleGeneric(ManaPool.COLORLESS2, genericCost);
-				genericCost = handleGeneric(ManaPool.BLUE2, genericCost);
-				genericCost = handleGeneric(ManaPool.BLACK2, genericCost);
-				genericCost = handleGeneric(ManaPool.WHITE2, genericCost);
-				genericCost = handleGeneric(ManaPool.GREEN2, genericCost);
-				genericCost = handleGeneric(ManaPool.RED2, genericCost);
-				
-				stack.push(new ItemOnStack(c, false));
-				
+
+				genericCost = this.handleGeneric(ManaPool.COLORLESS2, genericCost);
+				genericCost = this.handleGeneric(ManaPool.BLUE2, genericCost);
+				genericCost = this.handleGeneric(ManaPool.BLACK2, genericCost);
+				genericCost = this.handleGeneric(ManaPool.WHITE2, genericCost);
+				genericCost = this.handleGeneric(ManaPool.GREEN2, genericCost);
+				genericCost = this.handleGeneric(ManaPool.RED2, genericCost);
+
+				this.stack.push(new ItemOnStack(c, false));
+
 				zone.remove(index);
 				this.passed = false;
 				return true;
@@ -396,7 +408,7 @@ public class Backend {
 			}
 		}
 	}
-	
+
 	/**
 	 * Handles paying generic costs with mana from a specific mana pool
 	 * @param manaPool mana pool to play mana with
@@ -420,13 +432,13 @@ public class Backend {
 			throw new IllegalArgumentException(genericCost + " is not a valid amount of generic mana cost.");
 		}
 	}
-	
+
 	/**
 	 * Determines if a string is an integer
 	 * @param s string to check
 	 * @return true if the string is an integer
 	 */
 	public static boolean isInteger(String s) {
-	    return s.matches("\\d+");
+		return s.matches("\\d+");
 	}
 }
