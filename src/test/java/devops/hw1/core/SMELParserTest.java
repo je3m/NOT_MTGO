@@ -28,6 +28,14 @@ public class SMELParserTest {
 			assertEquals(e.getMessage(), "SMEL: no cost");
 		}
 		
+		parse = new SMELParser(null);
+		try{
+			parse.getCost();
+			fail("expected exception");
+		} catch (RuntimeException e){
+			assertEquals(e.getMessage(), "SMEL: no cost");
+		}
+		
 		
 		
 	}
