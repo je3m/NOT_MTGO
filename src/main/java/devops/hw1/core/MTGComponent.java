@@ -193,6 +193,7 @@ public class MTGComponent extends JComponent{
 		drawCountedZones2(graphics2);
 		drawManaPools(graphics2);
 		drawPhases(graphics2);
+		drawPassButtons(graphics2);
 		generateGUICards(this.handGUICards1, Zone.HAND, BASE_HAND_CARDS_POSITION);
 		generateGUICards(this.handGUICards2, Zone.HAND1, BASE_HAND1_CARDS_POSITION);
 		generateGUICards(this.battleGUICards1, Zone.BATTLE_FIELD, BASE_BATTLEFIELD_CARDS_POSITION);
@@ -282,6 +283,19 @@ public class MTGComponent extends JComponent{
 		
 	}
 	
+	/**
+	 * Draws the pass buttons for players 1 and 2
+	 * @param graphics2
+	 */
+	private void drawPassButtons(Graphics2D graphics2) {
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(windowY*PASS_BUTTONS_MAX_FONT_HEIGHT), (int)(windowX*PASS_BUTTONS_MAX_FONT_WIDTH))));
+		graphics2.setColor(Color.RED);
+		
+		graphics2.drawString("PASS", (int)(windowX*PASS_BUTTON_X_POSITION), (int)(windowY*PASS_BUTTON_Y_POSITION + windowY*PASS_BUTTONS_ADJUSTMENT*PASS_BUTTONS_HEIGHT));
+		graphics2.drawString("PASS", (int)(windowX*PASS_BUTTON1_X_POSITION), (int)(windowY*PASS_BUTTON1_Y_POSITION + windowY*PASS_BUTTONS_ADJUSTMENT*PASS_BUTTONS_HEIGHT));
+		
+		graphics2.setColor(Color.BLACK);
+	}
 	
 	/**
 	 * Draws counted library, graveyard, and exile for player 1
