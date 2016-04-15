@@ -172,7 +172,7 @@ public class Backend {
 	 */
 	public void passPriority(boolean player) {
 		if(this.priority == player) {
-			this.priority = !this.priority;
+			
 			if (this.passed && !this.stack.empty()) {
 				ItemOnStack item = this.stack.pop();
 				if(item.getPlayer()){
@@ -181,11 +181,14 @@ public class Backend {
 					Zone.BATTLE_FIELD1.addCard(item.getCard(), 0);
 				}
 				this.passed = false;
+				this.priority = this.turn;
 			} else if(this.passed){
 				this.changePhase();
 				this.passed = false;
+				this.priority= this.turn;
 			} else {
 				this.passed = true;
+				this.priority = !this.priority;
 			}
 		}
 	}

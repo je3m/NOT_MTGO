@@ -1301,9 +1301,11 @@ public class BackendTest {
 
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true));
 
+
 		bknd.passPriority(true);
 		bknd.passPriority(false);
 		bknd.passPriority(true);
+		
 
 		assertEquals(bknd.getPhase(), Phase.UNTAP1);
 		assertFalse(bknd.getPriority());
