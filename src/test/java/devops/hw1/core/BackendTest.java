@@ -142,9 +142,11 @@ public class BackendTest {
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.replay(c);
 
-		for (int i = 0; i < 13; i++)
+		for (int i = 0; i < 31; i++)
 			bknd.passPriority();
 
+		System.out.println("Priority: " + bknd.getPriority() + ", Phase: " + bknd.getPhase() + ", Turn: " + bknd.getTurn());
+		
 		ManaPool.BLUE2.add(1);
 		ManaPool.COLORLESS2.add(1);
 		bknd.addCard(Zone.HAND1, c, 0);
