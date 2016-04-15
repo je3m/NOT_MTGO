@@ -75,7 +75,7 @@ public enum ManaPool {
 	 * @return ManaPool of player
 	 */
 	public static ManaPool getPool(char color, boolean player){
-		switch(color){
+		switch(Character.toLowerCase(color)){
 		case 'w':
 			if (player)
 				return ManaPool.WHITE1;
