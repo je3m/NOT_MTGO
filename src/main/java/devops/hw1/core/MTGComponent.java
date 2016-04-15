@@ -453,6 +453,23 @@ public class MTGComponent extends JComponent{
 	public DispGUICard getDispGUICard2() {
 		return dispGUICard2;
 	}
+	
+	/**
+	 * Gets the Rectangle for the pass button for the first player
+	 * @return the rectangle enclosing the first player's pass button
+	 */
+	public Rectangle getPassButton1() {
+		return passButton1;
+	}
+	
+	/**
+	 * Gets the Rectangle for the pass button for the second player
+	 * @return the rectangle enclosing the second player's pass button
+	 */
+	public Rectangle getPassButton2() {
+		return passButton2;
+	}
+	
 
 	/**
 	 * Set the current Displayed GUI card for the first player

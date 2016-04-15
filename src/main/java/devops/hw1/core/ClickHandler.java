@@ -37,6 +37,9 @@ public class ClickHandler implements MouseListener {
 		checkZoneForCardClick(MTGComp.getBattleGUICards2(), Zone.BATTLE_FIELD1);
 		checkDispCardClick1();
 		checkDispCardClick2();
+		checkPassButtonClick1();
+		checkPassButtonClick2();
+		
 	}
 
 	/**
@@ -106,6 +109,25 @@ public class ClickHandler implements MouseListener {
 				}
 				MTGComp.repaint();
 			}
+		}
+	}
+	
+	/**
+	 * Checks to see if player 1's pass button is clicked and if so tells the backend to try to pass priority from that player
+	 */
+	public void checkPassButtonClick1() {
+		if(MTGComp.getPassButton1().contains(MTGComp.getMousePosition())) {
+			MTGComp.getBackend().passPriority();//TODO make this pass in which player is trying to pass priority
+		}
+	}
+	
+	/**
+	 * Checks to see if player 2's pass button is clicked and if so tells the backend to try to pass priority from that player
+	 */
+	public void checkPassButtonClick2() {
+		if(MTGComp.getPassButton2().contains(MTGComp.getMousePosition())) {
+
+			MTGComp.getBackend().passPriority();//TODO make this pass in which player is trying to pass priority
 		}
 	}
 	
