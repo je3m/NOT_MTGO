@@ -117,7 +117,7 @@ public class ClickHandler implements MouseListener {
 	 */
 	public void checkPassButtonClick1() {
 		if(MTGComp.getPassButton1().contains(MTGComp.getMousePosition())) {
-			MTGComp.getBackend().passPriority();//TODO make this pass in which player is trying to pass priority
+			MTGComp.getBackend().passPriority(true);//TODO make this pass in which player is trying to pass priority
 			MTGComp.repaint();
 		}
 	}
@@ -128,7 +128,7 @@ public class ClickHandler implements MouseListener {
 	public void checkPassButtonClick2() {
 		if(MTGComp.getPassButton2().contains(MTGComp.getMousePosition())) {
 
-			MTGComp.getBackend().passPriority();//TODO make this pass in which player is trying to pass priority
+			MTGComp.getBackend().passPriority(false);//TODO make this pass in which player is trying to pass priority
 			MTGComp.repaint();
 		}
 	}

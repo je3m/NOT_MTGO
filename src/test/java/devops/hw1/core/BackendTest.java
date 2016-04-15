@@ -43,8 +43,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
@@ -143,10 +143,8 @@ public class BackendTest {
 		EasyMock.replay(c);
 
 		for (int i = 0; i < 31; i++)
-			bknd.passPriority();
+			bknd.passPriority(((i % 2) ==0)?(true):(false));
 
-		System.out.println("Priority: " + bknd.getPriority() + ", Phase: " + bknd.getPhase() + ", Turn: " + bknd.getTurn());
-		
 		ManaPool.BLUE2.add(1);
 		ManaPool.COLORLESS2.add(1);
 		bknd.addCard(Zone.HAND1, c, 0);
@@ -160,8 +158,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND1),bknd.getZoneContents(Zone.HAND));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD1),bknd.getZoneContents(Zone.HAND));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(false);
+		bknd.passPriority(true);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND1),bknd.getZoneContents(Zone.HAND));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD1)[0]));
@@ -257,8 +255,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
@@ -308,8 +306,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
@@ -360,8 +358,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
@@ -412,8 +410,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
@@ -464,8 +462,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
@@ -520,8 +518,8 @@ public class BackendTest {
 		assertEquals(0, ManaPool.RED1.getAmount());
 		assertEquals(0, ManaPool.GREEN1.getAmount());
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
@@ -574,8 +572,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
@@ -638,8 +636,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
@@ -686,8 +684,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
@@ -734,8 +732,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
@@ -782,8 +780,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
@@ -874,8 +872,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
@@ -1195,22 +1193,22 @@ public class BackendTest {
 	@Test
 	public void testBasicPriorityPassing2(){
 		Backend bknd = new Backend();
-		bknd.passPriority();
+		bknd.passPriority(true);
 		assertFalse(bknd.getPriority());
 	}
 
 	@Test
 	public void testBasicPriorityPassing3(){
 		Backend bknd = new Backend();
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 		assertTrue(bknd.getPriority());
 	}
 
 	@Test
 	public void testComplexPriorityPassing1(){
 		Backend bknd = new Backend();
-		bknd.passPriority();
+		bknd.passPriority(true);
 		assertEquals(bknd.getPhase(), Phase.UNTAP1);
 		assertFalse(bknd.getPriority());
 	}
@@ -1218,8 +1216,8 @@ public class BackendTest {
 	@Test
 	public void testComplexPriorityPassing2(){
 		Backend bknd = new Backend();
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 		assertEquals(bknd.getPhase(), Phase.UPKEEP1);
 		assertTrue(bknd.getPriority());
 	}
@@ -1255,8 +1253,8 @@ public class BackendTest {
 
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertEquals(bknd.getPhase(), Phase.UNTAP1);
 		assertTrue(bknd.getPriority());
@@ -1303,9 +1301,9 @@ public class BackendTest {
 
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true));
 
-		bknd.passPriority();
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
+		bknd.passPriority(true);
 
 		assertEquals(bknd.getPhase(), Phase.UNTAP1);
 		assertFalse(bknd.getPriority());
@@ -1352,10 +1350,10 @@ public class BackendTest {
 
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true));
 
-		bknd.passPriority();
-		bknd.passPriority();
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertEquals(bknd.getPhase(), Phase.UPKEEP1);
 		assertTrue(bknd.getPriority());
@@ -1400,7 +1398,7 @@ public class BackendTest {
 		c.setType("Creature- bird");
 		c.setColor("1U");
 
-		bknd.passPriority();
+		bknd.passPriority(true);
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true));
 
 		assertEquals(bknd.getPhase(), Phase.UNTAP1);
@@ -2090,8 +2088,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
-		bknd.passPriority();
-		bknd.passPriority();
+		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
