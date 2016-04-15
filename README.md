@@ -73,3 +73,9 @@ Chris
  - mana abilities
  - phases
  - stack
+
+Scott
+ -Added display of mana abilities on cards
+ -Added display of mana pools on GUI
+ -Added display of the phases and which phase/turn the game is currently in
+ -Added button for each player to pass priority 

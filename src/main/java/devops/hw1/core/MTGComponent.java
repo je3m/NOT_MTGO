@@ -52,9 +52,29 @@ public class MTGComponent extends JComponent{
 	private static final int ABILITY_FONT_SIZE = 25;
 	private static final double ABILITY_STRING_LEFT_BUFFER = 0.1;
 	private static final double ABILITY_STRING_Y_CENTER_SHIFT = 0.05;
+	private static final double MANA_POOL_WIDTH = 0.4;
+	private static final double MANA_POOL_HEIGHT = 0.1;
+	private static final double MANA_POOL_COLOR_WIDTH = MANA_POOL_WIDTH/6.0;
+	private static final double MANA_POOLS_X_POSITION = 0.1;
+	private static final double MANA_POOLS_Y_POSITION = 0.8;
+	private static final double MANA_POOLS_MAX_FONT_HEIGHT = 0.06;
+	private static final double MANA_POOLS_MAX_FONT_WIDTH = 0.06;
+	private static final double MANA_POOLS_ADJUSTMENT= 0.5;
+	private static final double PHASES_WIDTH = 0.8;
+	private static final double PHASES_HEIGHT = 0.1;
+	private static final double PHASE_WIDTH = PHASES_WIDTH/12.0;
+	private static final double PHASES_X_POSITION = 0.1;
+	private static final double PHASES_Y_POSITION = 0.9;
+	private static final double PHASES_MAX_FONT_HEIGHT = 0.02;
+	private static final double PHASES_MAX_FONT_WIDTH = 0.02;
+	private static final double PHASES_ADJUSTMENT = 0.5;
+	
+	
+	
 	
 	private int windowX;
 	private int windowY;
+	private Backend bkd;
 	private ArrayList<GUICard> handGUICards1;
 	private DispGUICard dispGUICard1;
 	private ArrayList<GUICard> handGUICards2;
@@ -67,7 +87,7 @@ public class MTGComponent extends JComponent{
 	 * @param x width of the usable space in the JFrame that the component is placed in
 	 * @param y height of the usable space in the JFrame that the component is placed in
 	 */
-	public MTGComponent(int x, int y){
+	public MTGComponent(int x, int y, Backend bkd){
 		if(x < 0) {
 			throw new IllegalArgumentException("MTGComponent: " + x + " is not a valid window width");
 		}
@@ -77,12 +97,23 @@ public class MTGComponent extends JComponent{
 			throw new IllegalArgumentException("MTGComponent: " + y + " is not a valid window height");
 		}
 		this.windowY = y;
+		
+		this.bkd= bkd;
 		this.handGUICards1 = new ArrayList<GUICard>();
 		this.dispGUICard1 = null;
 		this.handGUICards2 = new ArrayList<GUICard>();
 		this.dispGUICard2 = null;
 		this.battleGUICards1 = new ArrayList<GUICard>();
 		this.battleGUICards2 = new ArrayList<GUICard>();
+	}
+	
+	
+	/**
+	 * Get the Backend object that stores the game state
+	 * @return Backend the game state
+	 */
+	public Backend getBackend() {
+		return bkd;
 	}
 	
 	/**
@@ -146,6 +177,8 @@ public class MTGComponent extends JComponent{
 		drawFormat(graphics2);
 		drawCountedZones1(graphics2);
 		drawCountedZones2(graphics2);
+		drawManaPools(graphics2);
+		drawPhases(graphics2);
 		generateGUICards(this.handGUICards1, Zone.HAND, BASE_HAND_CARDS_POSITION);
 		generateGUICards(this.handGUICards2, Zone.HAND1, BASE_HAND1_CARDS_POSITION);
 		generateGUICards(this.battleGUICards1, Zone.BATTLE_FIELD, BASE_BATTLEFIELD_CARDS_POSITION);
@@ -167,6 +200,14 @@ public class MTGComponent extends JComponent{
 		graphics2.setColor(Color.BLACK);
 		graphics2.drawLine((int)(windowX*CENTER_LINE_X_POSITION), CENTER_LINE_Y_POSITION, (int)(windowX*CENTER_LINE_X_POSITION), windowY);
 		
+		for(int i =0; i < 12; i++) {
+			graphics2.draw(new Rectangle((int) (windowX*MANA_POOLS_X_POSITION + i*windowX*MANA_POOL_COLOR_WIDTH), (int)(windowY*MANA_POOLS_Y_POSITION), (int)(windowX*MANA_POOL_COLOR_WIDTH), (int)(windowY*MANA_POOL_HEIGHT)));
+		}
+		
+		for(int i =0; i < 12; i++) {
+			graphics2.draw(new Rectangle((int) (windowX*PHASES_X_POSITION + i*windowX*PHASE_WIDTH), (int)(windowY*PHASES_Y_POSITION), (int)(windowX*PHASE_WIDTH), (int)(windowY*PHASES_HEIGHT)));
+		}
+		
 		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,HAND_Y_POSITION,(int)(windowX*SIDEBAR_WIDTH), (int)(windowY*HAND_HEIGHT)));
 		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
 		graphics2.draw(new Rectangle((int)(SIDEBAR1_X_POSITION + windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2) + SIDEBAR_ADJUSTMENT),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
@@ -177,6 +218,49 @@ public class MTGComponent extends JComponent{
 		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX + windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
 		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX),(int)(windowY*(HAND_HEIGHT + EXILE_HEIGHT)),(int)(windowX*SIDEBAR_WIDTH),(int)(windowY*LIBRARY_HEIGHT)));
 	}
+	
+	
+	/**
+	 * Draws the mana pools of various colors for players 1 and 2
+	 * @param graphics2
+	 */
+	private void drawManaPools(Graphics2D graphics2) {
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(windowY*MANA_POOLS_MAX_FONT_HEIGHT), (int)(windowX*MANA_POOLS_MAX_FONT_WIDTH))));
+		
+		String[] labels = {"W", "U", "B","R","G","C", "W","U","B","R","G","C"};
+		ManaPool[] pools = ManaPool.values();
+		for(int p = 0; p < pools.length; p++) {
+				graphics2.drawString(labels[p] + ":" + String.valueOf(pools[p].getAmount()), 
+						(int)(windowX*MANA_POOLS_X_POSITION + p*windowX*MANA_POOL_COLOR_WIDTH), (int)(windowY*MANA_POOLS_Y_POSITION + windowY*MANA_POOLS_ADJUSTMENT*MANA_POOL_HEIGHT));
+		}
+		
+	}
+	
+	/**
+	 * Draws the phase labels and colors one to indicate which phase the game is in and on which player's turn
+	 * @param graphics2
+	 */
+	private void drawPhases(Graphics2D graphics2) {
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(windowY*PHASES_MAX_FONT_HEIGHT), (int)(windowX*PHASES_MAX_FONT_WIDTH))));
+		
+		Phase[] phases = Phase.values();
+		for(int p=0; p< 12; p++) {
+			if(this.bkd.getPhase() == phases[p]) {
+				if(this.bkd.getTurn()) {
+					graphics2.setColor(Color.GREEN);
+				} else {
+					graphics2.setColor(Color.ORANGE);
+				}				
+			}
+			
+			graphics2.drawString(phases[p].toString(), (int)(windowX*PHASES_X_POSITION + p*windowX*PHASE_WIDTH), (int)(windowY*PHASES_Y_POSITION + windowY*PHASES_ADJUSTMENT*PHASES_HEIGHT));
+			
+			graphics2.setColor(Color.BLACK);
+		}
+		
+		
+	}
+	
 	
 	/**
 	 * Draws counted library, graveyard, and exile for player 1
@@ -246,13 +330,16 @@ public class MTGComponent extends JComponent{
 			} else {
 				Rectangle rec = cardsAL.get(i).getRec();
 				BufferedImage img = cardsAL.get(i).getImage();
-				AffineTransform transform = new AffineTransform();
-				transform.translate(0.5*img.getHeight(), 0.5*img.getWidth());
-				transform.rotate(Math.toRadians(rotate));
-				transform.translate(-0.5*img.getWidth(), -0.5*img.getHeight());
-
-				AffineTransformOp transformOP = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
-				img = transformOP.filter(img, null);
+				if(cardsAL.get(i).card.getTapped())
+				{
+					AffineTransform transform = new AffineTransform();
+					transform.translate(0.5*img.getHeight(), 0.5*img.getWidth());
+					transform.rotate(Math.toRadians(rotate));
+					transform.translate(-0.5*img.getWidth(), -0.5*img.getHeight());
+					
+					AffineTransformOp transformOP = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+					img = transformOP.filter(img, null);
+				}
 				graphics2.drawImage(img, (int)rec.getX(), (int)rec.getY(), (int)rec.getWidth(), (int)rec.getHeight(), this);
 			}
 		}

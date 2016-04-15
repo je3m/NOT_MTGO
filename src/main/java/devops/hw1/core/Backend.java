@@ -70,6 +70,18 @@ public class Backend {
 	}
 
 	/**
+	 * temporary fix to different ways to call activate ability
+	 * @param c the card whose ability is being activated
+	 * @param z the zone the card is leaving
+	 * @param i the index the card currently occupies in that zone
+	 * @param abInd index of the card's ability
+	 * TODO: this is weird
+	 */
+	public static void activateAbility(Card c, Zone z, int i, int abInd) {
+		activateAbility(c, z, i);
+	}
+
+	/**
 	 * Simply adds the card to the given zone at the end of that zone's list
 	 * @param z the zone being added to
 	 * @param c the card being added

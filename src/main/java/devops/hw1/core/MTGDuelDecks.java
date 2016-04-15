@@ -17,7 +17,8 @@ public class MTGDuelDecks {
 	 * @param args
 	 */
 	public static void main(String[] args){
-		setUpJFrame();
+		Backend bkd = new Backend();
+		setUpJFrame(bkd);
 
 		initializePlayer();
 		initializePlayer1();
@@ -34,12 +35,16 @@ public class MTGDuelDecks {
 		Zone.LIBRARY.addCard(new Card("Libr"), 0);
 
 		Card hand1 = new Card("Hand1");
+		hand1.addAbility("Tap: Add G to your mana pool");
 		hand1.addAbility("Play this card");
+		hand1.addManaAbility("T:G");
 		hand1.setImage(FOREST_PATH);
 		Zone.HAND.addCard(hand1,0);
 
 		Card hand2 = new Card("Hand2");
+		hand2.addAbility("Tap: Add G to your mana pool");
 		hand2.addAbility("Play this card");
+		hand2.addManaAbility("T:G");
 		hand2.setImage(FOREST_PATH);
 		Zone.HAND.addCard(hand2, 0);
 
@@ -53,6 +58,8 @@ public class MTGDuelDecks {
 
 		Card BF1 = new Card("BF1");
 		BF1.setImage(FOREST_PATH);
+		BF1.addAbility("Tap: Add G to your mana pool");
+		BF1.addManaAbility("T:G");
 		Zone.BATTLE_FIELD.addCard(BF1, 0);
 
 
@@ -71,7 +78,9 @@ public class MTGDuelDecks {
 
 
 		Card hand1 = new Card("Hand11");
+		hand1.addAbility("Tap: Add R to your mana pool");
 		hand1.addAbility("Play this card");
+		hand1.addManaAbility("T:R");
 		hand1.setImage(MOUNTAIN_PATH);
 		Zone.HAND1.addCard(hand1, 0);
 		Zone.HAND1.addCard(new Card("Hand2"), 0);
@@ -83,6 +92,8 @@ public class MTGDuelDecks {
 
 		Card BF2 = new Card("BF2");
 		BF2.setImage(MOUNTAIN_PATH);
+		BF2.addAbility("Tap: Add R to your mana pool");
+		BF2.addManaAbility("T:R");
 		Zone.BATTLE_FIELD1.addCard(BF2, 0);
 
 
@@ -95,13 +106,13 @@ public class MTGDuelDecks {
 	 * Sets up the JFrame to include all the default values for the game
 	 * @return initialized game JFrame
 	 */
-	private static JFrame setUpJFrame(){
+	private static JFrame setUpJFrame(Backend bkd){
 		final JFrame Frame = new JFrame();
 		Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Frame.setVisible(true);
 		Frame.setTitle("MTG Duel Decks");
 		Frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		final MTGComponent MTGComp = new MTGComponent(Frame.getContentPane().getWidth(), Frame.getContentPane().getHeight());
+		final MTGComponent MTGComp = new MTGComponent(Frame.getContentPane().getWidth(), Frame.getContentPane().getHeight(), bkd);
 		Frame.add(MTGComp);
 		Frame.addComponentListener(new ComponentAdapter() {
 			@Override
