@@ -302,7 +302,46 @@ public class Backend {
 	}
 
 	/**
-	 * Casts a spell, removing mana from the players mana pool acordingly
+	 * Parses a cost string and returns an array of costs
+	 * @param s String of cost
+	 * @return array of cost amounts in WUBRGC
+	 */
+	public int[] parseCost(String s){
+		int cost[] = new int[6];
+
+		int i = 0;
+
+		while(isInteger(s.substring(i, i+1))){
+			i++;
+		}
+
+		if(i != 0){
+			cost[5] = Integer.parseInt(s.substring(0,i));
+		}
+
+		for(int g = i;g < s.length(); g++){
+			switch (s.substring(g, g+1)){
+			case "W":
+				cost[0]++;
+				break;
+			case "U":
+				cost[1]++;
+				break;
+			case "B":
+				cost[2]++;
+				break;
+			case "R":
+				cost[3]++;
+				break;
+			case "G":
+				cost[4]++;
+				break;
+			}
+		}
+		return cost;
+	}
+	/**
+	 * Casts a spell, removing mana from the players mana pool accordingly
 	 * @param zone the zone the spell is being cast from
 	 * @param c the spell being cast
 	 * @param index the index the spell is in
@@ -310,104 +349,46 @@ public class Backend {
 	 * @return true if the spell is cast, false if not
 	 */
 	public boolean castSpell(Zone zone, Card c, int index, Boolean player) {
-		int whiteCost = 0;
-		int blueCost = 0;
-		int blackCost = 0;
-		int redCost = 0;
-		int greenCost = 0;
-		int genericCost = 0;
-		int i = 0;
-
-		while(isInteger(c.getCost().substring(i, i+1))){
-			i++;
-		}
-
-		if(i != 0){
-			genericCost = Integer.parseInt(c.getCost().substring(0,i));
-		}
-
-		for(int g = i;g < c.getCost().length(); g++){
-			switch (c.getCost().substring(g, g+1)){
-			case "W":
-				whiteCost++;
-				break;
-			case "U":
-				blueCost++;
-				break;
-			case "B":
-				blackCost++;
-				break;
-			case "R":
-				redCost++;
-				break;
-			case "G":
-				greenCost++;
-				break;
-			}
-		}
 		if((this.turn != player) || (!this.stack.isEmpty())){
 			return false;
 		}
-		if(player){
-			if((whiteCost <= ManaPool.WHITE1.getAmount()) &&
-					(blueCost <= ManaPool.BLUE1.getAmount()) &&
-					(blackCost <= ManaPool.BLACK1.getAmount()) &&
-					(redCost <= ManaPool.RED1.getAmount()) &&
-					(greenCost <= ManaPool.GREEN1.getAmount()) &&
-					((whiteCost + blueCost + blackCost + redCost + greenCost + genericCost)<=
-					(ManaPool.WHITE1.getAmount() + ManaPool.BLUE1.getAmount() + ManaPool.BLACK1.getAmount() + ManaPool.RED1.getAmount() + ManaPool.GREEN1.getAmount() + ManaPool.COLORLESS1.getAmount()))){
-				ManaPool.WHITE1.remove(whiteCost);
-				ManaPool.BLUE1.remove(blueCost);
-				ManaPool.BLACK1.remove(blackCost);
-				ManaPool.RED1.remove(redCost);
-				ManaPool.GREEN1.remove(greenCost);
+		int[] costs = this.parseCost(c.getCost());
 
-				genericCost = this.handleGeneric(ManaPool.COLORLESS1, genericCost);
-				genericCost = this.handleGeneric(ManaPool.BLUE1, genericCost);
-				genericCost = this.handleGeneric(ManaPool.BLACK1, genericCost);
-				genericCost = this.handleGeneric(ManaPool.WHITE1, genericCost);
-				genericCost = this.handleGeneric(ManaPool.RED1, genericCost);
-				genericCost = this.handleGeneric(ManaPool.GREEN1, genericCost);
 
-				this.stack.push(new ItemOnStack(c, true));
+		if((costs[0] <= ManaPool.getPool('w', player).getAmount()) &&
+				(costs[1] <= ManaPool.getPool('u', player).getAmount()) &&
+				(costs[2] <= ManaPool.getPool('b', player).getAmount()) &&
+				(costs[3] <= ManaPool.getPool('r', player).getAmount()) &&
+				(costs[4] <= ManaPool.getPool('g', player).getAmount()) &&
+				((costs[0] + costs[1] + costs[2] + costs[3] + costs[4] + costs[5])<=
+				(ManaPool.getPool('w', player).getAmount() + ManaPool.getPool('u', player).getAmount()
+						+ ManaPool.getPool('b', player).getAmount() + ManaPool.getPool('r', player).getAmount()
+						+ ManaPool.getPool('g', player).getAmount() + ManaPool.getPool('c', player).getAmount()))){
 
-				zone.remove(index);
-				this.passed = false;
-				return true;
-			} else {
-				return false;
-			}
+			ManaPool.getPool('w', player).remove(costs[0]);
+			ManaPool.getPool('u', player).remove(costs[1]);
+			ManaPool.getPool('b', player).remove(costs[2]);
+			ManaPool.getPool('r', player).remove(costs[3]);
+			ManaPool.getPool('g', player).remove(costs[4]);
+
+			costs[5] = this.handleGeneric(ManaPool.getPool('c', player), costs[5]);
+			costs[5] = this.handleGeneric(ManaPool.getPool('u', player), costs[5]);
+			costs[5] = this.handleGeneric(ManaPool.getPool('b', player), costs[5]);
+			costs[5] = this.handleGeneric(ManaPool.getPool('w', player), costs[5]);
+			costs[5] = this.handleGeneric(ManaPool.getPool('r', player), costs[5]);
+			costs[5] = this.handleGeneric(ManaPool.getPool('g', player), costs[5]);
+
+			this.stack.push(new ItemOnStack(c, player));
+
+			zone.remove(index);
+			this.passed = false;
+			return true;
 		} else {
-			if((whiteCost <= ManaPool.WHITE2.getAmount()) &&
-					(blueCost <= ManaPool.BLUE2.getAmount()) &&
-					(blackCost <= ManaPool.BLACK2.getAmount()) &&
-					(redCost <= ManaPool.RED2.getAmount()) &&
-					(greenCost <= ManaPool.GREEN2.getAmount()) &&
-					((whiteCost + blueCost + blackCost + redCost + greenCost + genericCost)<=
-					(ManaPool.WHITE2.getAmount() + ManaPool.BLUE2.getAmount() + ManaPool.BLACK2.getAmount() + ManaPool.RED2.getAmount() + ManaPool.GREEN2.getAmount() + ManaPool.COLORLESS2.getAmount()))){
-				ManaPool.WHITE2.remove(whiteCost);
-				ManaPool.BLUE2.remove(blueCost);
-				ManaPool.BLACK2.remove(blackCost);
-				ManaPool.RED2.remove(redCost);
-				ManaPool.GREEN2.remove(greenCost);
-
-				genericCost = this.handleGeneric(ManaPool.COLORLESS2, genericCost);
-				genericCost = this.handleGeneric(ManaPool.BLUE2, genericCost);
-				genericCost = this.handleGeneric(ManaPool.BLACK2, genericCost);
-				genericCost = this.handleGeneric(ManaPool.WHITE2, genericCost);
-				genericCost = this.handleGeneric(ManaPool.GREEN2, genericCost);
-				genericCost = this.handleGeneric(ManaPool.RED2, genericCost);
-
-				this.stack.push(new ItemOnStack(c, false));
-
-				zone.remove(index);
-				this.passed = false;
-				return true;
-			} else {
-				return false;
-			}
+			return false;
 		}
+
 	}
+
 
 	/**
 	 * Handles paying generic costs with mana from a specific mana pool
