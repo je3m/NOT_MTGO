@@ -105,6 +105,12 @@ public enum ManaPool {
 
 			return ManaPool.GREEN2;
 
+		case 'c':
+			if (player)
+				return ManaPool.COLORLESS1;
+
+			return ManaPool.COLORLESS2;
+
 		default:
 			throw new IllegalArgumentException("invalid color '" + color + "'");
 
