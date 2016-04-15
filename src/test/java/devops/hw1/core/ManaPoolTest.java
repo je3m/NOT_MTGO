@@ -58,6 +58,8 @@ public class ManaPoolTest {
 		} catch (IllegalArgumentException e){
 			assertEquals(e.getMessage(), "invalid color 'o'");
 		}
+
+		assertEquals(ManaPool.RED2, ManaPool.getPool('R', false));
 	}
 
 	@Test
