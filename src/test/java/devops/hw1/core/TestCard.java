@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 
 import java.util.regex.PatternSyntaxException;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class TestCard {
@@ -40,7 +41,7 @@ public class TestCard {
 		c = new Card("Akki Coalflinger");
 		c.addAbility(s[0]);
 		c.addAbility(s[1]);
-		assert(c.getAbilities().equals(s));
+		Assert.assertArrayEquals(c.getAbilities(), s);
 
 	}
 
