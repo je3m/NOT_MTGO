@@ -129,84 +129,13 @@ public class Backend {
 	 */
 	public void changePhase() {
 		ManaPool.emptyMana();
-		switch(this.phase) {
-		case UNTAP1:
-			this.phase = Phase.UPKEEP1;
-			break;
-		case UPKEEP1:
-			this.phase = Phase.DRAW1;
-			break;
-		case DRAW1:
-			this.phase = Phase.FIRST_MAIN1;
-			break;
-		case FIRST_MAIN1:
-			this.phase = Phase.START_COMBAT1;
-			break;
-		case START_COMBAT1:
-			this.phase = Phase.DECLARE_ATTACKERS1;
-			break;
-		case DECLARE_ATTACKERS1:
-			this.phase = Phase.DECLARE_BLOCKERS1;
-			break;
-		case DECLARE_BLOCKERS1:
-			this.phase = Phase.COMBAT_DAMAGE1;
-			break;
-		case COMBAT_DAMAGE1:
-			this.phase = Phase.END_OF_COMBAT1;
-			break;
-		case END_OF_COMBAT1:
-			this.phase = Phase.SECOND_MAIN1;
-			break;
-		case SECOND_MAIN1:
-			this.phase = Phase.END1;
-			break;
-		case END1:
-			this.phase = Phase.CLEANUP1;
-			break;
-		case CLEANUP1:
-			this.phase = Phase.UNTAP2;
-			this.turn = false;
-			break;
-		case UNTAP2:
-			this.phase = Phase.UPKEEP2;
-			break;
-		case UPKEEP2:
-			this.phase = Phase.DRAW2;
-			break;
-		case DRAW2:
-			this.phase = Phase.FIRST_MAIN2;
-			break;
-		case FIRST_MAIN2:
-			this.phase = Phase.START_COMBAT2;
-			break;
-		case START_COMBAT2:
-			this.phase = Phase.DECLARE_ATTACKERS2;
-			break;
-		case DECLARE_ATTACKERS2:
-			this.phase = Phase.DECLARE_BLOCKERS2;
-			break;
-		case DECLARE_BLOCKERS2:
-			this.phase = Phase.COMBAT_DAMAGE2;
-			break;
-		case COMBAT_DAMAGE2:
-			this.phase = Phase.END_OF_COMBAT2;
-			break;
-		case END_OF_COMBAT2:
-			this.phase = Phase.SECOND_MAIN2;
-			break;
-		case SECOND_MAIN2:
-			this.phase = Phase.END2;
-			break;
-		case END2:
-			this.phase = Phase.CLEANUP2;
-			break;
-		case CLEANUP2:
-			this.phase = Phase.UNTAP1;
-			this.turn = true;
-			break;
-		default:
-			break;
-		}
+
+		if((this.phase == Phase.CLEANUP1) || (this.phase == Phase.CLEANUP2))
+			this.turn = !this.turn;
+
+		this.phase = Phase.values()[(((this.phase.ordinal() + 1) % (Phase.CLEANUP2.ordinal() + 1)))];
+
+
 	}
 
 	/**
