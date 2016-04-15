@@ -61,6 +61,10 @@ Scott
 Milestone 4
 
 Jim
+ -removed warnings 
+ -refactored a couple functions to < 50 loc
+ -started SMEL
+ -added BVA test cases to some functions
 
 Chris
  - casting spells
