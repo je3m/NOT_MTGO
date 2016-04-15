@@ -35,12 +35,12 @@ public class MTGComponent extends JComponent{
 	private static final double SIDEBAR_ADJUSTMENT  = 0.5;
 	private static final double ZONES_MAX_FONT_WIDTH = 0.08;
 	private static final double ZONES_MAX_FONT_HEIGHT = 0.08;
-	private static final double LIBRARY_COUNT_X_POSITION = 0.038;
+	private static final double LIBRARY_COUNT_X_POSITION = 0.035;
 	private static final double LIBRARY_COUNT_Y_POSITION = 0.98;
 	private static final double GRAVEYARD_COUNT_X_POSITION = 0.01;
 	private static final double GRAVEYARD_COUNT_Y_POSITION = 0.88;
 	private static final double EXILE_COUNT_X_POSITION = 0.06;
-	private static final double LIBRARY1_COUNT_X_POSITION = 0.938;
+	private static final double LIBRARY1_COUNT_X_POSITION = 0.965;
 	private static final double GRAVEYARD1_COUNT_X_POSITION = 0.91;
 	private static final double EXILE1_COUNT_X_POSITION = 0.96;
 	private static final double CARD_WIDTH_TO_HEIGHT_RATIO = 3.5/2.5;
@@ -68,7 +68,16 @@ public class MTGComponent extends JComponent{
 	private static final double PHASES_MAX_FONT_HEIGHT = 0.02;
 	private static final double PHASES_MAX_FONT_WIDTH = 0.02;
 	private static final double PHASES_ADJUSTMENT = 0.5;
-	
+	private static final double PASS_BUTTONS_WIDTH = 0.03;
+	private static final double PASS_BUTTONS_HEIGHT = 0.1;
+	private static final double PASS_BUTTON_X_POSITION = 0.07;
+	private static final double PASS_BUTTON_Y_POSITION = 0.9;
+	private static final double PASS_BUTTON1_X_POSITION = 0.9;
+	private static final double PASS_BUTTON1_Y_POSITION = 0.9;
+	private static final double PASS_BUTTONS_MAX_FONT_HEIGHT = 0.02;
+	private static final double PASS_BUTTONS_MAX_FONT_WIDTH = 0.02;
+	private static final double PASS_BUTTONS_ADJUSTMENT = 0.5;
+	private static final double PRIORITY_ADJUSTMENT = PASS_BUTTONS_ADJUSTMENT + 0.2;
 	
 	
 	
@@ -81,6 +90,8 @@ public class MTGComponent extends JComponent{
 	private DispGUICard dispGUICard2;
 	private ArrayList<GUICard> battleGUICards1;
 	private ArrayList<GUICard> battleGUICards2;
+	private Rectangle passButton1;
+	private Rectangle passButton2;
 	
 	/**
 	 * Constructor for a MTGComponent
@@ -105,6 +116,10 @@ public class MTGComponent extends JComponent{
 		this.dispGUICard2 = null;
 		this.battleGUICards1 = new ArrayList<GUICard>();
 		this.battleGUICards2 = new ArrayList<GUICard>();
+		
+		this.passButton1= new Rectangle((int) (windowX*PASS_BUTTON_X_POSITION), (int)(windowY*PASS_BUTTON_Y_POSITION), (int)(windowX*PASS_BUTTONS_WIDTH), (int)(windowY*PASS_BUTTONS_HEIGHT));
+		this.passButton2= new Rectangle((int) (windowX*PASS_BUTTON1_X_POSITION), (int)(windowY*PASS_BUTTON1_Y_POSITION), (int)(windowX*PASS_BUTTONS_WIDTH), (int)(windowY*PASS_BUTTONS_HEIGHT));
+		
 	}
 	
 	
@@ -179,6 +194,7 @@ public class MTGComponent extends JComponent{
 		drawCountedZones2(graphics2);
 		drawManaPools(graphics2);
 		drawPhases(graphics2);
+		drawPassButtons(graphics2);
 		generateGUICards(this.handGUICards1, Zone.HAND, BASE_HAND_CARDS_POSITION);
 		generateGUICards(this.handGUICards2, Zone.HAND1, BASE_HAND1_CARDS_POSITION);
 		generateGUICards(this.battleGUICards1, Zone.BATTLE_FIELD, BASE_BATTLEFIELD_CARDS_POSITION);
@@ -217,6 +233,13 @@ public class MTGComponent extends JComponent{
 		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2) + SIDEBAR_ADJUSTMENT),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
 		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX + windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
 		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX),(int)(windowY*(HAND_HEIGHT + EXILE_HEIGHT)),(int)(windowX*SIDEBAR_WIDTH),(int)(windowY*LIBRARY_HEIGHT)));
+		
+		
+		this.passButton1= new Rectangle((int) (windowX*PASS_BUTTON_X_POSITION), (int)(windowY*PASS_BUTTON_Y_POSITION), (int)(windowX*PASS_BUTTONS_WIDTH), (int)(windowY*PASS_BUTTONS_HEIGHT));
+		this.passButton2= new Rectangle((int) (windowX*PASS_BUTTON1_X_POSITION), (int)(windowY*PASS_BUTTON1_Y_POSITION), (int)(windowX*PASS_BUTTONS_WIDTH), (int)(windowY*PASS_BUTTONS_HEIGHT));
+		graphics2.draw(this.passButton1);
+		graphics2.draw(this.passButton2);
+		
 	}
 	
 	
@@ -245,7 +268,7 @@ public class MTGComponent extends JComponent{
 		
 		Phase[] phases = Phase.values();
 		for(int p=0; p< 12; p++) {
-			if(this.bkd.getPhase() == phases[p]) {
+			if(this.bkd.getPhase() == phases[p] || this.bkd.getPhase() == phases[p+12]) {
 				if(this.bkd.getTurn()) {
 					graphics2.setColor(Color.GREEN);
 				} else {
@@ -261,6 +284,26 @@ public class MTGComponent extends JComponent{
 		
 	}
 	
+	/**
+	 * Draws the pass buttons for players 1 and 2
+	 * @param graphics2
+	 */
+	private void drawPassButtons(Graphics2D graphics2) {
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(windowY*PASS_BUTTONS_MAX_FONT_HEIGHT), (int)(windowX*PASS_BUTTONS_MAX_FONT_WIDTH))));
+		graphics2.setColor(Color.RED);
+		
+		graphics2.drawString("PASS", (int)(windowX*PASS_BUTTON_X_POSITION), (int)(windowY*PASS_BUTTON_Y_POSITION + windowY*PASS_BUTTONS_ADJUSTMENT*PASS_BUTTONS_HEIGHT));
+		graphics2.drawString("PASS", (int)(windowX*PASS_BUTTON1_X_POSITION), (int)(windowY*PASS_BUTTON1_Y_POSITION + windowY*PASS_BUTTONS_ADJUSTMENT*PASS_BUTTONS_HEIGHT));
+		
+		graphics2.setColor(Color.BLUE);
+		if(this.bkd.getPriority()) {
+			graphics2.drawString("***", (int)(windowX*PASS_BUTTON_X_POSITION), (int)(windowY*PASS_BUTTON_Y_POSITION + windowY*PRIORITY_ADJUSTMENT*PASS_BUTTONS_HEIGHT));
+		} else {
+			graphics2.drawString("***", (int)(windowX*PASS_BUTTON1_X_POSITION), (int)(windowY*PASS_BUTTON1_Y_POSITION + windowY*PRIORITY_ADJUSTMENT*PASS_BUTTONS_HEIGHT));
+		}
+		
+		graphics2.setColor(Color.BLACK);
+	}
 	
 	/**
 	 * Draws counted library, graveyard, and exile for player 1
@@ -418,6 +461,23 @@ public class MTGComponent extends JComponent{
 	public DispGUICard getDispGUICard2() {
 		return dispGUICard2;
 	}
+	
+	/**
+	 * Gets the Rectangle for the pass button for the first player
+	 * @return the rectangle enclosing the first player's pass button
+	 */
+	public Rectangle getPassButton1() {
+		return passButton1;
+	}
+	
+	/**
+	 * Gets the Rectangle for the pass button for the second player
+	 * @return the rectangle enclosing the second player's pass button
+	 */
+	public Rectangle getPassButton2() {
+		return passButton2;
+	}
+	
 
 	/**
 	 * Set the current Displayed GUI card for the first player

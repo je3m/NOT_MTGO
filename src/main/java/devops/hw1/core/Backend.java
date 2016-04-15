@@ -168,22 +168,28 @@ public class Backend {
 
 	/**
 	 * Passes priority for players
+	 * @param player which player is trying to pass priority
 	 */
-	public void passPriority() {
-		this.priority = !this.priority;
-		if (this.passed && !this.stack.empty()) {
-			ItemOnStack item = this.stack.pop();
-			if(item.getPlayer()){
-				Zone.BATTLE_FIELD.addCard(item.getCard(), 0);
+	public void passPriority(boolean player) {
+		if(this.priority == player) {
+			
+			if (this.passed && !this.stack.empty()) {
+				ItemOnStack item = this.stack.pop();
+				if(item.getPlayer()){
+					Zone.BATTLE_FIELD.addCard(item.getCard(), 0);
+				} else {
+					Zone.BATTLE_FIELD1.addCard(item.getCard(), 0);
+				}
+				this.passed = false;
+				this.priority = this.turn;
+			} else if(this.passed){
+				this.changePhase();
+				this.passed = false;
+				this.priority= this.turn;
 			} else {
-				Zone.BATTLE_FIELD1.addCard(item.getCard(), 0);
+				this.passed = true;
+				this.priority = !this.priority;
 			}
-			this.passed = false;
-		} else if(this.passed){
-			this.changePhase();
-			this.passed = true;
-		} else {
-			this.passed = true;
 		}
 	}
 
