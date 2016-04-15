@@ -181,7 +181,7 @@ public class Backend {
 			this.passed = false;
 		} else if(this.passed){
 			this.changePhase();
-			this.passed = true;
+			this.passed = false;
 		} else {
 			this.passed = true;
 		}

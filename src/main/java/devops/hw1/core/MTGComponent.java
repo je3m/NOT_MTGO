@@ -77,6 +77,7 @@ public class MTGComponent extends JComponent{
 	private static final double PASS_BUTTONS_MAX_FONT_HEIGHT = 0.02;
 	private static final double PASS_BUTTONS_MAX_FONT_WIDTH = 0.02;
 	private static final double PASS_BUTTONS_ADJUSTMENT = 0.5;
+	private static final double PRIORITY_ADJUSTMENT = PASS_BUTTONS_ADJUSTMENT + 0.2;
 	
 	
 	
@@ -267,7 +268,7 @@ public class MTGComponent extends JComponent{
 		
 		Phase[] phases = Phase.values();
 		for(int p=0; p< 12; p++) {
-			if(this.bkd.getPhase() == phases[p]) {
+			if(this.bkd.getPhase() == phases[p] || this.bkd.getPhase() == phases[p+12]) {
 				if(this.bkd.getTurn()) {
 					graphics2.setColor(Color.GREEN);
 				} else {
@@ -293,6 +294,13 @@ public class MTGComponent extends JComponent{
 		
 		graphics2.drawString("PASS", (int)(windowX*PASS_BUTTON_X_POSITION), (int)(windowY*PASS_BUTTON_Y_POSITION + windowY*PASS_BUTTONS_ADJUSTMENT*PASS_BUTTONS_HEIGHT));
 		graphics2.drawString("PASS", (int)(windowX*PASS_BUTTON1_X_POSITION), (int)(windowY*PASS_BUTTON1_Y_POSITION + windowY*PASS_BUTTONS_ADJUSTMENT*PASS_BUTTONS_HEIGHT));
+		
+		graphics2.setColor(Color.BLUE);
+		if(this.bkd.getPriority()) {
+			graphics2.drawString("***", (int)(windowX*PASS_BUTTON_X_POSITION), (int)(windowY*PASS_BUTTON_Y_POSITION + windowY*PRIORITY_ADJUSTMENT*PASS_BUTTONS_HEIGHT));
+		} else {
+			graphics2.drawString("***", (int)(windowX*PASS_BUTTON1_X_POSITION), (int)(windowY*PASS_BUTTON1_Y_POSITION + windowY*PRIORITY_ADJUSTMENT*PASS_BUTTONS_HEIGHT));
+		}
 		
 		graphics2.setColor(Color.BLACK);
 	}
