@@ -35,12 +35,12 @@ public class MTGComponent extends JComponent{
 	private static final double SIDEBAR_ADJUSTMENT  = 0.5;
 	private static final double ZONES_MAX_FONT_WIDTH = 0.08;
 	private static final double ZONES_MAX_FONT_HEIGHT = 0.08;
-	private static final double LIBRARY_COUNT_X_POSITION = 0.038;
+	private static final double LIBRARY_COUNT_X_POSITION = 0.035;
 	private static final double LIBRARY_COUNT_Y_POSITION = 0.98;
 	private static final double GRAVEYARD_COUNT_X_POSITION = 0.01;
 	private static final double GRAVEYARD_COUNT_Y_POSITION = 0.88;
 	private static final double EXILE_COUNT_X_POSITION = 0.06;
-	private static final double LIBRARY1_COUNT_X_POSITION = 0.938;
+	private static final double LIBRARY1_COUNT_X_POSITION = 0.965;
 	private static final double GRAVEYARD1_COUNT_X_POSITION = 0.91;
 	private static final double EXILE1_COUNT_X_POSITION = 0.96;
 	private static final double CARD_WIDTH_TO_HEIGHT_RATIO = 3.5/2.5;
@@ -68,7 +68,15 @@ public class MTGComponent extends JComponent{
 	private static final double PHASES_MAX_FONT_HEIGHT = 0.02;
 	private static final double PHASES_MAX_FONT_WIDTH = 0.02;
 	private static final double PHASES_ADJUSTMENT = 0.5;
-	
+	private static final double PASS_BUTTONS_WIDTH = 0.03;
+	private static final double PASS_BUTTONS_HEIGHT = 0.1;
+	private static final double PASS_BUTTON_X_POSITION = 0.07;
+	private static final double PASS_BUTTON_Y_POSITION = 0.9;
+	private static final double PASS_BUTTON1_X_POSITION = 0.9;
+	private static final double PASS_BUTTON1_Y_POSITION = 0.9;
+	private static final double PASS_BUTTONS_MAX_FONT_HEIGHT = 0.02;
+	private static final double PASS_BUTTONS_MAX_FONT_WIDTH = 0.02;
+	private static final double PASS_BUTTONS_ADJUSTMENT = 0.5;
 	
 	
 	
@@ -81,6 +89,8 @@ public class MTGComponent extends JComponent{
 	private DispGUICard dispGUICard2;
 	private ArrayList<GUICard> battleGUICards1;
 	private ArrayList<GUICard> battleGUICards2;
+	private Rectangle passButton1;
+	private Rectangle passButton2;
 	
 	/**
 	 * Constructor for a MTGComponent
@@ -105,6 +115,10 @@ public class MTGComponent extends JComponent{
 		this.dispGUICard2 = null;
 		this.battleGUICards1 = new ArrayList<GUICard>();
 		this.battleGUICards2 = new ArrayList<GUICard>();
+		
+		this.passButton1= new Rectangle((int) (windowX*PASS_BUTTON_X_POSITION), (int)(windowY*PASS_BUTTON_Y_POSITION), (int)(windowX*PASS_BUTTONS_WIDTH), (int)(windowY*PASS_BUTTONS_HEIGHT));
+		this.passButton2= new Rectangle((int) (windowX*PASS_BUTTON1_X_POSITION), (int)(windowY*PASS_BUTTON1_Y_POSITION), (int)(windowX*PASS_BUTTONS_WIDTH), (int)(windowY*PASS_BUTTONS_HEIGHT));
+		
 	}
 	
 	
@@ -217,6 +231,13 @@ public class MTGComponent extends JComponent{
 		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2) + SIDEBAR_ADJUSTMENT),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
 		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX + windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
 		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX),(int)(windowY*(HAND_HEIGHT + EXILE_HEIGHT)),(int)(windowX*SIDEBAR_WIDTH),(int)(windowY*LIBRARY_HEIGHT)));
+		
+		
+		this.passButton1= new Rectangle((int) (windowX*PASS_BUTTON_X_POSITION), (int)(windowY*PASS_BUTTON_Y_POSITION), (int)(windowX*PASS_BUTTONS_WIDTH), (int)(windowY*PASS_BUTTONS_HEIGHT));
+		this.passButton2= new Rectangle((int) (windowX*PASS_BUTTON1_X_POSITION), (int)(windowY*PASS_BUTTON1_Y_POSITION), (int)(windowX*PASS_BUTTONS_WIDTH), (int)(windowY*PASS_BUTTONS_HEIGHT));
+		graphics2.draw(this.passButton1);
+		graphics2.draw(this.passButton2);
+		
 	}
 	
 	
