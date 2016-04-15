@@ -52,6 +52,7 @@ public class ManaPoolTest {
 		assertEquals(ManaPool.WHITE2, ManaPool.getPool('w', false));
 		assertEquals(ManaPool.RED2, ManaPool.getPool('r', false));
 
+
 		try{
 			ManaPool.getPool('o', true);
 			fail("no exception thrown");
@@ -60,6 +61,7 @@ public class ManaPoolTest {
 		}
 
 		assertEquals(ManaPool.RED2, ManaPool.getPool('R', false));
+		assertEquals(ManaPool.COLORLESS2, ManaPool.getPool('c', false));
 	}
 
 	@Test
