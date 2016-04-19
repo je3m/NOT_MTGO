@@ -18,28 +18,43 @@ public class ItemOnStackTest {
 	
 	@Parameters
 	public static Collection<Object[]> data() {
-		Object[][] data = new Object[3][3];
+		Object[][] data = new Object[4][4];
 		
-		Card c1 = new Card("oogleyboogley");//EasyMock.niceMock(Card.class);
-		ItemOnStack item1 = new ItemOnStack(c1,false);
+		Card c1 = EasyMock.niceMock(Card.class);
+		Card ct1 = EasyMock.niceMock(Card.class);
+		ItemOnStack item1 = new ItemOnStack(c1,false, ct1);
 		
 		data[0][0] = item1;
 		data[0][1] = false;
 		data[0][2] = c1;
+		data[0][3] = ct1;
 		
 		
-		Card c2 = new Card("aaaaaah!");//EasyMock.niceMock(Card.class);
-		ItemOnStack item2 = new ItemOnStack(c2,true);
+		
+		Card c2 = EasyMock.niceMock(Card.class);
+		Card ct2 = EasyMock.niceMock(Card.class);
+		ItemOnStack item2 = new ItemOnStack(c2,true, ct2);
 		
 		data[1][0] = item2;
 		data[1][1] = true;
 		data[1][2] = c2;
+		data[1][3] = ct2;
 		
-		ItemOnStack item3 = new ItemOnStack(null, null);
+		Card ct3 = EasyMock.niceMock(Card.class);
+		ItemOnStack item3 = new ItemOnStack(null, null, ct3);
 		
 		data[2][0] = item3;
 		data[2][1] = null;
 		data[2][2] = null;
+		data[2][3] = ct3;
+		
+		ItemOnStack item4 = new ItemOnStack(null, null, null);
+		
+		data[3][0] = item4;
+		data[3][1] = null;
+		data[3][2] = null;
+		data[3][3] = null;
+		
 		
 		return Arrays.asList(data);
 	}
@@ -54,17 +69,21 @@ public class ItemOnStackTest {
 	
 	private Card tExpectedCard;
 	
+	private Card tExpectedTargetCard;
 	
-	public ItemOnStackTest(ItemOnStack InputItemOnStack, Boolean ExpectedPlayer, Card ExpectedCard) {
+	
+	public ItemOnStackTest(ItemOnStack InputItemOnStack, Boolean ExpectedPlayer, Card ExpectedCard, Card ExpectedTargetCard) {
 		tInputItemOnStack = InputItemOnStack;
 		tExpectedPlayer = ExpectedPlayer;
 		tExpectedCard = ExpectedCard;
+		tExpectedTargetCard = ExpectedTargetCard;
 	}
 	
 	@Test
 	public void test() {
 		assertEquals(tInputItemOnStack.getPlayer(), tExpectedPlayer);
 		assertEquals(tInputItemOnStack.getCard(), tExpectedCard);
+		assertEquals(tInputItemOnStack.getTarget(), tExpectedTargetCard);
 	}
 	
 }
