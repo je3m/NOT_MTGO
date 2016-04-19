@@ -18,7 +18,7 @@ public class ItemOnStackTest {
 	
 	@Parameters
 	public static Collection<Object[]> data() {
-		Object[][] data = new Object[4][4];
+		Object[][] data = new Object[5][4];
 		
 		Card c1 = EasyMock.niceMock(Card.class);
 		Card ct1 = EasyMock.niceMock(Card.class);
@@ -40,6 +40,7 @@ public class ItemOnStackTest {
 		data[1][2] = c2;
 		data[1][3] = ct2;
 		
+		
 		Card ct3 = EasyMock.niceMock(Card.class);
 		ItemOnStack item3 = new ItemOnStack(null, null, ct3);
 		
@@ -48,12 +49,20 @@ public class ItemOnStackTest {
 		data[2][2] = null;
 		data[2][3] = ct3;
 		
-		ItemOnStack item4 = new ItemOnStack(null, null, null);
+		Card c4 = EasyMock.niceMock(Card.class);
+		ItemOnStack item4 = new ItemOnStack(c4,true, null);
 		
 		data[3][0] = item4;
-		data[3][1] = null;
-		data[3][2] = null;
+		data[3][1] = true;
+		data[3][2] = c4;
 		data[3][3] = null;
+		
+		ItemOnStack item5 = new ItemOnStack(null, null, null);
+		
+		data[4][0] = item5;
+		data[4][1] = null;
+		data[4][2] = null;
+		data[4][3] = null;
 		
 		
 		return Arrays.asList(data);
