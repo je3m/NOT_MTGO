@@ -6,9 +6,15 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
 
+@RunWith(Parameterized.class)
 public class CanTargetTest {
 
+	@Parameters
 	public static Collection<Object[]> data() {
 		Object[][] data = new Object[6][5];
 		
@@ -78,10 +84,7 @@ public class CanTargetTest {
 	
 	@Test
 	public void test() {
-		/*boolean h1ToB2 = (tInputSourceZone == Zone.HAND)  && (tInputTargetZone == Zone.BATTLE_FIELD1);
-		boolean h1ToB1 = (tInputSourceZone == Zone.HAND)  && (tInputTargetZone == Zone.BATTLE_FIELD);
-		boolean h2ToB1 = (tInputSourceZone == Zone.HAND1)  && (tInputTargetZone == Zone.BATTLE_FIELD);
-		boolean h2ToB2 = (tInputSourceZone == Zone.HAND1)  && (tInputTargetZone == Zone.BATTLE_FIELD1);*/
+		
 		
 		assertEquals(Backend.canTarget(tInputSource, tInputSourceZone, tInputTarget, tInputTargetZone), 
 				tExpectedCanTarget);

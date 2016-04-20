@@ -369,4 +369,22 @@ public class Backend {
 	public static boolean isInteger(String s) {
 		return s.matches("\\d+");
 	}
+	
+	/**
+	 * Determines if a card can target another card
+	 * @param sourceC the card that is doing the targeting
+	 * @param sourceZ the zone that the targeting card is from
+	 * @param targetC the card that is being targeting
+	 * @param targetZ the zone that the targeted card is in
+	 * @return whether the source card in the source zone can target the target card in the target zone
+	 */
+	public static boolean canTarget(Card sourceC, Zone sourceZ, Card targetC, Zone targetZ) {
+		boolean h1ToB2 = (sourceZ == Zone.HAND)  && (targetZ == Zone.BATTLE_FIELD1);
+		boolean h1ToB1 = (sourceZ == Zone.HAND)  && (targetZ == Zone.BATTLE_FIELD);
+		boolean h2ToB1 = (sourceZ == Zone.HAND1)  && (targetZ == Zone.BATTLE_FIELD);
+		boolean h2ToB2 = (sourceZ == Zone.HAND1)  && (targetZ == Zone.BATTLE_FIELD1);
+		
+		
+		return h1ToB2 || h1ToB1 || h2ToB1 || h2ToB2;
+	}
 }
