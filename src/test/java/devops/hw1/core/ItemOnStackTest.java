@@ -79,12 +79,15 @@ public class ItemOnStackTest {
 	
 	private Card tExpectedTargetCard;
 	
+	private Zone tExpectedTargetZone;
 	
-	public ItemOnStackTest(ItemOnStack InputItemOnStack, Boolean ExpectedPlayer, Card ExpectedCard, Card ExpectedTargetCard) {
+	
+	public ItemOnStackTest(ItemOnStack InputItemOnStack, Boolean ExpectedPlayer, Card ExpectedCard, Card ExpectedTargetCard, Zone ExpectedTargetZone) {
 		tInputItemOnStack = InputItemOnStack;
 		tExpectedPlayer = ExpectedPlayer;
 		tExpectedCard = ExpectedCard;
 		tExpectedTargetCard = ExpectedTargetCard;
+		tExpectedTargetZone = ExpectedTargetZone;
 	}
 	
 	@Test
@@ -92,6 +95,8 @@ public class ItemOnStackTest {
 		assertEquals(tInputItemOnStack.getPlayer(), tExpectedPlayer);
 		assertEquals(tInputItemOnStack.getCard(), tExpectedCard);
 		assertEquals(tInputItemOnStack.getTarget(), tExpectedTargetCard);
+		assertEquals(tInputItemOnStack.getTargetZone(), tExpectedTargetZone);
+		
 	}
 	
 }

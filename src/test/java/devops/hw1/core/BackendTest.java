@@ -2161,13 +2161,10 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		
-		Card card1 = EasyMock.strictMock(Card.class);//Vindicate
-		Card card2 = EasyMock.strictMock(Card.class);
+		Card card1 = new Card("Vindicate");
+		Card card2 = new Card("Mountain");
 		
-		EasyMock.expect(card1.getCost()).andReturn("1WB");
-		
-		EasyMock.replay(card1);
-		EasyMock.replay(card2);
+		card1.setCost("1WB");
 		
 		bknd.addCard(Zone.HAND, card1, 0);
 		bknd.addCard(Zone.HAND1, card2, 0);
@@ -2181,17 +2178,21 @@ public class BackendTest {
 		
 		
 		assertFalse(bknd.castSpell(Zone.HAND, card1, 0, true, card2, Zone.HAND1));
-		assertEquals(bknd.getZoneContents(Zone.HAND)[0], card1);
-		assertEquals(bknd.getZoneContents(Zone.HAND1)[0], card2);
-
-		bknd.passPriority(true);
-		bknd.passPriority(false);
-
-		assertEquals(bknd.getZoneContents(Zone.HAND), card1);
-		assertEquals(bknd.getZoneContents(Zone.HAND1), card2);
+		assertEquals(card1, bknd.getZoneContents(Zone.HAND)[0]);
+		assertEquals(card2, bknd.getZoneContents(Zone.HAND1)[0]);
 		assertEquals(1, ManaPool.WHITE1.getAmount());
 		assertEquals(1, ManaPool.BLACK1.getAmount());
 		assertEquals(1, ManaPool.COLORLESS1.getAmount());
+		
+		
+		bknd.passPriority(true);
+		bknd.passPriority(false);
+
+		assertEquals(card1, bknd.getZoneContents(Zone.HAND)[0]);
+		assertEquals(card2, bknd.getZoneContents(Zone.HAND1)[0]);
+		assertEquals(0, ManaPool.WHITE1.getAmount());
+		assertEquals(0, ManaPool.BLACK1.getAmount());
+		assertEquals(0, ManaPool.COLORLESS1.getAmount());
 
 		ManaPool.WHITE1.empty();
 		ManaPool.BLUE1.empty();
@@ -2220,13 +2221,10 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		
-		Card card1 = EasyMock.strictMock(Card.class);//Vindicate
-		Card card2 = EasyMock.strictMock(Card.class);
+		Card card1 = new Card("Vindicate");
+		Card card2 = new Card("Mountain");
 		
-		EasyMock.expect(card1.getCost()).andReturn("1WB");
-		
-		EasyMock.replay(card1);
-		EasyMock.replay(card2);
+		card1.setCost("1WB");
 		
 		bknd.addCard(Zone.HAND, card1, 0);
 		bknd.addCard(Zone.BATTLE_FIELD1, card2, 0);
@@ -2240,14 +2238,14 @@ public class BackendTest {
 		
 		
 		assertTrue(bknd.castSpell(Zone.HAND, card1, 0, true, card2, Zone.BATTLE_FIELD1));
-		assertArrayEquals(bknd.getZoneContents(Zone.HAND), new Card[0]);
-		assertEquals(bknd.getZoneContents(Zone.BATTLE_FIELD1)[0], card2);
+		assertArrayEquals( new Card[0], bknd.getZoneContents(Zone.HAND));
+		assertEquals(card2, bknd.getZoneContents(Zone.BATTLE_FIELD1)[0]);
 
 		bknd.passPriority(true);
 		bknd.passPriority(false);
 
-		assertArrayEquals(bknd.getZoneContents(Zone.HAND), new Card[0]);
-		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD1), new Card[0]);
+		assertArrayEquals(new Card[0], bknd.getZoneContents(Zone.HAND));
+		assertArrayEquals(new Card[0], bknd.getZoneContents(Zone.BATTLE_FIELD1));
 		assertEquals(0, ManaPool.WHITE1.getAmount());
 		assertEquals(0, ManaPool.BLACK1.getAmount());
 		assertEquals(0, ManaPool.COLORLESS1.getAmount());

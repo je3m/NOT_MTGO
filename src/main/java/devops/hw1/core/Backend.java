@@ -295,10 +295,14 @@ public class Backend {
 	 * @param player the player that owns the spell
 	 * @return true if the spell is cast, false if not
 	 */
-	public boolean castSpell(Zone zone, Card c, int index, Boolean player) {
+	public boolean castSpell(Zone zone, Card c, int index, Boolean player, Card target, Zone targetZone) {
 		if((this.turn != player) || (!this.stack.isEmpty())){
 			return false;
 		}
+		if((target != null) && !canTarget(c, zone, target, targetZone)) {
+			return false;
+		}
+		
 		int[] costs = this.parseCost(c.getCost());
 
 
