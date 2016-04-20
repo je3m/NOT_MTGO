@@ -2148,4 +2148,7 @@ public class BackendTest {
 		assertEquals(1,ManaPool.WHITE1.getAmount());
 		ManaPool.WHITE1.empty();
 	}
+	
+	
+	
 }

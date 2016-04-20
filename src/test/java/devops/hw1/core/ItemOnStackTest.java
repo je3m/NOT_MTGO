@@ -15,7 +15,6 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(Parameterized.class)
 public class ItemOnStackTest {
 	
-	
 	@Parameters
 	public static Collection<Object[]> data() {
 		Object[][] data = new Object[5][4];
