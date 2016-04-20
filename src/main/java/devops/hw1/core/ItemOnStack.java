@@ -8,16 +8,18 @@ public class ItemOnStack {
 	private Card c;
 	private Card target;
 	private Boolean player;
+	private Zone targetZone;
 	
 	/**
 	 * Constructs an item on the stack object
 	 * @param c card on the stack
 	 * @param player player that owns the card (true if first player)
 	 */
-	ItemOnStack(Card c, Boolean player, Card target){
+	ItemOnStack(Card c, Boolean player, Card target, Zone targetZone){
 		this.c = c;
 		this.player = player;
 		this.target = target;
+		this.targetZone = targetZone;
 	}
 	
 	/**
@@ -42,5 +44,13 @@ public class ItemOnStack {
 	 */
 	public Card getTarget() {
 		return target;
+	}
+	
+	/**
+	 * Gets the zone that the targeted card is in
+	 * @return the zone occupied by the card that this stack item is targeting
+	 */
+	public Zone getTargetZone() {
+		return targetZone;
 	}
 }
