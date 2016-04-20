@@ -175,10 +175,19 @@ public class Backend {
 			
 			if (this.passed && !this.stack.empty()) {
 				ItemOnStack item = this.stack.pop();
-				if(item.getPlayer()){
-					Zone.BATTLE_FIELD.addCard(item.getCard(), 0);
+				if(item.getTarget() != null) {
+					Card[] tZone = item.getTargetZone().getCards();
+					for(int i = 0; i < tZone.length; i++) {
+						if(tZone[i].equals(item.getTarget())) {
+							item.getTargetZone().remove(i);
+						}
+					}
 				} else {
-					Zone.BATTLE_FIELD1.addCard(item.getCard(), 0);
+					if(item.getPlayer()){
+						Zone.BATTLE_FIELD.addCard(item.getCard(), 0);
+					} else {
+						Zone.BATTLE_FIELD1.addCard(item.getCard(), 0);
+					}
 				}
 				this.passed = false;
 				this.priority = this.turn;
@@ -329,7 +338,7 @@ public class Backend {
 			costs[5] = this.handleGeneric(ManaPool.getPool('r', player), costs[5]);
 			costs[5] = this.handleGeneric(ManaPool.getPool('g', player), costs[5]);
 
-			this.stack.push(new ItemOnStack(c, player, null, null));
+			this.stack.push(new ItemOnStack(c, player, target, targetZone));
 
 			zone.remove(index);
 			this.passed = false;
