@@ -2170,6 +2170,65 @@ public class BackendTest {
 		EasyMock.replay(card2);
 		
 		bknd.addCard(Zone.HAND, card1, 0);
+		bknd.addCard(Zone.HAND1, card2, 0);
+		
+		
+		
+		
+		ManaPool.WHITE1.add(1);
+		ManaPool.BLACK1.add(1);
+		ManaPool.COLORLESS1.add(1);
+		
+		
+		assertFalse(bknd.castSpell(Zone.HAND, card1, 0, true, card2, Zone.HAND1));
+		assertEquals(bknd.getZoneContents(Zone.HAND)[0], card1);
+		assertEquals(bknd.getZoneContents(Zone.HAND1)[0], card2);
+
+		bknd.passPriority(true);
+		bknd.passPriority(false);
+
+		assertEquals(bknd.getZoneContents(Zone.HAND), card1);
+		assertEquals(bknd.getZoneContents(Zone.HAND1), card2);
+		assertEquals(1, ManaPool.WHITE1.getAmount());
+		assertEquals(1, ManaPool.BLACK1.getAmount());
+		assertEquals(1, ManaPool.COLORLESS1.getAmount());
+
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+		
+		
+		
+	}
+	
+	
+	@Test
+	public void handleTargetTest2() {
+		
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+
+		Backend bknd = new Backend();
+		
+		Card card1 = EasyMock.strictMock(Card.class);//Vindicate
+		Card card2 = EasyMock.strictMock(Card.class);
+		
+		EasyMock.expect(card1.getCost()).andReturn("1WB");
+		
+		EasyMock.replay(card1);
+		EasyMock.replay(card2);
+		
+		bknd.addCard(Zone.HAND, card1, 0);
 		bknd.addCard(Zone.BATTLE_FIELD1, card2, 0);
 		
 		
