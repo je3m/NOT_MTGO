@@ -25,8 +25,6 @@ public class Backend {
 		this.stack = new Stack<ItemOnStack>();
 	}
 
-	//!# Eliminate because irrelevant? otherwise ADD ERROR-HANDLING FOR INDEX
-	//TODO add input validation for index/card
 	/**
 	 * Handles logic for moving a card when it's clicked (prototype code)
 	 * @param z the zone the card's being moved from
@@ -98,7 +96,6 @@ public class Backend {
 		z.addCard(c, z.getSize());
 	}
 
-	//TODO make wrapped exception more informative?
 	/**
 	 * Adds the given card to the given zone
 	 * @param z Zone to add card to

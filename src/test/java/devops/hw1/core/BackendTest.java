@@ -2714,6 +2714,16 @@ public class BackendTest {
 	}
 	
 	@Test
+	public void testHandleCardClickedInvalidIndex2() {
+		Card c = EasyMock.niceMock(Card.class);
+		try{
+			Backend.handleCardClicked(Zone.HAND, 1, c);
+		} catch(IndexOutOfBoundsException e){
+			assertTrue(e.getMessage().equals("Card clicked could not remove card: No object exists in the HAND zone at index 1"));
+		}
+	}
+	
+	@Test
 	public void testHandleCardClickedInvalidCard() {
 		try{
 			Backend.handleCardClicked(Zone.HAND, 0, null);

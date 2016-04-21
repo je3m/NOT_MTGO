@@ -79,3 +79,10 @@ Scott
  -Added display of mana pools on GUI
  -Added display of the phases and which phase/turn the game is currently in
  -Added button for each player to pass priority 
+ 
+ -----------------------------------------------------------------------------------
+ Milestone 5
+ 
+Chris
+ - Added input validation on
+ 	-handleCardClicked()
