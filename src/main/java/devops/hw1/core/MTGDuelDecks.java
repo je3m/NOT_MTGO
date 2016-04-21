@@ -13,6 +13,7 @@ public class MTGDuelDecks {
 	public static final String MOUNTAIN_PATH = "res/Mountain.jpg";
 	public static final String FOREST_PATH = "res/Forest.jpg";
 	public static final String LLANOWAR_ELVES_PATH = "res/Llanowar_Elves.jpg";
+	public static final String TARFIRE_PATH = "res/Tarfire.jpg";
 
 	/**
 	 * Main method that runs the game and sets up the GUI frame.
@@ -98,8 +99,17 @@ public class MTGDuelDecks {
 		hand1.addAbility("Play this card");
 		hand1.addManaAbility("T:R");
 		hand1.setImage(MOUNTAIN_PATH);
+
+		Card hand2 = new Card("tarfire");
+		hand2.addAbility("cast this card");
+		hand2.setCost("R");
+		hand2.setColor("R");
+		hand2.setFlash(true);
+		hand2.setImage(TARFIRE_PATH);
+		hand2.setType("instant- Goblin");
+
 		Zone.HAND1.addCard(hand1, 0);
-		Zone.HAND1.addCard(new Card("Hand2"), 0);
+		Zone.HAND1.addCard(hand2, 0);
 		Zone.HAND1.addCard(new Card("Hand3"), 0);
 		Zone.HAND1.addCard(new Card("Hand4"), 0);
 		Zone.HAND1.addCard(new Card("Hand5"), 0);
