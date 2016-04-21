@@ -37,6 +37,9 @@ public class Backend {
 		if(currIndex < 0){
 			throw new IllegalArgumentException(currIndex + " is not a valid index for card click events.");
 		}
+		if(c == null){
+			throw new IllegalArgumentException("Null is not a valid card for card click events.");
+		}
 		switch(z) {
 		case HAND:
 			Zone.BATTLE_FIELD.addCard(c, 0);
