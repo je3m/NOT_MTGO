@@ -2264,4 +2264,42 @@ public class BackendTest {
 		
 	}
 	
+	
+	@Test
+	public void testUntapStep() {
+		Backend bknd = new Backend();
+		
+		Card c1 = new Card("Forest");
+		Card c2 = new Card("Forest");
+		Card c3 = new Card("Mountain");
+		Card c4 = new Card("Mountain");
+		
+		bknd.addCard(Zone.BATTLE_FIELD, c1, 0);
+		bknd.addCard(Zone.BATTLE_FIELD, c2, 0);
+		bknd.addCard(Zone.BATTLE_FIELD1, c3, 0);
+		bknd.addCard(Zone.BATTLE_FIELD1, c4, 0);
+		
+		c1.tap();
+		c3.tap();
+		
+		for(int i = 0; i < 12; i++) {
+			bknd.changePhase();
+		}
+		
+		boolean anyTapped = false;
+		for(Card c : Zone.BATTLE_FIELD.getCards()) {
+			if(c.getTapped()) {
+				anyTapped =true;
+			}
+		}
+		for(Card c : Zone.BATTLE_FIELD1.getCards()) {
+			if(c.getTapped()) {
+				anyTapped =true;
+			}
+		}
+		
+		assertFalse(anyTapped);
+		
+	}
+	
 }
