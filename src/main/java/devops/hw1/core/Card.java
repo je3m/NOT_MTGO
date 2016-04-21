@@ -184,7 +184,7 @@ public class Card {
 	 * @param s type of card
 	 */
 	public void setType(String s) {//TODO more specific/rigorous regex
-		String regex = "[a-zA-Z]*(\\- [a-zA-Z]*( [a-zA-Z]*)*)?";
+		String regex = "[a-zA-Z]*(\\- [a-zA-Z]+( [a-zA-Z]+)*)?";
 		if(!s.matches(regex)) {
 			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid card typeline", regex, -1);
 		}
