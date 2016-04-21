@@ -217,6 +217,13 @@ public class TestCard {
 		} catch (PatternSyntaxException e) {
 			assertEquals(e.getDescription(), "Card Scornful Egotist: Creature- is not a valid card typeline");
 		}
+		
+		try {
+			c.setType("Creature- ");
+			fail("Expected PatternSyntaxException");
+		} catch (PatternSyntaxException e) {
+			assertEquals(e.getDescription(), "Card Scornful Egotist: Creature-  is not a valid card typeline");
+		}
 	}
 	
 	@Test 
