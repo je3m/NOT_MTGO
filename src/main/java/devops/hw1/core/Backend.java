@@ -320,7 +320,11 @@ public class Backend {
 	 * @return true if the spell is cast, false if not
 	 */
 	public boolean castSpell(Zone zone, Card c, int index, Boolean player, Card target, Zone targetZone) {
-		if((this.turn != player) || (!this.stack.isEmpty())){
+		
+		if(!c.isFlash() &&
+				((this.turn != player) || (!this.stack.isEmpty()) || 
+				(this.phase != Phase.FIRST_MAIN1 && this.phase != Phase.SECOND_MAIN1 && 
+				this.phase != Phase.FIRST_MAIN2 && this.phase != Phase.SECOND_MAIN2))){
 			return false;
 		}
 		if((target != null) && !canTarget(c, zone, target, targetZone)) {

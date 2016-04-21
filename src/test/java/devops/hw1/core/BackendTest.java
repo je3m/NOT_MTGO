@@ -24,6 +24,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.expect(c.getCost()).andReturn("1U");
@@ -87,6 +88,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("2U");
 		EasyMock.expect(c.getCost()).andReturn("2U");
@@ -133,6 +135,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.expect(c.getCost()).andReturn("1U");
@@ -142,7 +145,7 @@ public class BackendTest {
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.replay(c);
 
-		for (int i = 0; i < 31; i++)
+		for (int i = 0; i < 24; i++)
 			bknd.passPriority(((i % 2) ==0)?(true):(false));
 
 		ManaPool.BLUE2.add(1);
@@ -158,8 +161,8 @@ public class BackendTest {
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND1),bknd.getZoneContents(Zone.HAND));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD1),bknd.getZoneContents(Zone.HAND));
 
-		bknd.passPriority(false);
 		bknd.passPriority(true);
+		bknd.passPriority(false);
 
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND1),bknd.getZoneContents(Zone.HAND));
 		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD1)[0]));
@@ -191,6 +194,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("2U");
 		EasyMock.expect(c.getCost()).andReturn("2U");
@@ -237,6 +241,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.expect(c.getCost()).andReturn("1U");
@@ -287,6 +292,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.expect(c.getCost()).andReturn("1U");
@@ -339,6 +345,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.expect(c.getCost()).andReturn("1U");
@@ -391,6 +398,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.expect(c.getCost()).andReturn("1U");
@@ -443,6 +451,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.expect(c.getCost()).andReturn("1U");
@@ -495,6 +504,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("2U");
 		EasyMock.expect(c.getCost()).andReturn("2U");
@@ -552,6 +562,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.expect(c.getCost()).andReturn("1U");
@@ -620,6 +631,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("W");
 		EasyMock.expect(c.getCost()).andReturn("W");
@@ -668,6 +680,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("B");
 		EasyMock.expect(c.getCost()).andReturn("B");
@@ -716,6 +729,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("R");
 		EasyMock.expect(c.getCost()).andReturn("R");
@@ -764,6 +778,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("G");
 		EasyMock.expect(c.getCost()).andReturn("G");
@@ -812,6 +827,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("GG");
 		EasyMock.expect(c.getCost()).andReturn("GG");
@@ -854,6 +870,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("GG");
 		EasyMock.expect(c.getCost()).andReturn("GG");
@@ -1236,6 +1253,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.expect(c.getCost()).andReturn("1U");
@@ -1284,6 +1302,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.expect(c.getCost()).andReturn("1U");
@@ -1335,6 +1354,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.expect(c.getCost()).andReturn("1U");
@@ -1385,6 +1405,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.expect(c.getCost()).andReturn("1U");
@@ -1431,6 +1452,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c.getCost()).andReturn("1U");
 		EasyMock.expect(c.getCost()).andReturn("1U");
@@ -1441,6 +1463,7 @@ public class BackendTest {
 		EasyMock.replay(c);
 
 		Card c1 = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c1.isFlash()).andReturn(false);
 		EasyMock.expect(c1.getType()).andReturn("Creature- bird");
 		EasyMock.expect(c1.getCost()).andReturn("1U");
 		EasyMock.expect(c1.getCost()).andReturn("1U");
@@ -2147,6 +2170,7 @@ public class BackendTest {
 		
 		Card card1 = new Card("Vindicate");
 		Card card2 = new Card("Mountain");
+		card1.setType("Sorcery");
 		
 		card1.setCost("1WB");
 		
@@ -2209,6 +2233,7 @@ public class BackendTest {
 		Card card2 = new Card("Mountain");
 		
 		card1.setCost("1WB");
+		card1.setType("Sorcery");
 		
 		bknd.addCard(Zone.HAND, card1, 0);
 		bknd.addCard(Zone.BATTLE_FIELD1, card2, 0);
