@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.regex.PatternSyntaxException;
 
 import org.junit.Assert;
@@ -12,6 +13,20 @@ import org.junit.Test;
 
 public class TestCard {
 
+	@Test
+	public void makeCardSimpleTest(){
+		Card c = new Card("Storm Crow","1U", "U", "Creature- Bird", null, new ArrayList<String>(), 1, 1, "res/Mountain.jpg", null);
+		assertTrue(c.getName().equals("Storm Crow"));
+		assertTrue(c.getCost().equals("1U"));
+		assertTrue(c.getColor().equals("U"));
+		assertTrue(c.getType().equals("Creature- Bird"));
+		assertEquals(c.getManaAbility(),null);
+		assertEquals(c.getAbilities().length,0);
+		assertEquals(c.getPower(),1);
+		assertEquals(c.getToughness(),1);
+		assertTrue(c.getImage().equals("res/Mountain.jpg"));
+	}
+	
 	@Test
 	public void makeCardGetName(){
 		Card c = new Card("Storm Crow");
