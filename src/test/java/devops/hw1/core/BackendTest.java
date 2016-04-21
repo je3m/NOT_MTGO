@@ -1602,7 +1602,7 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.END_OF_COMBAT1);
+		assertEquals(bknd.getPhase(), Phase.COMBAT_DAMAGE1);
 	}
 
 	@Test
@@ -1613,7 +1613,7 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.SECOND_MAIN1);
+		assertEquals(bknd.getPhase(), Phase.END_OF_COMBAT1);
 	}
 
 	@Test
@@ -1625,7 +1625,7 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.END1);
+		assertEquals(bknd.getPhase(), Phase.SECOND_MAIN1);
 	}
 
 	@Test
@@ -1638,7 +1638,7 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.CLEANUP1);
+		assertEquals(bknd.getPhase(), Phase.END1);
 	}
 
 	@Test
@@ -1652,7 +1652,7 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.UPKEEP2);
+		assertEquals(bknd.getPhase(), Phase.CLEANUP1);
 	}
 
 	@Test
@@ -1667,7 +1667,7 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.DRAW2);
+		assertEquals(bknd.getPhase(), Phase.UPKEEP2);
 	}
 
 	@Test
@@ -1683,7 +1683,7 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.FIRST_MAIN2);
+		assertEquals(bknd.getPhase(), Phase.DRAW2);
 	}
 
 	@Test
@@ -1700,7 +1700,7 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.START_COMBAT2);
+		assertEquals(bknd.getPhase(), Phase.FIRST_MAIN2);
 	}
 
 	@Test
@@ -1718,7 +1718,7 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.DECLARE_ATTACKERS2);
+		assertEquals(bknd.getPhase(), Phase.START_COMBAT2);
 	}
 
 	@Test
@@ -1736,7 +1736,8 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.DECLARE_BLOCKERS2);
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.DECLARE_ATTACKERS2);
 	}
 
 	@Test
@@ -1755,7 +1756,8 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.END_OF_COMBAT2);
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.DECLARE_BLOCKERS2);
 	}
 
 	@Test
@@ -1775,7 +1777,8 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.SECOND_MAIN2);
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.COMBAT_DAMAGE2);
 	}
 
 	@Test
@@ -1796,7 +1799,8 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.END2);
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.END_OF_COMBAT2);
 	}
 
 	@Test
@@ -1818,7 +1822,8 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.CLEANUP2);
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.SECOND_MAIN2);
 	}
 
 	@Test
@@ -1841,7 +1846,8 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.UPKEEP1);
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.END2);
 	}
 
 	@Test
@@ -1865,7 +1871,8 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.DRAW1);
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.CLEANUP2);
 	}
 
 	@Test
@@ -1890,7 +1897,8 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.FIRST_MAIN1);
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.UPKEEP1);
 	}
 
 	@Test
@@ -1916,7 +1924,8 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.START_COMBAT1);
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.DRAW1);
 	}
 
 	@Test
@@ -1943,7 +1952,8 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.DECLARE_ATTACKERS1);
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.FIRST_MAIN1);
 	}
 
 	@Test
@@ -1971,7 +1981,8 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.DECLARE_BLOCKERS1);
+		bknd.changePhase();
+		assertEquals(bknd.getPhase(), Phase.START_COMBAT1);
 	}
 
 	@Test
@@ -1999,8 +2010,7 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.END_OF_COMBAT1);
+		assertEquals(bknd.getPhase(), Phase.FIRST_MAIN1);
 	}
 
 	/**

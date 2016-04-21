@@ -18,7 +18,7 @@ public class Backend {
 	 * Constructs a backend object
 	 */
 	public Backend(){
-		this.phase = Phase.UNTAP1;
+		this.phase = Phase.FIRST_MAIN1;
 		this.turn = true;
 		this.priority = true;
 		this.passed = false;
