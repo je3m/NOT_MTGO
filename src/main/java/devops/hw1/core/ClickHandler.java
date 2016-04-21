@@ -4,6 +4,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 /**
  * Handles clicking for the game
  * @author malinocr
@@ -35,8 +37,8 @@ public class ClickHandler implements MouseListener {
 		this.checkZoneForCardClick(this.MTGComp.getHandGUICards2(), Zone.HAND1);
 		this.checkZoneForCardClick(this.MTGComp.getBattleGUICards1(), Zone.BATTLE_FIELD);
 		this.checkZoneForCardClick(this.MTGComp.getBattleGUICards2(), Zone.BATTLE_FIELD1);
-		this.checkDispCardClick1();
-		this.checkDispCardClick2();
+		this.checkDispCardClick1(true);
+		this.checkDispCardClick1(false);
 		this.checkPassButtonClick1();
 		this.checkPassButtonClick2();
 
@@ -45,16 +47,34 @@ public class ClickHandler implements MouseListener {
 	/**
 	 * Handles click checking for the first players GUI card
 	 */
-	private void checkDispCardClick1() {
-		DispGUICard gCard = this.MTGComp.getDispGUICard1();
+	private void checkDispCardClick1(Boolean player) {
+		DispGUICard gCard;
 
-		if(this.MTGComp.getDispGUICard1() != null){
-			if(this.MTGComp.getDispGUICard1().getRec().contains(this.MTGComp.getMousePosition())){
-				this.MTGComp.setDispGUICard1(null);
+		if (player){
+			gCard = this.MTGComp.getDispGUICard1();
+		}else{
+			gCard = this.MTGComp.getDispGUICard2();
+		}
+
+		if(gCard != null){
+			if(gCard.getRec().contains(this.MTGComp.getMousePosition())){
+				if (player) {
+					this.MTGComp.setDispGUICard1(null);
+				} else {
+					this.MTGComp.setDispGUICard2(null);
+				}
+
 				this.MTGComp.repaint();
 			} else {
-				if((gCard.getAbilityBoxes().length > 1) && gCard.getAbilityBoxes()[1].contains(this.MTGComp.getMousePosition())){
-					Backend.getInstance().castSpell(gCard.getZone(), gCard.getCard(), gCard.index, true, null, null);
+				if((gCard.getAbilityBoxes().length > 1) &&
+						gCard.getAbilityBoxes()[1].contains(this.MTGComp.getMousePosition())){
+
+					try{
+						Backend.getInstance().castSpell(gCard.getZone(), gCard.getCard(), gCard.index, player, null, null);
+					} catch (Exception e){
+						JOptionPane.showMessageDialog(this.MTGComp, "Cannot play that card");
+					}
+
 				}else {
 
 					for(int i = 0; i < (gCard.getAbilityBoxes().length); i++){
@@ -75,30 +95,7 @@ public class ClickHandler implements MouseListener {
 		}
 	}
 
-	/**
-	 * Handles click checking for the second players GUI card
-	 */
-	private void checkDispCardClick2() {
-		if(this.MTGComp.getDispGUICard2() != null){
-			if(this.MTGComp.getDispGUICard2().getRec().contains(this.MTGComp.getMousePosition())){
-				this.MTGComp.setDispGUICard2(null);
-				this.MTGComp.repaint();
-			} else {
-				for(int i = 0; i < this.MTGComp.getDispGUICard2().getAbilityBoxes().length; i++){
-					if(this.MTGComp.getDispGUICard2().getAbilityBoxes()[i].contains(this.MTGComp.getMousePosition())){
-						if((this.MTGComp.getDispGUICard2().getCard().getManaAbility() != null) && (i==0)) {
-							this.MTGComp.getBackend().activateManaAbility(this.MTGComp.getDispGUICard2().getCard(), false);
-						} else {
-							Backend.activateAbility(this.MTGComp.getDispGUICard2().getCard(), this.MTGComp.getDispGUICard2().getZone(), this.MTGComp.getDispGUICard2().getIndex(), i);
-						}
-						this.MTGComp.setDispGUICard2(null);
-						this.MTGComp.repaint();
-						break;
-					}
-				}
-			}
-		}
-	}
+
 
 	/**
 	 * Checks to see if any card in an array list is clicked and tells the backend if something is clicked
