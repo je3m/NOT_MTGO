@@ -2698,6 +2698,7 @@ public class BackendTest {
 		Card c = EasyMock.niceMock(Card.class);
 		try{
 			Backend.handleCardClicked(Zone.EXILE, 0, c);
+			fail("Expected IllegalArgumentException");
 		} catch(IllegalArgumentException e){
 			assertTrue(e.getMessage().equals(Zone.EXILE + " zone is not a valid zone for card click events."));
 		}
@@ -2708,6 +2709,7 @@ public class BackendTest {
 		Card c = EasyMock.niceMock(Card.class);
 		try{
 			Backend.handleCardClicked(Zone.HAND, -1, c);
+			fail("Expected IllegalArgumentException");
 		} catch(IllegalArgumentException e){
 			assertTrue(e.getMessage().equals(-1 + " is not a valid index for card click events."));
 		}
@@ -2718,6 +2720,7 @@ public class BackendTest {
 		Card c = EasyMock.niceMock(Card.class);
 		try{
 			Backend.handleCardClicked(Zone.HAND, 1, c);
+			fail("Expected IndexOutOfBoundsException");
 		} catch(IndexOutOfBoundsException e){
 			assertTrue(e.getMessage().equals("Card clicked could not remove card: No object exists in the HAND zone at index 1"));
 		}
@@ -2727,6 +2730,7 @@ public class BackendTest {
 	public void testHandleCardClickedInvalidCard() {
 		try{
 			Backend.handleCardClicked(Zone.HAND, 0, null);
+			fail("Expected IllegalArgumentException");
 		} catch(IllegalArgumentException e){
 			assertTrue(e.getMessage().equals("Null is not a valid card for card click events."));
 		}

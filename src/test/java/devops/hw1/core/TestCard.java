@@ -28,6 +28,16 @@ public class TestCard {
 	}
 	
 	@Test
+	public void makeCardSimpleTest1(){
+		try{
+			Card c = new Card("Storm Crow","1U", "U", "Creature- Bird", null, null, 1, 1, "res/Mountain.jpg", null);
+			fail("Expected IllegalArgumentException");
+		} catch (IllegalArgumentException e){
+			assertEquals(e.getMessage(), "Card construction error: null is not a valid ability list");
+		}
+	}
+	
+	@Test
 	public void makeCardGetName(){
 		Card c = new Card("Storm Crow");
 		assertEquals(c.getName(), "Storm Crow");

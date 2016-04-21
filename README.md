@@ -86,5 +86,5 @@ Scott
 Chris
  - Added input validation on handleCardClicked()
  - Made setType's regex stricter and added input validation
- 
+ - Created a new constructer for the card class and tested it (old constructor is now depricated)
  
