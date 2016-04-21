@@ -2704,12 +2704,22 @@ public class BackendTest {
 	}
 	
 	@Test
-	public void testHandleCardClickedInvalidCurrentIndex() {
+	public void testHandleCardClickedInvalidIndex1() {
 		Card c = EasyMock.niceMock(Card.class);
 		try{
 			Backend.handleCardClicked(Zone.HAND, -1, c);
 		} catch(IllegalArgumentException e){
 			assertTrue(e.getMessage().equals(-1 + " is not a valid index for card click events."));
+		}
+	}
+	
+	@Test
+	public void testHandleCardClickedInvalidIndex2() {
+		Card c = EasyMock.niceMock(Card.class);
+		try{
+			Backend.handleCardClicked(Zone.HAND, 1, c);
+		} catch(IllegalArgumentException e){
+			assertTrue(e.getMessage().equals(1 + " is not a valid index for card click events."));
 		}
 	}
 }
