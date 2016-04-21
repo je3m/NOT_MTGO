@@ -183,7 +183,7 @@ public class Card {
 	 * (example Storm Crow -> "Creature- bird")
 	 * @param s type of card
 	 */
-	public void setType(String s) {
+	public void setType(String s) {//TODO more specific/rigorous regex
 		String regex = "[a-zA-Z]*\\-?[a-zA-Z ]*";
 		if(!s.matches(regex)) {
 			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid card typeline", regex, -1);
@@ -195,7 +195,7 @@ public class Card {
 	 * Sets whether this card can be cast at instant speed independent of its card typeline
 	 * @param flash whether this card can be cast at instant speed
 	 */
-	public void setFlash(boolean flash) {
+	public void setFlash(boolean flash) {//TODO null value input validation
 		this.flash = flash;
 	}
 

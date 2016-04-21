@@ -26,6 +26,7 @@ public class Backend {
 	}
 
 	//!# Eliminate because irrelevant? otherwise ADD ERROR-HANDLING FOR INDEX
+	//TODO add input validation for index/card
 	/**
 	 * Handles logic for moving a card when it's clicked (prototype code)
 	 * @param z the zone the card's being moved from
@@ -33,7 +34,6 @@ public class Backend {
 	 * @param c the card that's being moved from its current zone
 	 */
 	public static void handleCardClicked(Zone z, int currIndex, Card c) {
-		z.remove(currIndex);
 		switch(z) {
 		case HAND:
 			Zone.BATTLE_FIELD.addCard(c, 0);
@@ -50,8 +50,10 @@ public class Backend {
 		default:
 			throw new IllegalArgumentException(z + " zone is not a valid zone for card click events.");
 		}
+		z.remove(currIndex);
 	}
 
+	//TODO input validation on i
 	/**
 	 * Prototype function. Moves a card from its current zone to a new one when its ability is activated
 	 * @param c the card whose ability is being activated
@@ -90,6 +92,7 @@ public class Backend {
 		z.addCard(c, z.getSize());
 	}
 
+	//TODO make wrapped exception more informative?
 	/**
 	 * Adds the given card to the given zone
 	 * @param z Zone to add card to
