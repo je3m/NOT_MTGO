@@ -238,6 +238,13 @@ public class TestCard {
 		} catch (PatternSyntaxException e) {
 			assertEquals(e.getDescription(), "Card Scornful Egotist:  is not a valid card typeline");
 		}
+		
+		try {
+			c.setType(null);
+			fail("Expected IllegalArgumentException");
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Card Scornful Egotist: null is not a valid card type.");
+		}
 	}
 	
 	@Test 
@@ -271,7 +278,5 @@ public class TestCard {
 		c.setFlash(true);
 		
 		assertTrue(c.isFlash());
-		
-		
 	}
 }

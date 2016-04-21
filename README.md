@@ -84,5 +84,6 @@ Scott
  Milestone 5
  
 Chris
- - Added input validation on
- 	-handleCardClicked()
+ - Added input validation on handleCardClicked()
+ - Made setType's regex stricter
+ 
