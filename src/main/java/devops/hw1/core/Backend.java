@@ -54,7 +54,11 @@ public class Backend {
 		default:
 			throw new IllegalArgumentException(z + " zone is not a valid zone for card click events.");
 		}
-		z.remove(currIndex);
+		try{
+			z.remove(currIndex);
+		} catch (IndexOutOfBoundsException e){
+			throw new IndexOutOfBoundsException("Card clicked could not remove card: " + e.getMessage());
+		}
 	}
 
 	//TODO input validation on i
