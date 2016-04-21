@@ -2286,4 +2286,306 @@ public class BackendTest {
 		
 	}
 	
+	@Test
+	public void testCastInstant1() {
+		
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+
+		Backend bknd = new Backend();
+		Card c = new Card("Ashcoat Bear");
+		
+		bknd.changePhase();
+
+		ManaPool.BLUE1.add(1);
+		ManaPool.COLORLESS1.add(1);
+		bknd.addCard(Zone.HAND, c, 0);
+		c.setType("Creature- Bear");
+		c.setFlash(true);
+		c.setCost("1U");
+
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
+		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
+
+		bknd.passPriority(true);
+		bknd.passPriority(false);
+
+		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
+		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
+		assertEquals(0, ManaPool.BLUE1.getAmount());
+		assertEquals(0, ManaPool.COLORLESS1.getAmount());
+
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+		
+		
+	}
+	
+	@Test
+	public void testCastInstant2() {
+		
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+
+		Backend bknd = new Backend();
+		Card c = new Card("Ashcoat Bear");
+		
+		for(int i = 0; i <11; i++) {
+			bknd.changePhase();
+		}
+
+		ManaPool.BLUE1.add(1);
+		ManaPool.COLORLESS1.add(1);
+		bknd.addCard(Zone.HAND, c, 0);
+		c.setType("Creature- Bear");
+		c.setFlash(true);
+		c.setCost("1U");
+
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
+		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
+
+		bknd.passPriority(true);
+		bknd.passPriority(false);
+
+		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
+		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
+		assertEquals(0, ManaPool.BLUE1.getAmount());
+		assertEquals(0, ManaPool.COLORLESS1.getAmount());
+
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+		
+		
+	}
+	
+	@Test
+	public void testCastInstant3() {
+		
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+
+		Backend bknd = new Backend();
+		Card c = new Card("Ashcoat Bear");
+		
+		for(int i = 0; i <16; i++) {
+			bknd.changePhase();
+		}
+
+		ManaPool.BLUE1.add(1);
+		ManaPool.COLORLESS1.add(1);
+		bknd.addCard(Zone.HAND, c, 0);
+		c.setType("Creature- Bear");
+		c.setFlash(true);
+		c.setCost("1U");
+
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
+		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
+
+		bknd.passPriority(true);
+		bknd.passPriority(false);
+
+		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
+		assertEquals(c, (bknd.getZoneContents(Zone.BATTLE_FIELD)[0]));
+		assertEquals(0, ManaPool.BLUE1.getAmount());
+		assertEquals(0, ManaPool.COLORLESS1.getAmount());
+
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+		
+		
+	}
+	
+	@Test
+	public void testCastSpellBadTiming1() {
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+
+		Backend bknd = new Backend();
+		Card c = new Card("Storm Crow");
+
+		bknd.changePhase();
+		
+		ManaPool.BLUE1.add(1);
+		ManaPool.COLORLESS1.add(1);
+		bknd.addCard(Zone.HAND, c, 0);
+		c.setType("Creature- bird");
+		c.setCost("1U");
+
+		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertEquals(bknd.getZoneContents(Zone.HAND)[0],c);
+		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.BATTLE_FIELD1));
+
+		bknd.passPriority(true);
+		bknd.passPriority(false);
+
+		assertEquals(bknd.getZoneContents(Zone.HAND)[0], c);
+		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD1), (bknd.getZoneContents(Zone.BATTLE_FIELD)));
+		assertEquals(0, ManaPool.BLUE1.getAmount());
+		assertEquals(0, ManaPool.COLORLESS1.getAmount());
+
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+		
+		
+	}
+	
+	@Test
+	public void testCastSpellBadTiming2() {
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+
+		Backend bknd = new Backend();
+		Card c = new Card("Storm Crow");
+
+		for(int i = 0; i <11; i++) {
+			bknd.changePhase();
+		}
+		
+		ManaPool.BLUE1.add(1);
+		ManaPool.COLORLESS1.add(1);
+		bknd.addCard(Zone.HAND, c, 0);
+		c.setType("Creature- bird");
+		c.setCost("1U");
+
+		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertEquals(bknd.getZoneContents(Zone.HAND)[0],c);
+		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.BATTLE_FIELD1));
+
+		bknd.passPriority(true);
+		bknd.passPriority(false);
+
+		assertEquals(bknd.getZoneContents(Zone.HAND)[0], c);
+		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD1), (bknd.getZoneContents(Zone.BATTLE_FIELD)));
+		assertEquals(0, ManaPool.BLUE1.getAmount());
+		assertEquals(0, ManaPool.COLORLESS1.getAmount());
+
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+		
+		
+	}
+	
+	@Test
+	public void testCastSpellBadTiming3() {
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+
+		Backend bknd = new Backend();
+		Card c = new Card("Storm Crow");
+
+		for(int i = 0; i <16; i++) {
+			bknd.changePhase();
+		}
+		
+		ManaPool.BLUE1.add(1);
+		ManaPool.COLORLESS1.add(1);
+		bknd.addCard(Zone.HAND, c, 0);
+		c.setType("Creature- bird");
+		c.setCost("1U");
+
+		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertEquals(bknd.getZoneContents(Zone.HAND)[0],c);
+		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.BATTLE_FIELD1));
+
+		bknd.passPriority(true);
+		bknd.passPriority(false);
+
+		assertEquals(bknd.getZoneContents(Zone.HAND)[0], c);
+		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD1), (bknd.getZoneContents(Zone.BATTLE_FIELD)));
+		assertEquals(0, ManaPool.BLUE1.getAmount());
+		assertEquals(0, ManaPool.COLORLESS1.getAmount());
+
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+		
+		
+	}
+	
 }
