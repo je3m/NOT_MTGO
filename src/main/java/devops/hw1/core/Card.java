@@ -14,6 +14,7 @@ public class Card {
 	private int power, toughness;
 	private String image;
 	private Boolean tapped;
+	private Boolean flash;
 
 	/**
 	 * Constructs a card object with the given name
@@ -23,6 +24,7 @@ public class Card {
 		this.name = s;
 		this.tapped = false;
 		this.manaAbility = null;
+		this.flash = false;
 	}
 
 	//!# add more constructors
@@ -182,11 +184,19 @@ public class Card {
 	 * @param s type of card
 	 */
 	public void setType(String s) {
-		String regex = "[a-zA-Z]*\\-[a-zA-Z ]*";
+		String regex = "[a-zA-Z]*\\-?[a-zA-Z ]*";
 		if(!s.matches(regex)) {
 			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid card typeline", regex, -1);
 		}
 		this.type = s;
+	}
+	
+	/**
+	 * Sets whether this card can be cast at instant speed independent of its card typeline
+	 * @param flash whether this card can be cast at instant speed
+	 */
+	public void setFlash(boolean flash) {
+		this.flash = flash;
 	}
 
 	@Override
@@ -216,6 +226,14 @@ public class Card {
 	 */
 	public Boolean getTapped() {
 		return this.tapped;
+	}
+	
+	/**
+	 * Determines whether this card can be cast at instant speed
+	 * @return whether this card can be cast at instant speed
+	 */
+	public Boolean isFlash() {
+		return this.flash || this.type.contains("Instant");
 	}
 
 	/**

@@ -205,10 +205,10 @@ public class TestCard {
 		assertEquals(c.getType(), "Creature- Human Wizard");
 
 		try {
-			c.setType("ewonddl");
+			c.setType("ewonddl--");
 			fail("Expected PatternSyntaxException");
 		} catch (PatternSyntaxException e) {
-			assertEquals(e.getDescription(), "Card Scornful Egotist: ewonddl is not a valid card typeline");
+			assertEquals(e.getDescription(), "Card Scornful Egotist: ewonddl-- is not a valid card typeline");
 		}
 
 	}
