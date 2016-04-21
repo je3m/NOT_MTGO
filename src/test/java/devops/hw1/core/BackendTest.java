@@ -2613,4 +2613,103 @@ public class BackendTest {
 		
 	}
 	
+	@Test
+	public void testHandleCardClickedCase1() {
+		Zone.HAND.empty();
+		Zone.BATTLE_FIELD.empty();
+		
+		Card c = EasyMock.niceMock(Card.class);
+		Zone.HAND.addCard(c, 0);
+		
+		assertEquals(Zone.HAND.getSize(), 1);
+		assertEquals(Zone.BATTLE_FIELD.getSize(), 0);
+		
+		Backend.handleCardClicked(Zone.HAND, 0, c);
+		
+		assertEquals(Zone.HAND.getSize(), 0);
+		assertEquals(Zone.BATTLE_FIELD.getSize(), 1);
+		
+		Zone.HAND.empty();
+		Zone.BATTLE_FIELD.empty();
+	}
+	
+	@Test
+	public void testHandleCardClickedCase2() {
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD1.empty();
+		
+		Card c = EasyMock.niceMock(Card.class);
+		Zone.HAND1.addCard(c, 0);
+		
+		assertEquals(Zone.HAND1.getSize(), 1);
+		assertEquals(Zone.BATTLE_FIELD1.getSize(), 0);
+		
+		Backend.handleCardClicked(Zone.HAND1, 0, c);
+		
+		assertEquals(Zone.HAND1.getSize(), 0);
+		assertEquals(Zone.BATTLE_FIELD1.getSize(), 1);
+		
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD1.empty();
+	}
+	
+	@Test
+	public void testHandleCardClickedCase3() {
+		Zone.BATTLE_FIELD.empty();
+		Zone.GRAVEYARD.empty();
+		
+		Card c = EasyMock.niceMock(Card.class);
+		Zone.BATTLE_FIELD.addCard(c, 0);
+		
+		assertEquals(Zone.BATTLE_FIELD.getSize(), 1);
+		assertEquals(Zone.GRAVEYARD.getSize(), 0);
+		
+		Backend.handleCardClicked(Zone.BATTLE_FIELD, 0, c);
+		
+		assertEquals(Zone.BATTLE_FIELD.getSize(), 0);
+		assertEquals(Zone.GRAVEYARD.getSize(), 1);
+		
+		Zone.BATTLE_FIELD.empty();
+		Zone.GRAVEYARD.empty();
+	}
+	
+	@Test
+	public void testHandleCardClickedCase4() {
+		Zone.BATTLE_FIELD1.empty();
+		Zone.GRAVEYARD1.empty();
+		
+		Card c = EasyMock.niceMock(Card.class);
+		Zone.BATTLE_FIELD1.addCard(c, 0);
+		
+		assertEquals(Zone.BATTLE_FIELD1.getSize(), 1);
+		assertEquals(Zone.GRAVEYARD1.getSize(), 0);
+		
+		Backend.handleCardClicked(Zone.BATTLE_FIELD1, 0, c);
+		
+		assertEquals(Zone.BATTLE_FIELD1.getSize(), 0);
+		assertEquals(Zone.GRAVEYARD1.getSize(), 1);
+		
+		Zone.BATTLE_FIELD1.empty();
+		Zone.GRAVEYARD1.empty();
+	}
+	
+	@Test
+	public void testHandleCardClickedInvalidZone() {
+		Card c = EasyMock.niceMock(Card.class);
+		try{
+			Backend.handleCardClicked(Zone.EXILE, 0, c);
+		} catch(IllegalArgumentException e){
+			assertTrue(e.getMessage().equals(Zone.EXILE + " zone is not a valid zone for card click events."));
+		}
+	}
+	
+	@Test
+	public void testHandleCardClickedInvalidCurrentIndex() {
+		Card c = EasyMock.niceMock(Card.class);
+		try{
+			Backend.handleCardClicked(Zone.HAND, -1, c);
+		} catch(IllegalArgumentException e){
+			assertTrue(e.getMessage().equals(Zone.EXILE + " is not a valid index for card click events."));
+		}
+	}
 }
