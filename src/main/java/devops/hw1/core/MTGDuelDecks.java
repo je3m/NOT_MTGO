@@ -10,14 +10,16 @@ import javax.swing.JFrame;
  *
  */
 public class MTGDuelDecks {
-	public static String MOUNTAIN_PATH = "res/Mountain.jpg";
-	public static String FOREST_PATH = "res/Forest.jpg";
+	public static final String MOUNTAIN_PATH = "res/Mountain.jpg";
+	public static final String FOREST_PATH = "res/Forest.jpg";
+	public static final String LLANOWAR_ELVES_PATH = "res/Llanowar_Elves.jpg";
+
 	/**
 	 * Main method that runs the game and sets up the GUI frame.
 	 * @param args
 	 */
 	public static void main(String[] args){
-		Backend bkd = new Backend();
+		Backend bkd = Backend.getInstance();
 		setUpJFrame(bkd);
 
 		initializePlayer();
@@ -48,13 +50,27 @@ public class MTGDuelDecks {
 		hand2.setImage(FOREST_PATH);
 		Zone.HAND.addCard(hand2, 0);
 
-		Zone.HAND.addCard(new Card("Hand3"), 0);
+		Card hand3 = new Card("Arbor elf");
+		hand3.setColor("G");
+		hand3.addAbility("Tap: Add G to your mana pool");
+		hand3.addAbility("Play this card");
+		hand3.addManaAbility("T:G");
+		hand3.setImage(LLANOWAR_ELVES_PATH);
+		hand3.setType("Elf Druid");
+		hand3.setCost("G");
+		hand3.setPT(1, 1);
+
+
+		Zone.HAND.addCard(hand3, 0);
 		Zone.HAND.addCard(new Card("Hand4"), 0);
 		Zone.HAND.addCard(new Card("Hand5"), 0);
 		Zone.HAND.addCard(new Card("Hand6"), 0);
 		Zone.HAND.addCard(new Card("Hand7"), 0);
 		Zone.HAND.addCard(new Card("Hand8"), 0);
 		Zone.HAND.addCard(new Card("Hand9"), 0);
+
+
+
 
 		Card BF1 = new Card("BF1");
 		BF1.setImage(FOREST_PATH);
@@ -122,6 +138,8 @@ public class MTGDuelDecks {
 			}
 		});
 		ClickHandler ch = new ClickHandler(MTGComp);
+		KeyBoardHandler kb = new KeyBoardHandler(MTGComp);
+		Frame.addKeyListener(kb);
 		Frame.addMouseListener(ch);
 		return Frame;
 	}
