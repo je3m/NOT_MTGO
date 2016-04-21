@@ -61,7 +61,7 @@ public class Backend {
 		}
 	}
 
-	//TODO input validation on i
+	//TODO Implement this (no need for input validation yet)
 	/**
 	 * Prototype function. Moves a card from its current zone to a new one when its ability is activated
 	 * @param c the card whose ability is being activated
