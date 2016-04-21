@@ -66,21 +66,26 @@ public class ClickHandler implements MouseListener {
 
 				this.MTGComp.repaint();
 			} else {
-				if((gCard.getAbilityBoxes().length > 1) &&
-						gCard.getAbilityBoxes()[1].contains(this.MTGComp.getMousePosition())){
-
+				if(gCard.getAbilityBoxes()[0].contains(this.MTGComp.getMousePosition())){
+					System.out.println(gCard.getCard().getName());
 					try{
-						Backend.getInstance().castSpell(gCard.getZone(), gCard.getCard(), gCard.index, player, null, null);
+						if(Backend.getInstance().castSpell(gCard.getZone(), gCard.getCard(), gCard.index, player, null, null)){
+
+						} else {
+							JOptionPane.showMessageDialog(this.MTGComp, "Cannot play that card");
+						}
+
+						this.MTGComp.repaint();
 					} catch (Exception e){
-						JOptionPane.showMessageDialog(this.MTGComp, "Cannot play that card");
+						e.printStackTrace();
 					}
 
 				}else {
 
 					for(int i = 0; i < (gCard.getAbilityBoxes().length); i++){
 						if(gCard.getAbilityBoxes()[i].contains(this.MTGComp.getMousePosition())){
-							if((gCard.getCard().getManaAbility() != null) && (i==0)) {
-								this.MTGComp.getBackend().activateManaAbility(gCard.getCard(), true);
+							if((gCard.getCard().getManaAbility() != null) && (i==1)) {
+								this.MTGComp.getBackend().activateManaAbility(gCard.getCard(), player);
 							} else {
 								Backend.activateAbility(gCard.getCard(), gCard.getZone(), gCard.getIndex(), i);
 							}
@@ -92,7 +97,9 @@ public class ClickHandler implements MouseListener {
 					}
 				}
 			}
+
 		}
+
 	}
 
 

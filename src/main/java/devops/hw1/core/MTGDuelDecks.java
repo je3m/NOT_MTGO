@@ -38,23 +38,27 @@ public class MTGDuelDecks {
 		Zone.LIBRARY.addCard(new Card("Libr"), 0);
 
 		Card hand1 = new Card("Hand1");
-		hand1.addAbility("Tap: Add G to your mana pool");
+
 		hand1.addAbility("Play this card");
+		hand1.addAbility("Tap: Add G to your mana pool");
+
 		hand1.addManaAbility("T:G");
 		hand1.setImage(FOREST_PATH);
 		Zone.HAND.addCard(hand1,0);
 
 		Card hand2 = new Card("Hand2");
-		hand2.addAbility("Tap: Add G to your mana pool");
 		hand2.addAbility("Play this card");
+		hand2.addAbility("Tap: Add G to your mana pool");
+
 		hand2.addManaAbility("T:G");
 		hand2.setImage(FOREST_PATH);
 		Zone.HAND.addCard(hand2, 0);
 
 		Card hand3 = new Card("Arbor elf");
 		hand3.setColor("G");
-		hand3.addAbility("Tap: Add G to your mana pool");
 		hand3.addAbility("Play this card");
+		hand3.addAbility("Tap: Add G to your mana pool");
+
 		hand3.addManaAbility("T:G");
 		hand3.setImage(LLANOWAR_ELVES_PATH);
 		hand3.setType("Elf Druid");
@@ -75,6 +79,7 @@ public class MTGDuelDecks {
 
 		Card BF1 = new Card("BF1");
 		BF1.setImage(FOREST_PATH);
+		BF1.addAbility("Play this Card");
 		BF1.addAbility("Tap: Add G to your mana pool");
 		BF1.addManaAbility("T:G");
 		Zone.BATTLE_FIELD.addCard(BF1, 0);
@@ -95,13 +100,16 @@ public class MTGDuelDecks {
 
 
 		Card hand1 = new Card("Hand11");
-		hand1.addAbility("Tap: Add R to your mana pool");
 		hand1.addAbility("Play this card");
+		hand1.addAbility("Tap: Add R to your mana pool");
+		hand1.setColor("");
+		hand1.setType("land");
+		hand1.setFlash(false);
 		hand1.addManaAbility("T:R");
 		hand1.setImage(MOUNTAIN_PATH);
 
 		Card hand2 = new Card("tarfire");
-		hand2.addAbility("cast this card");
+		hand2.addAbility("play this card");
 		hand2.setCost("R");
 		hand2.setColor("R");
 		hand2.setFlash(true);
@@ -118,6 +126,7 @@ public class MTGDuelDecks {
 
 		Card BF2 = new Card("BF2");
 		BF2.setImage(MOUNTAIN_PATH);
+		BF2.addAbility("Play this card");
 		BF2.addAbility("Tap: Add R to your mana pool");
 		BF2.addManaAbility("T:R");
 		Zone.BATTLE_FIELD1.addCard(BF2, 0);
