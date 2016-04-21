@@ -212,4 +212,39 @@ public class TestCard {
 		}
 
 	}
+	
+	@Test 
+	public void testIsFlash() {
+		Card c;
+		
+		c= new Card("Ashcoat Bear");
+		c.setType("Creature- Bear");
+		c.setFlash(true);
+		
+		assertTrue(c.isFlash());
+		
+		c= new Card("Storm Crow");
+		c.setType("Creature- Bird");
+		
+		assertFalse(c.isFlash());
+		
+		c = new Card("Vindicate");
+		c.setType("Sorcery");
+		c.setFlash(true);
+		
+		assertTrue(c.isFlash());
+		
+		c= new Card("Lightning Bolt");
+		c.setType("Instant");
+		
+		assertTrue(c.isFlash());
+		
+		c = new Card("Ludicrous Speed!");
+		c.setType("Instant");
+		c.setFlash(true);
+		
+		assertTrue(c.isFlash());
+		
+		
+	}
 }
