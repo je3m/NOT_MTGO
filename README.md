@@ -85,5 +85,6 @@ Scott
  
 Chris
  - Added input validation on handleCardClicked()
- - Made setType's regex stricter
+ - Made setType's regex stricter and added input validation
+ 
  

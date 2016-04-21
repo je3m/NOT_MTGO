@@ -20,11 +20,27 @@ public class Card {
 	 * Constructs a card object with the given name
 	 * @param s name of the card
 	 */
+	@Deprecated
 	public Card(String s){
 		this.name = s;
 		this.tapped = false;
 		this.manaAbility = null;
 		this.flash = false;
+	}
+	
+	public Card(String name, String manaCost, String color, String type,
+			String manaAbility, ArrayList<String> abilities, int power,
+			int toughness, String image, Boolean flash){
+		this.name = name;
+		this.setCost(manaCost);
+		this.setColor(color);
+		this.setType(type);
+		this.addManaAbility(manaAbility);
+		this.abilities = abilities;
+		this.setPT(power, toughness);
+		this.setImage(image);
+		this.tapped = false;
+		this.flash = flash;
 	}
 
 	//!# add more constructors
@@ -183,7 +199,7 @@ public class Card {
 	 * (example Storm Crow -> "Creature- bird")
 	 * @param s type of card
 	 */
-	public void setType(String s) {//TODO more specific/rigorous regex
+	public void setType(String s) {
 		if(s == null){
 			throw new IllegalArgumentException("Card " + this.name + ": null is not a valid card type");
 		}
