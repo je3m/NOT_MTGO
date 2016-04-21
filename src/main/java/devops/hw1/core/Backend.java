@@ -34,6 +34,9 @@ public class Backend {
 	 * @param c the card that's being moved from its current zone
 	 */
 	public static void handleCardClicked(Zone z, int currIndex, Card c) {
+		if(currIndex < 0){
+			throw new IllegalArgumentException(currIndex + " is not a valid index for card click events.");
+		}
 		switch(z) {
 		case HAND:
 			Zone.BATTLE_FIELD.addCard(c, 0);

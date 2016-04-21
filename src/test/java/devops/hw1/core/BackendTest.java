@@ -2709,7 +2709,7 @@ public class BackendTest {
 		try{
 			Backend.handleCardClicked(Zone.HAND, -1, c);
 		} catch(IllegalArgumentException e){
-			assertTrue(e.getMessage().equals(Zone.EXILE + " is not a valid index for card click events."));
+			assertTrue(e.getMessage().equals(-1 + " is not a valid index for card click events."));
 		}
 	}
 }
