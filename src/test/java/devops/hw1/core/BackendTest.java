@@ -22,7 +22,7 @@ public class BackendTest {
 		Zone.HAND1.empty();
 		Zone.BATTLE_FIELD.empty();
 
-		Backend bknd = new Backend();
+		Backend bknd = Backend.getInstance();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.isFlash()).andReturn(false);
 		EasyMock.expect(c.getType()).andReturn("Creature- bird");
@@ -1324,7 +1324,7 @@ public class BackendTest {
 		bknd.passPriority(true);
 		bknd.passPriority(false);
 		bknd.passPriority(true);
-		
+
 
 		assertEquals(bknd.getPhase(), Phase.FIRST_MAIN1);
 		assertFalse(bknd.getPriority());
@@ -2155,10 +2155,10 @@ public class BackendTest {
 		assertEquals(1,ManaPool.WHITE1.getAmount());
 		ManaPool.WHITE1.empty();
 	}
-	
+
 	@Test
 	public void handleTargetTest1() {
-		
+
 		ManaPool.WHITE1.empty();
 		ManaPool.BLUE1.empty();
 		ManaPool.BLACK1.empty();
@@ -2167,32 +2167,32 @@ public class BackendTest {
 		ManaPool.COLORLESS1.empty();
 
 		Backend bknd = new Backend();
-		
+
 		Card card1 = new Card("Vindicate");
 		Card card2 = new Card("Mountain");
 		card1.setType("Sorcery");
-		
+
 		card1.setCost("1WB");
-		
+
 		bknd.addCard(Zone.HAND, card1, 0);
 		bknd.addCard(Zone.HAND1, card2, 0);
-		
-		
-		
-		
+
+
+
+
 		ManaPool.WHITE1.add(1);
 		ManaPool.BLACK1.add(1);
 		ManaPool.COLORLESS1.add(1);
-		
-		
+
+
 		assertFalse(bknd.castSpell(Zone.HAND, card1, 0, true, card2, Zone.HAND1));
 		assertEquals(card1, bknd.getZoneContents(Zone.HAND)[0]);
 		assertEquals(card2, bknd.getZoneContents(Zone.HAND1)[0]);
 		assertEquals(1, ManaPool.WHITE1.getAmount());
 		assertEquals(1, ManaPool.BLACK1.getAmount());
 		assertEquals(1, ManaPool.COLORLESS1.getAmount());
-		
-		
+
+
 		bknd.passPriority(true);
 		bknd.passPriority(false);
 
@@ -2211,15 +2211,15 @@ public class BackendTest {
 		Zone.HAND.empty();
 		Zone.HAND1.empty();
 		Zone.BATTLE_FIELD.empty();
-		
-		
-		
+
+
+
 	}
-	
-	
+
+
 	@Test
 	public void handleTargetTest2() {
-		
+
 		ManaPool.WHITE1.empty();
 		ManaPool.BLUE1.empty();
 		ManaPool.BLACK1.empty();
@@ -2228,24 +2228,24 @@ public class BackendTest {
 		ManaPool.COLORLESS1.empty();
 
 		Backend bknd = new Backend();
-		
+
 		Card card1 = new Card("Vindicate");
 		Card card2 = new Card("Mountain");
-		
+
 		card1.setCost("1WB");
 		card1.setType("Sorcery");
-		
+
 		bknd.addCard(Zone.HAND, card1, 0);
 		bknd.addCard(Zone.BATTLE_FIELD1, card2, 0);
-		
-		
-		
-		
+
+
+
+
 		ManaPool.WHITE1.add(1);
 		ManaPool.BLACK1.add(1);
 		ManaPool.COLORLESS1.add(1);
-		
-		
+
+
 		assertTrue(bknd.castSpell(Zone.HAND, card1, 0, true, card2, Zone.BATTLE_FIELD1));
 		assertArrayEquals( new Card[0], bknd.getZoneContents(Zone.HAND));
 		assertEquals(card2, bknd.getZoneContents(Zone.BATTLE_FIELD1)[0]);
@@ -2268,33 +2268,33 @@ public class BackendTest {
 		Zone.HAND.empty();
 		Zone.HAND1.empty();
 		Zone.BATTLE_FIELD.empty();
-		
-		
-		
+
+
+
 	}
-	
-	
+
+
 	@Test
 	public void testUntapStep() {
 		Backend bknd = new Backend();
-		
+
 		Card c1 = new Card("Forest");
 		Card c2 = new Card("Forest");
 		Card c3 = new Card("Mountain");
 		Card c4 = new Card("Mountain");
-		
+
 		bknd.addCard(Zone.BATTLE_FIELD, c1, 0);
 		bknd.addCard(Zone.BATTLE_FIELD, c2, 0);
 		bknd.addCard(Zone.BATTLE_FIELD1, c3, 0);
 		bknd.addCard(Zone.BATTLE_FIELD1, c4, 0);
-		
+
 		c1.tap();
 		c3.tap();
-		
+
 		for(int i = 0; i < 12; i++) {
 			bknd.changePhase();
 		}
-		
+
 		boolean anyTapped = false;
 		for(Card c : Zone.BATTLE_FIELD.getCards()) {
 			if(c.getTapped()) {
@@ -2306,14 +2306,14 @@ public class BackendTest {
 				anyTapped =true;
 			}
 		}
-		
+
 		assertFalse(anyTapped);
-		
+
 	}
-	
+
 	@Test
 	public void testCastInstant1() {
-		
+
 		ManaPool.WHITE1.empty();
 		ManaPool.BLUE1.empty();
 		ManaPool.BLACK1.empty();
@@ -2326,7 +2326,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = new Card("Ashcoat Bear");
-		
+
 		bknd.changePhase();
 
 		ManaPool.BLUE1.add(1);
@@ -2357,13 +2357,13 @@ public class BackendTest {
 		Zone.HAND.empty();
 		Zone.HAND1.empty();
 		Zone.BATTLE_FIELD.empty();
-		
-		
+
+
 	}
-	
+
 	@Test
 	public void testCastInstant2() {
-		
+
 		ManaPool.WHITE1.empty();
 		ManaPool.BLUE1.empty();
 		ManaPool.BLACK1.empty();
@@ -2376,7 +2376,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = new Card("Ashcoat Bear");
-		
+
 		for(int i = 0; i <11; i++) {
 			bknd.changePhase();
 		}
@@ -2409,13 +2409,13 @@ public class BackendTest {
 		Zone.HAND.empty();
 		Zone.HAND1.empty();
 		Zone.BATTLE_FIELD.empty();
-		
-		
+
+
 	}
-	
+
 	@Test
 	public void testCastInstant3() {
-		
+
 		ManaPool.WHITE1.empty();
 		ManaPool.BLUE1.empty();
 		ManaPool.BLACK1.empty();
@@ -2428,7 +2428,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = new Card("Ashcoat Bear");
-		
+
 		for(int i = 0; i <16; i++) {
 			bknd.changePhase();
 		}
@@ -2461,10 +2461,10 @@ public class BackendTest {
 		Zone.HAND.empty();
 		Zone.HAND1.empty();
 		Zone.BATTLE_FIELD.empty();
-		
-		
+
+
 	}
-	
+
 	@Test
 	public void testCastSpellBadTiming1() {
 		ManaPool.WHITE1.empty();
@@ -2481,7 +2481,7 @@ public class BackendTest {
 		Card c = new Card("Storm Crow");
 
 		bknd.changePhase();
-		
+
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
@@ -2509,10 +2509,10 @@ public class BackendTest {
 		Zone.HAND.empty();
 		Zone.HAND1.empty();
 		Zone.BATTLE_FIELD.empty();
-		
-		
+
+
 	}
-	
+
 	@Test
 	public void testCastSpellBadTiming2() {
 		ManaPool.WHITE1.empty();
@@ -2531,7 +2531,7 @@ public class BackendTest {
 		for(int i = 0; i <11; i++) {
 			bknd.changePhase();
 		}
-		
+
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
@@ -2559,10 +2559,10 @@ public class BackendTest {
 		Zone.HAND.empty();
 		Zone.HAND1.empty();
 		Zone.BATTLE_FIELD.empty();
-		
-		
+
+
 	}
-	
+
 	@Test
 	public void testCastSpellBadTiming3() {
 		ManaPool.WHITE1.empty();
@@ -2581,7 +2581,7 @@ public class BackendTest {
 		for(int i = 0; i <16; i++) {
 			bknd.changePhase();
 		}
-		
+
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
@@ -2609,8 +2609,8 @@ public class BackendTest {
 		Zone.HAND.empty();
 		Zone.HAND1.empty();
 		Zone.BATTLE_FIELD.empty();
-		
-		
+
+
 	}
-	
+
 }

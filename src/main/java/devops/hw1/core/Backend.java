@@ -13,6 +13,14 @@ public class Backend {
 	private Boolean priority;
 	private Boolean passed;
 	private Stack<ItemOnStack> stack;
+	public static Backend bk;
+
+	public static Backend getInstance(){
+		if(bk == null)
+			bk = new Backend();
+
+		return bk;
+	}
 
 	/**
 	 * Constructs a backend object
@@ -190,7 +198,7 @@ public class Backend {
 	 */
 	public void passPriority(boolean player) {
 		if(this.priority == player) {
-			
+
 			if (this.passed && !this.stack.empty()) {
 				ItemOnStack item = this.stack.pop();
 				if(item.getTarget() != null) {
@@ -282,6 +290,10 @@ public class Backend {
 	 */
 	public int[] parseCost(String s){
 		int cost[] = new int[6];
+		if(s == null)
+			return cost;
+
+
 
 		int i = 0;
 
@@ -323,17 +335,16 @@ public class Backend {
 	 * @return true if the spell is cast, false if not
 	 */
 	public boolean castSpell(Zone zone, Card c, int index, Boolean player, Card target, Zone targetZone) {
-		
-		if(!c.isFlash() &&
-				((this.turn != player) || (!this.stack.isEmpty()) || 
-				(this.phase != Phase.FIRST_MAIN1 && this.phase != Phase.SECOND_MAIN1 && 
-				this.phase != Phase.FIRST_MAIN2 && this.phase != Phase.SECOND_MAIN2))){
+
+		if(	!c.isFlash() && ((this.turn != player) || (!this.stack.isEmpty()) ||
+				((this.phase != Phase.FIRST_MAIN1) && (this.phase != Phase.SECOND_MAIN1) &&
+						(this.phase != Phase.FIRST_MAIN2) && (this.phase != Phase.SECOND_MAIN2)))){
 			return false;
 		}
 		if((target != null) && !canTarget(c, zone, target, targetZone)) {
 			return false;
 		}
-		
+
 		int[] costs = this.parseCost(c.getCost());
 
 
@@ -404,7 +415,7 @@ public class Backend {
 	public static boolean isInteger(String s) {
 		return s.matches("\\d+");
 	}
-	
+
 	/**
 	 * Determines if a card can target another card
 	 * @param sourceC the card that is doing the targeting
@@ -418,8 +429,8 @@ public class Backend {
 		boolean h1ToB1 = (sourceZ == Zone.HAND)  && (targetZ == Zone.BATTLE_FIELD);
 		boolean h2ToB1 = (sourceZ == Zone.HAND1)  && (targetZ == Zone.BATTLE_FIELD);
 		boolean h2ToB2 = (sourceZ == Zone.HAND1)  && (targetZ == Zone.BATTLE_FIELD1);
-		
-		
+
+
 		return h1ToB2 || h1ToB1 || h2ToB1 || h2ToB2;
 	}
 }
