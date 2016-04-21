@@ -147,6 +147,21 @@ public class Backend {
 
 		this.phase = Phase.values()[(((this.phase.ordinal() + 1) % (Phase.CLEANUP2.ordinal() + 1)))];
 
+		//handle untap-step case
+		if((this.phase == Phase.UNTAP1) || (this.phase == Phase.UNTAP2)) {
+			for(Card c : Zone.BATTLE_FIELD.getCards()) {
+				if(c.getTapped()) {
+					c.untap();
+				}
+			}
+			for(Card c : Zone.BATTLE_FIELD1.getCards()) {
+				if(c.getTapped()) {
+					c.untap();
+				}
+			}
+			this.phase = Phase.values()[(((this.phase.ordinal() + 1) % (Phase.CLEANUP2.ordinal() + 1)))];
+		}
+
 
 	}
 

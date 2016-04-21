@@ -1544,8 +1544,6 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		bknd.changePhase();
-		bknd.changePhase();
 		assertFalse(bknd.getTurn());
 	}
 
@@ -1732,13 +1730,12 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.UNTAP2);
+		assertEquals(bknd.getPhase(), Phase.UPKEEP2);
 	}
 
 	@Test
 	public void testPhase14(){
 		Backend bknd = new Backend();
-		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
@@ -1770,14 +1767,12 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		bknd.changePhase();
 		assertEquals(bknd.getPhase(), Phase.DRAW2);
 	}
 
 	@Test
 	public void testPhase16(){
 		Backend bknd = new Backend();
-		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
@@ -1813,14 +1808,12 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		bknd.changePhase();
 		assertEquals(bknd.getPhase(), Phase.START_COMBAT2);
 	}
 
 	@Test
 	public void testPhase18(){
 		Backend bknd = new Backend();
-		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
@@ -1860,14 +1853,12 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		bknd.changePhase();
 		assertEquals(bknd.getPhase(), Phase.DECLARE_BLOCKERS2);
 	}
 
 	@Test
 	public void testPhase20(){
 		Backend bknd = new Backend();
-		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
@@ -1911,14 +1902,12 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		bknd.changePhase();
 		assertEquals(bknd.getPhase(), Phase.END_OF_COMBAT2);
 	}
 
 	@Test
 	public void testPhase22(){
 		Backend bknd = new Backend();
-		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
@@ -1966,14 +1955,12 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		bknd.changePhase();
 		assertEquals(bknd.getPhase(), Phase.END2);
 	}
 
 	@Test
 	public void testPhase24(){
 		Backend bknd = new Backend();
-		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
@@ -2025,8 +2012,7 @@ public class BackendTest {
 		bknd.changePhase();
 		bknd.changePhase();
 		bknd.changePhase();
-		bknd.changePhase();
-		assertEquals(bknd.getPhase(), Phase.UNTAP1);
+		assertEquals(bknd.getPhase(), Phase.UPKEEP1);
 	}
 
 	/**
