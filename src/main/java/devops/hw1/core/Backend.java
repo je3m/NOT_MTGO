@@ -341,6 +341,7 @@ public class Backend {
 			return false;
 		}
 		
+		//TODO this.parseCost  null
 		int[] costs = this.parseCost(c.getCost());
 
 

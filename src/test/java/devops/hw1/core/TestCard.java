@@ -243,7 +243,7 @@ public class TestCard {
 			c.setType(null);
 			fail("Expected IllegalArgumentException");
 		} catch (IllegalArgumentException e) {
-			assertEquals(e.getMessage(), "Card Scornful Egotist: null is not a valid card type.");
+			assertEquals(e.getMessage(), "Card Scornful Egotist: null is not a valid card type");
 		}
 	}
 	
