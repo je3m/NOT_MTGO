@@ -38,6 +38,16 @@ public class TestCard {
 	}
 	
 	@Test
+	public void makeCardSimpleTest2(){
+		try{
+			Card c = new Card("Storm Crow","1U", "U", "Creature-", null, null, 1, 1, "res/Mountain.jpg", null);
+			fail("Expected IllegalArgumentException");
+		} catch (IllegalArgumentException e){
+			assertEquals(e.getMessage(), "Error creating card Storm Crow: Card Storm Crow: Creature- is not a valid card typeline");
+		}
+	}
+	
+	@Test
 	public void makeCardGetName(){
 		Card c = new Card("Storm Crow");
 		assertEquals(c.getName(), "Storm Crow");
