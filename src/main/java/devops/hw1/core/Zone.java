@@ -1,7 +1,10 @@
 package devops.hw1.core;
 
 import java.util.ArrayList;
-
+/**
+ * Represents the zones in MTG
+ *
+ */
 public enum Zone {
 	BATTLE_FIELD,
 	GRAVEYARD,

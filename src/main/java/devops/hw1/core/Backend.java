@@ -134,7 +134,8 @@ public class Backend {
 
 	/**
 	 * Removes the card at the given index from the zone
-	 * @param index of card to remove
+	 * @param z zone to remove card from
+	 * @param i index to remove the card
 	 */
 	void removeCard(Zone z, int i){
 		try {
@@ -335,6 +336,8 @@ public class Backend {
 	 * @param c the spell being cast
 	 * @param index the index the spell is in
 	 * @param player the player that owns the spell
+	 * @param target the card being targeted
+	 * @param targetZone the zone the targeted card is in
 	 * @return true if the spell is cast, false if not
 	 */
 	public boolean castSpell(Zone zone, Card c, int index, Boolean player, Card target, Zone targetZone) {

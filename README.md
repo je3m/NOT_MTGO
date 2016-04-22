@@ -89,4 +89,5 @@ Chris
  - Created a new constructer for the card class and tested it (old constructor is now depricated)
  - Added null check if a card has no cost in cast spell
  - Added tests for handlegeneric()
+ - Added tests to itemOnStack()
  

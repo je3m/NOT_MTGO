@@ -2,7 +2,10 @@ package devops.hw1.core;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+/**
+ * Handles Keyboard events for the MTG Duel Decks
+ *
+ */
 public class KeyBoardHandler implements KeyListener {
 
 	private MTGComponent MTGComp;

@@ -1,5 +1,8 @@
 package devops.hw1.core;
-
+/**
+ * Represents the various phases in MTG
+ *
+ */
 public enum Phase {
 	UNTAP1 {
         @Override
