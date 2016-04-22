@@ -10,14 +10,17 @@ import javax.swing.JFrame;
  *
  */
 public class MTGDuelDecks {
-	public static String MOUNTAIN_PATH = "res/Mountain.jpg";
-	public static String FOREST_PATH = "res/Forest.jpg";
+	public static final String MOUNTAIN_PATH = "res/Mountain.jpg";
+	public static final String FOREST_PATH = "res/Forest.jpg";
+	public static final String LLANOWAR_ELVES_PATH = "res/Llanowar_Elves.jpg";
+	public static final String TARFIRE_PATH = "res/Tarfire.jpg";
+
 	/**
 	 * Main method that runs the game and sets up the GUI frame.
 	 * @param args
 	 */
 	public static void main(String[] args){
-		Backend bkd = new Backend();
+		Backend bkd = Backend.getInstance();
 		setUpJFrame(bkd);
 
 		initializePlayer();
@@ -35,20 +38,35 @@ public class MTGDuelDecks {
 		Zone.LIBRARY.addCard(new Card("Libr"), 0);
 
 		Card hand1 = new Card("Hand1");
-		hand1.addAbility("Tap: Add G to your mana pool");
+
 		hand1.addAbility("Play this card");
+		hand1.addAbility("Tap: Add G to your mana pool");
+
 		hand1.addManaAbility("T:G");
 		hand1.setImage(FOREST_PATH);
 		Zone.HAND.addCard(hand1,0);
 
 		Card hand2 = new Card("Hand2");
-		hand2.addAbility("Tap: Add G to your mana pool");
 		hand2.addAbility("Play this card");
+		hand2.addAbility("Tap: Add G to your mana pool");
+
 		hand2.addManaAbility("T:G");
 		hand2.setImage(FOREST_PATH);
 		Zone.HAND.addCard(hand2, 0);
 
-		Zone.HAND.addCard(new Card("Hand3"), 0);
+		Card hand3 = new Card("Arbor elf");
+		hand3.setColor("G");
+		hand3.addAbility("Play this card");
+		hand3.addAbility("Tap: Add G to your mana pool");
+
+		hand3.addManaAbility("T:G");
+		hand3.setImage(LLANOWAR_ELVES_PATH);
+		hand3.setType("Elf Druid");
+		hand3.setCost("G");
+		hand3.setPT(1, 1);
+
+
+		Zone.HAND.addCard(hand3, 0);
 		Zone.HAND.addCard(new Card("Hand4"), 0);
 		Zone.HAND.addCard(new Card("Hand5"), 0);
 		Zone.HAND.addCard(new Card("Hand6"), 0);
@@ -56,8 +74,12 @@ public class MTGDuelDecks {
 		Zone.HAND.addCard(new Card("Hand8"), 0);
 		Zone.HAND.addCard(new Card("Hand9"), 0);
 
+
+
+
 		Card BF1 = new Card("BF1");
 		BF1.setImage(FOREST_PATH);
+		BF1.addAbility("Play this Card");
 		BF1.addAbility("Tap: Add G to your mana pool");
 		BF1.addManaAbility("T:G");
 		Zone.BATTLE_FIELD.addCard(BF1, 0);
@@ -78,12 +100,24 @@ public class MTGDuelDecks {
 
 
 		Card hand1 = new Card("Hand11");
-		hand1.addAbility("Tap: Add R to your mana pool");
 		hand1.addAbility("Play this card");
+		hand1.addAbility("Tap: Add R to your mana pool");
+		hand1.setColor("");
+		hand1.setType("land");
+		hand1.setFlash(false);
 		hand1.addManaAbility("T:R");
 		hand1.setImage(MOUNTAIN_PATH);
+
+		Card hand2 = new Card("tarfire");
+		hand2.addAbility("play this card");
+		hand2.setCost("R");
+		hand2.setColor("R");
+		hand2.setFlash(true);
+		hand2.setImage(TARFIRE_PATH);
+		hand2.setType("instant- Goblin");
+
 		Zone.HAND1.addCard(hand1, 0);
-		Zone.HAND1.addCard(new Card("Hand2"), 0);
+		Zone.HAND1.addCard(hand2, 0);
 		Zone.HAND1.addCard(new Card("Hand3"), 0);
 		Zone.HAND1.addCard(new Card("Hand4"), 0);
 		Zone.HAND1.addCard(new Card("Hand5"), 0);
@@ -92,6 +126,7 @@ public class MTGDuelDecks {
 
 		Card BF2 = new Card("BF2");
 		BF2.setImage(MOUNTAIN_PATH);
+		BF2.addAbility("Play this card");
 		BF2.addAbility("Tap: Add R to your mana pool");
 		BF2.addManaAbility("T:R");
 		Zone.BATTLE_FIELD1.addCard(BF2, 0);
@@ -122,6 +157,8 @@ public class MTGDuelDecks {
 			}
 		});
 		ClickHandler ch = new ClickHandler(MTGComp);
+		KeyBoardHandler kb = new KeyBoardHandler(MTGComp);
+		Frame.addKeyListener(kb);
 		Frame.addMouseListener(ch);
 		return Frame;
 	}

@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
- 
+
 /**
  * The component that draws everything for the game.
  * @author malinocr
@@ -78,9 +78,9 @@ public class MTGComponent extends JComponent{
 	private static final double PASS_BUTTONS_MAX_FONT_WIDTH = 0.02;
 	private static final double PASS_BUTTONS_ADJUSTMENT = 0.5;
 	private static final double PRIORITY_ADJUSTMENT = PASS_BUTTONS_ADJUSTMENT + 0.2;
-	
-	
-	
+
+
+
 	private int windowX;
 	private int windowY;
 	private Backend bkd;
@@ -92,7 +92,7 @@ public class MTGComponent extends JComponent{
 	private ArrayList<GUICard> battleGUICards2;
 	private Rectangle passButton1;
 	private Rectangle passButton2;
-	
+
 	/**
 	 * Constructor for a MTGComponent
 	 * @param x width of the usable space in the JFrame that the component is placed in
@@ -103,12 +103,12 @@ public class MTGComponent extends JComponent{
 			throw new IllegalArgumentException("MTGComponent: " + x + " is not a valid window width");
 		}
 		this.windowX = x;
-		
+
 		if(y < 0) {
 			throw new IllegalArgumentException("MTGComponent: " + y + " is not a valid window height");
 		}
 		this.windowY = y;
-		
+
 		this.bkd= bkd;
 		this.handGUICards1 = new ArrayList<GUICard>();
 		this.dispGUICard1 = null;
@@ -116,27 +116,27 @@ public class MTGComponent extends JComponent{
 		this.dispGUICard2 = null;
 		this.battleGUICards1 = new ArrayList<GUICard>();
 		this.battleGUICards2 = new ArrayList<GUICard>();
-		
-		this.passButton1= new Rectangle((int) (windowX*PASS_BUTTON_X_POSITION), (int)(windowY*PASS_BUTTON_Y_POSITION), (int)(windowX*PASS_BUTTONS_WIDTH), (int)(windowY*PASS_BUTTONS_HEIGHT));
-		this.passButton2= new Rectangle((int) (windowX*PASS_BUTTON1_X_POSITION), (int)(windowY*PASS_BUTTON1_Y_POSITION), (int)(windowX*PASS_BUTTONS_WIDTH), (int)(windowY*PASS_BUTTONS_HEIGHT));
-		
+
+		this.passButton1= new Rectangle((int) (this.windowX*PASS_BUTTON_X_POSITION), (int)(this.windowY*PASS_BUTTON_Y_POSITION), (int)(this.windowX*PASS_BUTTONS_WIDTH), (int)(this.windowY*PASS_BUTTONS_HEIGHT));
+		this.passButton2= new Rectangle((int) (this.windowX*PASS_BUTTON1_X_POSITION), (int)(this.windowY*PASS_BUTTON1_Y_POSITION), (int)(this.windowX*PASS_BUTTONS_WIDTH), (int)(this.windowY*PASS_BUTTONS_HEIGHT));
+
 	}
-	
-	
+
+
 	/**
 	 * Get the Backend object that stores the game state
 	 * @return Backend the game state
 	 */
 	public Backend getBackend() {
-		return bkd;
+		return this.bkd;
 	}
-	
+
 	/**
 	 * Get GUI Cards in first player's hand
 	 * @return GUI cards
 	 */
 	public ArrayList<GUICard> getHandGUICards1() {
-		return handGUICards1;
+		return this.handGUICards1;
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class MTGComponent extends JComponent{
 	 * @return GUI cards
 	 */
 	public ArrayList<GUICard> getHandGUICards2() {
-		return handGUICards2;
+		return this.handGUICards2;
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class MTGComponent extends JComponent{
 	 * @return GUI cards
 	 */
 	public ArrayList<GUICard> getBattleGUICards1() {
-		return battleGUICards1;
+		return this.battleGUICards1;
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class MTGComponent extends JComponent{
 	 * @return GUI cards
 	 */
 	public ArrayList<GUICard> getBattleGUICards2() {
-		return battleGUICards2;
+		return this.battleGUICards2;
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class MTGComponent extends JComponent{
 		}
 		this.windowX = x;
 	}
-	
+
 	/**
 	 * Set the current height of the window the component is in
 	 * @param y height of the window
@@ -184,178 +184,178 @@ public class MTGComponent extends JComponent{
 		}
 		this.windowY = y;
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
 		Graphics2D graphics2 = (Graphics2D) graphics;
-		drawFormat(graphics2);
-		drawCountedZones1(graphics2);
-		drawCountedZones2(graphics2);
-		drawManaPools(graphics2);
-		drawPhases(graphics2);
-		drawPassButtons(graphics2);
-		generateGUICards(this.handGUICards1, Zone.HAND, BASE_HAND_CARDS_POSITION);
-		generateGUICards(this.handGUICards2, Zone.HAND1, BASE_HAND1_CARDS_POSITION);
-		generateGUICards(this.battleGUICards1, Zone.BATTLE_FIELD, BASE_BATTLEFIELD_CARDS_POSITION);
-		generateGUICards(this.battleGUICards2, Zone.BATTLE_FIELD1, BASE_BATTLEFIELD1_CARDS_POSITION);
+		this.drawFormat(graphics2);
+		this.drawCountedZones1(graphics2);
+		this.drawCountedZones2(graphics2);
+		this.drawManaPools(graphics2);
+		this.drawPhases(graphics2);
+		this.drawPassButtons(graphics2);
+		this.generateGUICards(this.handGUICards1, Zone.HAND, BASE_HAND_CARDS_POSITION);
+		this.generateGUICards(this.handGUICards2, Zone.HAND1, BASE_HAND1_CARDS_POSITION);
+		this.generateGUICards(this.battleGUICards1, Zone.BATTLE_FIELD, BASE_BATTLEFIELD_CARDS_POSITION);
+		this.generateGUICards(this.battleGUICards2, Zone.BATTLE_FIELD1, BASE_BATTLEFIELD1_CARDS_POSITION);
 		if(this.dispGUICard1 != null){
-			generateDispGUICard1(this.dispGUICard1.getCard(), this.dispGUICard1.getIndex(), this.dispGUICard1.getZone());
+			this.generateDispGUICard1(this.dispGUICard1.getCard(), this.dispGUICard1.getIndex(), this.dispGUICard1.getZone());
 		}
 		if(this.dispGUICard2 != null){
-			generateDispGUICard2(this.dispGUICard2.getCard(), this.dispGUICard2.getIndex(), this.dispGUICard2.getZone());
+			this.generateDispGUICard2(this.dispGUICard2.getCard(), this.dispGUICard2.getIndex(), this.dispGUICard2.getZone());
 		}
-		drawGUICards(graphics2);
+		this.drawGUICards(graphics2);
 	}
-	
+
 	/**
 	 * Draws the basic format for the board
 	 * @param graphics2
 	 */
 	private void drawFormat(Graphics2D graphics2) {
 		graphics2.setColor(Color.BLACK);
-		graphics2.drawLine((int)(windowX*CENTER_LINE_X_POSITION), CENTER_LINE_Y_POSITION, (int)(windowX*CENTER_LINE_X_POSITION), windowY);
-		
+		graphics2.drawLine((int)(this.windowX*CENTER_LINE_X_POSITION), CENTER_LINE_Y_POSITION, (int)(this.windowX*CENTER_LINE_X_POSITION), this.windowY);
+
 		for(int i =0; i < 12; i++) {
-			graphics2.draw(new Rectangle((int) (windowX*MANA_POOLS_X_POSITION + i*windowX*MANA_POOL_COLOR_WIDTH), (int)(windowY*MANA_POOLS_Y_POSITION), (int)(windowX*MANA_POOL_COLOR_WIDTH), (int)(windowY*MANA_POOL_HEIGHT)));
+			graphics2.draw(new Rectangle((int) ((this.windowX*MANA_POOLS_X_POSITION) + (i*this.windowX*MANA_POOL_COLOR_WIDTH)), (int)(this.windowY*MANA_POOLS_Y_POSITION), (int)(this.windowX*MANA_POOL_COLOR_WIDTH), (int)(this.windowY*MANA_POOL_HEIGHT)));
 		}
-		
+
 		for(int i =0; i < 12; i++) {
-			graphics2.draw(new Rectangle((int) (windowX*PHASES_X_POSITION + i*windowX*PHASE_WIDTH), (int)(windowY*PHASES_Y_POSITION), (int)(windowX*PHASE_WIDTH), (int)(windowY*PHASES_HEIGHT)));
+			graphics2.draw(new Rectangle((int) ((this.windowX*PHASES_X_POSITION) + (i*this.windowX*PHASE_WIDTH)), (int)(this.windowY*PHASES_Y_POSITION), (int)(this.windowX*PHASE_WIDTH), (int)(this.windowY*PHASES_HEIGHT)));
 		}
-		
-		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,HAND_Y_POSITION,(int)(windowX*SIDEBAR_WIDTH), (int)(windowY*HAND_HEIGHT)));
-		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
-		graphics2.draw(new Rectangle((int)(SIDEBAR1_X_POSITION + windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2) + SIDEBAR_ADJUSTMENT),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
-		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,(int)(windowY*(HAND_HEIGHT + EXILE_HEIGHT)),(int)(windowX*SIDEBAR_WIDTH),(int)(windowY*LIBRARY_HEIGHT)));
-		
-		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX),HAND_Y_POSITION,(int)(windowX*SIDEBAR_WIDTH), (int)(windowY*HAND_HEIGHT)));
-		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2) + SIDEBAR_ADJUSTMENT),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
-		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX + windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*HAND_HEIGHT),(int)(windowX*(SIDEBAR_WIDTH/2)),(int)(windowY*EXILE_HEIGHT  + SIDEBAR_ADJUSTMENT)));
-		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*windowX),(int)(windowY*(HAND_HEIGHT + EXILE_HEIGHT)),(int)(windowX*SIDEBAR_WIDTH),(int)(windowY*LIBRARY_HEIGHT)));
-		
-		
-		this.passButton1= new Rectangle((int) (windowX*PASS_BUTTON_X_POSITION), (int)(windowY*PASS_BUTTON_Y_POSITION), (int)(windowX*PASS_BUTTONS_WIDTH), (int)(windowY*PASS_BUTTONS_HEIGHT));
-		this.passButton2= new Rectangle((int) (windowX*PASS_BUTTON1_X_POSITION), (int)(windowY*PASS_BUTTON1_Y_POSITION), (int)(windowX*PASS_BUTTONS_WIDTH), (int)(windowY*PASS_BUTTONS_HEIGHT));
+
+		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,HAND_Y_POSITION,(int)(this.windowX*SIDEBAR_WIDTH), (int)(this.windowY*HAND_HEIGHT)));
+		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,(int)(this.windowY*HAND_HEIGHT),(int)(this.windowX*(SIDEBAR_WIDTH/2)),(int)((this.windowY*EXILE_HEIGHT)  + SIDEBAR_ADJUSTMENT)));
+		graphics2.draw(new Rectangle((int)(SIDEBAR1_X_POSITION + (this.windowX*(SIDEBAR_WIDTH/2))),(int)(this.windowY*HAND_HEIGHT),(int)((this.windowX*(SIDEBAR_WIDTH/2)) + SIDEBAR_ADJUSTMENT),(int)((this.windowY*EXILE_HEIGHT)  + SIDEBAR_ADJUSTMENT)));
+		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,(int)(this.windowY*(HAND_HEIGHT + EXILE_HEIGHT)),(int)(this.windowX*SIDEBAR_WIDTH),(int)(this.windowY*LIBRARY_HEIGHT)));
+
+		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*this.windowX),HAND_Y_POSITION,(int)(this.windowX*SIDEBAR_WIDTH), (int)(this.windowY*HAND_HEIGHT)));
+		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*this.windowX),(int)(this.windowY*HAND_HEIGHT),(int)((this.windowX*(SIDEBAR_WIDTH/2)) + SIDEBAR_ADJUSTMENT),(int)((this.windowY*EXILE_HEIGHT)  + SIDEBAR_ADJUSTMENT)));
+		graphics2.draw(new Rectangle((int)((SIDEBAR2_X_POSITION*this.windowX) + (this.windowX*(SIDEBAR_WIDTH/2))),(int)(this.windowY*HAND_HEIGHT),(int)(this.windowX*(SIDEBAR_WIDTH/2)),(int)((this.windowY*EXILE_HEIGHT)  + SIDEBAR_ADJUSTMENT)));
+		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*this.windowX),(int)(this.windowY*(HAND_HEIGHT + EXILE_HEIGHT)),(int)(this.windowX*SIDEBAR_WIDTH),(int)(this.windowY*LIBRARY_HEIGHT)));
+
+
+		this.passButton1= new Rectangle((int) (this.windowX*PASS_BUTTON_X_POSITION), (int)(this.windowY*PASS_BUTTON_Y_POSITION), (int)(this.windowX*PASS_BUTTONS_WIDTH), (int)(this.windowY*PASS_BUTTONS_HEIGHT));
+		this.passButton2= new Rectangle((int) (this.windowX*PASS_BUTTON1_X_POSITION), (int)(this.windowY*PASS_BUTTON1_Y_POSITION), (int)(this.windowX*PASS_BUTTONS_WIDTH), (int)(this.windowY*PASS_BUTTONS_HEIGHT));
 		graphics2.draw(this.passButton1);
 		graphics2.draw(this.passButton2);
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Draws the mana pools of various colors for players 1 and 2
 	 * @param graphics2
 	 */
 	private void drawManaPools(Graphics2D graphics2) {
-		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(windowY*MANA_POOLS_MAX_FONT_HEIGHT), (int)(windowX*MANA_POOLS_MAX_FONT_WIDTH))));
-		
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(this.windowY*MANA_POOLS_MAX_FONT_HEIGHT), (int)(this.windowX*MANA_POOLS_MAX_FONT_WIDTH))));
+
 		String[] labels = {"W", "U", "B","R","G","C", "W","U","B","R","G","C"};
 		ManaPool[] pools = ManaPool.values();
 		for(int p = 0; p < pools.length; p++) {
-				graphics2.drawString(labels[p] + ":" + String.valueOf(pools[p].getAmount()), 
-						(int)(windowX*MANA_POOLS_X_POSITION + p*windowX*MANA_POOL_COLOR_WIDTH), (int)(windowY*MANA_POOLS_Y_POSITION + windowY*MANA_POOLS_ADJUSTMENT*MANA_POOL_HEIGHT));
+			graphics2.drawString(labels[p] + ":" + String.valueOf(pools[p].getAmount()),
+					(int)((this.windowX*MANA_POOLS_X_POSITION) + (p*this.windowX*MANA_POOL_COLOR_WIDTH)), (int)((this.windowY*MANA_POOLS_Y_POSITION) + (this.windowY*MANA_POOLS_ADJUSTMENT*MANA_POOL_HEIGHT)));
 		}
-		
+
 	}
-	
+
 	/**
 	 * Draws the phase labels and colors one to indicate which phase the game is in and on which player's turn
 	 * @param graphics2
 	 */
 	private void drawPhases(Graphics2D graphics2) {
-		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(windowY*PHASES_MAX_FONT_HEIGHT), (int)(windowX*PHASES_MAX_FONT_WIDTH))));
-		
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(this.windowY*PHASES_MAX_FONT_HEIGHT), (int)(this.windowX*PHASES_MAX_FONT_WIDTH))));
+
 		Phase[] phases = Phase.values();
 		for(int p=0; p< 12; p++) {
-			if(this.bkd.getPhase() == phases[p] || this.bkd.getPhase() == phases[p+12]) {
+			if((this.bkd.getPhase() == phases[p]) || (this.bkd.getPhase() == phases[p+12])) {
 				if(this.bkd.getTurn()) {
 					graphics2.setColor(Color.GREEN);
 				} else {
 					graphics2.setColor(Color.ORANGE);
-				}				
+				}
 			}
-			
-			graphics2.drawString(phases[p].toString(), (int)(windowX*PHASES_X_POSITION + p*windowX*PHASE_WIDTH), (int)(windowY*PHASES_Y_POSITION + windowY*PHASES_ADJUSTMENT*PHASES_HEIGHT));
-			
+
+			graphics2.drawString(phases[p].toString(), (int)((this.windowX*PHASES_X_POSITION) + (p*this.windowX*PHASE_WIDTH)), (int)((this.windowY*PHASES_Y_POSITION) + (this.windowY*PHASES_ADJUSTMENT*PHASES_HEIGHT)));
+
 			graphics2.setColor(Color.BLACK);
 		}
-		
-		
+
+
 	}
-	
+
 	/**
 	 * Draws the pass buttons for players 1 and 2
 	 * @param graphics2
 	 */
 	private void drawPassButtons(Graphics2D graphics2) {
-		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(windowY*PASS_BUTTONS_MAX_FONT_HEIGHT), (int)(windowX*PASS_BUTTONS_MAX_FONT_WIDTH))));
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(this.windowY*PASS_BUTTONS_MAX_FONT_HEIGHT), (int)(this.windowX*PASS_BUTTONS_MAX_FONT_WIDTH))));
 		graphics2.setColor(Color.RED);
-		
-		graphics2.drawString("PASS", (int)(windowX*PASS_BUTTON_X_POSITION), (int)(windowY*PASS_BUTTON_Y_POSITION + windowY*PASS_BUTTONS_ADJUSTMENT*PASS_BUTTONS_HEIGHT));
-		graphics2.drawString("PASS", (int)(windowX*PASS_BUTTON1_X_POSITION), (int)(windowY*PASS_BUTTON1_Y_POSITION + windowY*PASS_BUTTONS_ADJUSTMENT*PASS_BUTTONS_HEIGHT));
-		
+
+		graphics2.drawString("PASS", (int)(this.windowX*PASS_BUTTON_X_POSITION), (int)((this.windowY*PASS_BUTTON_Y_POSITION) + (this.windowY*PASS_BUTTONS_ADJUSTMENT*PASS_BUTTONS_HEIGHT)));
+		graphics2.drawString("PASS", (int)(this.windowX*PASS_BUTTON1_X_POSITION), (int)((this.windowY*PASS_BUTTON1_Y_POSITION) + (this.windowY*PASS_BUTTONS_ADJUSTMENT*PASS_BUTTONS_HEIGHT)));
+
 		graphics2.setColor(Color.BLUE);
 		if(this.bkd.getPriority()) {
-			graphics2.drawString("***", (int)(windowX*PASS_BUTTON_X_POSITION), (int)(windowY*PASS_BUTTON_Y_POSITION + windowY*PRIORITY_ADJUSTMENT*PASS_BUTTONS_HEIGHT));
+			graphics2.drawString("***", (int)(this.windowX*PASS_BUTTON_X_POSITION), (int)((this.windowY*PASS_BUTTON_Y_POSITION) + (this.windowY*PRIORITY_ADJUSTMENT*PASS_BUTTONS_HEIGHT)));
 		} else {
-			graphics2.drawString("***", (int)(windowX*PASS_BUTTON1_X_POSITION), (int)(windowY*PASS_BUTTON1_Y_POSITION + windowY*PRIORITY_ADJUSTMENT*PASS_BUTTONS_HEIGHT));
+			graphics2.drawString("***", (int)(this.windowX*PASS_BUTTON1_X_POSITION), (int)((this.windowY*PASS_BUTTON1_Y_POSITION) + (this.windowY*PRIORITY_ADJUSTMENT*PASS_BUTTONS_HEIGHT)));
 		}
-		
+
 		graphics2.setColor(Color.BLACK);
 	}
-	
+
 	/**
 	 * Draws counted library, graveyard, and exile for player 1
 	 * @param graphics2
 	 */
 	private void drawCountedZones1(Graphics2D graphics2){
-		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(windowY*ZONES_MAX_FONT_HEIGHT), (int)(windowX*ZONES_MAX_FONT_WIDTH)))); 
-		graphics2.drawString(String.valueOf(Zone.LIBRARY.getSize()),(int)(windowX*LIBRARY_COUNT_X_POSITION),(int)(windowY*LIBRARY_COUNT_Y_POSITION));
-		graphics2.drawString(String.valueOf(Zone.GRAVEYARD.getSize()),(int)(windowX*GRAVEYARD_COUNT_X_POSITION),(int)(windowY*GRAVEYARD_COUNT_Y_POSITION));
-		graphics2.drawString(String.valueOf(Zone.EXILE.getSize()),(int)(windowX*EXILE_COUNT_X_POSITION),(int)(windowY*GRAVEYARD_COUNT_Y_POSITION));
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(this.windowY*ZONES_MAX_FONT_HEIGHT), (int)(this.windowX*ZONES_MAX_FONT_WIDTH))));
+		graphics2.drawString(String.valueOf(Zone.LIBRARY.getSize()),(int)(this.windowX*LIBRARY_COUNT_X_POSITION),(int)(this.windowY*LIBRARY_COUNT_Y_POSITION));
+		graphics2.drawString(String.valueOf(Zone.GRAVEYARD.getSize()),(int)(this.windowX*GRAVEYARD_COUNT_X_POSITION),(int)(this.windowY*GRAVEYARD_COUNT_Y_POSITION));
+		graphics2.drawString(String.valueOf(Zone.EXILE.getSize()),(int)(this.windowX*EXILE_COUNT_X_POSITION),(int)(this.windowY*GRAVEYARD_COUNT_Y_POSITION));
 	}
-	
+
 	/**
 	 * Draws counted library, graveyard, and exile for player 2
 	 * @param graphics2
 	 */
 	private void drawCountedZones2(Graphics2D graphics2){
-		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(windowY*ZONES_MAX_FONT_HEIGHT), (int)(windowX*ZONES_MAX_FONT_WIDTH)))); 
-		graphics2.drawString(String.valueOf(Zone.LIBRARY1.getSize()),(int)(windowX*LIBRARY1_COUNT_X_POSITION),(int)(windowY*LIBRARY_COUNT_Y_POSITION));
-		graphics2.drawString(String.valueOf(Zone.GRAVEYARD1.getSize()),(int)(windowX*GRAVEYARD1_COUNT_X_POSITION),(int)(windowY*GRAVEYARD_COUNT_Y_POSITION));
-		graphics2.drawString(String.valueOf(Zone.EXILE1.getSize()),(int)(windowX*EXILE1_COUNT_X_POSITION),(int)(windowY*GRAVEYARD_COUNT_Y_POSITION));
+		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(this.windowY*ZONES_MAX_FONT_HEIGHT), (int)(this.windowX*ZONES_MAX_FONT_WIDTH))));
+		graphics2.drawString(String.valueOf(Zone.LIBRARY1.getSize()),(int)(this.windowX*LIBRARY1_COUNT_X_POSITION),(int)(this.windowY*LIBRARY_COUNT_Y_POSITION));
+		graphics2.drawString(String.valueOf(Zone.GRAVEYARD1.getSize()),(int)(this.windowX*GRAVEYARD1_COUNT_X_POSITION),(int)(this.windowY*GRAVEYARD_COUNT_Y_POSITION));
+		graphics2.drawString(String.valueOf(Zone.EXILE1.getSize()),(int)(this.windowX*EXILE1_COUNT_X_POSITION),(int)(this.windowY*GRAVEYARD_COUNT_Y_POSITION));
 	}
-	
+
 	/**
 	 * Generates a GUICard object for each card in a given zone and puts them into a given arraylist
 	 * @param cardsAL an array list to place the created GUICard objects
 	 * @param zone the zone where the MTGCards are be created from
-	 * @param baseXLocation the base x percentage of the width of the screen where the cards rectangle should be placed 
+	 * @param baseXLocation the base x percentage of the width of the screen where the cards rectangle should be placed
 	 */
 	private void generateGUICards(ArrayList<GUICard> cardsAL, Zone zone, double baseXLocation){//!#stress-test this
 		cardsAL.clear();
-		int height = getCardHeight(zone);
+		int height = this.getCardHeight(zone);
 		int width = (int)Math.round(height * CARD_WIDTH_TO_HEIGHT_RATIO);
-		int currentSpace = (int)Math.round(HAND_BUFFER_FROM_TOP*windowY);
+		int currentSpace = (int)Math.round(HAND_BUFFER_FROM_TOP*this.windowY);
 		Card[] cards = zone.getCards();
 		for(int i = 0; i < zone.getSize(); i++){
-			cardsAL.add(new GUICard(new Rectangle((int)((HAND_BUFFER_FROM_LEFT + baseXLocation)*windowX - width/2), currentSpace, width, height), cards[i]));
+			cardsAL.add(new GUICard(new Rectangle((int)(((HAND_BUFFER_FROM_LEFT + baseXLocation)*this.windowX) - (width/2)), currentSpace, width, height), cards[i]));
 			currentSpace = currentSpace + (int)(BUFFER_FROM_TOP_OF_PREV_CARD*height);
 		}
 	}
-	
+
 	/**
 	 * Draw all the GUICards onto the graphics object
 	 * @param graphics2 the graphics object to draw onto
 	 */
 	private void drawGUICards(Graphics2D graphics2){
-		drawGUICardArrayList(handGUICards1, graphics2, 90);
-		drawGUICardArrayList(handGUICards2, graphics2, -90);
-		drawGUICardArrayList(battleGUICards1, graphics2, 90);
-		drawGUICardArrayList(battleGUICards2, graphics2, -90);
-		drawDispGUICard(dispGUICard1, graphics2);
-		drawDispGUICard(dispGUICard2, graphics2);
+		this.drawGUICardArrayList(this.handGUICards1, graphics2, 90);
+		this.drawGUICardArrayList(this.handGUICards2, graphics2, -90);
+		this.drawGUICardArrayList(this.battleGUICards1, graphics2, 90);
+		this.drawGUICardArrayList(this.battleGUICards2, graphics2, -90);
+		this.drawDispGUICard(this.dispGUICard1, graphics2);
+		this.drawDispGUICard(this.dispGUICard2, graphics2);
 	}
 
 	/**
@@ -373,37 +373,41 @@ public class MTGComponent extends JComponent{
 			} else {
 				Rectangle rec = cardsAL.get(i).getRec();
 				BufferedImage img = cardsAL.get(i).getImage();
-				if(cardsAL.get(i).card.getTapped())
+				if(!cardsAL.get(i).card.getTapped())
 				{
 					AffineTransform transform = new AffineTransform();
 					transform.translate(0.5*img.getHeight(), 0.5*img.getWidth());
 					transform.rotate(Math.toRadians(rotate));
 					transform.translate(-0.5*img.getWidth(), -0.5*img.getHeight());
-					
+
 					AffineTransformOp transformOP = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
 					img = transformOP.filter(img, null);
+				} else {
+					int tmp = rec.height;
+					rec.height = rec.width;
+					rec.width = tmp;
 				}
 				graphics2.drawImage(img, (int)rec.getX(), (int)rec.getY(), (int)rec.getWidth(), (int)rec.getHeight(), this);
 			}
 		}
 	}
-	
+
 	/**
 	 * Determine the height a card in a given zone should be based on the window height
 	 * @param zone the zone the card is located in
 	 * @return the height of the card
 	 */
 	private int getCardHeight(Zone zone){
-		int HeightRec = 3*windowY/(5*zone.getSize()-1);
+		int HeightRec = (3*this.windowY)/((5*zone.getSize())-1);
 		int heightWidthRec = (int)(HeightRec * CARD_WIDTH_TO_HEIGHT_RATIO);
-		int windowWidthRec = (int)(windowX*MINIMUM_HAND_CARD_WIDTH);
+		int windowWidthRec = (int)(this.windowX*MINIMUM_HAND_CARD_WIDTH);
 		if(heightWidthRec < windowWidthRec){
 			return HeightRec;
 		} else {
 			return (int)Math.round(windowWidthRec * CARD_HEIGHT_TO_WIDTH_RATIO);
 		}
 	}
-	
+
 	/**
 	 * Draws the displayed GUI card
 	 * @param dispCard display card object to be drawn
@@ -425,7 +429,7 @@ public class MTGComponent extends JComponent{
 			}
 		}
 	}
-	
+
 	private static final double DISPLAY_CARD1_X_POSITION = 0.15;
 	private static final double DISPLAY_CARD1_Y_POSITION = 0.2;
 	/**
@@ -434,24 +438,24 @@ public class MTGComponent extends JComponent{
 	 * @param index index of card being displayed
 	 */
 	public void generateDispGUICard1(Card card, int index, Zone zone){
-		this.dispGUICard1 = new DispGUICard(new Rectangle((int)(DISPLAY_CARD1_X_POSITION*windowX), (int)(DISPLAY_CARD1_Y_POSITION*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, index, zone);
+		this.dispGUICard1 = new DispGUICard(new Rectangle((int)(DISPLAY_CARD1_X_POSITION*this.windowX), (int)(DISPLAY_CARD1_Y_POSITION*this.windowY), (int)(0.2*this.windowX), (int)(0.2*this.windowX*(3.5/2.5))),card, index, zone);
 	}
-	
+
 	/**
 	 * Create a Displayed GUI card object for the second player
 	 * @param card card being displayed
 	 * @param index index of card being displayed
 	 */
 	public void generateDispGUICard2(Card card, int index, Zone zone){
-		this.dispGUICard2 = new DispGUICard(new Rectangle((int)(0.55*windowX), (int)(0.2*windowY), (int)(0.2*windowX), (int)(0.2*windowX*(3.5/2.5))),card, index, zone);
+		this.dispGUICard2 = new DispGUICard(new Rectangle((int)(0.55*this.windowX), (int)(0.2*this.windowY), (int)(0.2*this.windowX), (int)(0.2*this.windowX*(3.5/2.5))),card, index, zone);
 	}
-	
+
 	/**
 	 * Get the current Displayed GUI card for the first player
 	 * @return current displayed card
 	 */
 	public DispGUICard getDispGUICard1() {
-		return dispGUICard1;
+		return this.dispGUICard1;
 	}
 
 	/**
@@ -459,29 +463,29 @@ public class MTGComponent extends JComponent{
 	 * @return current displayed card
 	 */
 	public DispGUICard getDispGUICard2() {
-		return dispGUICard2;
+		return this.dispGUICard2;
 	}
-	
+
 	/**
 	 * Gets the Rectangle for the pass button for the first player
 	 * @return the rectangle enclosing the first player's pass button
 	 */
 	public Rectangle getPassButton1() {
-		return passButton1;
+		return this.passButton1;
 	}
-	
+
 	/**
 	 * Gets the Rectangle for the pass button for the second player
 	 * @return the rectangle enclosing the second player's pass button
 	 */
 	public Rectangle getPassButton2() {
-		return passButton2;
+		return this.passButton2;
 	}
-	
+
 
 	/**
 	 * Set the current Displayed GUI card for the first player
-	 * @param dispGUICard1 
+	 * @param dispGUICard1
 	 */
 	public void setDispGUICard1(DispGUICard dispGUICard1) {
 		this.dispGUICard1 = dispGUICard1;
@@ -492,6 +496,6 @@ public class MTGComponent extends JComponent{
 	 * @param dispGUICard2
 	 */
 	public void setDispGUICard2(DispGUICard dispGUICard2) {
-		this.dispGUICard2 = dispGUICard1;
+		this.dispGUICard2 = this.dispGUICard1;
 	}
 }
