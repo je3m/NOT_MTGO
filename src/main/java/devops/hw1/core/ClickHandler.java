@@ -13,6 +13,40 @@ import javax.swing.JOptionPane;
  */
 public class ClickHandler implements MouseListener {
 	MTGComponent MTGComp;
+	short targetState = 0;
+	DispGUICard tarFire = null;
+
+	public void dealWithTarFire(DispGUICard gCard, boolean player){
+
+		switch(this.targetState){
+		case 0:
+			if (gCard.getCard().getName().equals("tarfire")){
+				this.targetState = 1;
+			}
+			this.tarFire = gCard;
+			System.out.println("select target");
+			break;
+
+		case 1:
+			boolean owner;
+			if(this.tarFire.getZone().equals(Zone.HAND1))
+				owner = false;
+			else
+				owner = true;
+
+
+			System.out.println("casting " + this.tarFire.getCard().getName() + " on " + gCard.getCard().getName());
+
+			if(Backend.getInstance().castSpell(this.tarFire.getZone(), this.tarFire.getCard(), this.tarFire.index, owner, gCard.getCard(), Zone.GRAVEYARD)){
+
+			} else {
+				JOptionPane.showMessageDialog(this.MTGComp, "Cannot play that card");
+			}
+			this.targetState = 0;
+			break;
+		}
+	}
+
 
 
 	/**
@@ -57,46 +91,53 @@ public class ClickHandler implements MouseListener {
 		}
 
 		if(gCard != null){
-			if(gCard.getRec().contains(this.MTGComp.getMousePosition())){
-				if (player) {
-					this.MTGComp.setDispGUICard1(null);
-				} else {
-					this.MTGComp.setDispGUICard2(null);
-				}
-
-				this.MTGComp.repaint();
-			} else {
-				if(gCard.getAbilityBoxes()[0].contains(this.MTGComp.getMousePosition())){
-					System.out.println(gCard.getCard().getName());
-					try{
-						if(Backend.getInstance().castSpell(gCard.getZone(), gCard.getCard(), gCard.index, player, null, null)){
-
-						} else {
-							JOptionPane.showMessageDialog(this.MTGComp, "Cannot play that card");
-						}
-
-						this.MTGComp.repaint();
-					} catch (Exception e){
-						e.printStackTrace();
+			if ( (this.targetState == 1)){
+				this.dealWithTarFire(gCard, player);
+			}else
+				if(gCard.getRec().contains(this.MTGComp.getMousePosition())){
+					if (player) {
+						this.MTGComp.setDispGUICard1(null);
+					} else {
+						this.MTGComp.setDispGUICard2(null);
 					}
 
-				}else {
+					this.MTGComp.repaint();
+				} else {
+					if(gCard.getAbilityBoxes()[0].contains(this.MTGComp.getMousePosition())){
+						Zone z = null;
 
-					for(int i = 0; i < (gCard.getAbilityBoxes().length); i++){
-						if(gCard.getAbilityBoxes()[i].contains(this.MTGComp.getMousePosition())){
-							if((gCard.getCard().getManaAbility() != null) && (i==1)) {
-								this.MTGComp.getBackend().activateManaAbility(gCard.getCard(), player);
+						System.out.println(gCard.getCard().getName());
+						try{
+							if (gCard.getCard().getName().equals("tarfire")){
+								this.dealWithTarFire(gCard, !player);
+							} else if(Backend.getInstance().castSpell(gCard.getZone(), gCard.getCard(), gCard.index, player, null, z)){
+
 							} else {
-								Backend.activateAbility(gCard.getCard(), gCard.getZone(), gCard.getIndex(), i);
+								JOptionPane.showMessageDialog(this.MTGComp, "Cannot play that card");
 							}
 
-							this.MTGComp.setDispGUICard1(null);
 							this.MTGComp.repaint();
-							break;
+						} catch (Exception e){
+							e.printStackTrace();
+						}
+
+					}else {
+
+						for(int i = 0; i < (gCard.getAbilityBoxes().length); i++){
+							if(gCard.getAbilityBoxes()[i].contains(this.MTGComp.getMousePosition())){
+								if((gCard.getCard().getManaAbility() != null) && (i==1)) {
+									this.MTGComp.getBackend().activateManaAbility(gCard.getCard(), player);
+								} else {
+									Backend.activateAbility(gCard.getCard(), gCard.getZone(), gCard.getIndex(), i);
+								}
+
+								this.MTGComp.setDispGUICard1(null);
+								this.MTGComp.repaint();
+								break;
+							}
 						}
 					}
 				}
-			}
 
 		}
 
