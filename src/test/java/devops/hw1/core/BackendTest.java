@@ -11,6 +11,37 @@ import org.junit.Test;
 
 public class BackendTest {
 	@Test
+	public void testCastSpellNoCost(){
+		ManaPool.BLUE1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.isFlash()).andReturn(false);
+		EasyMock.expect(c.getType()).andReturn("Creature- bird");
+		EasyMock.expect(c.getCost()).andReturn(null);
+		EasyMock.expect(c.getName()).andReturn("Storm Crow");
+		EasyMock.replay(c);
+
+		ManaPool.BLUE1.add(1);
+		ManaPool.COLORLESS1.add(1);
+		bknd.addCard(Zone.HAND, c, 0);
+		c.setType("Creature- bird");
+
+		try {
+			bknd.castSpell(Zone.HAND, c, 0, true, null, null);
+			fail("Expected IllegalArgumentException");
+		}catch (IllegalArgumentException e) {
+			assertTrue(e.getMessage().equals("Illegal card Storm Crow: card cost is null"));
+		}
+
+		ManaPool.BLUE1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+	}
+	
+	@Test
 	public void testBasicCastSpell(){
 		ManaPool.WHITE1.empty();
 		ManaPool.BLUE1.empty();

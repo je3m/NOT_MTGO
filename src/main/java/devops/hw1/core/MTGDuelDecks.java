@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 
 /**
  * Main MTG Duel Deck class that runs the rest of the game.
- *
  */
 public class MTGDuelDecks {
 	public static final String MOUNTAIN_PATH = "res/Mountain.jpg";
