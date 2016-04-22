@@ -102,7 +102,7 @@ public class MTGDuelDecks {
 		hand1.addAbility("Play this card");
 		hand1.addAbility("Tap: Add R to your mana pool");
 		hand1.setColor("");
-		hand1.setType("land");
+		hand1.setType("Land");
 		hand1.setFlash(false);
 		hand1.addManaAbility("T:R");
 		hand1.setImage(MOUNTAIN_PATH);
@@ -113,7 +113,7 @@ public class MTGDuelDecks {
 		hand2.setColor("R");
 		hand2.setFlash(true);
 		hand2.setImage(TARFIRE_PATH);
-		hand2.setType("instant- Goblin");
+		hand2.setType("Instant- Goblin");
 
 		Zone.HAND1.addCard(hand1, 0);
 		Zone.HAND1.addCard(hand2, 0);
