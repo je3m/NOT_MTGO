@@ -294,6 +294,10 @@ public class TestCard {
 		} catch (PatternSyntaxException e) {
 			assertEquals(e.getDescription(), "Card Scornful Egotist: Creature- goblin is not a valid card typeline");
 		}
+		
+		c = new Card("Forest");
+		c.setType("Basic Land");
+		assertEquals(c.getType(), "Basic Land");
 	}
 	
 	@Test 
