@@ -36,12 +36,16 @@ public class Card {
 			throw new IllegalArgumentException("Error creating card " + name + ": null is not a valid ability list");
 		}
 		this.abilities = abilities;
-		this.setCost(manaCost);
-		this.setColor(color);
-		this.setType(type);
-		this.addManaAbility(manaAbility);
-		this.setPT(power, toughness);
-		this.setImage(image);
+		try{
+			this.setCost(manaCost);
+			this.setColor(color);
+			this.setType(type);
+			this.addManaAbility(manaAbility);
+			this.setPT(power, toughness);
+			this.setImage(image);
+		} catch (Exception e){
+			throw new IllegalArgumentException("Error creating card " + name + ": " + e.getMessage());
+		}
 		this.tapped = false;
 		this.flash = flash;
 	}
