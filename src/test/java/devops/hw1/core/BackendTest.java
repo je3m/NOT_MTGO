@@ -6,6 +6,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.concurrent.RejectedExecutionException;
+
 import org.easymock.EasyMock;
 import org.junit.Test;
 
@@ -98,6 +100,7 @@ public class BackendTest {
 	public void testActivateManaAbilityTap(){
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:U");
+		EasyMock.expect(c.getTapped()).andReturn(false);
 		EasyMock.replay(c);
 
 		new Backend().activateManaAbility(c, true);
@@ -960,6 +963,7 @@ public class BackendTest {
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:G");
+		EasyMock.expect(c.getTapped()).andReturn(false);
 		EasyMock.replay(c);
 
 		c.addManaAbility("T:G");
@@ -976,6 +980,7 @@ public class BackendTest {
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:R");
+		EasyMock.expect(c.getTapped()).andReturn(false);
 		EasyMock.replay(c);
 
 		c.addManaAbility("T:R");
@@ -992,6 +997,7 @@ public class BackendTest {
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:W");
+		EasyMock.expect(c.getTapped()).andReturn(false);
 		EasyMock.replay(c);
 
 		c.addManaAbility("T:W");
@@ -1008,6 +1014,7 @@ public class BackendTest {
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:G");
+		EasyMock.expect(c.getTapped()).andReturn(false);
 		EasyMock.replay(c);
 
 		c.addManaAbility("T:G");
@@ -1024,6 +1031,7 @@ public class BackendTest {
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:U");
+		EasyMock.expect(c.getTapped()).andReturn(false);
 		EasyMock.replay(c);
 
 		c.addManaAbility("T:U");
@@ -1040,6 +1048,7 @@ public class BackendTest {
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:B");
+		EasyMock.expect(c.getTapped()).andReturn(false);
 		EasyMock.replay(c);
 
 		c.addManaAbility("T:B");
@@ -1056,6 +1065,7 @@ public class BackendTest {
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:R");
+		EasyMock.expect(c.getTapped()).andReturn(false);
 		EasyMock.replay(c);
 
 		c.addManaAbility("T:R");
@@ -1072,6 +1082,7 @@ public class BackendTest {
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:W");
+		EasyMock.expect(c.getTapped()).andReturn(false);
 		EasyMock.replay(c);
 
 		c.addManaAbility("T:W");
@@ -1088,6 +1099,7 @@ public class BackendTest {
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:U");
+		EasyMock.expect(c.getTapped()).andReturn(false);
 		EasyMock.replay(c);
 
 		c.addManaAbility("T:U");
@@ -1104,6 +1116,7 @@ public class BackendTest {
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:B");
+		EasyMock.expect(c.getTapped()).andReturn(false);
 		EasyMock.replay(c);
 
 		c.addManaAbility("T:B");
@@ -1120,6 +1133,7 @@ public class BackendTest {
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:1");
+		EasyMock.expect(c.getTapped()).andReturn(false);
 		EasyMock.replay(c);
 
 		c.addManaAbility("T:1");
@@ -1136,6 +1150,7 @@ public class BackendTest {
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:1");
+		EasyMock.expect(c.getTapped()).andReturn(false);
 		EasyMock.replay(c);
 
 		c.addManaAbility("T:1");
@@ -1152,7 +1167,10 @@ public class BackendTest {
 		Backend bknd = new Backend();
 		Card c = EasyMock.niceMock(Card.class);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:1");
+		EasyMock.expect(c.getTapped()).andReturn(false);
 		EasyMock.expect(c.getManaAbility()).andReturn("T:1");
+		EasyMock.expect(c.getTapped()).andReturn(true);
+		EasyMock.expect(c.getName()).andReturn("Storm Crow");
 		EasyMock.replay(c);
 
 		c.addManaAbility("T:1");
@@ -1160,11 +1178,12 @@ public class BackendTest {
 
 		assertEquals(ManaPool.COLORLESS2.getAmount(), 1);
 		
-		bknd.activateManaAbility(c, false);
-
-		assertEquals(ManaPool.COLORLESS2.getAmount(), 1);
-		EasyMock.verify(c);
-		ManaPool.COLORLESS2.empty();
+		try{
+			bknd.activateManaAbility(c, false);
+			fail("Expected RejectedExecutionException");
+		} catch(RejectedExecutionException e){
+			assertTrue(e.getMessage().equals("Mana ability of Storm Crow cannot be activated: cannot pay cost"));
+		}
 	}
 
 	@Test
@@ -2140,7 +2159,7 @@ public class BackendTest {
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
-		c.setType("Creature- bird");
+		c.setType("Creature- Bird");
 		c.setCost("1U");
 
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
@@ -2546,7 +2565,7 @@ public class BackendTest {
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
-		c.setType("Creature- bird");
+		c.setType("Creature- Bird");
 		c.setCost("1U");
 
 		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
@@ -2596,7 +2615,7 @@ public class BackendTest {
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
-		c.setType("Creature- bird");
+		c.setType("Creature- Bird");
 		c.setCost("1U");
 
 		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
@@ -2646,7 +2665,7 @@ public class BackendTest {
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
-		c.setType("Creature- bird");
+		c.setType("Creature- Bird");
 		c.setCost("1U");
 
 		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true, null, null));

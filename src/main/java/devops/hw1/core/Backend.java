@@ -1,6 +1,7 @@
 package devops.hw1.core;
 
 import java.util.Stack;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.StringTokenizer;
 
 /**
@@ -244,6 +245,9 @@ public class Backend {
 	public void activateManaAbility(Card c, Boolean player) {
 		StringTokenizer strToken = new StringTokenizer(c.getManaAbility(),":");
 		if(strToken.nextToken().equals("T")){
+			if(c.getTapped()){
+				throw new RejectedExecutionException("Mana ability of " + c.getName() + " cannot be activated: cannot pay cost");
+			}
 			c.tap();
 		}
 		if(player){
