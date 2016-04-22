@@ -32,11 +32,14 @@ public class Card {
 			String manaAbility, ArrayList<String> abilities, int power,
 			int toughness, String image, Boolean flash){
 		this.name = name;
+		if(abilities == null){
+			throw new IllegalArgumentException("Error creating card " + name + ": null is not a valid ability list");
+		}
+		this.abilities = abilities;
 		this.setCost(manaCost);
 		this.setColor(color);
 		this.setType(type);
 		this.addManaAbility(manaAbility);
-		this.abilities = abilities;
 		this.setPT(power, toughness);
 		this.setImage(image);
 		this.tapped = false;
