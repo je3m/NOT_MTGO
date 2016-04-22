@@ -37,7 +37,7 @@ public class ClickHandler implements MouseListener {
 
 			System.out.println("casting " + this.tarFire.getCard().getName() + " on " + gCard.getCard().getName());
 
-			if(Backend.getInstance().castSpell(this.tarFire.getZone(), this.tarFire.getCard(), this.tarFire.index, owner, gCard.getCard(), Zone.GRAVEYARD)){
+			if(Backend.getInstance().castSpell(this.tarFire.getZone(), this.tarFire.getCard(), this.tarFire.index, owner, gCard.getCard(), gCard.getZone())){
 
 			} else {
 				JOptionPane.showMessageDialog(this.MTGComp, "Cannot play that card");

@@ -166,8 +166,6 @@ public class Card {
 		if(!test.exists()) {
 			throw new IllegalArgumentException("Card " + this.name + ": " + string + " is not a valid file name");
 		}
-
-
 		this.image = string;
 
 	}

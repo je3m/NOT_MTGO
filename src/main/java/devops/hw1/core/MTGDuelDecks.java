@@ -61,7 +61,7 @@ public class MTGDuelDecks {
 
 		hand3.addManaAbility("T:G");
 		hand3.setImage(LLANOWAR_ELVES_PATH);
-		hand3.setType("Elf Druid");
+		hand3.setType("Creature- Elf Druid");
 		hand3.setCost("G");
 		hand3.setPT(1, 1);
 
