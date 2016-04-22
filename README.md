@@ -90,4 +90,5 @@ Chris
  - Added null check if a card has no cost in cast spell
  - Added tests for handlegeneric()
  - Added tests to itemOnStack()
+ - Improved Various Javadocs
  
