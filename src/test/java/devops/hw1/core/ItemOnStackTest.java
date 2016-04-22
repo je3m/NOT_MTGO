@@ -16,7 +16,7 @@ public class ItemOnStackTest {
 	
 	@Parameters
 	public static Collection<Object[]> data() {
-		Object[][] data = new Object[5][5];
+		Object[][] data = new Object[9][5];
 		
 		Card c1 = EasyMock.niceMock(Card.class);
 		Card ct1 = EasyMock.niceMock(Card.class);
@@ -24,12 +24,10 @@ public class ItemOnStackTest {
 		ItemOnStack item1 = new ItemOnStack(c1,false, ct1, zt1);
 		
 		data[0][0] = item1;
-		data[0][1] = false;
-		data[0][2] = c1;
+		data[0][1] = c1;
+		data[0][2] = false;
 		data[0][3] = ct1;
 		data[0][4] = zt1;
-		
-		
 		
 		Card c2 = EasyMock.niceMock(Card.class);
 		Card ct2 = EasyMock.niceMock(Card.class);
@@ -37,8 +35,8 @@ public class ItemOnStackTest {
 		ItemOnStack item2 = new ItemOnStack(c2,true, ct2, zt2);
 		
 		data[1][0] = item2;
-		data[1][1] = true;
-		data[1][2] = c2;
+		data[1][1] = c2;
+		data[1][2] = true;
 		data[1][3] = ct2;
 		data[1][4] = zt2;
 		
@@ -57,8 +55,8 @@ public class ItemOnStackTest {
 		ItemOnStack item4 = new ItemOnStack(c4,true, null, null);
 		
 		data[3][0] = item4;
-		data[3][1] = true;
-		data[3][2] = c4;
+		data[3][1] = c4;
+		data[3][2] = true;
 		data[3][3] = null;
 		data[3][4] = null;
 		
@@ -70,6 +68,51 @@ public class ItemOnStackTest {
 		data[4][2] = null;
 		data[4][3] = null;
 		data[4][4] = null;
+		
+		Card ct6 = EasyMock.niceMock(Card.class);
+		Zone zt6 = Zone.BATTLE_FIELD1;
+		
+		ItemOnStack item6 = new ItemOnStack(null, true, ct6, zt6);
+		
+		data[5][0] = item6;
+		data[5][1] = null;
+		data[5][2] = true;
+		data[5][3] = ct6;
+		data[5][4] = zt6;
+		
+		Card c7 = EasyMock.niceMock(Card.class);
+		Card ct7 = EasyMock.niceMock(Card.class);
+		Zone zt7 = Zone.BATTLE_FIELD1;
+		
+		ItemOnStack item7 = new ItemOnStack(c7, null, ct7, zt7);
+		
+		data[6][0] = item7;
+		data[6][1] = c7;
+		data[6][2] = null;
+		data[6][3] = ct7;
+		data[6][4] = zt7;
+		
+		Card c8 = EasyMock.niceMock(Card.class);
+		Zone zt8 = Zone.BATTLE_FIELD1;
+		
+		ItemOnStack item8 = new ItemOnStack(c8, true, null, zt8);
+		
+		data[7][0] = item8;
+		data[7][1] = c8;
+		data[7][2] = true;
+		data[7][3] = null;
+		data[7][4] = zt8;
+		
+		Card c9 = EasyMock.niceMock(Card.class);
+		Card ct9 = EasyMock.niceMock(Card.class);
+		
+		ItemOnStack item9 = new ItemOnStack(c9, true, ct9, null);
+		
+		data[8][0] = item9;
+		data[8][1] = c9;
+		data[8][2] = true;
+		data[8][3] = ct9;
+		data[8][4] = null;
 		
 		
 		return Arrays.asList(data);
@@ -90,7 +133,7 @@ public class ItemOnStackTest {
 	private Zone tExpectedTargetZone;
 	
 	
-	public ItemOnStackTest(ItemOnStack InputItemOnStack, Boolean ExpectedPlayer, Card ExpectedCard, Card ExpectedTargetCard, Zone ExpectedTargetZone) {
+	public ItemOnStackTest(ItemOnStack InputItemOnStack, Card ExpectedCard, Boolean ExpectedPlayer, Card ExpectedTargetCard, Zone ExpectedTargetZone) {
 		tInputItemOnStack = InputItemOnStack;
 		tExpectedPlayer = ExpectedPlayer;
 		tExpectedCard = ExpectedCard;
@@ -104,7 +147,6 @@ public class ItemOnStackTest {
 		assertEquals(tInputItemOnStack.getCard(), tExpectedCard);
 		assertEquals(tInputItemOnStack.getTarget(), tExpectedTargetCard);
 		assertEquals(tInputItemOnStack.getTargetZone(), tExpectedTargetZone);
-		
 	}
 	
 }

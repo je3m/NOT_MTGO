@@ -101,8 +101,6 @@ public class BackendTest {
 		EasyMock.replay(c);
 
 		new Backend().activateManaAbility(c, true);
-
-
 	}
 
 	@Test
