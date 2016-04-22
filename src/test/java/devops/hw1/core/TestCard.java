@@ -40,10 +40,10 @@ public class TestCard {
 	@Test
 	public void makeCardSimpleTest2(){
 		try{
-			Card c = new Card("Storm Crow","1U", "U", "Creature-", null, null, 1, 1, "res/Mountain.jpg", null);
+			Card c = new Card("Storm Crow","1U", "U", "Creature-", null, new ArrayList<String>(), 1, 1, "res/Mountain.jpg", null);
 			fail("Expected IllegalArgumentException");
 		} catch (IllegalArgumentException e){
-			assertEquals(e.getMessage(), "Error creating card Storm Crow: Card Storm Crow: Creature- is not a valid card typeline");
+			assertEquals(e.getMessage(), "Error creating card Storm Crow: Card Storm Crow: null is not a valid card type");
 		}
 	}
 	
