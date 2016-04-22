@@ -1145,6 +1145,27 @@ public class BackendTest {
 		EasyMock.verify(c);
 		ManaPool.COLORLESS2.empty();
 	}
+	
+	@Test
+	public void testActivateManaAbilityAlreadyTapped(){
+		ManaPool.COLORLESS2.empty();
+		Backend bknd = new Backend();
+		Card c = EasyMock.niceMock(Card.class);
+		EasyMock.expect(c.getManaAbility()).andReturn("T:1");
+		EasyMock.expect(c.getManaAbility()).andReturn("T:1");
+		EasyMock.replay(c);
+
+		c.addManaAbility("T:1");
+		bknd.activateManaAbility(c, false);
+
+		assertEquals(ManaPool.COLORLESS2.getAmount(), 1);
+		
+		bknd.activateManaAbility(c, false);
+
+		assertEquals(ManaPool.COLORLESS2.getAmount(), 1);
+		EasyMock.verify(c);
+		ManaPool.COLORLESS2.empty();
+	}
 
 	@Test
 	public void testAdd(){
