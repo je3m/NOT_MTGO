@@ -349,7 +349,9 @@ public class Backend {
 			return false;
 		}
 		
-		//TODO this.parseCost  null
+		if(c.getCost() == null){
+			throw new IllegalArgumentException("Illegal card " + c.getName() + ": card cost is null");
+		}
 		int[] costs = this.parseCost(c.getCost());
 
 
