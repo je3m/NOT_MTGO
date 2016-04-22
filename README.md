@@ -88,7 +88,8 @@ Chris
  - Made setType's regex stricter and added input validation
  - Created a new constructer for the card class and tested it (old constructor is now depricated)
  - Added null check if a card has no cost in cast spell
- - Added tests for handlegeneric()
+ - Added tests for handleGeneric()
  - Added tests to itemOnStack()
+ - Fixed activating mana abilities on tapped lands in both backend and GUI
  - Improved Various Javadocs
  

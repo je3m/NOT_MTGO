@@ -3,6 +3,7 @@ package devops.hw1.core;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.concurrent.RejectedExecutionException;
 
 import javax.swing.JOptionPane;
 
@@ -126,7 +127,11 @@ public class ClickHandler implements MouseListener {
 						for(int i = 0; i < (gCard.getAbilityBoxes().length); i++){
 							if(gCard.getAbilityBoxes()[i].contains(this.MTGComp.getMousePosition())){
 								if((gCard.getCard().getManaAbility() != null) && (i==1)) {
-									this.MTGComp.getBackend().activateManaAbility(gCard.getCard(), player);
+									try{
+										this.MTGComp.getBackend().activateManaAbility(gCard.getCard(), player);
+									} catch (RejectedExecutionException e){
+										JOptionPane.showMessageDialog(this.MTGComp, "Cannot activate mana ability");
+									}
 								} else {
 									Backend.activateAbility(gCard.getCard(), gCard.getZone(), gCard.getIndex(), i);
 								}
