@@ -208,7 +208,7 @@ public class Card {
 		if(s == null){
 			throw new IllegalArgumentException("Card " + this.name + ": null is not a valid card type");
 		}
-		String regex = "[a-zA-Z]+(\\- [a-zA-Z]+( [a-zA-Z]+)*)?";
+		String regex = "[A-Z][a-z]*(\\- [a-zA-Z]+( [a-zA-Z]+)*)?";
 		if(!s.matches(regex)) {
 			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid card typeline", regex, -1);
 		} 

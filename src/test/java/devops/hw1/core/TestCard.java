@@ -284,8 +284,8 @@ public class TestCard {
 		try {
 			c.setType("c");
 			fail("Expected IllegalArgumentException");
-		} catch (IllegalArgumentException e) {
-			assertEquals(e.getMessage(), "Card Scornful Egotist: null is not a valid card type");
+		} catch (PatternSyntaxException e) {
+			assertEquals(e.getDescription(), "Card Scornful Egotist: c is not a valid card typeline");
 		}
 	}
 	
