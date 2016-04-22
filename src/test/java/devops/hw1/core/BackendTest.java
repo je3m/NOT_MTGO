@@ -2188,6 +2188,17 @@ public class BackendTest {
 	}
 	
 	@Test
+	public void handleGenericTestError(){
+		Backend bknd = new Backend();
+		try{
+			bknd.handleGeneric(ManaPool.WHITE1, -1);
+			fail("Expected IllegalArguementException");
+		} catch (IllegalArgumentException e){
+			assertTrue(e.getMessage().equals("-1 is not a valid amount of generic mana cost."));
+		}
+	}
+	
+	@Test
 	public void handleTargetTest1() {
 		
 		ManaPool.WHITE1.empty();

@@ -409,7 +409,6 @@ public class Backend {
 		} else if (genericCost == 0){
 			return 0;
 		} else {
-			//Needs tested
 			throw new IllegalArgumentException(genericCost + " is not a valid amount of generic mana cost.");
 		}
 	}
