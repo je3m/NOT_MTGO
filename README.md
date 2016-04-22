@@ -93,3 +93,13 @@ Chris
  - Fixed activating mana abilities on tapped lands in both backend and GUI
  - Improved Various Javadocs
  
+Jim
+ - Added Keyboard Shortcut to pass priority
+ - Implemented Basic targeting for GUI
+ - Fixed Display for tapped cards
+ 
+Scott
+ - Added Targeting support in Backend
+ - Added Sorcery/Instant speed timing constraints
+ - Added Untapping functionality to Untap phase
+ 
