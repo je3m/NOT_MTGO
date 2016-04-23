@@ -3,7 +3,10 @@ package back_end;
 public class SMELParser {
 
 	private String cost;
-	public String effect;
+	private String effect;
+	private String target;
+	private Zone zone;
+	private Zone resolveZone;
 
 	public SMELParser(String smel) {
 		if (smel == null)
@@ -14,18 +17,28 @@ public class SMELParser {
 		String[] arr = smel.split("(?:(\\{|\\}))");
 
 		for(int i = 0; i < arr.length; i++){
-			if(arr[i].equals("COST")){
-				this.cost = arr[i+1];
-				i++;
-			} else if (arr[i].equals("EFFECT")){
-				this.effect = arr[i+1];
-				i++;
+			switch(arr[i]){
+			case "COST":
+				this.cost = arr[++i];
+				break;
+			case "EFFECT":
+				this.effect = arr[++i];
+				break;
+
 			}
 		}
+	}
 
+	public String getTarget(){
+		return this.target;
+	}
 
+	public Zone getZone(){
+		return this.zone;
+	}
 
-
+	public Zone getResolveZone(){
+		return this.resolveZone;
 	}
 
 	public String getCost() {
@@ -36,8 +49,6 @@ public class SMELParser {
 	}
 
 	public String getEffect() {
-		// TODO Auto-generated method stub
 		return this.effect;
 	}
-
 }
