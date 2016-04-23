@@ -24,6 +24,9 @@ public class SMELParser {
 			case "EFFECT":
 				this.effect = arr[++i];
 				break;
+			case "TARGET":
+				this.target = arr[++i];
+				break;
 
 			}
 		}
