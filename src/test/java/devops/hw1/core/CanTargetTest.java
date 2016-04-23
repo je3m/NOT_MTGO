@@ -11,6 +11,10 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
+import back_end.Backend;
+import back_end.Card;
+import back_end.Zone;
+
 @RunWith(Parameterized.class)
 public class CanTargetTest {
 

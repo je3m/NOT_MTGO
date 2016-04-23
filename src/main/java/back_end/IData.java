@@ -1,4 +1,4 @@
-package devops.hw1.core;
+package back_end;
 
 public interface IData<T> extends Comparable<IData<T>> {
 	public long getId();

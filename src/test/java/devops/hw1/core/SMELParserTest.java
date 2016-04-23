@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import back_end.SMELParser;
+
 public class SMELParserTest {
 
 	@Test

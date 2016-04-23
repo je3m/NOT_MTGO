@@ -5,6 +5,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import back_end.Backend;
+import front_end.MTGComponent;
+
 public class MTGComponentTest {
 
 	@Test

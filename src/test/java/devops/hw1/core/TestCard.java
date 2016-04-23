@@ -11,6 +11,8 @@ import java.util.regex.PatternSyntaxException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import back_end.Card;
+
 public class TestCard {
 
 	@Test

@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
+import back_end.Card;
+import back_end.Zone;
+
 public class ZoneTest {
 	String[] names = {"Storm Crow",
 			"Scornful Egotist", "One with Nothing", "Sorrow's Path",

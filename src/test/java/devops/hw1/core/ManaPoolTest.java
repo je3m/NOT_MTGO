@@ -5,6 +5,8 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import back_end.ManaPool;
+
 public class ManaPoolTest {
 	@Test
 	public void testMana1(){

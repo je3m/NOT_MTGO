@@ -11,6 +11,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import back_end.Card;
+import back_end.ItemOnStack;
+import back_end.Zone;
+
 @RunWith(Parameterized.class)
 public class ItemOnStackTest {
 	

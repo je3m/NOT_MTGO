@@ -3,6 +3,9 @@ package devops.hw1.core;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import back_end.AbstractData;
+import back_end.IData;
+
 public class AbstractDataTest {
 	int id;
 	Integer value;

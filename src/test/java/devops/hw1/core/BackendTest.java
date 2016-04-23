@@ -11,6 +11,12 @@ import java.util.concurrent.RejectedExecutionException;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
+import back_end.Backend;
+import back_end.Card;
+import back_end.ManaPool;
+import back_end.Phase;
+import back_end.Zone;
+
 public class BackendTest {
 	@Test
 	public void testCastSpellNoCost(){

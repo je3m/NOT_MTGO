@@ -6,6 +6,10 @@ import java.awt.Rectangle;
 
 import org.junit.Test;
 
+import back_end.Card;
+import back_end.Zone;
+import front_end.DispGUICard;
+
 public class DispGUICardTest {
 
 	@Test

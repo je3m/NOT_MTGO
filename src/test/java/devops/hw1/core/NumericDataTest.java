@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import back_end.NumericData;
+
 public class NumericDataTest {
 	long id;
 	Long value;
