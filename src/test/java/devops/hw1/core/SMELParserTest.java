@@ -47,6 +47,14 @@ public class SMELParserTest {
 
 		assertEquals("TAP", parse.getCost());
 		assertEquals("MANAG", parse.getEffect());
+	}
+
+	@Test
+	public void testTarget(){
+		String giantGrowth = "COST { G } EFFECT { POWER += 3, TOUGHNESS += 3} TARGET { CREATURE }";
+		SMELParser parse = new SMELParser(giantGrowth);
+
+		assertEquals("CREATURE", parse.getTarget());
 
 
 
