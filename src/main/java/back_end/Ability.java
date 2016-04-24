@@ -1,6 +1,6 @@
 package back_end;
 
-public class SMELParser {
+public class Ability {
 
 	private String cost;
 	private String effect;
@@ -10,7 +10,7 @@ public class SMELParser {
 	private AbilityType type;
 
 	//TODO: support mixed case, bad syntax
-	public SMELParser(String smel) {
+	public Ability(String smel) {
 		if (smel == null)
 			throw new IllegalArgumentException("SMEL: no cost");
 
