@@ -981,7 +981,8 @@ public class BackendTest {
 		Ability castAbility = EasyMock.niceMock(Ability.class);
 
 		EasyMock.expect(c.isFlash()).andReturn(false);
-
+		EasyMock.expect(c.getCost()).andReturn("GG");
+		EasyMock.expect(c.getCost()).andReturn("GG");
 
 		EasyMock.expect(castAbility.getCost()).andReturn("GG");
 		EasyMock.expect(castAbility.getZone()).andReturn("HAND");
@@ -995,9 +996,12 @@ public class BackendTest {
 
 		EasyMock.replay(c);
 
+		ManaPool.GREEN1.add(2);
 		Backend.addCard(Zone.HAND, c);
 		Backend.getInstance().activateAbility(c, Zone.HAND, 0, 0);
 
+		Backend.getInstance().passPriority(Backend.PLAYER_ONE);
+		Backend.getInstance().passPriority(Backend.PLAYER_TWO);
 		assertEquals(Backend.getInstance().getZoneContents(Zone.BATTLE_FIELD)[0], c);
 
 
