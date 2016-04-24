@@ -8,13 +8,14 @@ public class SMELParser {
 	private Zone zone;
 	private Zone resolveZone;
 
+	//TODO: support mixed case, bad syntax
 	public SMELParser(String smel) {
 		if (smel == null)
 			throw new IllegalArgumentException("SMEL: no cost");
 
 		smel = smel.replaceAll("\\s+", "");
 
-		String[] arr = smel.split("(?:(\\{|\\}))");
+		String[] arr = smel.split("(?:(\\{|\\}))"); //split on { or }
 
 		for(int i = 0; i < arr.length; i++){
 			switch(arr[i]){
@@ -27,6 +28,15 @@ public class SMELParser {
 			case "TARGET":
 				this.target = arr[++i];
 				break;
+			case "ZONE":
+				i++;
+				this.zone = Zone.getZoneFromString(arr[i]);
+				break;
+			case "RESOLVE":
+				i++;
+				this.resolveZone = Zone.getZoneFromString(arr[i]);
+				break;
+
 
 			}
 		}
