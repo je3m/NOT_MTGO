@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import back_end.Ability;
 import back_end.AbilityType;
-import back_end.Zone;
 
 public class AbilityTest {
 
@@ -65,8 +64,8 @@ public class AbilityTest {
 		String giantGrowth = "COST { G } EFFECT { POWER += 3, TOUGHNESS += 3} TARGET { CREATURE } ZONE { HAND } RESOLVE { GRAVEYARD }";
 		Ability parse = new Ability(giantGrowth);
 
-		assertEquals(Zone.HAND, parse.getZone());
-		assertEquals(Zone.GRAVEYARD, parse.getResolveZone());
+		assertEquals("HAND", parse.getZone());
+		assertEquals("GRAVEYARD", parse.getResolveZone());
 
 	}
 

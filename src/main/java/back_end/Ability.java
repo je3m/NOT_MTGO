@@ -5,8 +5,8 @@ public class Ability {
 	private String cost;
 	private String effect;
 	private String target;
-	private Zone zone;
-	private Zone resolveZone;
+	private String zone;
+	private String resolveZone;
 	private AbilityType type;
 	private String displayText;
 
@@ -31,12 +31,10 @@ public class Ability {
 				this.target = arr[++i];
 				break;
 			case "ZONE":
-				i++;
-				this.zone = Zone.getZoneFromString(arr[i]);
+				this.zone = arr[++i];
 				break;
 			case "RESOLVE":
-				i++;
-				this.resolveZone = Zone.getZoneFromString(arr[i]);
+				this.resolveZone = arr[++i];
 				break;
 			case "TYPE":
 				i++;
@@ -58,11 +56,11 @@ public class Ability {
 		return this.target;
 	}
 
-	public Zone getZone(){
+	public String getZone(){
 		return this.zone;
 	}
 
-	public Zone getResolveZone(){
+	public String getResolveZone(){
 		return this.resolveZone;
 	}
 
