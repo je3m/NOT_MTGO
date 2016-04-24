@@ -35,6 +35,9 @@
 # IntelliJ
 /out/
 
+#Codecover
+.xml
+
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
