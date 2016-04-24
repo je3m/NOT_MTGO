@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.concurrent.RejectedExecutionException;
 
 import org.easymock.EasyMock;
@@ -942,7 +943,8 @@ public class BackendTest {
 	@Test
 	public void testActivateAbility(){
 
-		Card c = new Card("Storm Crow");
+		Card c = new Card("Storm Crow", "", "", "Creature- Bird", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		Backend.addCard(Zone.HAND, c);
 
 
@@ -950,7 +952,8 @@ public class BackendTest {
 
 		assert(Zone.BATTLE_FIELD.contains(c.getName()));
 
-		Card c1 = new Card("Scornful Egotist");
+		Card c1 = new Card("Scornful Egotist", "", "", "Creature- Bird", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 
 		Backend.addCard(Zone.HAND1, c1);
 		Backend.activateAbility(c1, Zone.HAND1, 0);
@@ -1230,13 +1233,16 @@ public class BackendTest {
 	@Test
 	public void testGetContentsFromMultipleZones(){
 		Backend bknd = new Backend();
-		Card c = new Card("Storm crow");
+		Card c = new Card("Storm crow", "", "", "Creature- Bird", "",
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		bknd.addCard(Zone.HAND, c, 0);
 
-		Card c1 = new Card("island");
+		Card c1 = new Card("island", "", "", "Basic Land- Island", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		bknd.addCard(Zone.BATTLE_FIELD, c1, 0);
 
-		Card c2 = new Card("Scornful egotist");
+		Card c2 = new Card("Scornful egotist", "", "", "Creature- Human Wizard", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		bknd.addCard(Zone.GRAVEYARD, c2, 0);
 
 		assertEquals(c, (bknd.getZoneContents(Zone.HAND)[0]));
@@ -1247,13 +1253,16 @@ public class BackendTest {
 	@Test
 	public void testGetManyZoneContents(){
 		Backend bknd = new Backend();
-		Card c = new Card("Storm crow");
+		Card c = new Card("Storm crow", "", "", "Creature- Bird", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		bknd.addCard(Zone.HAND, c, 0);
 
-		Card c1 = new Card("island");
+		Card c1 = new Card("island", "", "", "Basic Land- Island", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		bknd.addCard(Zone.HAND, c1, 1);
 
-		Card c2 = new Card("Scornful egotist");
+		Card c2 = new Card("Scornful egotist", "", "", "Creature- Human Wizard", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		bknd.addCard(Zone.HAND, c2, 2);
 
 		assertEquals(c, (bknd.getZoneContents(Zone.HAND)[0]));
@@ -1264,7 +1273,8 @@ public class BackendTest {
 	@Test
 	public void testGetZoneContents(){
 		Backend bknd = new Backend();
-		Card c = new Card("Storm crow");
+		Card c = new Card("Storm crow", "", "", "Creature- Bird", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		bknd.addCard(Zone.HAND, c, 0);
 		Card z = (bknd.getZoneContents(Zone.HAND)[0]);
 		assertEquals(c, z);
@@ -2130,9 +2140,9 @@ public class BackendTest {
 	public void testIntegrateActivateManaAbility(){
 		ManaPool.GREEN1.empty();
 		Backend bknd = new Backend();
-		Card c = new Card("Forest");
+		Card c = new Card("Forest", "", "", "Basic Land- Forest", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 
-		c.addManaAbility("T:G");
 		Backend.addCard(Zone.BATTLE_FIELD, c);
 		bknd.activateManaAbility(c, true);
 
@@ -2154,13 +2164,12 @@ public class BackendTest {
 		Zone.BATTLE_FIELD.empty();
 
 		Backend bknd = new Backend();
-		Card c = new Card("Storm Crow");
+		Card c = new Card("Storm Crow", "1U", "U", "Creature- Bird", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
-		c.setType("Creature- Bird");
-		c.setCost("1U");
 
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
@@ -2248,11 +2257,11 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		
-		Card card1 = new Card("Vindicate");
-		Card card2 = new Card("Mountain");
-		card1.setType("Sorcery");
+		Card card1 = new Card("Vindicate", "1WB", "WB", "Sorcery", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
+		Card card2 = new Card("Mountain", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		
-		card1.setCost("1WB");
 		
 		bknd.addCard(Zone.HAND, card1, 0);
 		bknd.addCard(Zone.HAND1, card2, 0);
@@ -2309,11 +2318,10 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		
-		Card card1 = new Card("Vindicate");
-		Card card2 = new Card("Mountain");
-		
-		card1.setCost("1WB");
-		card1.setType("Sorcery");
+		Card card1 = new Card("Vindicate", "1WB", "WB", "Sorcery", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
+		Card card2 = new Card("Mountain", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		
 		bknd.addCard(Zone.HAND, card1, 0);
 		bknd.addCard(Zone.BATTLE_FIELD1, card2, 0);
@@ -2358,10 +2366,14 @@ public class BackendTest {
 	public void testUntapStep() {
 		Backend bknd = new Backend();
 		
-		Card c1 = new Card("Forest");
-		Card c2 = new Card("Forest");
-		Card c3 = new Card("Mountain");
-		Card c4 = new Card("Mountain");
+		Card c1 = new Card("Forest", "", "", "Basic Land- Forest", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
+		Card c2 = new Card("Forest", "", "", "Basic Land- Forest", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
+		Card c3 = new Card("Mountain", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
+		Card c4 = new Card("Mountain", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		
 		bknd.addCard(Zone.BATTLE_FIELD, c1, 0);
 		bknd.addCard(Zone.BATTLE_FIELD, c2, 0);
@@ -2405,16 +2417,14 @@ public class BackendTest {
 		Zone.BATTLE_FIELD.empty();
 
 		Backend bknd = new Backend();
-		Card c = new Card("Ashcoat Bear");
+		Card c = new Card("Ashcoat Bear", "1U", "U", "Creature- Bear", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", true);
 		
 		bknd.changePhase();
 
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
-		c.setType("Creature- Bear");
-		c.setFlash(true);
-		c.setCost("1U");
 
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
@@ -2455,7 +2465,8 @@ public class BackendTest {
 		Zone.BATTLE_FIELD.empty();
 
 		Backend bknd = new Backend();
-		Card c = new Card("Ashcoat Bear");
+		Card c = new Card("Ashcoat Bear", "1U", "U", "Creature- Bear", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", true);
 		
 		for(int i = 0; i <11; i++) {
 			bknd.changePhase();
@@ -2464,9 +2475,6 @@ public class BackendTest {
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
-		c.setType("Creature- Bear");
-		c.setFlash(true);
-		c.setCost("1U");
 
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
@@ -2507,7 +2515,8 @@ public class BackendTest {
 		Zone.BATTLE_FIELD.empty();
 
 		Backend bknd = new Backend();
-		Card c = new Card("Ashcoat Bear");
+		Card c = new Card("Ashcoat Bear", "1U", "U", "Creature- Bear", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", true);
 		
 		for(int i = 0; i <16; i++) {
 			bknd.changePhase();
@@ -2516,9 +2525,6 @@ public class BackendTest {
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
-		c.setType("Creature- Bear");
-		c.setFlash(true);
-		c.setCost("1U");
 
 		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
@@ -2558,15 +2564,14 @@ public class BackendTest {
 		Zone.BATTLE_FIELD.empty();
 
 		Backend bknd = new Backend();
-		Card c = new Card("Storm Crow");
+		Card c = new Card("Storm Crow", "1U", "U", "Creature- Bird", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 
 		bknd.changePhase();
 		
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
-		c.setType("Creature- Bird");
-		c.setCost("1U");
 
 		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
 		assertEquals(bknd.getZoneContents(Zone.HAND)[0],c);
@@ -2606,7 +2611,8 @@ public class BackendTest {
 		Zone.BATTLE_FIELD.empty();
 
 		Backend bknd = new Backend();
-		Card c = new Card("Storm Crow");
+		Card c = new Card("Storm Crow", "1U", "U", "Creature- Bird", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 
 		for(int i = 0; i <11; i++) {
 			bknd.changePhase();
@@ -2615,8 +2621,6 @@ public class BackendTest {
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
-		c.setType("Creature- Bird");
-		c.setCost("1U");
 
 		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
 		assertEquals(bknd.getZoneContents(Zone.HAND)[0],c);
@@ -2656,7 +2660,8 @@ public class BackendTest {
 		Zone.BATTLE_FIELD.empty();
 
 		Backend bknd = new Backend();
-		Card c = new Card("Storm Crow");
+		Card c = new Card("Storm Crow", "1U", "U", "Creature- Bird", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 
 		for(int i = 0; i <16; i++) {
 			bknd.changePhase();
@@ -2665,8 +2670,6 @@ public class BackendTest {
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
-		c.setType("Creature- Bird");
-		c.setCost("1U");
 
 		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
 		assertEquals(bknd.getZoneContents(Zone.HAND)[0],c);

@@ -2,6 +2,8 @@ package devops.hw1.core;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.easymock.EasyMock;
 import org.junit.Test;
 
@@ -19,7 +21,8 @@ public class ZoneTest {
 	}
 	public void populateZone(Zone z){
 		for (int i = 0; i < 5; i++){
-			z.addCard(new Card(this.names[i]), i);
+			z.addCard(new Card(this.names[i], "", "", "Basic Land- Mountain", "", 
+					new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false), i);
 		}
 	}
 
@@ -52,7 +55,8 @@ public class ZoneTest {
 	public void testClearZone(){
 		this.clearZones();
 		for (int i = 0; i < 5; i++){
-			Zone.GRAVEYARD.addCard(new Card("Storm Crow"), i);
+			Zone.GRAVEYARD.addCard(new Card("Storm Crow", "", "", "Basic Land- Mountain", "", 
+					new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false), i);
 		}
 
 		assertEquals(Zone.GRAVEYARD.getSize(), 5);
@@ -67,7 +71,8 @@ public class ZoneTest {
 
 
 		for (int i = 0; i < 5; i++){
-			Zone.BATTLE_FIELD.addCard(new Card(this.names[i]), i);
+			Zone.BATTLE_FIELD.addCard(new Card(this.names[i], "", "", "Basic Land- Mountain", "", 
+					new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false), i);
 		}
 
 		for (int i = 0; i < 5; i++){
@@ -79,13 +84,16 @@ public class ZoneTest {
 	public void testGetContentsFromMultipleZones(){
 		this.clearZones();
 
-		Card c = new Card("Storm crow");
+		Card c = new Card("Storm crow", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		Zone.HAND.addCard(c, 0);
 
-		Card c1 = new Card("island");
+		Card c1 = new Card("island", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		Zone.BATTLE_FIELD.addCard(c1, 0);
 
-		Card c2 = new Card("Scornful egotist");
+		Card c2 = new Card("Scornful egotist", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		Zone.GRAVEYARD.addCard(c2, 0);
 
 		assertEquals(c, Zone.HAND.getCards()[0]);
@@ -111,13 +119,16 @@ public class ZoneTest {
 	public void testGetManyZoneContents(){
 		this.clearZones();
 
-		Card c = new Card("Storm crow");
+		Card c = new Card("Storm crow", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		Zone.HAND.addCard(c, 0);
 
-		Card c1 = new Card("island");
+		Card c1 = new Card("island", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		Zone.HAND.addCard(c1, 1);
 
-		Card c2 = new Card("Scornful egotist");
+		Card c2 = new Card("Scornful egotist", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		Zone.HAND.addCard(c2, 2);
 
 		assertEquals(c, Zone.HAND.getCards()[0]);
@@ -131,16 +142,20 @@ public class ZoneTest {
 
 		assertEquals(Zone.BATTLE_FIELD.getSize(), 0);
 
-		Zone.BATTLE_FIELD.addCard(new Card("Storm Crow"), 0);
+		Zone.BATTLE_FIELD.addCard(new Card("Storm Crow", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false), 0);
 		assertEquals(Zone.BATTLE_FIELD.getSize(), 1);
 
-		Zone.BATTLE_FIELD.addCard(new Card("Scornful Egotist"), 1);
+		Zone.BATTLE_FIELD.addCard(new Card("Scornful Egotist", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false), 1);
 		assertEquals(Zone.BATTLE_FIELD.getSize(), 2);
 
-		Zone.BATTLE_FIELD.addCard(new Card("One With Nothing"), 2);
+		Zone.BATTLE_FIELD.addCard(new Card("One With Nothing", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false), 2);
 		assertEquals(Zone.BATTLE_FIELD.getSize(), 3);
 
-		Zone.BATTLE_FIELD.addCard(new Card("Sorrow's Path"), 3);
+		Zone.BATTLE_FIELD.addCard(new Card("Sorrow's Path", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false), 3);
 		assertEquals(Zone.BATTLE_FIELD.getSize(), 4);
 
 	}
@@ -153,7 +168,8 @@ public class ZoneTest {
 		"Fleshmad Steed"};
 
 		for (int i = 0; i < 5; i++){
-			Zone.BATTLE_FIELD.addCard(new Card(names[i]), i);
+			Zone.BATTLE_FIELD.addCard(new Card(names[i], "", "", "Basic Land- Mountain", "", 
+					new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false), i);
 		}
 
 		assertEquals(Zone.BATTLE_FIELD.getSize(), 5);

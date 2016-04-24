@@ -49,13 +49,15 @@ public class TestCard {
 	
 	@Test
 	public void makeCardGetName(){
-		Card c = new Card("Storm Crow");
+		Card c = new Card("Storm Crow", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		assertEquals(c.getName(), "Storm Crow");
 	}
 
 	@Test
 	public void testTapTwice(){
-		Card c = new Card("Scornful Egotist");
+		Card c = new Card("Scornful Egotist", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		assert(c.tap());
 		assert(!c.tap());
 	}
@@ -64,16 +66,19 @@ public class TestCard {
 	public void testAbilities(){
 		Card c;
 
-		c = new Card("Scornful Egotist");
+		c = new Card("Scornful Egotist", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		c.addAbility("Morph U");
 		assertEquals(c.getAbilities()[0], "Morph U");
 
-		c = new Card("Storm Crow");
+		c = new Card("Storm Crow", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		c.addAbility("flying");
 		assertEquals(c.getAbilities()[0], "flying");
 
 		String s[] = {"FirstStrike", "attackingCreaturesHaveFirstStrike RT"};
-		c = new Card("Akki Coalflinger");
+		c = new Card("Akki Coalflinger", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		c.addAbility(s[0]);
 		c.addAbility(s[1]);
 		Assert.assertArrayEquals(c.getAbilities(), s);
@@ -82,20 +87,23 @@ public class TestCard {
 
 	@Test
 	public void testTap1(){
-		Card c = new Card("Forest");
+		Card c = new Card("Forest", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		assertFalse(c.getTapped());
 	}
 
 	@Test
 	public void testTap2(){
-		Card c = new Card("Forest");
+		Card c = new Card("Forest", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		c.tap();
 		assertTrue(c.getTapped());
 	}
 
 	@Test
 	public void testTap3(){
-		Card c = new Card("Forest");
+		Card c = new Card("Forest", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		c.tap();
 		c.untap();
 		assertFalse(c.getTapped());
@@ -103,8 +111,8 @@ public class TestCard {
 
 	@Test
 	public void testManaAbility(){
-		Card c = new Card("Forest");
-		c.addManaAbility("T:G");
+		Card c = new Card("Forest", "", "", "Basic Land- Mountain", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		assertEquals(c.getManaAbility(), "T:G");
 	}
 
@@ -112,12 +120,12 @@ public class TestCard {
 	public void testColor(){
 		Card c;
 
-		c = new Card("Storm Crow");
-		c.setColor("U");
+		c = new Card("Storm Crow", "", "U", "Basic Land- Mountain", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		assertEquals(c.getColor(), "U");
 
-		c = new Card("One with Nothing");
-		c.setColor("B");
+		c = new Card("One with Nothing", "", "B", "Basic Land- Mountain", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
 		assertEquals(c.getColor(), "B");
 
 		try {
@@ -145,12 +153,12 @@ public class TestCard {
 	@Test
 	public void testImage(){
 		Card c;
-		c = new Card("Storm Crow");
-		c.setImage("res/storm_crow.jpg");
+		c = new Card("Storm Crow", "", "", "Basic Land- Mountain", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/storm_crow.jpg", false);
 		assertEquals(c.getImage(), "res/storm_crow.jpg");
 
-		c = new Card("Scornful Egotist");
-		c.setImage("res/scornful_egotist.jpg");
+		c = new Card("Scornful Egotist", "", "", "Basic Land- Mountain", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", false);
 		assertEquals(c.getImage(), "res/scornful_egotist.jpg");
 
 
@@ -166,12 +174,12 @@ public class TestCard {
 	public void testManaCostGetSet(){
 		Card c;
 
-		c = new Card("Storm Crow");
-		c.setCost("1U");
+		c = new Card("Storm Crow", "1U", "", "Basic Land- Mountain", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", false);
 		assertEquals(c.getCost(), "1U");
 
-		c = new Card("Scornful Egotist");
-		c.setCost("7U");
+		c = new Card("Scornful Egotist", "7U", "", "Basic Land- Mountain", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", false);
 		assertEquals(c.getCost(), "7U");
 
 		c.setCost("7GG");
@@ -197,21 +205,20 @@ public class TestCard {
 	public void testPowerToughness(){
 		Card c;
 
-		c = new Card("Storm Crow");
-		c.setPower(1);
-		c.setToughness(2);
+		c = new Card("Storm Crow", "", "", "Basic Land- Mountain", "T:G", 
+				new ArrayList<String>(), 1, 2, "res/scornful_egotist.jpg", false);
 
 		assertEquals(c.getPower(), 1);
 		assertEquals(c.getToughness(), 2);
 
-		c = new Card("Scornful Egotist");
-		c.setPower(1);
-		c.setToughness(1);
-
+		c = new Card("Scornful Egotist", "", "", "Basic Land- Mountain", "T:G", 
+				new ArrayList<String>(), 1, 1, "res/scornful_egotist.jpg", false);
+		
 		assertEquals(c.getPower(), 1);
 		assertEquals(c.getToughness(), 1);
 
-		c = new Card("Fleshmad Steed");
+		c = new Card("Fleshmad Steed", "", "", "Basic Land- Mountain", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", false);
 		c.setPT(2, 2);
 
 		assertEquals(c.getPower(), 2);
@@ -222,20 +229,24 @@ public class TestCard {
 
 	@Test
 	public void testToString(){
-		assertEquals("Storm Crow", new Card("Storm Crow").toString());
-		assertEquals("Scornful Egotist", new Card("Scornful Egotist").toString());
-		assertEquals("One With Nothing", new Card("One With Nothing").toString());
+		assertEquals("Storm Crow", new Card("Storm Crow", "", "", "Basic Land- Mountain", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", false).toString());
+		assertEquals("Scornful Egotist", new Card("Scornful Egotist", "", "", "Basic Land- Mountain", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", false).toString());
+		assertEquals("One With Nothing", new Card("One With Nothing", "", "", "Basic Land- Mountain", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", false).toString());
 	}
 
 	@Test
 	public void testType(){
 		Card c;
 
-		c = new Card("Storm Crow");
-		c.setType("Creature- Bird");
+		c = new Card("Storm Crow", "", "", "Creature- Bird", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", false);
 		assertEquals(c.getType(), "Creature- Bird");
 
-		c = new Card("Scornful Egotist");
+		c = new Card("Scornful Egotist", "", "", "Creature- Human Wizard", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", false);
 		c.setType("Creature- Human Wizard");
 		assertEquals(c.getType(), "Creature- Human Wizard");
 
@@ -295,8 +306,8 @@ public class TestCard {
 			assertEquals(e.getDescription(), "Card Scornful Egotist: Creature- goblin is not a valid card typeline");
 		}
 		
-		c = new Card("Forest");
-		c.setType("Basic Land");
+		c = new Card("Forest", "", "", "Basic Land", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", false);
 		assertEquals(c.getType(), "Basic Land");
 	}
 	
@@ -304,31 +315,28 @@ public class TestCard {
 	public void testIsFlash() {
 		Card c;
 		
-		c= new Card("Ashcoat Bear");
-		c.setType("Creature- Bear");
-		c.setFlash(true);
+		c= new Card("Ashcoat Bear", "", "", "Creature- Bear", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", true);
 		
 		assertTrue(c.isFlash());
 		
-		c= new Card("Storm Crow");
-		c.setType("Creature- Bird");
+		c= new Card("Storm Crow", "", "", "Creature- Bird", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", false);
 		
 		assertFalse(c.isFlash());
 		
-		c = new Card("Vindicate");
-		c.setType("Sorcery");
-		c.setFlash(true);
+		c = new Card("Vindicate", "", "", "Sorcery", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", true);
 		
 		assertTrue(c.isFlash());
 		
-		c= new Card("Lightning Bolt");
-		c.setType("Instant");
+		c= new Card("Lightning Bolt", "", "", "Instant", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", false);
 		
 		assertTrue(c.isFlash());
 		
-		c = new Card("Ludicrous Speed!");
-		c.setType("Instant");
-		c.setFlash(true);
+		c = new Card("Ludicrous Speed!", "", "", "Instant", "T:G", 
+				new ArrayList<String>(), 0, 0, "res/scornful_egotist.jpg", true);
 		
 		assertTrue(c.isFlash());
 	}

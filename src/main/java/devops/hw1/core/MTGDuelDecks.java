@@ -2,6 +2,7 @@ package devops.hw1.core;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
@@ -33,54 +34,55 @@ public class MTGDuelDecks {
 	 */
 	private static void initializePlayer() {
 		//Test
-		Zone.GRAVEYARD.addCard(new Card("Grave"), 0);
-		Zone.LIBRARY.addCard(new Card("Libr"), 0);
+		Zone.GRAVEYARD.addCard(new Card("Grave", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
+		Zone.LIBRARY.addCard(new Card("Libr", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
 
-		Card hand1 = new Card("Hand1");
+		Card hand1 = new Card("Hand1", "", "", "", "T:G", 
+				new ArrayList<String>(), 0, 0, FOREST_PATH, false);
 
 		hand1.addAbility("Play this card");
 		hand1.addAbility("Tap: Add G to your mana pool");
 
-		hand1.addManaAbility("T:G");
-		hand1.setImage(FOREST_PATH);
 		Zone.HAND.addCard(hand1,0);
 
-		Card hand2 = new Card("Hand2");
+		Card hand2 = new Card("Hand2", "", "", "", "T:G", 
+				new ArrayList<String>(), 0, 0, FOREST_PATH, false);
 		hand2.addAbility("Play this card");
 		hand2.addAbility("Tap: Add G to your mana pool");
 
-		hand2.addManaAbility("T:G");
-		hand2.setImage(FOREST_PATH);
 		Zone.HAND.addCard(hand2, 0);
 
-		Card hand3 = new Card("Arbor elf");
-		hand3.setColor("G");
+		Card hand3 = new Card("Arbor elf", "G", "G", "Creature- Elf Druid", "T:G", 
+				new ArrayList<String>(), 1, 1, LLANOWAR_ELVES_PATH, false);
 		hand3.addAbility("Play this card");
 		hand3.addAbility("Tap: Add G to your mana pool");
 
-		hand3.addManaAbility("T:G");
-		hand3.setImage(LLANOWAR_ELVES_PATH);
-		hand3.setType("Creature- Elf Druid");
-		hand3.setCost("G");
-		hand3.setPT(1, 1);
 
 
 		Zone.HAND.addCard(hand3, 0);
-		Zone.HAND.addCard(new Card("Hand4"), 0);
-		Zone.HAND.addCard(new Card("Hand5"), 0);
-		Zone.HAND.addCard(new Card("Hand6"), 0);
-		Zone.HAND.addCard(new Card("Hand7"), 0);
-		Zone.HAND.addCard(new Card("Hand8"), 0);
-		Zone.HAND.addCard(new Card("Hand9"), 0);
+		Zone.HAND.addCard(new Card("Hand4", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
+		Zone.HAND.addCard(new Card("Hand5", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
+		Zone.HAND.addCard(new Card("Hand6", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
+		Zone.HAND.addCard(new Card("Hand7", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
+		Zone.HAND.addCard(new Card("Hand8", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
+		Zone.HAND.addCard(new Card("Hand9", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
 
 
 
 
-		Card BF1 = new Card("BF1");
-		BF1.setImage(FOREST_PATH);
+		Card BF1 = new Card("BF1", "", "", "", "T:G", 
+				new ArrayList<String>(), 0, 0, FOREST_PATH, false);
+
 		BF1.addAbility("Play this Card");
 		BF1.addAbility("Tap: Add G to your mana pool");
-		BF1.addManaAbility("T:G");
 		Zone.BATTLE_FIELD.addCard(BF1, 0);
 
 
@@ -94,40 +96,38 @@ public class MTGDuelDecks {
 	 */
 	private static void initializePlayer1() {
 		//Test
-		Zone.GRAVEYARD1.addCard(new Card("Grave"), 0);
-		Zone.LIBRARY1.addCard(new Card("Libr"), 0);
+		Zone.GRAVEYARD1.addCard(new Card("Grave", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
+		Zone.LIBRARY1.addCard(new Card("Libr", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
 
 
-		Card hand1 = new Card("Hand11");
+		Card hand1 = new Card("Hand11", "", "", "Land", "T:R", 
+				new ArrayList<String>(), 0, 0, MOUNTAIN_PATH, false);
 		hand1.addAbility("Play this card");
 		hand1.addAbility("Tap: Add R to your mana pool");
-		hand1.setColor("");
-		hand1.setType("Land");
-		hand1.setFlash(false);
-		hand1.addManaAbility("T:R");
-		hand1.setImage(MOUNTAIN_PATH);
 
-		Card hand2 = new Card("tarfire");
+		Card hand2 = new Card("tarfire", "R", "R", "Instant- Goblin", "", 
+				new ArrayList<String>(), 0, 0, TARFIRE_PATH, true);
 		hand2.addAbility("play this card");
-		hand2.setCost("R");
-		hand2.setColor("R");
-		hand2.setFlash(true);
-		hand2.setImage(TARFIRE_PATH);
-		hand2.setType("Instant- Goblin");
 
 		Zone.HAND1.addCard(hand1, 0);
 		Zone.HAND1.addCard(hand2, 0);
-		Zone.HAND1.addCard(new Card("Hand3"), 0);
-		Zone.HAND1.addCard(new Card("Hand4"), 0);
-		Zone.HAND1.addCard(new Card("Hand5"), 0);
-		Zone.HAND1.addCard(new Card("Hand6"), 0);
-		Zone.HAND1.addCard(new Card("Hand7"), 0);
+		Zone.HAND1.addCard(new Card("Hand3", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
+		Zone.HAND1.addCard(new Card("Hand4", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
+		Zone.HAND1.addCard(new Card("Hand5", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
+		Zone.HAND1.addCard(new Card("Hand6", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
+		Zone.HAND1.addCard(new Card("Hand7", "", "", "", "", 
+				new ArrayList<String>(), 0, 0, "", false), 0);
 
-		Card BF2 = new Card("BF2");
-		BF2.setImage(MOUNTAIN_PATH);
+		Card BF2 = new Card("BF2", "", "", "", "T:R", 
+				new ArrayList<String>(), 0, 0, MOUNTAIN_PATH, false);
 		BF2.addAbility("Play this card");
 		BF2.addAbility("Tap: Add R to your mana pool");
-		BF2.addManaAbility("T:R");
 		Zone.BATTLE_FIELD1.addCard(BF2, 0);
 
 
