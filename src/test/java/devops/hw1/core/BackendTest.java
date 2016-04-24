@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.concurrent.RejectedExecutionException;
 
 import org.easymock.EasyMock;
@@ -15,6 +16,7 @@ import back_end.Ability;
 import back_end.AbilityType;
 import back_end.Backend;
 import back_end.Card;
+import back_end.MTGDuelDecks;
 import back_end.ManaPool;
 import back_end.Phase;
 import back_end.Zone;
@@ -970,12 +972,6 @@ public class BackendTest {
 		Zone.HAND.empty();
 		Zone.BATTLE_FIELD.empty();
 
-		String cast = "COST {GG}"
-				+ "ZONE { HAND } " +
-				"RESOLVE { BATTLEFIELD }";
-		String mana = "COST { TAP }" +
-				"EFFECT { MANA G }" +
-				"ZONE {BATTLEFIELD}";
 
 		Card c = EasyMock.niceMock(Card.class);
 		Ability castAbility = EasyMock.niceMock(Ability.class);
@@ -1003,10 +999,32 @@ public class BackendTest {
 		Backend.getInstance().passPriority(Backend.PLAYER_ONE);
 		Backend.getInstance().passPriority(Backend.PLAYER_TWO);
 		assertEquals(Backend.getInstance().getZoneContents(Zone.BATTLE_FIELD)[0], c);
+	}
 
+	@Test
+	public void testCastAbilityIntegration(){
+		String cast = "COST {G}"
+				+ "ZONE { HAND } " +
+				"RESOLVE { BATTLEFIELD }" +
+				"TYPE {CAST}";
+		String mana = "COST { TAP }" +
+				"EFFECT { MANA G }" +
+				"ZONE {BATTLEFIELD}";
 
+		ArrayList<String> abilities = new ArrayList<String>();
+		abilities.add(cast);
+		abilities.add(mana);
 
+		Card llanowarElves = new Card("Llanowar elves", "G", "G", "Creature- Elf Druid",
+				null, abilities, 1, 1, MTGDuelDecks.LLANOWAR_ELVES_PATH, false);
 
+		Backend.addCard(Zone.HAND, llanowarElves);
+		ManaPool.GREEN1.add(1);
+
+		Backend.getInstance().activateAbility(llanowarElves, Zone.HAND, 0, 0);
+		Backend.getInstance().passPriority(true);
+		Backend.getInstance().passPriority(false);
+		assertEquals(Backend.getInstance().getZoneContents(Zone.BATTLE_FIELD)[0], llanowarElves);
 	}
 
 	@Test
