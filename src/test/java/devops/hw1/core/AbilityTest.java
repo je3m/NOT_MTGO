@@ -84,5 +84,11 @@ public class AbilityTest {
 		Ability parse = new Ability(giantGrowth);
 
 		assertEquals("Cast", parse.getText());
+
+		String elvishWarrior = "COST { GG} ZONE {HAND} RESOLVE { BATTLEFIELD} TYPE {CAST}";
+		parse = new Ability(elvishWarrior);
+
+		assertEquals("Cast", parse.getText());
+
 	}
 }
