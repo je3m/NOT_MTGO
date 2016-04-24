@@ -4,11 +4,15 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.concurrent.RejectedExecutionException;
 
+
 /**
  * Backend object that handles a lot of game logic and information
  *
  */
 public class Backend {
+	public static final boolean PLAYER_ONE = true;
+	public static final boolean PLAYER_TWO = false;
+
 	private Phase phase;
 	private Boolean turn;
 	private Boolean priority;
@@ -95,8 +99,12 @@ public class Backend {
 	 * @param i the index the card currently occupies in that zone
 	 * @param abInd index of the card's ability
 	 */
-	public static void activateAbility(Card c, Zone z, int i, int abInd) {
+	public void activateAbility(Card c, Zone z, int i, int abInd) {
 		Ability a =	c.getAbilities()[abInd];
+
+		if(a.getType() == AbilityType.CAST){
+			this.castSpell(z, c, i, true, null, Zone.BATTLE_FIELD);
+		}
 	}
 
 
