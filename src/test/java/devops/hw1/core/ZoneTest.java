@@ -1,6 +1,9 @@
 package devops.hw1.core;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.easymock.EasyMock;
 import org.junit.Test;
@@ -27,22 +30,27 @@ public class ZoneTest {
 	}
 
 	@Test
+	public void testGetZoneFromString(){
+		assertEquals(Zone.HAND, Zone.getZoneFromString("HAND"));
+	}
+
+	@Test
 	public void testAddToZone(){
 		this.clearZones();
-		
+
 		Card c = EasyMock.niceMock(Card.class);
-		
+
 		Zone.HAND.addCard(c, 0);
-		
+
 		assert(Zone.HAND.getCards()[0] == c);
-		
+
 		try {
 			Zone.HAND.addCard(c, -1);
 			fail("did not throw error");
 		} catch (IndexOutOfBoundsException e){
 			assertEquals(e.getMessage(), "Index -1 is not valid for the HAND zone");
 		}
-		
+
 		Zone.HAND.addCard(c, Zone.HAND.getSize());
 		try {
 			Zone.HAND.addCard(c, Zone.HAND.getSize() + 1);
@@ -50,7 +58,7 @@ public class ZoneTest {
 			assertEquals(e.getMessage(), "Index 3 is not valid for the HAND zone");
 		}
 	}
-	
+
 	@Test
 	public void testClearZone(){
 		this.clearZones();
@@ -167,7 +175,7 @@ public class ZoneTest {
 		assertFalse(Zone.BATTLE_FIELD.contains(names[0]));
 
 		assertEquals(Zone.BATTLE_FIELD.getSize(), 4);
-		
+
 		try {
 			Zone.BATTLE_FIELD.remove(10000);;
 		} catch (IndexOutOfBoundsException e) {
