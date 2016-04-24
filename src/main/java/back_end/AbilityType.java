@@ -9,7 +9,8 @@ public enum AbilityType {
 	TRIGGERED,
 	STATIC,
 	ETB,
-	MANA;
+	MANA,
+	CAST;
 
 	public static AbilityType getTypeFromString(String s){
 		//TODO: invalid input
