@@ -7,6 +7,7 @@ public class SMELParser {
 	private String target;
 	private Zone zone;
 	private Zone resolveZone;
+	private AbilityType type;
 
 	//TODO: support mixed case, bad syntax
 	public SMELParser(String smel) {
@@ -36,7 +37,10 @@ public class SMELParser {
 				i++;
 				this.resolveZone = Zone.getZoneFromString(arr[i]);
 				break;
-
+			case "TYPE":
+				i++;
+				this.type = AbilityType.getTypeFromString(arr[i]);
+				break;
 
 			}
 		}
@@ -63,5 +67,10 @@ public class SMELParser {
 
 	public String getEffect() {
 		return this.effect;
+	}
+
+	public AbilityType getType() {
+
+		return this.type;
 	}
 }
