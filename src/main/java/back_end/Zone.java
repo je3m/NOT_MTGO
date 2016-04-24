@@ -26,7 +26,7 @@ public enum Zone {
 	 * @param i index to place card
 	 */
 	public void addCard(Card c, int i){
-		if(i > this.getSize() || i < 0) {
+		if((i > this.getSize()) || (i < 0)) {
 			throw new IndexOutOfBoundsException("Index " + i + " is not valid for the " + this + " zone");
 		}
 		this.cards.add(i, c);
@@ -97,6 +97,21 @@ public enum Zone {
 		}
 		this.cards.remove(i);
 
+	}
+
+	/**
+	 * Returns the zone corresponding to the given string
+	 * @param string name of the zone
+	 * @return Zone enum that matches that string
+	 */
+	public static Zone getZoneFromString(String string) {
+		//TODO: invalid input
+		for (Zone z: Zone.values()){
+			if (string.equals(z.name())){
+				return z;
+			}
+		}
+		return null;
 	}
 
 
