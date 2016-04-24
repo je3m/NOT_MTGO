@@ -48,6 +48,10 @@ public class Ability {
 
 			}
 		}
+
+		if((this.type == AbilityType.CAST) && (this.displayText == null)){
+			this.displayText = "Cast";
+		}
 	}
 
 	public String getTarget(){
