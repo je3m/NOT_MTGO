@@ -8,8 +8,9 @@ public class Ability {
 	private Zone zone;
 	private Zone resolveZone;
 	private AbilityType type;
+	private String displayText;
 
-	//TODO: support mixed case, bad syntax
+	//TODO: support mixed case, bad syntax, bad info
 	public Ability(String smel) {
 		if (smel == null)
 			throw new IllegalArgumentException("SMEL: no cost");
@@ -40,6 +41,9 @@ public class Ability {
 			case "TYPE":
 				i++;
 				this.type = AbilityType.getTypeFromString(arr[i]);
+				break;
+			case "TEXT":
+				this.displayText = arr[++i];
 				break;
 
 			}
@@ -72,5 +76,9 @@ public class Ability {
 	public AbilityType getType() {
 
 		return this.type;
+	}
+
+	public String getText() {
+		return this.displayText;
 	}
 }

@@ -5,11 +5,11 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import back_end.AbilityType;
 import back_end.Ability;
+import back_end.AbilityType;
 import back_end.Zone;
 
-public class SMELParserTest {
+public class AbilityTest {
 
 	@Test
 	public void testGetCost() {
@@ -76,5 +76,13 @@ public class SMELParserTest {
 		Ability parse = new Ability(giantGrowth);
 
 		assertEquals(AbilityType.CAST, parse.getType());
+	}
+
+	@Test
+	public void testDisplayText(){
+		String giantGrowth = "TEXT { Cast } COST { G } EFFECT { POWER += 3, TOUGHNESS += 3} TARGET { CREATURE } ZONE { HAND } RESOLVE { GRAVEYARD } TYPE { CAST }";
+		Ability parse = new Ability(giantGrowth);
+
+		assertEquals("Cast", parse.getText());
 	}
 }
