@@ -2,6 +2,7 @@ package front_end;
 
 import java.awt.Rectangle;
 
+import back_end.Ability;
 import back_end.Card;
 import back_end.Zone;
 /**
@@ -10,10 +11,10 @@ import back_end.Zone;
  *
  */
 public class DispGUICard extends GUICard{
-		String[] abilityStrings;
-		Rectangle[] abilityBoxes;
-		int index;
-		Zone zone;
+	String[] abilityStrings;
+	Rectangle[] abilityBoxes;
+	int index;
+	Zone zone;
 
 	/**
 	 * Constructs a displayed GUI card
@@ -25,26 +26,31 @@ public class DispGUICard extends GUICard{
 	 */
 	public DispGUICard(Rectangle rec, Card card, int index, Zone zone) {
 		super(rec, card);
-		this.abilityStrings = card.getAbilities();
-		
+		Ability[] a = card.getAbilities();
+
+		this.abilityStrings = new String[a.length+1];
+		for (int i = 0; i < a.length; i++){
+			this.abilityStrings[i] = a[i].getText();
+		}
+
 		if(index > zone.getSize()) {
 			throw new IllegalArgumentException("DispGUICard " + card.getName() +
 					": " + index + " is not a valid index for zone " + zone);
 		}
 		this.index = index;
 		this.zone = zone;
-		generateAbilityBoxes();
+		this.generateAbilityBoxes();
 	}
 
 	/**
 	 * Generates ability boxes for the DispGUICards based on the ability strings and the cards size
 	 */
 	private void generateAbilityBoxes() {
-		abilityBoxes = new Rectangle[this.abilityStrings.length];
+		this.abilityBoxes = new Rectangle[this.abilityStrings.length];
 		int height = Math.min((int)(this.rec.getHeight()/4), (int)(this.rec.getHeight()/this.abilityStrings.length));
 		int width = (int)(this.rec.getWidth()/2);
 		for(int i = 0; i < this.abilityStrings.length; i++){
-			abilityBoxes[i] = new Rectangle((int)(this.rec.getX() + this.rec.getWidth()), (int)(this.rec.getY() + (height * i)), width, height);
+			this.abilityBoxes[i] = new Rectangle((int)(this.rec.getX() + this.rec.getWidth()), (int)(this.rec.getY() + (height * i)), width, height);
 		}
 	}
 
@@ -53,7 +59,7 @@ public class DispGUICard extends GUICard{
 	 * @return the abilityStrings
 	 */
 	public String[] getAbilityStrings() {
-		return abilityStrings;
+		return this.abilityStrings;
 	}
 
 	/**
@@ -69,22 +75,22 @@ public class DispGUICard extends GUICard{
 	 * @return the abilityBoxes
 	 */
 	public Rectangle[] getAbilityBoxes() {
-		return abilityBoxes;
+		return this.abilityBoxes;
 	}
-	
+
 	/**
 	 * Gets the index of the card represented by the GUI card
 	 * @return index of the card
 	 */
 	public int getIndex() {
-		return index;
+		return this.index;
 	}
-	
+
 	/**
 	 * Gets the zone of the card represented by the GUI card
 	 * @return index of the card
 	 */
 	public Zone getZone() {
-		return zone;
+		return this.zone;
 	}
 }

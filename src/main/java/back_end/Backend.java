@@ -94,11 +94,11 @@ public class Backend {
 	 * @param z the zone the card is leaving
 	 * @param i the index the card currently occupies in that zone
 	 * @param abInd index of the card's ability
-	 * TODO: this is weird
 	 */
 	public static void activateAbility(Card c, Zone z, int i, int abInd) {
-		activateAbility(c, z, i);
+		Ability a =	c.getAbilities()[abInd];
 	}
+
 
 	/**
 	 * Simply adds the card to the given zone at the end of that zone's list

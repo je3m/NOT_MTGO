@@ -10,7 +10,7 @@ public class Card {
 	private String color;
 	private String type;
 	private String manaAbility;
-	private ArrayList<String> abilities = new ArrayList<String>();
+	private ArrayList<Ability> abilities = new ArrayList<Ability>();
 	private int power, toughness;
 	private String image;
 	private Boolean tapped;
@@ -27,7 +27,7 @@ public class Card {
 		this.manaAbility = null;
 		this.flash = false;
 	}
-	
+
 	public Card(String name, String manaCost, String color, String type,
 			String manaAbility, ArrayList<String> abilities, int power,
 			int toughness, String image, Boolean flash){
@@ -35,7 +35,11 @@ public class Card {
 		if(abilities == null){
 			throw new IllegalArgumentException("Error creating card " + name + ": null is not a valid ability list");
 		}
-		this.abilities = abilities;
+
+		for(String s : abilities){
+			this.addAbility(s);;
+		}
+
 		try{
 			this.setCost(manaCost);
 			this.setColor(color);
@@ -58,7 +62,7 @@ public class Card {
 	 * @param string ability to add following TODO: format
 	 */
 	public void addAbility(String string) {
-		this.abilities.add(string);
+		this.abilities.add(new Ability(string));
 
 	}
 
@@ -66,8 +70,8 @@ public class Card {
 	 *
 	 * @return a string of all abilities that card has
 	 */
-	public String[] getAbilities() {
-		return (this.abilities.toArray(new String[0]));
+	public Ability[] getAbilities() {
+		return (this.abilities.toArray(new Ability[0]));
 	}
 
 	/**
@@ -211,10 +215,10 @@ public class Card {
 		String regex = "(Basic )?[A-Z][a-z]*(\\- [A-Z][a-z]*( [A-Z][a-z]*)*)?";
 		if(!s.matches(regex)) {
 			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid card typeline", regex, -1);
-		} 
+		}
 		this.type = s;
 	}
-	
+
 	/**
 	 * Sets whether this card can be cast at instant speed independent of its card typeline
 	 * @param flash whether this card can be cast at instant speed
@@ -251,7 +255,7 @@ public class Card {
 	public Boolean getTapped() {
 		return this.tapped;
 	}
-	
+
 	/**
 	 * Determines whether this card can be cast at instant speed
 	 * @return whether this card can be cast at instant speed
