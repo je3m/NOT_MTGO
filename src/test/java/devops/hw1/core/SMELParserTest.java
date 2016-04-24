@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import back_end.SMELParser;
+import back_end.Zone;
 
 public class SMELParserTest {
 
@@ -56,8 +57,15 @@ public class SMELParserTest {
 
 		assertEquals("CREATURE", parse.getTarget());
 
-
-
 	}
 
+	@Test
+	public void testZones(){
+		String giantGrowth = "COST { G } EFFECT { POWER += 3, TOUGHNESS += 3} TARGET { CREATURE } ZONE { HAND } RESOLVE { GRAVEYARD }";
+		SMELParser parse = new SMELParser(giantGrowth);
+
+		assertEquals(Zone.HAND, parse.getZone());
+		assertEquals(Zone.GRAVEYARD, parse.getResolveZone());
+
+	}
 }
