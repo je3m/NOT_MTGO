@@ -103,6 +103,7 @@ public class Backend {
 		Ability a =	c.getAbilities()[abInd];
 
 		if(a.getType() == AbilityType.CAST){
+			c.setCost(a.getCost());
 			this.castSpell(z, c, i, true, null, Zone.BATTLE_FIELD);
 		}
 	}
