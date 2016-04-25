@@ -114,5 +114,9 @@ public enum Zone {
 		return null;
 	}
 
+	public static boolean getPlayerFromZone(Zone zone) {
+		return zone.ordinal() < 5;
+	}
+
 
 }
