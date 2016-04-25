@@ -14,9 +14,9 @@ public class Backend {
 	public static final boolean PLAYER_TWO = false;
 
 	private Phase phase;
-	private Boolean turn;
-	private Boolean priority;
-	private Boolean passed;
+	private boolean turn;
+	private boolean priority;
+	private boolean passed;
 	private Stack<ItemOnStack> stack;
 	public static Backend bk;
 
@@ -25,6 +25,24 @@ public class Backend {
 			bk = new Backend();
 
 		return bk;
+	}
+
+	public void setPhase(Phase p){
+		this.phase = p;
+	}
+
+	public void setTurn(boolean t){
+		this.turn = t;
+	}
+
+	public void setPriority(boolean priority){
+		this.priority = priority;
+	}
+
+	public void reset(){
+		this.setPhase(Phase.FIRST_MAIN1);
+		this.setTurn(PLAYER_ONE);
+		this.setPriority(PLAYER_ONE);
 	}
 
 	/**
@@ -101,10 +119,11 @@ public class Backend {
 	 */
 	public void activateAbility(Card c, Zone z, int i, int abInd) {
 		Ability a =	c.getAbilities()[abInd];
+		boolean player = Zone.getPlayerFromZone(z);
 
 		if(a.getType() == AbilityType.CAST){
 			c.setCost(a.getCost());
-			this.castSpell(z, c, i, true, null, Zone.BATTLE_FIELD);
+			this.castSpell(z, c, i, player, null, Zone.getZoneFromString(a.getResolveZone(), player));
 		}
 	}
 
