@@ -118,5 +118,18 @@ public enum Zone {
 		return zone.ordinal() < 5;
 	}
 
+	public static Zone getZoneFromString(String string, boolean player) {
+		//TODO: invalid input
+		if(!player)
+			string = string.concat("1");
+		for (Zone z: Zone.values()){
+			if (string.equals(z.name())){
+				return z;
+			}
+		}
+		return null;
+	}
+
+
 
 }
