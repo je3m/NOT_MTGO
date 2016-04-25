@@ -30,6 +30,12 @@ public class ZoneTest {
 	}
 
 	@Test
+	public void getPlayerFromZone(){
+		for(int i = 0; i < 10; i++)
+			assertEquals((i < 5), Zone.getPlayerFromZone(Zone.values()[i]));
+	}
+
+	@Test
 	public void testGetZoneFromString(){
 		assertEquals(Zone.HAND, Zone.getZoneFromString("HAND"));
 	}
