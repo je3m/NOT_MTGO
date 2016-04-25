@@ -969,6 +969,7 @@ public class BackendTest {
 
 	@Test
 	public void testAbilityCast(){
+		Backend.getInstance().reset();
 		Zone.HAND.empty();
 		Zone.BATTLE_FIELD.empty();
 
@@ -1003,6 +1004,8 @@ public class BackendTest {
 
 	@Test
 	public void testCastAbilityIntegration(){
+		Backend.getInstance().setPhase(Phase.FIRST_MAIN1);
+		Backend.getInstance().setPriority(true);
 		String cast = "COST {G}"
 				+ "ZONE { HAND } " +
 				"RESOLVE { BATTLEFIELD }" +
@@ -1025,6 +1028,37 @@ public class BackendTest {
 		Backend.getInstance().passPriority(true);
 		Backend.getInstance().passPriority(false);
 		assertEquals(Backend.getInstance().getZoneContents(Zone.BATTLE_FIELD)[0], llanowarElves);
+	}
+
+	@Test
+	public void testCastAbilityIntegrationPlayer2(){
+		Backend.getInstance().setPhase(Phase.FIRST_MAIN1);
+		String cast = "COST {R}"
+				+ "ZONE { HAND } " +
+				"RESOLVE { BATTLE_FIELD }" +
+				"TYPE {CAST}";
+
+
+		ArrayList<String> abilities = new ArrayList<String>();
+		abilities.add(cast);
+
+		Card skirkProspector = new Card("Skirk Prospector", "R", "R", "Creature- Goblin",
+				null, abilities, 1, 1, MTGDuelDecks.TARFIRE_PATH, false);
+
+		Backend.addCard(Zone.HAND1, skirkProspector);
+
+
+		for (int i = 0; i < 24; i++)
+			Backend.getInstance().passPriority(((i % 2) ==0)?(true):(false));
+
+		ManaPool.RED2.add(1);
+		Backend.getInstance().activateAbility(skirkProspector, Zone.HAND1, 0, 0);
+
+		Backend.getInstance().passPriority(false);
+		Backend.getInstance().passPriority(true);
+		Backend.getInstance().passPriority(false);
+
+		assertEquals(Backend.getInstance().getZoneContents(Zone.BATTLE_FIELD1)[0], skirkProspector);
 	}
 
 	@Test
@@ -2629,7 +2663,7 @@ public class BackendTest {
 
 		Backend bknd = new Backend();
 		Card c = new Card("Storm Crow");
-
+		bknd.reset();
 		bknd.changePhase();
 
 		ManaPool.BLUE1.add(1);
