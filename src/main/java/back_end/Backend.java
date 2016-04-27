@@ -98,7 +98,9 @@ public class Backend {
 	 * @param c the card whose ability is being activated
 	 * @param z the zone the card is leaving
 	 * @param i the index the card currently occupies in that zone
+	 * @deprecated use activateAbility(Card c, Zone z, int i, int abInd)
 	 */
+	@Deprecated
 	public static void activateAbility(Card c, Zone z, int i) {
 		z.remove(i);
 
@@ -121,9 +123,18 @@ public class Backend {
 		Ability a =	c.getAbilities()[abInd];
 		boolean player = Zone.getPlayerFromZone(z);
 
-		if(a.getType() == AbilityType.CAST){
+		switch(a.getType()){
+		case CAST:
 			c.setCost(a.getCost());
 			this.castSpell(z, c, i, player, null, Zone.getZoneFromString(a.getResolveZone(), player));
+			break;
+
+		case PLAY:
+			Zone res = Zone.getZoneFromString(a.getResolveZone(), player);
+			Zone.getZoneFromString(a.getZone(), player).remove(i);
+			res.addCard(c, res.getSize());
+			break;
+
 		}
 	}
 
@@ -331,6 +342,9 @@ public class Backend {
 	public int[] parseCost(String s){
 		int cost[] = new int[6];
 
+		if(s.length() == 0){
+			return cost;
+		}
 		int i = 0;
 
 		while(isInteger(s.substring(i, i+1))){
