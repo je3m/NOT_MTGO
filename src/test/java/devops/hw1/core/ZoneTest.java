@@ -38,7 +38,14 @@ public class ZoneTest {
 
 	@Test
 	public void testGetZoneFromString(){
-		assertEquals(Zone.HAND, Zone.getZoneFromString("HAND"));
+		assertEquals(Zone.BATTLE_FIELD, Zone.getZoneFromString("BATTLE_FIELD"));
+
+		try{
+			Zone.getZoneFromString("lawl");
+			fail("no exception thrown");
+		} catch (IllegalArgumentException e){
+			assertEquals("invalid zone lawl", e.getMessage());
+		}
 	}
 
 	@Test
