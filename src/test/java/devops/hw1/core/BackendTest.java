@@ -1070,6 +1070,14 @@ public class BackendTest {
 
 		assertEquals(1, ManaPool.getPool('g', Backend.PLAYER_ONE).getAmount());
 
+		String mountain = "ZONE {BATTLE_FIELD} EFFECT {R} COST {TAP} TYPE {MANA}";
+		abilities = new ArrayList<>();
+		abilities.add(mountain);
+		//		Backend.getInstance().setTurn(Backend.PLAYER_TWO);
+		Card mountainCard = new Card("mountain", "", "C", "Land", null, abilities, 0, 0, MTGDuelDecks.MOUNTAIN_PATH, false);
+		Zone.BATTLE_FIELD1.addCard(mountainCard, Zone.BATTLE_FIELD1.getSize());
+		Backend.getInstance().activateAbility(mountainCard, Zone.BATTLE_FIELD1, 0, 0);
+		assertEquals(1, ManaPool.getPool('r', Backend.PLAYER_TWO).getAmount());
 	}
 
 	@Test
