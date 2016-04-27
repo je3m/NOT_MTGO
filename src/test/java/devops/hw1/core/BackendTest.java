@@ -1028,8 +1028,49 @@ public class BackendTest {
 		Backend.getInstance().passPriority(true);
 		Backend.getInstance().passPriority(false);
 		assertEquals(Backend.getInstance().getZoneContents(Zone.BATTLE_FIELD)[0], llanowarElves);
+
 	}
 
+	public void testParseCost(){
+		try{
+			int[] ans = new int[]{0,0,0,0,0,0};
+			assertArrayEquals(ans, Backend.getInstance().parseCost(""));
+		} catch (Exception e){
+			fail("Threw exception");
+		}
+
+
+
+	}
+
+	public void resetGame(){
+		ManaPool.WHITE1.empty();
+		ManaPool.BLUE1.empty();
+		ManaPool.BLACK1.empty();
+		ManaPool.RED1.empty();
+		ManaPool.GREEN1.empty();
+		ManaPool.COLORLESS1.empty();
+		Zone.HAND.empty();
+		Zone.HAND1.empty();
+		Zone.BATTLE_FIELD.empty();
+		Zone.BATTLE_FIELD1.empty();
+	}
+
+	@Test
+	public void testPlayLand(){
+		String forest = "ZONE {HAND} RESOLVE {BATTLE_FIELD} TYPE {PLAY}";
+		ArrayList<String> abilities = new ArrayList<String>();
+		abilities.add(forest);
+		this.resetGame();
+
+
+
+		Card forestCard = new Card("forest", "", "C", "Land", null, abilities, 0, 0, MTGDuelDecks.FOREST_PATH, false);
+
+		Backend.addCard(Zone.HAND, forestCard);
+		Backend.getInstance().activateAbility(forestCard, Zone.HAND, 0, 0);
+		assertEquals(Backend.getInstance().getZoneContents(Zone.BATTLE_FIELD)[0], forestCard);
+	}
 	@Test
 	public void testCastAbilityIntegrationPlayer2(){
 		Backend.getInstance().setPhase(Phase.FIRST_MAIN1);
