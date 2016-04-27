@@ -137,7 +137,7 @@ public class Card {
 	 * @param string color of card represented by W?U?B?R?G?
 	 */
 	public void setColor(String string) {
-		String regex = "W?U?B?R?G?";
+		String regex = "W?U?B?R?G?C?";
 		if(!string.matches(regex)) {
 			throw new PatternSyntaxException("Card " + this.name + ": " + string + " is not a valid color", regex, -1);
 		}
