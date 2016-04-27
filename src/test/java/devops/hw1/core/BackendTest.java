@@ -646,6 +646,24 @@ public class BackendTest {
 	}
 
 	@Test
+	public void testActivatedAbility(){
+		String imperiousPerfect = "TYPE{ACTIVATED} COST {G, TAP} ZONE {BATTLE_FIELD} EFFECT {TOKEN ELFWARRIOR} RESOLVE {BATTLEFIELD}";
+		ArrayList<String> abilities = new ArrayList<>();
+		abilities.add(imperiousPerfect);
+
+		Card c = new Card("Imperious Perfect", null, "G", "Creature- Elf Warrior", null, abilities, 2, 2, MTGDuelDecks.FOREST_PATH, false);
+
+		Backend bk = Backend.getInstance();
+		ManaPool.GREEN1.add(1);
+		bk.addCard(Zone.BATTLE_FIELD, c, 0);
+		bk.activateAbility(c, Zone.BATTLE_FIELD, 0, 0, null);
+
+
+		assertEquals(2, bk.getZoneContents(Zone.BATTLE_FIELD).length);
+
+	}
+
+	@Test
 	public void testIsInteger(){
 		String s = "5";
 		assert(Backend.isInteger(s));
