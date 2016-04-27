@@ -136,7 +136,7 @@ public class Backend {
 			break;
 
 		case MANA:
-			c.addManaAbility("T:G");
+			c.addManaAbility("T:"+a.getEffect());
 			this.activateManaAbility(c, player);
 			break;
 		}
