@@ -103,3 +103,13 @@ Scott
  - Added Sorcery/Instant speed timing constraints
  - Added Untapping functionality to Untap phase
  
+  -----------------------------------------------------------------------------------
+ Milestone 6
+
+Jim
+ -refactored project to treat casting a card as an ability
+ -Ability object used to describe abilities
+ -made standard to describe card abilities
+ -made backend a singleton
+ -added reset utilities to backend
+ -can now cast abilities, activate mana abilities, and add 1/1 elves to battlefield all using abilities
