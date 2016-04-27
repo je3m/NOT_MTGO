@@ -1,5 +1,6 @@
 package back_end;
 
+import java.util.ArrayList;
 import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.concurrent.RejectedExecutionException;
@@ -141,6 +142,9 @@ public class Backend {
 			this.activateManaAbility(c, player);
 			break;
 		case ACTIVATED:
+			ArrayList<String> abilities = new ArrayList<String>();
+			Card token = new Card("Elf Warrior", "", "G", "Creature- Elfwarrior", null, abilities, 1, 1, MTGDuelDecks.LLANOWAR_ELVES_PATH, false);
+			Backend.getInstance().addCard(Zone.BATTLE_FIELD, token, Zone.BATTLE_FIELD.getSize());
 			break;
 		case ETB:
 			break;
