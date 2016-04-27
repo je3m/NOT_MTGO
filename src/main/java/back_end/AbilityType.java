@@ -10,7 +10,8 @@ public enum AbilityType {
 	STATIC,
 	ETB,
 	MANA,
-	CAST;
+	CAST,
+	PLAY;
 
 	public static AbilityType getTypeFromString(String s){
 		//TODO: invalid input
