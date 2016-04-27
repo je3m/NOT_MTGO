@@ -65,9 +65,6 @@ public class Ability {
 	}
 
 	public String getCost() {
-		if (this.cost == null)
-			throw new RuntimeException("SMEL: no cost");
-
 		return this.cost;
 	}
 

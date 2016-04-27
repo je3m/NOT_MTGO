@@ -25,12 +25,10 @@ public class AbilityTest {
 		smel = "";
 		parse = new Ability(smel);
 
-		try{
-			parse.getCost();
-			fail("expected exception");
-		} catch (RuntimeException e){
-			assertEquals(e.getMessage(), "SMEL: no cost");
-		}
+
+		assertEquals(null, parse.getCost());
+
+
 
 
 		try{
