@@ -2660,6 +2660,7 @@ public class BackendTest {
 		Zone.HAND.empty();
 		Zone.HAND1.empty();
 		Zone.BATTLE_FIELD.empty();
+		Zone.BATTLE_FIELD1.empty();
 
 		Backend bknd = new Backend();
 		Card c = new Card("Storm Crow");
