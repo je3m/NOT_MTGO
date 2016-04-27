@@ -136,7 +136,7 @@ public class ClickHandler implements MouseListener {
 										JOptionPane.showMessageDialog(this.MTGComp, "Cannot activate mana ability");
 									}
 								} else {
-									Backend.getInstance().activateAbility(gCard.getCard(), gCard.getZone(), gCard.getIndex(), i);
+									Backend.getInstance().activateAbility(gCard.getCard(), gCard.getZone(), gCard.getIndex(), i, null);
 								}
 
 								this.MTGComp.setDispGUICard1(null);

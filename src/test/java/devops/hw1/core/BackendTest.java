@@ -995,7 +995,7 @@ public class BackendTest {
 
 		ManaPool.GREEN1.add(2);
 		Backend.addCard(Zone.HAND, c);
-		Backend.getInstance().activateAbility(c, Zone.HAND, 0, 0);
+		Backend.getInstance().activateAbility(c, Zone.HAND, 0, 0, null);
 
 		Backend.getInstance().passPriority(Backend.PLAYER_ONE);
 		Backend.getInstance().passPriority(Backend.PLAYER_TWO);
@@ -1024,7 +1024,7 @@ public class BackendTest {
 		Backend.addCard(Zone.HAND, llanowarElves);
 		ManaPool.GREEN1.add(1);
 
-		Backend.getInstance().activateAbility(llanowarElves, Zone.HAND, 0, 0);
+		Backend.getInstance().activateAbility(llanowarElves, Zone.HAND, 0, 0, null);
 		Backend.getInstance().passPriority(true);
 		Backend.getInstance().passPriority(false);
 		assertEquals(Backend.getInstance().getZoneContents(Zone.BATTLE_FIELD)[0], llanowarElves);
@@ -1066,7 +1066,7 @@ public class BackendTest {
 		Card forestCard = new Card("forest", "", "C", "Land", null, abilities, 0, 0, MTGDuelDecks.FOREST_PATH, false);
 		Zone.BATTLE_FIELD.addCard(forestCard, 0);
 
-		Backend.getInstance().activateAbility(forestCard, Zone.BATTLE_FIELD, 0, 0);
+		Backend.getInstance().activateAbility(forestCard, Zone.BATTLE_FIELD, 0, 0, null);
 
 		assertEquals(1, ManaPool.getPool('g', Backend.PLAYER_ONE).getAmount());
 
@@ -1076,7 +1076,7 @@ public class BackendTest {
 		//		Backend.getInstance().setTurn(Backend.PLAYER_TWO);
 		Card mountainCard = new Card("mountain", "", "C", "Land", null, abilities, 0, 0, MTGDuelDecks.MOUNTAIN_PATH, false);
 		Zone.BATTLE_FIELD1.addCard(mountainCard, Zone.BATTLE_FIELD1.getSize());
-		Backend.getInstance().activateAbility(mountainCard, Zone.BATTLE_FIELD1, 0, 0);
+		Backend.getInstance().activateAbility(mountainCard, Zone.BATTLE_FIELD1, 0, 0, null);
 		assertEquals(1, ManaPool.getPool('r', Backend.PLAYER_TWO).getAmount());
 	}
 
@@ -1090,7 +1090,7 @@ public class BackendTest {
 		Card forestCard = new Card("forest", "", "C", "Land", null, abilities, 0, 0, MTGDuelDecks.FOREST_PATH, false);
 
 		Backend.addCard(Zone.HAND, forestCard);
-		Backend.getInstance().activateAbility(forestCard, Zone.HAND, 0, 0);
+		Backend.getInstance().activateAbility(forestCard, Zone.HAND, 0, 0, null);
 		assertEquals(Backend.getInstance().getZoneContents(Zone.BATTLE_FIELD)[0], forestCard);
 	}
 	@Test
@@ -1115,7 +1115,7 @@ public class BackendTest {
 			Backend.getInstance().passPriority(((i % 2) ==0)?(true):(false));
 
 		ManaPool.RED2.add(1);
-		Backend.getInstance().activateAbility(skirkProspector, Zone.HAND1, 0, 0);
+		Backend.getInstance().activateAbility(skirkProspector, Zone.HAND1, 0, 0, null);
 
 		Backend.getInstance().passPriority(false);
 		Backend.getInstance().passPriority(true);

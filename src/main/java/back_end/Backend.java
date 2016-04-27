@@ -118,15 +118,29 @@ public class Backend {
 	 * @param z the zone the card is leaving
 	 * @param i the index the card currently occupies in that zone
 	 * @param abInd index of the card's ability
+	 * @deprecated Use {@link #activateAbility(Card,Zone,int,int,Card)} instead
 	 */
+	@Deprecated
 	public void activateAbility(Card c, Zone z, int i, int abInd) {
+		this.activateAbility(c, z, i, abInd, null);
+	}
+
+	/**
+	 * temporary fix to different ways to call activate ability
+	 * @param c the card whose ability is being activated
+	 * @param z the zone the card is leaving
+	 * @param i the index the card currently occupies in that zone
+	 * @param abInd index of the card's ability
+	 * @param target TODO
+	 */
+	public void activateAbility(Card c, Zone z, int i, int abInd, Card target) {
 		Ability a =	c.getAbilities()[abInd];
 		boolean player = Zone.getPlayerFromZone(z);
 
 		switch(a.getType()){
 		case CAST:
 			c.setCost(a.getCost());
-			this.castSpell(z, c, i, player, null, Zone.getZoneFromString(a.getResolveZone(), player));
+			this.castSpell(z, c, i, player, target, Zone.getZoneFromString(a.getResolveZone(), player));
 			break;
 
 		case PLAY:
@@ -138,6 +152,16 @@ public class Backend {
 		case MANA:
 			c.addManaAbility("T:"+a.getEffect());
 			this.activateManaAbility(c, player);
+			break;
+		case ACTIVATED:
+			break;
+		case ETB:
+			break;
+		case STATIC:
+			break;
+		case TRIGGERED:
+			break;
+		default:
 			break;
 		}
 	}
