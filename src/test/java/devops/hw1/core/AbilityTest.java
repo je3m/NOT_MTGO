@@ -42,6 +42,14 @@ public class AbilityTest {
 	}
 
 	@Test
+	public void testNulls(){
+		String smel = "ZONE {HAND} RESOLVE {BATTLEFIELD}";
+		Ability a = new Ability(smel);
+		assertEquals(null, a.getCost());
+
+	}
+
+	@Test
 	public void testCostEfectParse(){
 		String LlanowarElves = "COST { TAP } EFFECT { MANA G}";
 		Ability parse = new Ability(LlanowarElves);
