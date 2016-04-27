@@ -1057,13 +1057,27 @@ public class BackendTest {
 	}
 
 	@Test
+	public void testManaAbility(){
+		String forest = "ZONE {BATTLE_FIELD} EFFECT {G} COST {TAP} TYPE {MANA}";
+		ArrayList<String> abilities = new ArrayList<String>();
+		abilities.add(forest);
+		this.resetGame();
+
+		Card forestCard = new Card("forest", "", "C", "Land", null, abilities, 0, 0, MTGDuelDecks.FOREST_PATH, false);
+		Zone.BATTLE_FIELD.addCard(forestCard, 0);
+
+		Backend.getInstance().activateAbility(forestCard, Zone.BATTLE_FIELD, 0, 0);
+
+		assertEquals(1, ManaPool.getPool('g', Backend.PLAYER_ONE).getAmount());
+
+	}
+
+	@Test
 	public void testPlayLand(){
 		String forest = "ZONE {HAND} RESOLVE {BATTLE_FIELD} TYPE {PLAY}";
 		ArrayList<String> abilities = new ArrayList<String>();
 		abilities.add(forest);
 		this.resetGame();
-
-
 
 		Card forestCard = new Card("forest", "", "C", "Land", null, abilities, 0, 0, MTGDuelDecks.FOREST_PATH, false);
 
