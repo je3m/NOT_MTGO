@@ -111,7 +111,7 @@ public enum Zone {
 				return z;
 			}
 		}
-		return null;
+		throw new IllegalArgumentException("invalid zone " + string);
 	}
 
 	public static boolean getPlayerFromZone(Zone zone) {
