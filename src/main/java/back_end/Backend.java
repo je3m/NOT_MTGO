@@ -135,6 +135,10 @@ public class Backend {
 			res.addCard(c, res.getSize());
 			break;
 
+		case MANA:
+			c.addManaAbility("T:G");
+			this.activateManaAbility(c, player);
+			break;
 		}
 	}
 
