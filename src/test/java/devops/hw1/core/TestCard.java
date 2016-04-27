@@ -39,6 +39,13 @@ public class TestCard {
 	}
 
 	@Test
+	public void testNullCost(){
+		Card c = new Card("lol");
+		c.setCost(null);
+		assertEquals("", c.getCost());
+	}
+
+	@Test
 	public void makeCardSimpleTest2(){
 		try{
 			Card c = new Card("Storm Crow","1U", "U", null, null, new ArrayList<String>(), 1, 1, "res/Mountain.jpg", null);
