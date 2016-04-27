@@ -118,19 +118,6 @@ public class Backend {
 	 * @param z the zone the card is leaving
 	 * @param i the index the card currently occupies in that zone
 	 * @param abInd index of the card's ability
-	 * @deprecated Use {@link #activateAbility(Card,Zone,int,int,Card)} instead
-	 */
-	@Deprecated
-	public void activateAbility(Card c, Zone z, int i, int abInd) {
-		this.activateAbility(c, z, i, abInd, null);
-	}
-
-	/**
-	 * temporary fix to different ways to call activate ability
-	 * @param c the card whose ability is being activated
-	 * @param z the zone the card is leaving
-	 * @param i the index the card currently occupies in that zone
-	 * @param abInd index of the card's ability
 	 * @param target TODO
 	 */
 	public void activateAbility(Card c, Zone z, int i, int abInd, Card target) {
