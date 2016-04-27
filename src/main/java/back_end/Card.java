@@ -154,6 +154,11 @@ public class Card {
 	 * @param s mana cost of card
 	 */
 	public void setCost(String s){
+		if (s == null){
+			this.manaCost = "";
+			return;
+		}
+
 		String regex = "[0-9]*W*U*B*R*G*";
 		if(!s.matches(regex)) {
 			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid mana cost", regex, -1);
