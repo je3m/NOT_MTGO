@@ -18,6 +18,7 @@ public class MTGDuelDecks {
 	public static final String FOREST_PATH = "res/Forest.jpg";
 	public static final String LLANOWAR_ELVES_PATH = "res/Llanowar_Elves.jpg";
 	public static final String TARFIRE_PATH = "res/Tarfire.jpg";
+	public static final String IMPERIOUS_PERFECT_PATH = "res/Imperious_Perfect.jpg";
 
 	/**
 	 * Main method that runs the game and sets up the GUI frame.
@@ -38,55 +39,49 @@ public class MTGDuelDecks {
 	 */
 	private static void initializePlayer() {
 		//Test
-		Zone.GRAVEYARD.addCard(new Card("Grave", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
-		Zone.LIBRARY.addCard(new Card("Libr", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
+		Zone.GRAVEYARD.addCard(new Card("Forest", "", "", "Basic Land- Forest", "T:G", 
+				new ArrayList<String>(), 0, 0, FOREST_PATH, false), 0);
+		Zone.LIBRARY.addCard(new Card("Forest", "", "", "Basic Land- Forest", "T:G", 
+				new ArrayList<String>(), 0, 0, FOREST_PATH, false), 0);
 
-		Card hand1 = new Card("Hand1", "", "", "", "T:G", 
+		Card hand1 = new Card("Forest", "", "", "Basic Land- Forest", "T:G", 
 				new ArrayList<String>(), 0, 0, FOREST_PATH, false);
 
-		hand1.addAbility("Play this card");
-		hand1.addAbility("Tap: Add G to your mana pool");
+		hand1.addAbility("TYPE {PLAY} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Play}");
+		hand1.addAbility("TYPE {MANA} COST {TAP} EFFECT {G} ZONE {BATTLE_FIELD} TEXT {Add G to your mana pool}");
 
 		Zone.HAND.addCard(hand1,0);
 
-		Card hand2 = new Card("Hand2", "", "", "", "T:G", 
+		Card hand2 = new Card("Forest", "", "", "Basic Land- Forest", "T:G", 
 				new ArrayList<String>(), 0, 0, FOREST_PATH, false);
-		hand2.addAbility("Play this card");
-		hand2.addAbility("Tap: Add G to your mana pool");
+		hand2.addAbility("TYPE {PLAY} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Play}");
+		hand2.addAbility("TYPE {MANA} COST {TAP} EFFECT {G} ZONE {BATTLE_FIELD} TEXT {Add G to your mana pool}");
 
 		Zone.HAND.addCard(hand2, 0);
 
-		Card hand3 = new Card("Arbor elf", "G", "G", "Creature- Elf Druid", "T:G", 
+		Card hand3 = new Card("Arbor Elf", "G", "G", "Creature- Elf Druid", "T:G", 
 				new ArrayList<String>(), 1, 1, LLANOWAR_ELVES_PATH, false);
-		hand3.addAbility("Play this card");
-		hand3.addAbility("Tap: Add G to your mana pool");
+		hand3.addAbility("TYPE {CAST} COST {G} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Cast}");
+		hand3.addAbility("TYPE {MANA} COST {TAP} EFFECT {G} ZONE {BATTLE_FIELD} TEXT {Add G to your mana pool}");
 
 
 
 		Zone.HAND.addCard(hand3, 0);
-		Zone.HAND.addCard(new Card("Hand4", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
-		Zone.HAND.addCard(new Card("Hand5", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
-		Zone.HAND.addCard(new Card("Hand6", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
-		Zone.HAND.addCard(new Card("Hand7", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
-		Zone.HAND.addCard(new Card("Hand8", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
-		Zone.HAND.addCard(new Card("Hand9", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
+
+		Card hand4 = new Card("Imperious Perfect", "2G", "G", "Creature- Elf Warrior", null, 
+				new ArrayList<String>(), 2, 2, IMPERIOUS_PERFECT_PATH, false);
+		hand4.addAbility("TYPE {CAST} COST {2G} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Cast}");
+		hand4.addAbility("TYPE {ACTIVATED} COST {G TAP} EFFECT {TOKEN (TYPE (Creature- Elf Warrior) COLOR (G) POWER (1) TOUGHNESS (1))} ZONE {BATTLE_FIELD} TEXT {Put a 1/1 green Elf Warrior token into play}");
 
 
+		Zone.HAND.addCard(hand4, 0);
 
 
-		Card BF1 = new Card("BF1", "", "", "", "T:G", 
+		Card BF1 = new Card("Forest", "", "", "Creature- Elf Druid", "T:G", 
 				new ArrayList<String>(), 0, 0, FOREST_PATH, false);
 
-		BF1.addAbility("Play this Card");
-		BF1.addAbility("Tap: Add G to your mana pool");
+		BF1.addAbility("TYPE {PLAY} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Play}");
+		BF1.addAbility("TYPE {MANA} COST {TAP} EFFECT {G} ZONE {BATTLE_FIELD} TEXT {Add G to your mana pool}");
 		Zone.BATTLE_FIELD.addCard(BF1, 0);
 
 
@@ -100,38 +95,28 @@ public class MTGDuelDecks {
 	 */
 	private static void initializePlayer1() {
 		//Test
-		Zone.GRAVEYARD1.addCard(new Card("Grave", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
-		Zone.LIBRARY1.addCard(new Card("Libr", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
+		Zone.GRAVEYARD1.addCard(new Card("Mountain", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, MOUNTAIN_PATH, false), 0);
+		Zone.LIBRARY1.addCard(new Card("Mountain", "", "", "Basic Land- Mountain", "", 
+				new ArrayList<String>(), 0, 0, MOUNTAIN_PATH, false), 0);
 
 
-		Card hand1 = new Card("Hand11", "", "", "Land", "T:R", 
+		Card hand1 = new Card("Mountain", "", "", "Basic Land- Mountain", "T:R", 
 				new ArrayList<String>(), 0, 0, MOUNTAIN_PATH, false);
-		hand1.addAbility("Play this card");
-		hand1.addAbility("Tap: Add R to your mana pool");
+		hand1.addAbility("TYPE {PLAY} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Play}");
+		hand1.addAbility("TYPE {MANA} COST {TAP} EFFECT {R} ZONE {BATTLE_FIELD} TEXT {Add R to your mana pool}");
 
-		Card hand2 = new Card("tarfire", "R", "R", "Instant- Goblin", "", 
+		Card hand2 = new Card("Tarfire", "R", "R", "Instant- Goblin", "", 
 				new ArrayList<String>(), 0, 0, TARFIRE_PATH, true);
-		hand2.addAbility("play this card");
+		hand2.addAbility("TYPE {CAST} COST {R} TARGET {CREATURE} EFFECT {DAMAGE} ZONE {HAND} RESOLVE {GRAVEYARD} TEXT {Deal 2 damage to target creature}");
 
 		Zone.HAND1.addCard(hand1, 0);
 		Zone.HAND1.addCard(hand2, 0);
-		Zone.HAND1.addCard(new Card("Hand3", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
-		Zone.HAND1.addCard(new Card("Hand4", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
-		Zone.HAND1.addCard(new Card("Hand5", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
-		Zone.HAND1.addCard(new Card("Hand6", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
-		Zone.HAND1.addCard(new Card("Hand7", "", "", "", "", 
-				new ArrayList<String>(), 0, 0, "", false), 0);
 
-		Card BF2 = new Card("BF2", "", "", "", "T:R", 
+		Card BF2 = new Card("Mountain", "", "", "Basic Land- Mountain", "T:R", 
 				new ArrayList<String>(), 0, 0, MOUNTAIN_PATH, false);
-		BF2.addAbility("Play this card");
-		BF2.addAbility("Tap: Add R to your mana pool");
+		BF2.addAbility("TYPE {PLAY} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Play}");
+		BF2.addAbility("TYPE {MANA} COST {TAP} EFFECT {R} ZONE {BATTLE_FIELD} TEXT {Add R to your mana pool}");
 		Zone.BATTLE_FIELD1.addCard(BF2, 0);
 
 

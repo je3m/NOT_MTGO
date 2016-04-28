@@ -98,6 +98,10 @@ public class MTGComponent extends JComponent{
 	private ArrayList<GUICard> battleGUICards2;
 	private Rectangle passButton1;
 	private Rectangle passButton2;
+	private Rectangle graveyardButton1;
+	private Rectangle graveyardButton2;
+	private Rectangle exileButton1;
+	private Rectangle exileButton2;
 
 	/**
 	 * Constructor for a MTGComponent
@@ -122,9 +126,6 @@ public class MTGComponent extends JComponent{
 		this.dispGUICard2 = null;
 		this.battleGUICards1 = new ArrayList<GUICard>();
 		this.battleGUICards2 = new ArrayList<GUICard>();
-
-		this.passButton1= new Rectangle((int) (this.windowX*PASS_BUTTON_X_POSITION), (int)(this.windowY*PASS_BUTTON_Y_POSITION), (int)(this.windowX*PASS_BUTTONS_WIDTH), (int)(this.windowY*PASS_BUTTONS_HEIGHT));
-		this.passButton2= new Rectangle((int) (this.windowX*PASS_BUTTON1_X_POSITION), (int)(this.windowY*PASS_BUTTON1_Y_POSITION), (int)(this.windowX*PASS_BUTTONS_WIDTH), (int)(this.windowY*PASS_BUTTONS_HEIGHT));
 
 	}
 
@@ -231,13 +232,17 @@ public class MTGComponent extends JComponent{
 		}
 
 		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,HAND_Y_POSITION,(int)(this.windowX*SIDEBAR_WIDTH), (int)(this.windowY*HAND_HEIGHT)));
-		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,(int)(this.windowY*HAND_HEIGHT),(int)(this.windowX*(SIDEBAR_WIDTH/2)),(int)((this.windowY*EXILE_HEIGHT)  + SIDEBAR_ADJUSTMENT)));
-		graphics2.draw(new Rectangle((int)(SIDEBAR1_X_POSITION + (this.windowX*(SIDEBAR_WIDTH/2))),(int)(this.windowY*HAND_HEIGHT),(int)((this.windowX*(SIDEBAR_WIDTH/2)) + SIDEBAR_ADJUSTMENT),(int)((this.windowY*EXILE_HEIGHT)  + SIDEBAR_ADJUSTMENT)));
+		this.graveyardButton1 = new Rectangle((int)SIDEBAR1_X_POSITION,(int)(this.windowY*HAND_HEIGHT),(int)(this.windowX*(SIDEBAR_WIDTH/2)),(int)((this.windowY*EXILE_HEIGHT)  + SIDEBAR_ADJUSTMENT));
+		graphics2.draw(this.graveyardButton1);
+		this.exileButton1 = new Rectangle((int)(SIDEBAR1_X_POSITION + (this.windowX*(SIDEBAR_WIDTH/2))),(int)(this.windowY*HAND_HEIGHT),(int)((this.windowX*(SIDEBAR_WIDTH/2)) + SIDEBAR_ADJUSTMENT),(int)((this.windowY*EXILE_HEIGHT)  + SIDEBAR_ADJUSTMENT));
+		graphics2.draw(this.exileButton1);
 		graphics2.draw(new Rectangle((int)SIDEBAR1_X_POSITION,(int)(this.windowY*(HAND_HEIGHT + EXILE_HEIGHT)),(int)(this.windowX*SIDEBAR_WIDTH),(int)(this.windowY*LIBRARY_HEIGHT)));
 
 		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*this.windowX),HAND_Y_POSITION,(int)(this.windowX*SIDEBAR_WIDTH), (int)(this.windowY*HAND_HEIGHT)));
-		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*this.windowX),(int)(this.windowY*HAND_HEIGHT),(int)((this.windowX*(SIDEBAR_WIDTH/2)) + SIDEBAR_ADJUSTMENT),(int)((this.windowY*EXILE_HEIGHT)  + SIDEBAR_ADJUSTMENT)));
-		graphics2.draw(new Rectangle((int)((SIDEBAR2_X_POSITION*this.windowX) + (this.windowX*(SIDEBAR_WIDTH/2))),(int)(this.windowY*HAND_HEIGHT),(int)(this.windowX*(SIDEBAR_WIDTH/2)),(int)((this.windowY*EXILE_HEIGHT)  + SIDEBAR_ADJUSTMENT)));
+		this.graveyardButton2 = new Rectangle((int)(SIDEBAR2_X_POSITION*this.windowX),(int)(this.windowY*HAND_HEIGHT),(int)((this.windowX*(SIDEBAR_WIDTH/2)) + SIDEBAR_ADJUSTMENT),(int)((this.windowY*EXILE_HEIGHT)  + SIDEBAR_ADJUSTMENT));
+		graphics2.draw(this.graveyardButton2);
+		this.exileButton2 = new Rectangle((int)((SIDEBAR2_X_POSITION*this.windowX) + (this.windowX*(SIDEBAR_WIDTH/2))),(int)(this.windowY*HAND_HEIGHT),(int)(this.windowX*(SIDEBAR_WIDTH/2)),(int)((this.windowY*EXILE_HEIGHT)  + SIDEBAR_ADJUSTMENT));
+		graphics2.draw(this.exileButton2);
 		graphics2.draw(new Rectangle((int)(SIDEBAR2_X_POSITION*this.windowX),(int)(this.windowY*(HAND_HEIGHT + EXILE_HEIGHT)),(int)(this.windowX*SIDEBAR_WIDTH),(int)(this.windowY*LIBRARY_HEIGHT)));
 
 
@@ -430,6 +435,9 @@ public class MTGComponent extends JComponent{
 				graphics2.drawImage(dispCard.getImage(), (int)rec.getX(), (int)rec.getY(), (int)rec.getWidth(), (int)rec.getHeight(), this);
 			}
 			for(int i = 0; i < dispCard.getAbilityBoxes().length; i++){
+				graphics2.setColor(Color.WHITE);
+				graphics2.fill(dispCard.getAbilityBoxes()[i]);
+				graphics2.setColor(Color.BLACK);
 				graphics2.draw(dispCard.getAbilityBoxes()[i]);
 				graphics2.drawString(dispCard.getAbilityStrings()[i], (int)(dispCard.getAbilityBoxes()[i].getX() + (ABILITY_STRING_LEFT_BUFFER * dispCard.getAbilityBoxes()[i].getWidth())), (int)(dispCard.getAbilityBoxes()[i].getCenterY() + (ABILITY_STRING_Y_CENTER_SHIFT * dispCard.getAbilityBoxes()[i].getHeight())));
 			}
@@ -503,5 +511,22 @@ public class MTGComponent extends JComponent{
 	 */
 	public void setDispGUICard2(DispGUICard dispGUICard2) {
 		this.dispGUICard2 = this.dispGUICard1;
+	}
+
+
+	/**
+	 * Returns the current graveyard button for the first player
+	 * @return first player graveyard button
+	 */
+	public Rectangle getGraveyardButton1() {
+		return this.graveyardButton1;
+	}
+	
+	/**
+	 * Returns the current graveyard button for the second player
+	 * @return second player graveyard button
+	 */
+	public Rectangle getGraveyardButton2() {
+		return this.graveyardButton2;
 	}
 }

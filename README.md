@@ -113,3 +113,10 @@ Jim
  -made backend a singleton
  -added reset utilities to backend
  -can now cast abilities, activate mana abilities, and add 1/1 elves to battlefield all using abilities
+ 
+ Chris
+ -Changed MTGDuelDecks to implement correct cards
+ -GUICards now only display abilities relevant to the zone they are in
+ -Updated the way targeting works for the GUI to be more general
+ -Fixed bug where overlaping cards would cause errors
+ -Began work on displaying the graveyard and exile
