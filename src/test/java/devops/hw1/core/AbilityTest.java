@@ -96,4 +96,14 @@ public class AbilityTest {
 		assertEquals("Cast", parse.getText());
 
 	}
+	
+	@Test
+	public void testMixedCaseString() {
+		String mixedCaseCard = "CosT { TAp } efFECT { mAnA g}";
+		Ability parse = new Ability(mixedCaseCard);
+		
+
+		assertEquals("TAP", parse.getCost());
+		assertEquals("MANAG", parse.getEffect());
+	}
 }
