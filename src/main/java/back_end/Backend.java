@@ -109,8 +109,7 @@ public class Backend {
 
 		switch(a.getType()){
 		case CAST:
-			c.setCost(a.getCost());
-			this.castSpell(z, c, i, player, target, Zone.getZoneFromString(a.getResolveZone(), player));
+			this.castSpell(z, c, i, a.getCost(), player, target, Zone.getZoneFromString(a.getResolveZone(), player));
 			break;
 
 		case PLAY:
@@ -388,7 +387,7 @@ public class Backend {
 	 * @param targetZone the zone the targeted card is in
 	 * @return true if the spell is cast, false if not
 	 */
-	public boolean castSpell(Zone zone, Card c, int index, Boolean player, Card target, Zone targetZone) {
+	public boolean castSpell(Zone zone, Card c, int index, String cost, Boolean player, Card target, Zone targetZone) {
 
 		if(!c.isFlash() &&
 				((this.turn != player) || (!this.stack.isEmpty()) ||
@@ -400,10 +399,10 @@ public class Backend {
 			return false;
 		}
 
-		if(c.getCost() == null){
+		if(cost == null){
 			throw new IllegalArgumentException("Illegal card " + c.getName() + ": card cost is null");
 		}
-		int[] costs = this.parseCost(c.getCost());
+		int[] costs = this.parseCost(cost);
 
 
 		if((costs[0] <= ManaPool.getPool('w', player).getAmount()) &&
