@@ -88,12 +88,12 @@ public class AbilityTest {
 		String giantGrowth = "TEXT { Cast } COST { G } EFFECT { POWER += 3, TOUGHNESS += 3} TARGET { CREATURE } ZONE { HAND } RESOLVE { GRAVEYARD } TYPE { CAST }";
 		Ability parse = new Ability(giantGrowth);
 
-		assertEquals("Cast", parse.getText());
+		assertEquals("CAST", parse.getText());
 
 		String elvishWarrior = "COST { GG} ZONE {HAND} RESOLVE { BATTLEFIELD} TYPE {CAST}";
 		parse = new Ability(elvishWarrior);
 
-		assertEquals("Cast", parse.getText());
+		assertEquals("CAST", parse.getText());
 
 	}
 	

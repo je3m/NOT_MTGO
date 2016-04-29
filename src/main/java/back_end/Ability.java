@@ -16,6 +16,8 @@ public class Ability {
 			throw new IllegalArgumentException("SMEL: no cost");
 
 		smel = smel.replaceAll("\\s+", "");
+		
+		smel = smel.toUpperCase();
 
 		String[] arr = smel.split("(?:(\\{|\\}))"); //split on { or }
 
@@ -48,7 +50,7 @@ public class Ability {
 		}
 
 		if((this.type == AbilityType.CAST) && (this.displayText == null)){
-			this.displayText = "Cast";
+			this.displayText = "CAST";
 		}
 	}
 
