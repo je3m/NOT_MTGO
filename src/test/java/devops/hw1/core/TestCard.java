@@ -59,8 +59,8 @@ public class TestCard {
 	public void testTapTwice(){
 		Card c = new Card("Scornful Egotist", "", "", "Basic Land- Mountain", "",
 				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
-		assert(c.tap());
-		assert(!c.tap());
+		assertTrue(c.tap());
+		assertTrue(!c.tap());
 	}
 
 	@Test

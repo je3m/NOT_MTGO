@@ -951,6 +951,9 @@ public class BackendTest {
 		Zone.BATTLE_FIELD.empty();
 	}
 
+	
+	
+	
 
 	@Test
 	public void testAbilityCast(){
@@ -1016,7 +1019,8 @@ public class BackendTest {
 
 	}
 
-	public void testParseCost(){
+	@Test
+	public void testParseCost1(){
 		try{
 			int[] ans = new int[]{0,0,0,0,0,0};
 			assertArrayEquals(ans, Backend.getInstance().parseCost(""));
@@ -1024,10 +1028,20 @@ public class BackendTest {
 			fail("Threw exception");
 		}
 
-
-
+	}
+	
+	@Test
+	public void testParseCost2() {
+		try {
+			int[] ans = new int[]{1, 0, 1, 0, 0, 1};
+			assertArrayEquals(ans, Backend.getInstance().parseCost("1WB"));
+			
+		} catch (Exception e) {
+			fail("Threw exception: " + e.getMessage());
+		}
 	}
 
+	@Test
 	public void resetGame(){
 		ManaPool.WHITE1.empty();
 		ManaPool.BLUE1.empty();
@@ -1615,6 +1629,10 @@ public class BackendTest {
 		Zone.HAND1.empty();
 		Zone.BATTLE_FIELD.empty();
 	}
+	
+	
+	
+	
 
 	@Test
 	public void testCastingCreatureSpell(){

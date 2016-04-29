@@ -16,18 +16,6 @@ public class Card {
 	private Boolean tapped;
 	private Boolean flash;
 
-	/**
-	 * Constructs a card object with the given name
-	 * @param s name of the card
-	 */
-	@Deprecated
-	public Card(String s){
-		this.name = s;
-		this.tapped = false;
-		this.manaAbility = null;
-		this.flash = false;
-	}
-
 	public Card(String name, String manaCost, String color, String type,
 			String manaAbility, ArrayList<String> abilities, int power,
 			int toughness, String image, Boolean flash){

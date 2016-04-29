@@ -120,3 +120,9 @@ Jim
  -Updated the way targeting works for the GUI to be more general
  -Fixed bug where overlaping cards would cause errors
  -Began work on displaying the graveyard and exile
+ 
+ Scott
+ -Added some input validation (strings not null) to new constructors/other functions
+ -Made the Ability constructor ignore the case ofthe letters of the string passed to it
+ -Refactored the castSpell function to take a cost to be paid, in order to facilitate future extension of that function to put sundry ability activations onto the stack
+ -Added MC/DC code coverage to non-GUI code and corrected most of the gaps that that revealed

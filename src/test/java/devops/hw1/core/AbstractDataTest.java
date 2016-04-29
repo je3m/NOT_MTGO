@@ -40,7 +40,7 @@ public class AbstractDataTest {
 	}
 
 	@Test
-	public void testHashCode() {
+	public void testHashCode1() {
 		final int prime = 31;
 		int expected = 1;
 		expected = prime * expected + (int)this.dataTestMock.getId();
@@ -49,6 +49,21 @@ public class AbstractDataTest {
 		int actual = this.dataTestMock.hashCode();
 		
 		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testHashCode2() {
+		final int prime = 31;
+		int expected = 1;
+		AbstractData<Integer> otherTestMock = new IntegerDataMock(this.id, null);
+		
+		expected = prime*expected + (int)otherTestMock.getId();
+		expected = prime*expected;
+		
+		int actual = otherTestMock.hashCode();
+		
+		assertEquals(expected, actual);
+		
 	}
 
 	@Test
@@ -106,6 +121,34 @@ public class AbstractDataTest {
 		}
 	}
 	
+
+	
+	@Test
+	public void testNullObjectNonNullOther() {
+		AbstractData<Integer> otherTestMock = new IntegerDataMock(this.id, null);
+
+		try {
+			assertFalse(otherTestMock.equals(this.dataTestMock));
+		} catch (NullPointerException e) {
+			assertTrue(false);
+		}
+	}
+	
+
+	
+	@Test
+	public void testNullObjectNullOther() {
+		AbstractData<Integer> oneTestMock = new IntegerDataMock(this.id, null);
+		AbstractData<Integer> otherTestMock = new IntegerDataMock(this.id, null);
+
+		try {
+			assertTrue(oneTestMock.equals(otherTestMock));
+		} catch (NullPointerException e) {
+			assertTrue(false);
+		}
+	}
+	
+	
 	@Test
 	public void testWrongTOtherObject() {
 		AbstractData<Double> otherTestMock = new DoubleDataMock(this.id, (1.1*this.value));
@@ -115,4 +158,7 @@ public class AbstractDataTest {
 			assertTrue(false);
 		}
 	}
+	
+	
+	
 }
