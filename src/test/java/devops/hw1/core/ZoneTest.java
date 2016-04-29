@@ -63,6 +63,16 @@ public class ZoneTest {
 		assertEquals(Zone.HAND, Zone.getZoneFromString("HAND", true));
 		assertEquals(Zone.HAND1, Zone.getZoneFromString("HAND", false));
 	}
+	
+	@Test
+	public void testGetZoneFromStringPlayerNull() {
+		try {
+			Zone.getZoneFromString(null, false);
+			fail("IllegalArgumentException expected");
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Zone name string cannot be null.");
+		}
+	}
 
 	@Test
 	public void testAddToZone(){

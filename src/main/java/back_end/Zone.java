@@ -109,7 +109,7 @@ public enum Zone {
 		if(string == null) {
 			throw new IllegalArgumentException("Zone name string cannot be null");
 		}
-		//TODO: invalid input
+		
 		for (Zone z: Zone.values()){
 			if (string.equals(z.name())){
 				return z;
