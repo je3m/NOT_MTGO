@@ -93,25 +93,7 @@ public class Backend {
 		}
 	}
 
-	//TODO Implement this (no need for input validation yet)
-	/**
-	 * Prototype function. Moves a card from its current zone to a new one when its ability is activated
-	 * @param c the card whose ability is being activated
-	 * @param z the zone the card is leaving
-	 * @param i the index the card currently occupies in that zone
-	 * @deprecated use activateAbility(Card c, Zone z, int i, int abInd)
-	 */
-	@Deprecated
-	public static void activateAbility(Card c, Zone z, int i) {
-		z.remove(i);
-
-		if(z == Zone.HAND)
-			addCard(Zone.BATTLE_FIELD, c);
-
-		if(z == Zone.HAND1)
-			addCard(Zone.BATTLE_FIELD1, c);
-
-	}
+	
 
 	/**
 	 * temporary fix to different ways to call activate ability

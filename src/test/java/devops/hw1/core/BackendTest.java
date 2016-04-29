@@ -968,25 +968,6 @@ public class BackendTest {
 		Zone.BATTLE_FIELD.empty();
 	}
 
-	@Test
-	public void testActivateAbility(){
-
-		Card c = new Card("Storm Crow", "", "", "Creature- Bird", "",
-				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
-		Backend.addCard(Zone.HAND, c);
-
-
-		Backend.activateAbility(c, Zone.HAND, 0);
-
-		assert(Zone.BATTLE_FIELD.contains(c.getName()));
-
-		Card c1 = new Card("Scornful Egotist", "", "", "Creature- Bird", "",
-				new ArrayList<String>(), 0, 0, "res/Mountain.jpg", false);
-
-		Backend.addCard(Zone.HAND1, c1);
-		Backend.activateAbility(c1, Zone.HAND1, 0);
-		assert(Zone.BATTLE_FIELD1.contains(c1.getName()));
-	}
 
 	@Test
 	public void testAbilityCast(){

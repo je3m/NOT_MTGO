@@ -114,10 +114,12 @@ public enum Zone {
 		throw new IllegalArgumentException("invalid zone " + string);
 	}
 
+	//TODO
 	public static boolean getPlayerFromZone(Zone zone) {
 		return zone.ordinal() < 5;
 	}
 
+	//TODO
 	public static Zone getZoneFromString(String string, boolean player) {
 		//TODO: invalid input
 		if(!player)

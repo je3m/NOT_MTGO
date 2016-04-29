@@ -172,7 +172,7 @@ public class ClickHandler implements MouseListener {
 		}
 		return false;
 	}
-	
+	//TODO add javadoc
 	public void handleTargeting(){
 		Boolean changed = false;
 		changed = changed || this.targetHandleZoneForCardClick(this.MTGComp.getHandGUICards1(), Zone.HAND);
