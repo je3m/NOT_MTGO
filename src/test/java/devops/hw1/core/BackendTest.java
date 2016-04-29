@@ -42,7 +42,7 @@ public class BackendTest {
 		c.setType("Creature- bird");
 
 		try {
-			bknd.castSpell(Zone.HAND, c, 0, true, null, null);
+			bknd.castSpell(Zone.HAND, c, 0, null, true, null, null);
 			fail("Expected IllegalArgumentException");
 		}catch (IllegalArgumentException e) {
 			assertTrue(e.getMessage().equals("Illegal card Storm Crow: card cost is null"));
@@ -81,9 +81,8 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("1U");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -144,9 +143,8 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("2U");
 
-		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertFalse(bknd.castSpell(Zone.HAND, c, 0, "2U", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(c, (bknd.getZoneContents(Zone.HAND)[0]));
 		assertEquals(1, ManaPool.BLUE1.getAmount());
@@ -194,12 +192,11 @@ public class BackendTest {
 		ManaPool.COLORLESS2.add(1);
 		bknd.addCard(Zone.HAND1, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("1U");
 
 
 
 		assertFalse(bknd.getTurn());
-		assertTrue(bknd.castSpell(Zone.HAND1, c, 0, false, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND1, c, 0, "1U", false, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND1),bknd.getZoneContents(Zone.HAND));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD1),bknd.getZoneContents(Zone.HAND));
 
@@ -250,9 +247,8 @@ public class BackendTest {
 		ManaPool.COLORLESS2.add(1);
 		bknd.addCard(Zone.HAND1, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("2U");
 
-		assertFalse(bknd.castSpell(Zone.HAND1, c, 0, true, null, null));
+		assertFalse(bknd.castSpell(Zone.HAND1, c, 0, "2U", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD1),bknd.getZoneContents(Zone.HAND));
 		assertEquals(c, (bknd.getZoneContents(Zone.HAND1)[0]));
 		assertEquals(1, ManaPool.BLUE2.getAmount());
@@ -296,9 +292,8 @@ public class BackendTest {
 		ManaPool.BLUE1.add(2);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("1U");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -348,9 +343,8 @@ public class BackendTest {
 		ManaPool.RED1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("1U");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -401,9 +395,8 @@ public class BackendTest {
 		ManaPool.WHITE1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("1U");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -454,9 +447,8 @@ public class BackendTest {
 		ManaPool.GREEN1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("1U");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -507,9 +499,8 @@ public class BackendTest {
 		ManaPool.BLACK1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("1U");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -561,9 +552,8 @@ public class BackendTest {
 		ManaPool.GREEN1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("2U");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "2U", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 		assertEquals(0, ManaPool.BLUE1.getAmount());
@@ -619,9 +609,8 @@ public class BackendTest {
 		ManaPool.GREEN1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("1U");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -703,9 +692,8 @@ public class BackendTest {
 		ManaPool.WHITE1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("W");
-
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "W", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -752,9 +740,8 @@ public class BackendTest {
 		ManaPool.BLACK1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("B");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "B", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -801,9 +788,8 @@ public class BackendTest {
 		ManaPool.RED1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("R");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "R", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -850,9 +836,8 @@ public class BackendTest {
 		ManaPool.GREEN1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("G");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "G", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -901,9 +886,8 @@ public class BackendTest {
 		ManaPool.GREEN1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("GG");
 
-		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertFalse(bknd.castSpell(Zone.HAND, c, 0, "GG", true, null, null));
 		assertEquals(1, ManaPool.GREEN1.getAmount());
 
 		ManaPool.WHITE1.empty();
@@ -944,9 +928,8 @@ public class BackendTest {
 		ManaPool.GREEN1.add(2);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setCost("GG");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "GG", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -1512,9 +1495,8 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setColor("1U");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 
 		bknd.passPriority(true);
 		bknd.passPriority(false);
@@ -1561,9 +1543,8 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setColor("1U");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 
 
 		bknd.passPriority(true);
@@ -1613,9 +1594,8 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setColor("1U");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 
 		bknd.passPriority(true);
 		bknd.passPriority(false);
@@ -1664,10 +1644,9 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setColor("1U");
 
 		bknd.passPriority(true);
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 
 		assertEquals(bknd.getPhase(), Phase.FIRST_MAIN1);
 		assertFalse(bknd.getPriority());
@@ -1722,16 +1701,14 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 		c.setType("Creature- bird");
-		c.setColor("1U");
 
 		ManaPool.BLUE1.add(1);
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c1, 0);
 		c1.setType("Creature- bird");
-		c1.setColor("1U");
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
-		assertFalse(bknd.castSpell(Zone.HAND, c1, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
+		assertFalse(bknd.castSpell(Zone.HAND, c1, 0, "1U", true, null, null));
 
 		assertEquals(bknd.getPhase(), Phase.FIRST_MAIN1);
 		assertTrue(bknd.getPriority());
@@ -2337,7 +2314,7 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -2440,7 +2417,7 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 
 
-		assertFalse(bknd.castSpell(Zone.HAND, card1, 0, true, card2, Zone.HAND1));
+		assertFalse(bknd.castSpell(Zone.HAND, card1, 0, "1WB", true, card2, Zone.HAND1));
 		assertEquals(card1, bknd.getZoneContents(Zone.HAND)[0]);
 		assertEquals(card2, bknd.getZoneContents(Zone.HAND1)[0]);
 		assertEquals(1, ManaPool.WHITE1.getAmount());
@@ -2500,7 +2477,7 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 
 
-		assertTrue(bknd.castSpell(Zone.HAND, card1, 0, true, card2, Zone.BATTLE_FIELD1));
+		assertTrue(bknd.castSpell(Zone.HAND, card1, 0, "1WB", true, card2, Zone.BATTLE_FIELD1));
 		assertArrayEquals( new Card[0], bknd.getZoneContents(Zone.HAND));
 		assertEquals(card2, bknd.getZoneContents(Zone.BATTLE_FIELD1)[0]);
 
@@ -2591,7 +2568,7 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -2641,7 +2618,7 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -2691,7 +2668,7 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 
-		assertTrue(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertTrue(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 		assertArrayEquals(bknd.getZoneContents(Zone.HAND),bknd.getZoneContents(Zone.HAND1));
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.HAND1));
 
@@ -2739,7 +2716,7 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 
-		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertFalse(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 		assertEquals(bknd.getZoneContents(Zone.HAND)[0],c);
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.BATTLE_FIELD1));
 
@@ -2788,7 +2765,7 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 
-		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertFalse(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 		assertEquals(bknd.getZoneContents(Zone.HAND)[0],c);
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.BATTLE_FIELD1));
 
@@ -2837,7 +2814,7 @@ public class BackendTest {
 		ManaPool.COLORLESS1.add(1);
 		bknd.addCard(Zone.HAND, c, 0);
 
-		assertFalse(bknd.castSpell(Zone.HAND, c, 0, true, null, null));
+		assertFalse(bknd.castSpell(Zone.HAND, c, 0, "1U", true, null, null));
 		assertEquals(bknd.getZoneContents(Zone.HAND)[0],c);
 		assertArrayEquals(bknd.getZoneContents(Zone.BATTLE_FIELD),bknd.getZoneContents(Zone.BATTLE_FIELD1));
 

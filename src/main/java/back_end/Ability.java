@@ -10,7 +10,7 @@ public class Ability {
 	private AbilityType type;
 	private String displayText;
 
-	//TODO: support mixed case, bad syntax, bad info
+	//TODO: support bad syntax, bad info
 	public Ability(String smel) {
 		if (smel == null)
 			throw new IllegalArgumentException("SMEL: no cost");
