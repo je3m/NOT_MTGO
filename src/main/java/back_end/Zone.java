@@ -105,6 +105,10 @@ public enum Zone {
 	 * @return Zone enum that matches that string
 	 */
 	public static Zone getZoneFromString(String string) {
+		
+		if(string == null) {
+			throw new IllegalArgumentException("Zone name string cannot be null");
+		}
 		//TODO: invalid input
 		for (Zone z: Zone.values()){
 			if (string.equals(z.name())){
