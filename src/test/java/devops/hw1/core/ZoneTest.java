@@ -47,7 +47,7 @@ public class ZoneTest {
 			Zone.getZoneFromString(null);
 			fail("IllegalArgumentException expected");
 		} catch(IllegalArgumentException e) {
-			assertEquals(e.getMessage(), "Zone name string cannot be null");
+			assertEquals(e.getMessage(), "Zone name string cannot be null.");
 		}
 		
 		try{

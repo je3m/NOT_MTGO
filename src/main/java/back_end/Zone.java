@@ -107,9 +107,8 @@ public enum Zone {
 	public static Zone getZoneFromString(String string) {
 		
 		if(string == null) {
-			throw new IllegalArgumentException("Zone name string cannot be null");
+			throw new IllegalArgumentException("Zone name string cannot be null.");
 		}
-		
 		for (Zone z: Zone.values()){
 			if (string.equals(z.name())){
 				return z;
@@ -125,7 +124,12 @@ public enum Zone {
 
 	//TODO
 	public static Zone getZoneFromString(String string, boolean player) {
-		//TODO: invalid input
+
+
+		if(string == null) {
+			throw new IllegalArgumentException("Zone name string cannot be null.");
+		}
+		
 		if(!player)
 			string = string.concat("1");
 		for (Zone z: Zone.values()){
