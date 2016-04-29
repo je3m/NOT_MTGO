@@ -15,6 +15,10 @@ public enum AbilityType {
 
 	public static AbilityType getTypeFromString(String s){
 		//TODO: invalid input
+		if(s == null) {
+			throw new IllegalArgumentException("Ability type string cannot be null.");
+		}
+		
 		for (AbilityType z: AbilityType.values()){
 			if (s.equals(z.name())){
 				return z;
