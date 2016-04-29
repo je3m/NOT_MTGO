@@ -101,7 +101,7 @@ public class Backend {
 	 * @param z the zone the card is leaving
 	 * @param i the index the card currently occupies in that zone
 	 * @param abInd index of the card's ability
-	 * @param target TODO
+	 * @param target the card being targeted by the ability
 	 */
 	public void activateAbility(Card c, Zone z, int i, int abInd, Card target) {
 		Ability a =	c.getAbilities()[abInd];

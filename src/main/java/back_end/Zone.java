@@ -117,12 +117,21 @@ public enum Zone {
 		throw new IllegalArgumentException("invalid zone " + string);
 	}
 
-	//TODO
+	/**
+	 * Returns the player that a given zone belongs to
+	 * @param zone the zone whose player is being identified
+	 * @return the player that a given zone belongs to
+	 */
 	public static boolean getPlayerFromZone(Zone zone) {
 		return zone.ordinal() < 5;
 	}
 
-	//TODO
+	/**
+	 * Returns the zone corresponding to the given string and player
+	 * @param string name of the zone
+	 * @param player the player to whom the zone belongs
+	 * @return Zone enum that matches that string and player
+	 */
 	public static Zone getZoneFromString(String string, boolean player) {
 
 

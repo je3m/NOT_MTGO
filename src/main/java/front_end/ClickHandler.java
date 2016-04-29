@@ -172,7 +172,12 @@ public class ClickHandler implements MouseListener {
 		}
 		return false;
 	}
-	//TODO add javadoc
+
+
+	/**
+	 * Checks whether any of the zones containing targetable cards were clicked on
+	 * 
+	 */
 	public void handleTargeting(){
 		Boolean changed = false;
 		changed = changed || this.targetHandleZoneForCardClick(this.MTGComp.getHandGUICards1(), Zone.HAND);
