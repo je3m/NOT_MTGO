@@ -14,7 +14,6 @@ public enum AbilityType {
 	PLAY;
 
 	public static AbilityType getTypeFromString(String s){
-		//TODO: invalid input
 		if(s == null) {
 			throw new IllegalArgumentException("Ability type string cannot be null.");
 		}

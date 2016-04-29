@@ -58,8 +58,7 @@ public class Card {
 
 	/**
 	 * Adds ability to card
-	 * TODO: come up with a good way to represent abilities (Mckee)
-	 * @param string ability to add following TODO: format
+	 * @param string ability to add following
 	 */
 	public void addAbility(String string) {
 		this.abilities.add(new Ability(string));

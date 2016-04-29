@@ -22,7 +22,7 @@ public class TestAbilityType {
 	public void testNullType() {
 		try {
 			AbilityType.getTypeFromString(null);
-			fail();
+			fail("IllegalArgumentException expected");
 		} catch (IllegalArgumentException e) {
 			assertEquals(e.getMessage(), "Ability type string cannot be null.");
 		}
