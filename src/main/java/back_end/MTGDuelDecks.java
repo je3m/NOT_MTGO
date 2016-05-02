@@ -19,6 +19,7 @@ public class MTGDuelDecks {
 	public static final String LLANOWAR_ELVES_PATH = "res/Llanowar_Elves.jpg";
 	public static final String TARFIRE_PATH = "res/Tarfire.jpg";
 	public static final String IMPERIOUS_PERFECT_PATH = "res/Imperious_Perfect.jpg";
+	public static final String ELF_WARRIOR_TOKEN_PATH = "res/Elf_Warrior_Token.jpg";
 
 	/**
 	 * Main method that runs the game and sets up the GUI frame.

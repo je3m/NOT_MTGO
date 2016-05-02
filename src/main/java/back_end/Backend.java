@@ -124,7 +124,7 @@ public class Backend {
 			break;
 		case ACTIVATED:
 			ArrayList<String> abilities = new ArrayList<String>();
-			Card token = new Card("Elf Warrior", "", "G", "Creature- Elfwarrior", null, abilities, 1, 1, MTGDuelDecks.LLANOWAR_ELVES_PATH, false);
+			Card token = new Card("Elf Warrior", "", "G", "Creature- Elfwarrior", null, abilities, 1, 1, MTGDuelDecks.ELF_WARRIOR_TOKEN_PATH, false);
 			Backend.getInstance().addCard(Zone.BATTLE_FIELD, token, Zone.BATTLE_FIELD.getSize());
 			c.tap();
 			break;
