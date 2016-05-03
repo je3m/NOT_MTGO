@@ -22,4 +22,10 @@ public class HealthTests {
 	    // Write code here that turns the phrase above into concrete actions
 	    Health.HEALTH1.add(change);
 	}
+	
+	@When("^the first player's health decreases by (\\d+)$")
+	public void the_first_player_s_health_decreases_by(int change) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		Health.HEALTH1.remove(change);
+	}
 }
