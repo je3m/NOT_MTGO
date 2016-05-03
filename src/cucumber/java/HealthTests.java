@@ -17,9 +17,9 @@ public class HealthTests {
 	    assertEquals(Health.HEALTH1.get(),health);
 	}
 	
-	@When("^the first player's health changes by (\\d+)$")
-	public void the_first_player_s_health_changes_by(int change) throws Throwable {
+	@When("^the first player's health increases by (\\d+)$")
+	public void the_first_player_s_health_increases_by(int change) throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
-	    Health.HEALTH1.change(change);
+	    Health.HEALTH1.add(change);
 	}
 }

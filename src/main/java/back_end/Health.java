@@ -24,4 +24,12 @@ public enum Health {
 	public int get(){
 		return this.amount;
 	}
+
+	/**
+	 * Adds amount to the health
+	 * @param amount amount to add
+	 */
+	public void add(int amount) {
+		this.amount += amount;
+	}
 }
