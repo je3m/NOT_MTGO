@@ -15,11 +15,13 @@ public class Card {
 	private String image;
 	private Boolean tapped;
 	private Boolean flash;
+	private int damage;
 
 	public Card(String name, String manaCost, String color, String type,
 			String manaAbility, ArrayList<String> abilities, int power,
 			int toughness, String image, Boolean flash){
 		this.name = name;
+		this.damage = 0;
 		if(abilities == null){
 			throw new IllegalArgumentException("Error creating card " + name + ": null is not a valid ability list");
 		}
@@ -280,6 +282,14 @@ public class Card {
 	 * @return
 	 */
 	public int getDamage() {
-		return 0;
+		return this.damage;
+	}
+
+	/**
+	 * Adds damage on a card
+	 * @param damage amount of damage added
+	 */
+	public void addDamage(int damage) {
+		this.damage += damage;
 	}
 }
