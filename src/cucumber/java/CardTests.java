@@ -28,4 +28,9 @@ public class CardTests {
 	public void the_card_takes_damage(int damage) throws Throwable {
 	    c.addDamage(damage);
 	}
+	
+	@When("^the card's damage is reset$")
+	public void the_card_s_damage_is_reset() throws Throwable {
+	    c.resetDamage();
+	}
 }
