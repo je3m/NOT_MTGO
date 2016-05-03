@@ -59,7 +59,7 @@ public class BackendTests {
 		bknd = Backend.getInstance();
 		c = new Card("Tarfire", "R", "R", "Instant- Goblin", "", new ArrayList<String>(), 0, 0, MTGDuelDecks.TARFIRE_PATH, true);
 		c.addAbility("TYPE {CAST} COST {R} TARGET {CREATURE} EFFECT {DAMAGE-2} ZONE {HAND} RESOLVE {GRAVEYARD} TEXT {Deal 2 damage to target creature}");
-		bknd.putItemOnStack(new ItemOnStack(c,c.getAbilities()[0],Backend.PLAYER_TWO, null, Backend.PLAYER_TWO,null));
+		bknd.putItemOnStack(new ItemOnStack(c,c.getAbilities()[0],Backend.PLAYER_TWO, null, Backend.PLAYER_ONE,null));
 	}
 
 	@Given("^the second player has priority$")

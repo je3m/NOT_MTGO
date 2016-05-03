@@ -9,36 +9,36 @@ public class HealthTests {
 	@When("^the (first|second) player's health is set to (\\d+)$")
 	public void the_player_s_health_is_set_to(String player, int health) throws Throwable {
 		if(player.equals("first")){
-			Health.HEALTH1.set(health);
+			Health.HEALTH.set(health);
 		} else {
-			Health.HEALTH2.set(health);
+			Health.HEALTH1.set(health);
 		}
 	}
 
 	@Then("^the (first|second) player's health should be (\\d+)$")
 	public void the_player_s_health_should_be(String player, int health) throws Throwable {
 		if(player.equals("first")){
-			assertEquals(Health.HEALTH1.get(),health);
+			assertEquals(Health.HEALTH.get(),health);
 		} else {
-			assertEquals(Health.HEALTH2.get(),health);
+			assertEquals(Health.HEALTH1.get(),health);
 		}
 	}
 	
 	@When("^the (first|second) player's health increases by (\\d+)$")
 	public void the_player_s_health_increases_by(String player, int change) throws Throwable {
 		if(player.equals("first")){
-			Health.HEALTH1.add(change);
+			Health.HEALTH.add(change);
 		} else {
-			Health.HEALTH2.add(change);
+			Health.HEALTH1.add(change);
 		}
 	}
 	
 	@When("^the (first|second) player's health decreases by (\\d+)$")
 	public void the_player_s_health_decreases_by(String player, int change) throws Throwable {
 		if(player.equals("first")){
-			Health.HEALTH1.remove(change);
+			Health.HEALTH.remove(change);
 		} else {
-			Health.HEALTH2.remove(change);
+			Health.HEALTH1.remove(change);
 		}
 	}
 }

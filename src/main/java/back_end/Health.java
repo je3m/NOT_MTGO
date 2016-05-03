@@ -4,8 +4,8 @@ package back_end;
  *
  */
 public enum Health {
-	HEALTH1,
-	HEALTH2;
+	HEALTH,
+	HEALTH1;
 	
 	int amount;
 	

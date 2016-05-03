@@ -327,7 +327,6 @@ public class Backend {
 	 */
 	public void passPriority(boolean player) {
 		if(this.priority == player) {
-
 			if (this.passed && !this.stack.empty()) {
 				ItemOnStack item = this.stack.pop();
 				if(item.getTarget() != null) {
@@ -337,6 +336,14 @@ public class Backend {
 							item.getTargetZone().remove(i);
 						}
 					}
+				} else if (item.getTargetPlayer() != null) {
+					String[] splitEffect = item.getAbility().getEffect().split("-");
+					if(item.getTargetPlayer()){
+						Health.HEALTH.remove(Integer.parseInt(splitEffect[1]));
+					} else {
+						Health.HEALTH1.remove(Integer.parseInt(splitEffect[1]));
+					}
+					Zone.getZoneFromString(item.getAbility().getResolveZone()).addCard(item.getCard(),0);
 				} else {
 					if(item.getPlayer()){
 						Zone.BATTLE_FIELD.addCard(item.getCard(), 0);
