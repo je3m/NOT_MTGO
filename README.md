@@ -126,3 +126,12 @@ Jim
  -Made the Ability constructor ignore the case ofthe letters of the string passed to it
  -Refactored the castSpell function to take a cost to be paid, in order to facilitate future extension of that function to put sundry ability activations onto the stack
  -Added MC/DC code coverage to non-GUI code and corrected most of the gaps that that revealed
+ 
+ ------------------------------------------------------------------------------------
+ Milestone 7
+ 
+ Chris
+  -added cost paying for activated abilities
+  -added ability and targetplayer to itemonstack
+  -added health to players
+  -added damage to cards

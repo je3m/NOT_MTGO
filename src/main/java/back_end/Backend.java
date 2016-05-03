@@ -28,24 +28,49 @@ public class Backend {
 		return bk;
 	}
 
+	//Functions Used For Testing
+	/**
+	 * Puts an item directly onto the stack
+	 * @param stackItem item to be put on the stack
+	 */
+	public void putItemOnStack(ItemOnStack stackItem){
+		stack.push(stackItem);
+	}
+	
+	/**
+	 * Sets the current phase
+	 * @param p phase to be set to
+	 */
 	public void setPhase(Phase p){
 		this.phase = p;
 	}
 
+	/**
+	 * Sets the current turn
+	 * @param t new turn
+	 */
 	public void setTurn(boolean t){
 		this.turn = t;
 	}
 
+	/**
+	 * Sets the priority
+	 * @param priority new priority
+	 */
 	public void setPriority(boolean priority){
 		this.priority = priority;
 	}
 
+	/**
+	 * Resets the game
+	 */
 	public void reset(){
 		this.setPhase(Phase.FIRST_MAIN1);
 		this.setTurn(PLAYER_ONE);
 		this.setPriority(PLAYER_ONE);
 	}
 
+	//Non testing functions
 	/**
 	 * Constructs a backend object
 	 */

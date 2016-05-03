@@ -72,7 +72,7 @@ public class MTGDuelDecks {
 		Card hand4 = new Card("Imperious Perfect", "2G", "G", "Creature- Elf Warrior", null, 
 				new ArrayList<String>(), 2, 2, IMPERIOUS_PERFECT_PATH, false);
 		hand4.addAbility("TYPE {CAST} COST {2G} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Cast}");
-		hand4.addAbility("TYPE {ACTIVATED} COST {G TAP} EFFECT {TOKEN (TYPE (Creature- Elf Warrior) COLOR (G) POWER (1) TOUGHNESS (1))} ZONE {BATTLE_FIELD} TEXT {Put a 1/1 green Elf Warrior token into play}");
+		hand4.addAbility("TYPE {ACTIVATED} COST {G,TAP} EFFECT {TOKEN (TYPE (Creature- Elf Warrior) COLOR (G) POWER (1) TOUGHNESS (1))} ZONE {BATTLE_FIELD} TEXT {Put a 1/1 green Elf Warrior token into play}");
 
 
 		Zone.HAND.addCard(hand4, 0);
