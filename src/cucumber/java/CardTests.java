@@ -23,4 +23,9 @@ public class CardTests {
 	public void the_card_should_have_damage(int damage) throws Throwable {
 	    assertEquals(c.getDamage(), damage);
 	}
+	
+	@When("^the card takes (\\d+) damage$")
+	public void the_card_takes_damage(int damage) throws Throwable {
+	    c.addDamage(damage);
+	}
 }
