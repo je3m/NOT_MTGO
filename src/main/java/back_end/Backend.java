@@ -428,7 +428,7 @@ public class Backend {
 			costs[5] = this.handleGeneric(ManaPool.getPool('r', player), costs[5]);
 			costs[5] = this.handleGeneric(ManaPool.getPool('g', player), costs[5]);
 
-			this.stack.push(new ItemOnStack(c, player, target, targetZone));
+			this.stack.push(new ItemOnStack(c, null, player, target, null, targetZone));
 
 			zone.remove(index);
 			this.passed = false;

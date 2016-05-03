@@ -6,19 +6,27 @@ package back_end;
  */
 public class ItemOnStack {
 	private Card c;
-	private Card target;
+	private Ability a;
 	private Boolean player;
+	private Card target;
+	private Boolean targetPlayer;
 	private Zone targetZone;
 
 	/**
-	 * Constructs an item on the stack object
-	 * @param c card on the stack
-	 * @param player player that owns the card (true if first player)
+	 * Constructs an item on stack object
+	 * @param c card the ability is from
+	 * @param a ability on the stack
+	 * @param player the player that owns the ability
+	 * @param target the target card of the ability (null if the target is a player)
+	 * @param targetPlayer the target player of an ability
+	 * @param targetZone the zone of the targeted card
 	 */
-	public ItemOnStack(Card c, Boolean player, Card target, Zone targetZone){
+	public ItemOnStack(Card c, Ability a, Boolean player, Card target, Boolean targetPlayer, Zone targetZone){
 		this.c = c;
+		this.a = a;
 		this.player = player;
 		this.target = target;
+		this.targetPlayer = targetPlayer;
 		this.targetZone = targetZone;
 	}
 
@@ -28,6 +36,14 @@ public class ItemOnStack {
 	 */
 	public Card getCard() {
 		return this.c;
+	}
+	
+	/**
+	 * Gets the ability from the item on stack
+	 * @return the ability on the stack
+	 */
+	public Ability getAbility() {
+		return this.a;
 	}
 
 	/**
@@ -44,6 +60,14 @@ public class ItemOnStack {
 	 */
 	public Card getTarget() {
 		return this.target;
+	}
+	
+	/**
+	 * Gets the player that this item on the stack is targeting
+	 * @return the player being targeted by this stack item
+	 */
+	public Boolean getTargetPlayer() {
+		return this.targetPlayer;
 	}
 
 	/**
