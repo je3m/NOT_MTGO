@@ -330,12 +330,9 @@ public class Backend {
 			if (this.passed && !this.stack.empty()) {
 				ItemOnStack item = this.stack.pop();
 				if(item.getTarget() != null) {
-					Card[] tZone = item.getTargetZone().getCards();
-					for(int i = 0; i < tZone.length; i++) {
-						if(tZone[i].equals(item.getTarget())) {
-							item.getTargetZone().remove(i);
-						}
-					}
+					String[] splitEffect = item.getAbility().getEffect().split("-");
+					item.getTarget().addDamage(Integer.parseInt(splitEffect[1]));
+					Zone.getZoneFromString(item.getAbility().getResolveZone()).addCard(item.getCard(),0);
 				} else if (item.getTargetPlayer() != null) {
 					String[] splitEffect = item.getAbility().getEffect().split("-");
 					if(item.getTargetPlayer()){
