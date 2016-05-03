@@ -6,26 +6,39 @@ import cucumber.api.java.en.When;
 import static org.junit.Assert.*;
 
 public class HealthTests {
-	@When("^the first player's health is set to (\\d+)$")
-	public void the_first_player_s_health_is_set_to(int health) throws Throwable {
-	    Health.HEALTH1.set(health);
+	@When("^the (first|second) player's health is set to (\\d+)$")
+	public void the_player_s_health_is_set_to(String player, int health) throws Throwable {
+		if(player.equals("first")){
+			Health.HEALTH1.set(health);
+		} else {
+			Health.HEALTH2.set(health);
+		}
 	}
 
-	@Then("^the first player's health should be (\\d+)$")
-	public void the_first_player_s_health_should_be(int health) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    assertEquals(Health.HEALTH1.get(),health);
+	@Then("^the (first|second) player's health should be (\\d+)$")
+	public void the_player_s_health_should_be(String player, int health) throws Throwable {
+		if(player.equals("first")){
+			assertEquals(Health.HEALTH1.get(),health);
+		} else {
+			assertEquals(Health.HEALTH2.get(),health);
+		}
 	}
 	
-	@When("^the first player's health increases by (\\d+)$")
-	public void the_first_player_s_health_increases_by(int change) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    Health.HEALTH1.add(change);
+	@When("^the (first|second) player's health increases by (\\d+)$")
+	public void the_player_s_health_increases_by(String player, int change) throws Throwable {
+		if(player.equals("first")){
+			Health.HEALTH1.add(change);
+		} else {
+			Health.HEALTH2.add(change);
+		}
 	}
 	
-	@When("^the first player's health decreases by (\\d+)$")
-	public void the_first_player_s_health_decreases_by(int change) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-		Health.HEALTH1.remove(change);
+	@When("^the (first|second) player's health decreases by (\\d+)$")
+	public void the_player_s_health_decreases_by(String player, int change) throws Throwable {
+		if(player.equals("first")){
+			Health.HEALTH1.remove(change);
+		} else {
+			Health.HEALTH2.remove(change);
+		}
 	}
 }
