@@ -292,4 +292,11 @@ public class Card {
 	public void addDamage(int damage) {
 		this.damage += damage;
 	}
+
+	/**
+	 * Resets the damage on a card
+	 */
+	public void resetDamage() {
+		this.damage = 0;
+	}
 }
