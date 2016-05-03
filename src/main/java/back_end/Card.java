@@ -274,4 +274,12 @@ public class Card {
 	public void untap() {
 		this.tapped = false;
 	}
+
+	/**
+	 * Gets the damage on a card
+	 * @return
+	 */
+	public int getDamage() {
+		return 0;
+	}
 }

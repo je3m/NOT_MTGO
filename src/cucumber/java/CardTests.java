@@ -21,6 +21,6 @@ public class CardTests {
 
 	@Then("^the card should have (\\d+) damage$")
 	public void the_card_should_have_damage(int damage) throws Throwable {
-	    assertTrue(c.getDamage(), damage);
+	    assertEquals(c.getDamage(), damage);
 	}
 }
