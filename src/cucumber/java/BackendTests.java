@@ -22,15 +22,16 @@ public class BackendTests {
 
 	String imperiousPerfect = "TYPE{ACTIVATED} COST {G,TAP} ZONE {BATTLE_FIELD} EFFECT {TOKEN ELFWARRIOR} RESOLVE {BATTLEFIELD}";
 	ArrayList<String> abilities;
-	Card c;
+	Card imperious;
+	Card tarfire;
 	//TODO:Mocking?
 	
 	@Given("^an Imperious Perfect is put on the first player's battlefield$")
 	public void an_Imperious_Perfect_is_put_on_the_first_player_s_battlefield() throws Throwable {
 		abilities = new ArrayList<String>();
 		abilities.add(imperiousPerfect);
-		c = new Card("Imperious Perfect", null, "G", "Creature- Elf Warrior", null, abilities, 2, 2, MTGDuelDecks.FOREST_PATH, false);
-		Zone.BATTLE_FIELD.addCard(c, 0);
+		imperious = new Card("Imperious Perfect", null, "G", "Creature- Elf Warrior", null, abilities, 2, 2, MTGDuelDecks.FOREST_PATH, false);
+		Zone.BATTLE_FIELD.addCard(imperious, 0);
 	}
 
 	@Given("^there is (\\d+) mana in the first player's green mana pool$")
@@ -41,25 +42,25 @@ public class BackendTests {
 
 	@When("^I activate Imperious Perfect activated ability$")
 	public void i_activate_Imperious_Perfect_activated_ability() throws Throwable {
-		bknd.activateAbility(c, Zone.BATTLE_FIELD, 0, 0, null);
+		bknd.activateAbility(imperious, Zone.BATTLE_FIELD, 0, 0, null);
 	}
 
 	@Then("^Imperious Perfect should be tapped$")
 	public void imperious_Perfect_should_be_tapped() throws Throwable {
-	    assertTrue(c.getTapped());
+	    assertTrue(imperious.getTapped());
 	}
 
 	@Then("^there should be (\\d+) mana in the first player's green mana pool$")
-	public void there_should_be_mana_in_the_first_player_s_green_mana_pool(int arg1) throws Throwable {
-	    assertEquals(ManaPool.GREEN1.getAmount(),0);
+	public void there_should_be_mana_in_the_first_player_s_green_mana_pool(int mana) throws Throwable {
+	    assertEquals(ManaPool.GREEN1.getAmount(),mana);
 	}
 	
 	@Given("^there is a Tarfire on the stack targeting the first player$")
 	public void there_is_a_Tarfire_on_the_stack_targeting_the_first_player() throws Throwable {
 		bknd = Backend.getInstance();
-		c = new Card("Tarfire", "R", "R", "Instant- Goblin", "", new ArrayList<String>(), 0, 0, MTGDuelDecks.TARFIRE_PATH, true);
-		c.addAbility("TYPE {CAST} COST {R} TARGET {CREATURE} EFFECT {DAMAGE-2} ZONE {HAND} RESOLVE {GRAVEYARD} TEXT {Deal 2 damage to target creature}");
-		bknd.putItemOnStack(new ItemOnStack(c,c.getAbilities()[0],Backend.PLAYER_TWO, null, Backend.PLAYER_ONE,null));
+		tarfire = new Card("Tarfire", "R", "R", "Instant- Goblin", "", new ArrayList<String>(), 0, 0, MTGDuelDecks.TARFIRE_PATH, true);
+		tarfire.addAbility("TYPE {CAST} COST {R} TARGET {CREATURE} EFFECT {DAMAGE-2} ZONE {HAND} RESOLVE {GRAVEYARD} TEXT {Deal 2 damage to target creature}");
+		bknd.putItemOnStack(new ItemOnStack(tarfire,tarfire.getAbilities()[0],Backend.PLAYER_TWO, null, Backend.PLAYER_ONE,null));
 	}
 
 	@Given("^the second player has priority$")
@@ -81,5 +82,18 @@ public class BackendTests {
 	@Then("^Tarfire should be in the second player's graveyard$")
 	public void tarfire_should_be_in_the_second_player_s_graveyard() throws Throwable {
 	    Zone.GRAVEYARD1.contains("Tarfire");
+	}
+	
+	@Given("^there is a Tarfire on the stack targeting the Imperious Perfect$")
+	public void there_is_a_Tarfire_on_the_stack_targeting_the_Imperious_Perfect() throws Throwable {
+		bknd = Backend.getInstance();
+		tarfire = new Card("Tarfire", "R", "R", "Instant- Goblin", "", new ArrayList<String>(), 0, 0, MTGDuelDecks.TARFIRE_PATH, true);
+		tarfire.addAbility("TYPE {CAST} COST {R} TARGET {CREATURE} EFFECT {DAMAGE-2} ZONE {HAND} RESOLVE {GRAVEYARD} TEXT {Deal 2 damage to target creature}");
+		bknd.putItemOnStack(new ItemOnStack(tarfire,tarfire.getAbilities()[0],Backend.PLAYER_TWO, imperious, null,Zone.BATTLE_FIELD));
+	}
+
+	@Then("^Imperious Perfect should have (\\d+) damage$")
+	public void imperious_Perfect_should_have_damage(int damage) throws Throwable {
+	    assertEquals(imperious.getDamage(), damage);
 	}
 }
