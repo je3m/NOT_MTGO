@@ -32,4 +32,12 @@ public enum Health {
 	public void add(int amount) {
 		this.amount += amount;
 	}
+
+	/**
+	 * Removed amount from the health
+	 * @param amount amount to remove
+	 */
+	public void remove(int amount) {
+		this.amount -= amount;
+	}
 }
