@@ -636,7 +636,7 @@ public class BackendTest {
 
 	@Test
 	public void testActivatedAbility(){
-		String imperiousPerfect = "TYPE{ACTIVATED} COST {G, TAP} ZONE {BATTLE_FIELD} EFFECT {TOKEN ELFWARRIOR} RESOLVE {BATTLEFIELD}";
+		String imperiousPerfect = "TYPE{ACTIVATED} COST {G,TAP} ZONE {BATTLE_FIELD} EFFECT {TOKEN ELFWARRIOR} RESOLVE {BATTLEFIELD}";
 		ArrayList<String> abilities = new ArrayList<>();
 		abilities.add(imperiousPerfect);
 

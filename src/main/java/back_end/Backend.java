@@ -123,10 +123,11 @@ public class Backend {
 			this.activateManaAbility(c, player);
 			break;
 		case ACTIVATED:
-			ArrayList<String> abilities = new ArrayList<String>();
-			Card token = new Card("Elf Warrior", "", "G", "Creature- Elfwarrior", null, abilities, 1, 1, MTGDuelDecks.ELF_WARRIOR_TOKEN_PATH, false);
-			Backend.getInstance().addCard(Zone.BATTLE_FIELD, token, Zone.BATTLE_FIELD.getSize());
-			c.tap();
+			if(payAbilityCost(a.getCost(), player, c)){
+				ArrayList<String> abilities = new ArrayList<String>();
+				Card token = new Card("Elf Warrior", "", "G", "Creature- Elfwarrior", null, abilities, 1, 1, MTGDuelDecks.ELF_WARRIOR_TOKEN_PATH, false);
+				Backend.getInstance().addCard(Zone.BATTLE_FIELD, token, Zone.BATTLE_FIELD.getSize());
+			}
 			break;
 		case ETB:
 			break;
@@ -139,6 +140,60 @@ public class Backend {
 		}
 	}
 
+	//TODO:Test this more
+	/**
+	 * Handles paying the cost for an ability
+	 * @param cost cost of the ability
+	 * @param player player casting the ability
+	 * @param c card the ability belongs to
+	 * @return true if the ability cost could be payed, false if not
+	 */
+	private boolean payAbilityCost(String cost, Boolean player, Card c) {
+		String[] costSplit = cost.split(",");
+		for(int i = 0; i < costSplit.length; i++){
+			if(costSplit[i].equals("TAP")){
+				if(c.getTapped()){
+					return false;
+				}
+			} else {
+				//TODO:refactor this
+				int[] costs = this.parseCost(cost);
+
+				if(!((costs[0] <= ManaPool.getPool('w', player).getAmount()) &&
+						(costs[1] <= ManaPool.getPool('u', player).getAmount()) &&
+						(costs[2] <= ManaPool.getPool('b', player).getAmount()) &&
+						(costs[3] <= ManaPool.getPool('r', player).getAmount()) &&
+						(costs[4] <= ManaPool.getPool('g', player).getAmount()) &&
+						((costs[0] + costs[1] + costs[2] + costs[3] + costs[4] + costs[5])<=
+						(ManaPool.getPool('w', player).getAmount() + ManaPool.getPool('u', player).getAmount()
+								+ ManaPool.getPool('b', player).getAmount() + ManaPool.getPool('r', player).getAmount()
+								+ ManaPool.getPool('g', player).getAmount() + ManaPool.getPool('c', player).getAmount())))){
+					return false;
+				}
+			}	
+		}
+		for(int i = 0; i < costSplit.length; i++){
+			if(costSplit[i].equals("TAP")){
+				c.tap();
+			} else {
+				int[] costs = this.parseCost(cost);
+				
+				ManaPool.getPool('w', player).remove(costs[0]);
+				ManaPool.getPool('u', player).remove(costs[1]);
+				ManaPool.getPool('b', player).remove(costs[2]);
+				ManaPool.getPool('r', player).remove(costs[3]);
+				ManaPool.getPool('g', player).remove(costs[4]);
+
+				costs[5] = this.handleGeneric(ManaPool.getPool('c', player), costs[5]);
+				costs[5] = this.handleGeneric(ManaPool.getPool('u', player), costs[5]);
+				costs[5] = this.handleGeneric(ManaPool.getPool('b', player), costs[5]);
+				costs[5] = this.handleGeneric(ManaPool.getPool('w', player), costs[5]);
+				costs[5] = this.handleGeneric(ManaPool.getPool('r', player), costs[5]);
+				costs[5] = this.handleGeneric(ManaPool.getPool('g', player), costs[5]);
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * Simply adds the card to the given zone at the end of that zone's list

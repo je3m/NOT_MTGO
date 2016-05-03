@@ -19,7 +19,7 @@ public class BackendTests {
 	    Zone.BATTLE_FIELD.empty();
 	}
 
-	String imperiousPerfect = "TYPE{ACTIVATED} COST {G, TAP} ZONE {BATTLE_FIELD} EFFECT {TOKEN ELFWARRIOR} RESOLVE {BATTLEFIELD}";
+	String imperiousPerfect = "TYPE{ACTIVATED} COST {G,TAP} ZONE {BATTLE_FIELD} EFFECT {TOKEN ELFWARRIOR} RESOLVE {BATTLEFIELD}";
 	ArrayList<String> abilities;
 	Card c;
 	
