@@ -14,13 +14,19 @@ import cucumber.api.java.en.When;
 import static org.junit.Assert.*;
 
 public class BackendTests {
-	Backend bknd = Backend.getInstance();
+	Backend bknd;
+	@Given("^there is a new backend$")
+	public void there_is_a_new_backend() throws Throwable {
+	    bknd = new Backend();
+	    bknd.reset();
+	}
+	
 	@Given("^the first player's battlefield is empty$")
 	public void the_first_player_s_battlefield_is_empty() throws Throwable {
 	    Zone.BATTLE_FIELD.empty();
 	}
 
-	String imperiousPerfect = "TYPE{ACTIVATED} COST {G,TAP} ZONE {BATTLE_FIELD} EFFECT {TOKEN ELFWARRIOR} RESOLVE {BATTLEFIELD}";
+	String imperiousPerfect = "TYPE{ACTIVATED} COST {G,TAP} ZONE {BATTLE_FIELD} EFFECT {ELF_TOKEN} RESOLVE {BATTLEFIELD}  TEXT {Put a 1/1 Elf Warrior token on the battlefield}";
 	ArrayList<String> abilities;
 	Card imperious;
 	Card tarfire;
@@ -43,7 +49,7 @@ public class BackendTests {
 
 	@When("^I activate Imperious Perfect activated ability$")
 	public void i_activate_Imperious_Perfect_activated_ability() throws Throwable {
-		bknd.activateAbility(imperious, Zone.BATTLE_FIELD, 0, 0, null, null);
+		bknd.activateAbility(imperious, Zone.BATTLE_FIELD, 0, 0, null, null, null);
 	}
 
 	@Then("^Imperious Perfect should be tapped$")
@@ -58,7 +64,6 @@ public class BackendTests {
 	
 	@Given("^there is a Tarfire on the stack targeting the first player$")
 	public void there_is_a_Tarfire_on_the_stack_targeting_the_first_player() throws Throwable {
-		bknd = Backend.getInstance();
 		tarfire = new Card("Tarfire", "R", "R", "Instant- Goblin", "", new ArrayList<String>(), 0, 0, MTGDuelDecks.TARFIRE_PATH, true);
 		tarfire.addAbility("TYPE {CAST} COST {R} TARGET {CREATURE} EFFECT {DAMAGE-2} ZONE {HAND} RESOLVE {GRAVEYARD} TEXT {Deal 2 damage to target creature}");
 		bknd.putItemOnStack(new ItemOnStack(tarfire,tarfire.getAbilities()[0],Backend.PLAYER_TWO, null, Backend.PLAYER_ONE,null));
@@ -87,7 +92,6 @@ public class BackendTests {
 	
 	@Given("^there is a Tarfire on the stack targeting the Imperious Perfect$")
 	public void there_is_a_Tarfire_on_the_stack_targeting_the_Imperious_Perfect() throws Throwable {
-		bknd = Backend.getInstance();
 		tarfire = new Card("Tarfire", "R", "R", "Instant- Goblin", "", new ArrayList<String>(), 0, 0, MTGDuelDecks.TARFIRE_PATH, true);
 		tarfire.addAbility("TYPE {CAST} COST {R} TARGET {CREATURE} EFFECT {DAMAGE-2} ZONE {HAND} RESOLVE {GRAVEYARD} TEXT {Deal 2 damage to target creature}");
 		bknd.putItemOnStack(new ItemOnStack(tarfire,tarfire.getAbilities()[0],Backend.PLAYER_TWO, imperious, null,Zone.BATTLE_FIELD));
@@ -110,7 +114,6 @@ public class BackendTests {
 
 	@Given("^there is a Tarfire on the stack targeting the Beast$")
 	public void there_is_a_Tarfire_on_the_stack_targeting_the_Beast() throws Throwable {
-		bknd = Backend.getInstance();
 		tarfire = new Card("Tarfire", "R", "R", "Instant- Goblin", "", new ArrayList<String>(), 0, 0, MTGDuelDecks.TARFIRE_PATH, true);
 		tarfire.addAbility("TYPE {CAST} COST {R} TARGET {CREATURE} EFFECT {DAMAGE-2} ZONE {HAND} RESOLVE {GRAVEYARD} TEXT {Deal 2 damage to target creature}");
 		bknd.putItemOnStack(new ItemOnStack(tarfire,tarfire.getAbilities()[0],Backend.PLAYER_TWO, beast, null,Zone.BATTLE_FIELD));

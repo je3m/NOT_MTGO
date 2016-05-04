@@ -29,6 +29,10 @@ public class Backend {
 	}
 
 	//Functions Used For Testing
+	/**
+	 * Gets the stack in the backend
+	 * @return the stack
+	 */
 	public Stack<ItemOnStack> getStack(){
 		return this.stack;
 	}
@@ -131,8 +135,10 @@ public class Backend {
 	 * @param i the index the card currently occupies in that zone
 	 * @param abInd index of the card's ability
 	 * @param target the card being targeted by the ability
+	 * @param targetPlayer the player being targeted by the ability
+	 * @param targetZone the zone of the card being targeted
 	 */
-	public void activateAbility(Card c, Zone z, int i, int abInd, Card target, Boolean targetPlayer) {
+	public void activateAbility(Card c, Zone z, int i, int abInd, Card target, Boolean targetPlayer, Zone targetZone) {
 		Ability a =	c.getAbilities()[abInd];
 		boolean player = Zone.getPlayerFromZone(z);
 
@@ -153,9 +159,8 @@ public class Backend {
 			break;
 		case ACTIVATED:
 			if(payAbilityCost(a.getCost(), player, c)){
-				ArrayList<String> abilities = new ArrayList<String>();
-				Card token = new Card("Elf Warrior", "", "G", "Creature- Elfwarrior", null, abilities, 1, 1, MTGDuelDecks.ELF_WARRIOR_TOKEN_PATH, false);
-				Backend.getInstance().addCard(Zone.BATTLE_FIELD, token, Zone.BATTLE_FIELD.getSize());
+				this.stack.push(new ItemOnStack(c,a,player,target,targetPlayer, targetZone));
+				this.passed = false;
 			}
 			break;
 		case ETB:
@@ -353,10 +358,21 @@ public class Backend {
 					Zone.getZoneFromString(item.getAbility().getResolveZone()).addCard(item.getCard(),0);
 				
 				} else {
-					if(item.getPlayer()){
-						Zone.BATTLE_FIELD.addCard(item.getCard(), 0);
+					if(item.getAbility().getEffect() != null && item.getAbility().getEffect().equals("ELF_TOKEN")){
+						ArrayList<String> abilities = new ArrayList<String>();
+						Card token = new Card("Elf Warrior", "", "G", "Creature- Elf Warrior", null, abilities, 1, 1, MTGDuelDecks.ELF_WARRIOR_TOKEN_PATH, false);
+						if(item.getPlayer()){
+							Zone.BATTLE_FIELD.addCard(token, 0);
+						} else {
+							Zone.BATTLE_FIELD1.addCard(token, 0);
+						}
 					} else {
-						Zone.BATTLE_FIELD1.addCard(item.getCard(), 0);
+						//TODO:This should probably actually check if the ability is a "CAST" effect
+						if(item.getPlayer()){
+							Zone.BATTLE_FIELD.addCard(item.getCard(), 0);
+						} else {
+							Zone.BATTLE_FIELD1.addCard(item.getCard(), 0);
+						}
 					}
 				}
 				this.passed = false;

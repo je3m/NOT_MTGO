@@ -136,4 +136,4 @@ Jim
   -added health to players
   -added damage to cards
   -Tarfire correctly resolves on both creatures and players as well as killing creatures
-  
+  -Activated abilities use the stack

@@ -104,8 +104,8 @@ public class ClickHandler implements MouseListener {
 						try {
 							int index = gCard.getAbilityIndex(i);
 							if(gCard.getCard().getAbilities()[index].getTarget() == null){
-								//TODO:Add targeting for players
-								Backend.getInstance().activateAbility(gCard.getCard(), gCard.getZone(), gCard.getIndex(), index,null, null);
+								//TODO:Add targeting for players and zone from target
+								Backend.getInstance().activateAbility(gCard.getCard(), gCard.getZone(), gCard.getIndex(), index,null, null,null);
 							} else {
 								this.targetGUICard = gCard;
 								this.targetAbilityIndex = index;
@@ -201,7 +201,7 @@ public class ClickHandler implements MouseListener {
 			if(cardAL.get(i).getRec().contains(this.MTGComp.getMousePosition())){
 				try	{
 					//TODO:See above
-					Backend.getInstance().activateAbility(this.targetGUICard.getCard(), this.targetGUICard.getZone(), this.targetGUICard.getIndex(), this.targetAbilityIndex, cardAL.get(i).getCard(),null);
+					Backend.getInstance().activateAbility(this.targetGUICard.getCard(), this.targetGUICard.getZone(), this.targetGUICard.getIndex(), this.targetAbilityIndex, cardAL.get(i).getCard(),null,null);
 					return true;
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(this.MTGComp, e.getMessage());
