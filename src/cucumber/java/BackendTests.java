@@ -81,8 +81,8 @@ public class BackendTests {
 
 	@When("^priority is passed twice$")
 	public void priority_is_passed_twice() throws Throwable {
-		bknd.passPriority(Backend.PLAYER_TWO);
-		bknd.passPriority(Backend.PLAYER_ONE);
+		bknd.passPriority(bknd.getPriority());
+		bknd.passPriority(bknd.getPriority());
 	}
 
 	@Then("^Tarfire should be in the second player's graveyard$")
