@@ -131,6 +131,7 @@ Jim
  Milestone 7
  
  Chris
+  -added cucumber to project
   -added cost paying for activated abilities
   -added ability and targetplayer to itemonstack
   -added health to players
