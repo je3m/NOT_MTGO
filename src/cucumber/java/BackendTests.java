@@ -24,6 +24,7 @@ public class BackendTests {
 	ArrayList<String> abilities;
 	Card imperious;
 	Card tarfire;
+	Card beast;
 	//TODO:Mocking?
 	
 	@Given("^an Imperious Perfect is put on the first player's battlefield$")
@@ -95,5 +96,28 @@ public class BackendTests {
 	@Then("^Imperious Perfect should have (\\d+) damage$")
 	public void imperious_Perfect_should_have_damage(int damage) throws Throwable {
 	    assertEquals(imperious.getDamage(), damage);
+	}
+
+	@Then("^Imperious Perfect should be in the first player's graveyard$")
+	public void imperious_Perfect_should_be_in_the_first_player_s_graveyard() throws Throwable {
+		Zone.GRAVEYARD1.contains("Imperious Perfect");
+	}
+	
+	@Given("^a Beast is put on the first player's battlefield$")
+	public void a_Beast_is_put_on_the_first_player_s_battlefield() throws Throwable {
+		beast = new Card("Beast", null, "G", "Creature- Beast", null, new ArrayList<String>(), 3, 3, MTGDuelDecks.FOREST_PATH, false);
+	}
+
+	@Given("^there is a Tarfire on the stack targeting the Beast$")
+	public void there_is_a_Tarfire_on_the_stack_targeting_the_Beast() throws Throwable {
+		bknd = Backend.getInstance();
+		tarfire = new Card("Tarfire", "R", "R", "Instant- Goblin", "", new ArrayList<String>(), 0, 0, MTGDuelDecks.TARFIRE_PATH, true);
+		tarfire.addAbility("TYPE {CAST} COST {R} TARGET {CREATURE} EFFECT {DAMAGE-2} ZONE {HAND} RESOLVE {GRAVEYARD} TEXT {Deal 2 damage to target creature}");
+		bknd.putItemOnStack(new ItemOnStack(tarfire,tarfire.getAbilities()[0],Backend.PLAYER_TWO, beast, null,Zone.BATTLE_FIELD));
+	}
+
+	@Then("^Beast should have (\\d+) damage$")
+	public void beast_should_have_damage(int damage) throws Throwable {
+	    assertEquals(beast.getDamage(), damage);
 	}
 }

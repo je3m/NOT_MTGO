@@ -1,6 +1,7 @@
 Feature: Backend
 	As a player, I want the backend to pay costs for activated abilities.
 	As a player, I want spells effects to be handled when they are cast.
+	As a player, I want creatures to die when a spell deals enough damage to kill them.
 	
 @backend
 Scenario: Paying costs for an activated ability
@@ -22,12 +23,24 @@ Scenario: Tarfire resolves
 	And Tarfire should be in the second player's graveyard
 	
 @backend
-Scenario: Tarfire resolves on a creature
+Scenario: Tarfire resolves on a creature that lives
+	Given the first player's battlefield is empty
+	And a Beast is put on the first player's battlefield
+	And there is a Tarfire on the stack targeting the Beast
+	And the second player has priority
+	And it is the second player's turn
+	When priority is passed twice
+	Then Beast should have 2 damage
+	And Tarfire should be in the second player's graveyard
+	
+@backend
+Scenario: Tarfire resolves on a creature that dies
 	Given the first player's battlefield is empty
 	And an Imperious Perfect is put on the first player's battlefield
 	And there is a Tarfire on the stack targeting the Imperious Perfect
 	And the second player has priority
 	And it is the second player's turn
 	When priority is passed twice
-	Then Imperious Perfect should have 2 damage
+	Then Imperious Perfect should have 0 damage
+	And Imperious Perfect should be in the first player's graveyard
 	And Tarfire should be in the second player's graveyard
