@@ -44,3 +44,12 @@ Scenario: Tarfire resolves on a creature that dies
 	Then Imperious Perfect should have 0 damage
 	And Imperious Perfect should be in the first player's graveyard
 	And Tarfire should be in the second player's graveyard
+	
+@backend
+Scenario: Activated ability puts an item on the stack
+	Given the first player's battlefield is empty
+	And an Imperious Perfect is put on the first player's battlefield
+	And there is 1 mana in the first player's green mana pool
+	When I activate Imperious Perfect activated ability
+	Then the first player's battlefield should have 1 card in it
+	And the stack has 1 item on it

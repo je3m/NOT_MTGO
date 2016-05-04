@@ -29,6 +29,10 @@ public class Backend {
 	}
 
 	//Functions Used For Testing
+	public Stack<ItemOnStack> getStack(){
+		return this.stack;
+	}
+	
 	/**
 	 * Puts an item directly onto the stack
 	 * @param stackItem item to be put on the stack

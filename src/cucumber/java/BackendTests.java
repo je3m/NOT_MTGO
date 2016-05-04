@@ -120,4 +120,14 @@ public class BackendTests {
 	public void beast_should_have_damage(int damage) throws Throwable {
 	    assertEquals(beast.getDamage(), damage);
 	}
+	
+	@Then("^the first player's battlefield should have (\\d+) card in it$")
+	public void the_first_player_s_battlefield_should_have_card_in_it(int cards) throws Throwable {
+	    assertEquals(Zone.BATTLE_FIELD.getSize(), cards);
+	}
+	
+	@Then("^the stack has (\\d+) item on it$")
+	public void the_stack_has_item_on_it(int size) throws Throwable {
+	    assertEquals(bknd.getStack().size(),size);
+	}
 }

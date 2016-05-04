@@ -135,4 +135,5 @@ Jim
   -added ability and targetplayer to itemonstack
   -added health to players
   -added damage to cards
-  -Tarfire correctly resolves on both creatures and players
+  -Tarfire correctly resolves on both creatures and players as well as killing creatures
+  
