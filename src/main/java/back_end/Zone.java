@@ -86,6 +86,15 @@ public enum Zone {
 		return this.cards.size();
 	}
 
+	//TODO:Test this
+	/**
+	 * Gets the index of a card in the zone
+	 * @param c card in the zone
+	 * @return index of the card
+	 */
+	public int getIndex(Card c){
+		return cards.lastIndexOf(c);
+	}
 
 	/**
 	 * Removes the card at the given index from the zone
@@ -97,6 +106,15 @@ public enum Zone {
 		}
 		this.cards.remove(i);
 
+	}
+	
+	//TODO:Test this
+	/**
+	 * Removes a card from the zone
+	 * @param c Card to be removed
+	 */
+	public void remove(Card c) {
+		cards.remove(c);
 	}
 
 	/**

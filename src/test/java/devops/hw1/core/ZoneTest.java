@@ -11,6 +11,7 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import back_end.Card;
+import back_end.MTGDuelDecks;
 import back_end.Zone;
 
 public class ZoneTest {
@@ -234,5 +235,16 @@ public class ZoneTest {
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(e.getMessage(), "No object exists in the BATTLE_FIELD zone at index 10000");
 		}
+	}
+	
+	@Test
+	public void testRemoveCardFromZone(){
+		Zone.BATTLE_FIELD.empty();
+		Card c = new Card("Tarfire", "R", "R", "Instant- Goblin", "", new ArrayList<String>(), 0, 0, MTGDuelDecks.TARFIRE_PATH, true);
+		assertEquals(Zone.BATTLE_FIELD.getSize(), 0);
+		Zone.BATTLE_FIELD.addCard(c, 0);
+		assertEquals(Zone.BATTLE_FIELD.getSize(), 1);
+		Zone.BATTLE_FIELD.remove(c);
+		assertEquals(Zone.BATTLE_FIELD.getSize(), 0);
 	}
 }

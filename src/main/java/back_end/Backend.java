@@ -329,9 +329,15 @@ public class Backend {
 		if(this.priority == player) {
 			if (this.passed && !this.stack.empty()) {
 				ItemOnStack item = this.stack.pop();
+				
 				if(item.getTarget() != null) {
 					String[] splitEffect = item.getAbility().getEffect().split("-");
 					item.getTarget().addDamage(Integer.parseInt(splitEffect[1]));
+					if(item.getTarget().getDamage() >= item.getTarget().getToughness()){
+						Zone.getZoneFromString("BATTLE_FIELD", Zone.getPlayerFromZone(item.getTargetZone())).remove(item.getTarget());
+						Zone.getZoneFromString("GRAVEYARD", Zone.getPlayerFromZone(item.getTargetZone())).addCard(item.getTarget(),0);
+						item.getTarget().resetDamage();
+					}
 					Zone.getZoneFromString(item.getAbility().getResolveZone()).addCard(item.getCard(),0);
 				} else if (item.getTargetPlayer() != null) {
 					String[] splitEffect = item.getAbility().getEffect().split("-");
@@ -341,6 +347,7 @@ public class Backend {
 						Health.HEALTH1.remove(Integer.parseInt(splitEffect[1]));
 					}
 					Zone.getZoneFromString(item.getAbility().getResolveZone()).addCard(item.getCard(),0);
+				
 				} else {
 					if(item.getPlayer()){
 						Zone.BATTLE_FIELD.addCard(item.getCard(), 0);
