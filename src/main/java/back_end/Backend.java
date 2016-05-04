@@ -128,13 +128,13 @@ public class Backend {
 	 * @param abInd index of the card's ability
 	 * @param target the card being targeted by the ability
 	 */
-	public void activateAbility(Card c, Zone z, int i, int abInd, Card target) {
+	public void activateAbility(Card c, Zone z, int i, int abInd, Card target, Boolean targetPlayer) {
 		Ability a =	c.getAbilities()[abInd];
 		boolean player = Zone.getPlayerFromZone(z);
 
 		switch(a.getType()){
 		case CAST:
-			this.castSpell(z, c, i, a.getCost(), player, target, Zone.getZoneFromString(a.getResolveZone(), player));
+			this.castSpell(z, a, c, i, a.getCost(), player, target, targetPlayer, Zone.getZoneFromString(a.getResolveZone(), player));
 			break;
 
 		case PLAY:
@@ -461,17 +461,21 @@ public class Backend {
 		}
 		return cost;
 	}
+	
+	//TODO:more tests and improved checking for targeting
 	/**
 	 * Casts a spell, removing mana from the players mana pool accordingly
 	 * @param zone the zone the spell is being cast from
+	 * @param a the ability the spell is being cast with
 	 * @param c the spell being cast
 	 * @param index the index the spell is in
 	 * @param player the player that owns the spell
 	 * @param target the card being targeted
+	 * @param targetPlayer the player being targeted
 	 * @param targetZone the zone the targeted card is in
 	 * @return true if the spell is cast, false if not
 	 */
-	public boolean castSpell(Zone zone, Card c, int index, String cost, Boolean player, Card target, Zone targetZone) {
+	public boolean castSpell(Zone zone, Ability a, Card c, int index, String cost, Boolean player, Card target, Boolean targetPlayer, Zone targetZone) {
 
 		if(!c.isFlash() &&
 				((this.turn != player) || (!this.stack.isEmpty()) ||
@@ -512,7 +516,7 @@ public class Backend {
 			costs[5] = this.handleGeneric(ManaPool.getPool('r', player), costs[5]);
 			costs[5] = this.handleGeneric(ManaPool.getPool('g', player), costs[5]);
 
-			this.stack.push(new ItemOnStack(c, null, player, target, null, targetZone));
+			this.stack.push(new ItemOnStack(c, a, player, target, targetPlayer, targetZone));
 
 			zone.remove(index);
 			this.passed = false;
