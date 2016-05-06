@@ -1079,6 +1079,8 @@ public class BackendTest {
 		//		Backend.getInstance().setTurn(Backend.PLAYER_TWO);
 		Card mountainCard = new Card("mountain", "", "C", "Land", null, abilities, 0, 0, MTGDuelDecks.MOUNTAIN_PATH, false);
 		Zone.BATTLE_FIELD1.addCard(mountainCard, Zone.BATTLE_FIELD1.getSize());
+
+		Backend.getInstance().passPriority(true);
 		Backend.getInstance().activateAbility(mountainCard, Zone.BATTLE_FIELD1, 0, 0,null, null, null);
 		assertEquals(1, ManaPool.getPool('r', Backend.PLAYER_TWO).getAmount());
 	}
