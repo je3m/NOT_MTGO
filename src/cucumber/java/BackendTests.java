@@ -93,7 +93,13 @@ public class BackendTests {
 
 		this.bknd.addCard(Zone.HAND1, mountain, 0);
 
-		this.bknd.activateAbility(mountain, Zone.HAND1, 0, 0, null, true, Zone.BATTLE_FIELD1);
+		try{
+			this.bknd.activateAbility(mountain, Zone.HAND1, 0, 0, null, true, Zone.BATTLE_FIELD1);
+
+		} catch (Exception e){
+
+		}
+
 	}
 
 	@Then("^there is nothing in the second players battlefield$")
