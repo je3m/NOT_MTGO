@@ -642,10 +642,11 @@ public class BackendTest {
 
 		Card c = new Card("Imperious Perfect", null, "G", "Creature- Elf Warrior", null, abilities, 2, 2, MTGDuelDecks.FOREST_PATH, false);
 
-		Backend bk = Backend.getInstance();
+		Backend bk = new Backend();
 		this.resetGame();
 		ManaPool.GREEN1.add(1);
 		bk.addCard(Zone.BATTLE_FIELD, c, 0);
+
 		bk.activateAbility(c, Zone.BATTLE_FIELD, 0, 0,null, null, null);
 
 		bk.passPriority(Backend.PLAYER_ONE);
