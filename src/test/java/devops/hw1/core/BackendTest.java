@@ -1116,10 +1116,11 @@ public class BackendTest {
 		Backend.addCard(Zone.HAND1, skirkProspector);
 
 
-		for (int i = 0; i < 24; i++)
+		for (int i = 0; i < 23; i++)
 			Backend.getInstance().passPriority(((i % 2) ==0)?(true):(false));
 
 		ManaPool.RED2.add(1);
+
 		Backend.getInstance().activateAbility(skirkProspector, Zone.HAND1, 0, 0,null, null,null);
 
 		Backend.getInstance().passPriority(false);
