@@ -69,3 +69,9 @@ Scenario: Activated ability resolves correctly
 	When priority is passed twice
 	Then the stack has 0 item on it
 	And the first player's battlefield should have 2 card in it
+	
+@backend
+Scenario: Playing lands at the right time
+	Given there is a new backend
+	When I play a mountain
+	Then there is nothing in the second players battlefield
