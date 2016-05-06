@@ -152,6 +152,22 @@ public class BackendTests {
 		assertEquals(Zone.BATTLE_FIELD.getSize(), cards);
 	}
 
+	@When("^I play a forest$")
+	public void i_play_a_forest() throws Throwable {
+		Card forest = new Card("Forest", "", "", "Basic Land- Forest", "T:G",
+				new ArrayList<String>(), 0, 0, "res/Forest.jpg", false);
+		forest.addAbility("TYPE {PLAY} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Play}");
+
+		this.bknd.addCard(Zone.HAND, forest, 0);
+
+		try{
+			this.bknd.activateAbility(forest, Zone.HAND, 0, 0, null, true, Zone.BATTLE_FIELD);
+
+		} catch (Exception e){
+
+		}
+	}
+
 	@Then("^the stack has (\\d+) item on it$")
 	public void the_stack_has_item_on_it(int size) throws Throwable {
 		assertEquals(this.bknd.getStack().size(),size);

@@ -75,3 +75,11 @@ Scenario: Playing lands at the right time
 	Given there is a new backend
 	When I play a mountain
 	Then there is nothing in the second players battlefield
+	
+@backend
+Scenario: Playing forest at the right time
+	Given there is a new backend
+	And it is the second player's turn
+	And the first player's battlefield is empty
+	When I play a forest
+	Then the first player's battlefield should have 0 card in it
