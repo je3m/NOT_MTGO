@@ -145,6 +145,9 @@ public class Backend {
 	public void activateAbility(Card c, Zone z, int i, int abInd, Card target, Boolean targetPlayer, Zone targetZone) {
 		Ability a =	c.getAbilities()[abInd];
 
+		if(this.priority != Zone.getPlayerFromZone(z))
+			throw new RuntimeException("You do not have priority");
+
 		if((a.getType() != AbilityType.MANA)&& (!c.isFlash() &&
 				((this.turn != Zone.getPlayerFromZone(z)) || (!this.stack.isEmpty()) ||
 						((this.phase != Phase.FIRST_MAIN1) && (this.phase != Phase.SECOND_MAIN1) &&
