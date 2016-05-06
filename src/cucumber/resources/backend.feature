@@ -83,3 +83,11 @@ Scenario: Playing forest at the right time
 	And the first player's battlefield is empty
 	When I play a forest
 	Then the first player's battlefield should have 0 card in it
+	
+@backend
+Scenario: Playing one land per turn
+	Given there is a new backend
+	And the first player's battlefield is empty
+	And I play a forest
+	When I play a forest
+	Then the first player's battlefield should have 1 card in it

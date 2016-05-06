@@ -149,7 +149,7 @@ public class BackendTests {
 
 	@Then("^the first player's battlefield should have (\\d+) card in it$")
 	public void the_first_player_s_battlefield_should_have_card_in_it(int cards) throws Throwable {
-		assertEquals(Zone.BATTLE_FIELD.getSize(), cards);
+		assertEquals(cards, Zone.BATTLE_FIELD.getSize());
 	}
 
 	@When("^I play a forest$")
