@@ -138,3 +138,9 @@ Jim
   -added damage to cards
   -Tarfire correctly resolves on both creatures and players as well as killing creatures
   -Activated abilities use the stack
+
+  Jim
+  -added cucumber tests for playing lands at the correct
+  -removed multiple calls and tests to castspell (we now use abilities for everything)
+  -asserted priority on every action in the game
+  
