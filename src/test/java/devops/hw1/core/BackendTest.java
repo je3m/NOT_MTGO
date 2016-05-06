@@ -2917,7 +2917,7 @@ public class BackendTest {
 			Backend.handleCardClicked(Zone.HAND, 1, c);
 			fail("Expected IndexOutOfBoundsException");
 		} catch(IndexOutOfBoundsException e){
-			assertTrue(e.getMessage().equals("Card clicked could not remove card: No object exists in the HAND zone at index 1"));
+			assertEquals("Card clicked could not remove card: No object exists in the HAND zone at index 1", e.getMessage());
 		}
 	}
 
