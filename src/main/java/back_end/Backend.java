@@ -18,6 +18,8 @@ public class Backend {
 	private boolean turn;
 	private boolean priority;
 	private boolean passed;
+	private boolean landPlayed;
+
 	private Stack<ItemOnStack> stack;
 	public static Backend bk;
 
@@ -59,6 +61,7 @@ public class Backend {
 	 */
 	public void setTurn(boolean t){
 		this.turn = t;
+		this.landPlayed = false;
 	}
 
 	/**
@@ -88,6 +91,7 @@ public class Backend {
 		this.priority = true;
 		this.passed = false;
 		this.stack = new Stack<ItemOnStack>();
+		this.landPlayed = false;
 	}
 
 	/**
@@ -159,6 +163,10 @@ public class Backend {
 			break;
 
 		case PLAY:
+			if (this.landPlayed)
+				throw new RuntimeException("Can only play one land per turn");
+
+			this.landPlayed = true;
 			Zone res = Zone.getZoneFromString(a.getResolveZone(), player);
 			Zone.getZoneFromString(a.getZone(), player).remove(i);
 			res.addCard(c, res.getSize());
@@ -303,8 +311,10 @@ public class Backend {
 	public void changePhase() {
 		ManaPool.emptyMana();
 
-		if((this.phase == Phase.CLEANUP1) || (this.phase == Phase.CLEANUP2))
+		if((this.phase == Phase.CLEANUP1) || (this.phase == Phase.CLEANUP2)){
 			this.turn = !this.turn;
+			this.landPlayed = false;
+		}
 
 		this.phase = Phase.values()[(((this.phase.ordinal() + 1) % (Phase.CLEANUP2.ordinal() + 1)))];
 
