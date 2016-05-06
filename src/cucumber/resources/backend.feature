@@ -91,3 +91,11 @@ Scenario: Playing one land per turn
 	And I play a forest
 	When I play a forest
 	Then the first player's battlefield should have 1 card in it
+	
+@backend
+Scenario: Playing land no priority
+	Given there is a new backend
+	And the first player's battlefield is empty
+	And the second player has priority
+	When I play a forest
+	Then the first player's battlefield should have 0 card in it
