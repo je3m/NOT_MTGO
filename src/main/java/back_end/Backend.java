@@ -36,15 +36,15 @@ public class Backend {
 	public Stack<ItemOnStack> getStack(){
 		return this.stack;
 	}
-	
+
 	/**
 	 * Puts an item directly onto the stack
 	 * @param stackItem item to be put on the stack
 	 */
 	public void putItemOnStack(ItemOnStack stackItem){
-		stack.push(stackItem);
+		this.stack.push(stackItem);
 	}
-	
+
 	/**
 	 * Sets the current phase
 	 * @param p phase to be set to
@@ -126,7 +126,7 @@ public class Backend {
 		}
 	}
 
-	
+
 
 	/**
 	 * temporary fix to different ways to call activate ability
@@ -140,6 +140,17 @@ public class Backend {
 	 */
 	public void activateAbility(Card c, Zone z, int i, int abInd, Card target, Boolean targetPlayer, Zone targetZone) {
 		Ability a =	c.getAbilities()[abInd];
+
+		if(!c.isFlash() &&
+				((this.turn != Zone.getPlayerFromZone(z)) || (!this.stack.isEmpty()) ||
+						((this.phase != Phase.FIRST_MAIN1) && (this.phase != Phase.SECOND_MAIN1) &&
+								(this.phase != Phase.FIRST_MAIN2) && (this.phase != Phase.SECOND_MAIN2)))){
+			throw new RuntimeException("cannot cast spell at this time");
+		}
+		if((target != null) && !canTarget(c, z, target, targetZone)) {
+			throw new RuntimeException("invalid target");
+		}
+
 		boolean player = Zone.getPlayerFromZone(z);
 
 		switch(a.getType()){
@@ -158,7 +169,7 @@ public class Backend {
 			this.activateManaAbility(c, player);
 			break;
 		case ACTIVATED:
-			if(payAbilityCost(a.getCost(), player, c)){
+			if(this.payAbilityCost(a.getCost(), player, c)){
 				this.stack.push(new ItemOnStack(c,a,player,target,targetPlayer, targetZone));
 				this.passed = false;
 			}
@@ -205,14 +216,14 @@ public class Backend {
 								+ ManaPool.getPool('g', player).getAmount() + ManaPool.getPool('c', player).getAmount())))){
 					return false;
 				}
-			}	
+			}
 		}
 		for(int i = 0; i < costSplit.length; i++){
 			if(costSplit[i].equals("TAP")){
 				c.tap();
 			} else {
 				int[] costs = this.parseCost(cost);
-				
+
 				ManaPool.getPool('w', player).remove(costs[0]);
 				ManaPool.getPool('u', player).remove(costs[1]);
 				ManaPool.getPool('b', player).remove(costs[2]);
@@ -339,7 +350,7 @@ public class Backend {
 		if(this.priority == player) {
 			if (this.passed && !this.stack.empty()) {
 				ItemOnStack item = this.stack.pop();
-				
+
 				if(item.getTarget() != null) {
 					String[] splitEffect = item.getAbility().getEffect().split("-");
 					item.getTarget().addDamage(Integer.parseInt(splitEffect[1]));
@@ -357,9 +368,9 @@ public class Backend {
 						Health.HEALTH1.remove(Integer.parseInt(splitEffect[1]));
 					}
 					Zone.getZoneFromString(item.getAbility().getResolveZone()).addCard(item.getCard(),0);
-				
+
 				} else {
-					if(item.getAbility().getEffect() != null && item.getAbility().getEffect().equals("ELF_TOKEN")){
+					if((item.getAbility().getEffect() != null) && item.getAbility().getEffect().equals("ELF_TOKEN")){
 						ArrayList<String> abilities = new ArrayList<String>();
 						Card token = new Card("Elf Warrior", "", "G", "Creature- Elf Warrior", null, abilities, 1, 1, MTGDuelDecks.ELF_WARRIOR_TOKEN_PATH, false);
 						if(item.getPlayer()){
@@ -489,7 +500,7 @@ public class Backend {
 		}
 		return cost;
 	}
-	
+
 	//TODO:more tests and improved checking for targeting
 	/**
 	 * Casts a spell, removing mana from the players mana pool accordingly
