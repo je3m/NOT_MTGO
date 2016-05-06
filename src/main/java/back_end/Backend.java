@@ -526,12 +526,6 @@ public class Backend {
 	 */
 	public boolean castSpell(Zone zone, Ability a, Card c, int index, String cost, Boolean player, Card target, Boolean targetPlayer, Zone targetZone) {
 
-		if(!c.isFlash() &&
-				((this.turn != player) || (!this.stack.isEmpty()) ||
-						((this.phase != Phase.FIRST_MAIN1) && (this.phase != Phase.SECOND_MAIN1) &&
-								(this.phase != Phase.FIRST_MAIN2) && (this.phase != Phase.SECOND_MAIN2)))){
-			return false;
-		}
 		if((target != null) && !canTarget(c, zone, target, targetZone)) {
 			return false;
 		}
