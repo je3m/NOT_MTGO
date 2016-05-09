@@ -31,7 +31,7 @@ public class RandomTester {
 		        text[i] = (char)r.nextInt((int)(Math.pow(2,7)-1));
 		    }
 		    return new String(text);
-		} else if (type == Boolean.class) {
+		} else if (type == Boolean.class || type == boolean.class) {
 			if(r.nextInt(2) == 0){
 				return true;
 			} else {
@@ -161,7 +161,7 @@ public class RandomTester {
 			try {
 				System.out.println("Return: " + method.invoke(instanceClass, params));
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 		
@@ -173,6 +173,6 @@ public class RandomTester {
 	 * @param args - arg[0] is the name of the class. arg[1] is how many methods to randomly call.
 	 */
 	public static void main(String[] args) throws NumberFormatException, ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		testClass("back_end.Backend",10);
+		testClass("back_end.ItemOnStack",100);
 	}
 }

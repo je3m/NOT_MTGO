@@ -1386,6 +1386,13 @@ public class BackendTest {
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(e.getMessage(), "Backend: Index 10000 is not valid for the HAND zone");
 		}
+		
+		try {
+			bknd.addCard(Zone.HAND, c2, -1);
+			fail("Expected IndexOutOfBoundsException");
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(e.getMessage(), "Backend: Index -1 is not valid for the HAND zone");
+		}
 	}
 
 
