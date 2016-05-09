@@ -1402,6 +1402,18 @@ public class BackendTest {
 	}
 
 	@Test
+	public void testRemoveCardOutOfBounds1() {
+		Backend bknd = new Backend();
+
+		try {
+			bknd.removeCard(Zone.HAND, -1);
+			fail("Expected IndexOutOfBoundsException");
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(e.getMessage(), "Backend: No object exists in the HAND zone at index -1");
+		}
+	}
+	
+	@Test
 	public void testGetContentsFromMultipleZones(){
 		Backend bknd = new Backend();
 		Card c = new Card("Storm crow", "", "", "Creature- Bird", "",
