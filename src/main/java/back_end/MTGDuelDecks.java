@@ -136,6 +136,7 @@ public class MTGDuelDecks {
 		Frame.setVisible(true);
 		Frame.setTitle("MTG Duel Decks");
 		Frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		System.out.println(Frame.getContentPane().getWidth());
 		final MTGComponent MTGComp = new MTGComponent(Frame.getContentPane().getWidth(), Frame.getContentPane().getHeight(), bkd);
 		Frame.add(MTGComp);
 		Frame.addComponentListener(new ComponentAdapter() {
