@@ -55,4 +55,24 @@ public class ItemOnStackCardAbilityIntegration {
 		assertTrue(item.getCard().getImage().equals(MTGDuelDecks.LLANOWAR_ELVES_PATH));
 	}
 
+	@Test
+	public void integrateAll(){
+		Card hand3 = new Card("Arbor Elf", "G", "G", "Creature- Elf Druid", "T:G",
+				new ArrayList<String>(), 1, 1, MTGDuelDecks.LLANOWAR_ELVES_PATH, false);
+
+		hand3.addAbility("TYPE {CAST} COST {G} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Cast}");
+
+		ItemOnStack item = new ItemOnStack(hand3, new Ability("TYPE {CAST} COST {G} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Cast}"), true, null, true, null);
+
+		assertEquals(AbilityType.CAST, item.getCard().getAbilities()[0].getType());
+
+		assertEquals("G", item.getCard().getAbilities()[0].getCost());
+
+		assertEquals("HAND", item.getCard().getAbilities()[0].getZone());
+
+		assertEquals("BATTLE_FIELD", item.getCard().getAbilities()[0].getResolveZone());
+
+		assertEquals("CAST", item.getCard().getAbilities()[0].getText());
+
+	}
 }
