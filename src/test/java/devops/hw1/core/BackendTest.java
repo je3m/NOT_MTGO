@@ -1386,6 +1386,13 @@ public class BackendTest {
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(e.getMessage(), "Backend: Index 10000 is not valid for the HAND zone");
 		}
+		
+		try {
+			bknd.addCard(Zone.HAND, c2, -1);
+			fail("Expected IndexOutOfBoundsException");
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(e.getMessage(), "Backend: Index -1 is not valid for the HAND zone");
+		}
 	}
 
 
@@ -1401,6 +1408,18 @@ public class BackendTest {
 		}
 	}
 
+	@Test
+	public void testRemoveCardOutOfBounds1() {
+		Backend bknd = new Backend();
+
+		try {
+			bknd.removeCard(Zone.HAND, -1);
+			fail("Expected IndexOutOfBoundsException");
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(e.getMessage(), "Backend: No object exists in the HAND zone at index -1");
+		}
+	}
+	
 	@Test
 	public void testGetContentsFromMultipleZones(){
 		Backend bknd = new Backend();

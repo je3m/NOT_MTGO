@@ -471,6 +471,7 @@ public class Backend {
 		}
 	}
 
+	//TODO: improve input checking
 	/**
 	 * Parses a cost string and returns an array of costs
 	 * @param s String of cost
