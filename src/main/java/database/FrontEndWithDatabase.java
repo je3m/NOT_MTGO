@@ -1,8 +1,10 @@
 package database;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,7 +19,7 @@ import javax.swing.ListSelectionModel;
 
 
 public class FrontEndWithDatabase {
-	public static void main(String[] args){
+	public static void main(String[] args) throws SQLException{
 		int width = 1000;
 		int height = 1000;
 		Dimension buttonDimension = new Dimension((int)(width*.2),25);
@@ -31,9 +33,12 @@ public class FrontEndWithDatabase {
 		Frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		JPanel initialScreen = new JPanel();
-		initialScreen.setMaximumSize(new Dimension(width, height));
-		initialScreen.setLayout(new FlowLayout());
+		initialScreen.setPreferredSize(new Dimension(width, height));
 
+		JPanel loginPanel = new JPanel();
+		initialScreen.setMaximumSize(new Dimension(width, height));
+		loginPanel.setMaximumSize(new Dimension((int)(width*0.5), (int)(height*0.8)));
+		
 		JPanel deckBuilder = createDeckBuilder(width, height, buttonDimension, initialScreen, Frame, "Card List", "Deck");
 
 		JPanel collectionBuilder = createDeckBuilder(width, height, buttonDimension, initialScreen, Frame, "Card List", "Collection");
@@ -75,30 +80,141 @@ public class FrontEndWithDatabase {
 				Frame.repaint();
 			}
 		});
+		
+		JButton logOut = new JButton("Log Out");
+		logOut.setPreferredSize(bigButtonDimension);
+		logOut.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Frame.remove(initialScreen);
+				Frame.add(loginPanel);
+				Frame.revalidate();
+				Frame.repaint();
+			}
+		});
+		
+		JLabel deck1 = new JLabel("Deck 1");
+		deck1.setHorizontalAlignment(JLabel.CENTER);
+		deck1.setPreferredSize(new Dimension((int)(width*0.3),(int)(height*.04)));
+		
+		String[] decks1 = {"lol1","redDeck","bazaartrader"};
+		
+		String[] decks2 = {"lol1","redDeck","bazaartrader"};
+		
+		JList<String> deck1List = new JList<String>(decks1);
+		deck1List.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		deck1List.setLayoutOrientation(JList.VERTICAL);
+		deck1List.setVisibleRowCount(-1);
+		
+		JScrollPane deck1listScroller = new JScrollPane(deck1List);
+		deck1listScroller.setPreferredSize(new Dimension((int)(width*.2),(int)(height*.1)));
+		
+		JLabel deck2 = new JLabel("Deck 2");
+		deck2.setHorizontalAlignment(JLabel.CENTER);
+		deck2.setPreferredSize(new Dimension((int)(width*0.25),(int)(height*.04)));
+		
+		JList<String> deck2List = new JList<String>(decks2);
+		deck2List.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		deck2List.setLayoutOrientation(JList.VERTICAL);
+		deck2List.setVisibleRowCount(-1);
+		
+		JScrollPane deck2listScroller = new JScrollPane(deck2List);
+		deck2listScroller.setPreferredSize(new Dimension((int)(width*.2),(int)(height*.1)));
+		
+		JButton playGame = new JButton("Play Game");
+		playGame.setPreferredSize(bigButtonDimension);
+		playGame.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String selected = deck1List.getSelectedValue();
+				String selected1 = deck2List.getSelectedValue();
+				System.out.println("Play game with " + selected + " against " + selected1);
+			}
+		});
 
 		initialScreen.add(goToDB);
 		initialScreen.add(goToCB);
 		initialScreen.add(goToCDB);
+		initialScreen.add(logOut);
+		
+		initialScreen.add(deck1);
+		initialScreen.add(deck1listScroller);
+		initialScreen.add(deck2);
+		initialScreen.add(deck2listScroller);
+		initialScreen.add(playGame);
+		
+		JLabel unLabel = new JLabel("Username");
+		unLabel.setHorizontalAlignment(JLabel.CENTER);
+		unLabel.setPreferredSize(new Dimension((int)(width*0.1),(int)(height*.04)));
+		
+		JTextField userName = new JTextField();
+		userName.setPreferredSize(new Dimension((int)(width*.15),25));
+		
+		JLabel pwLabel = new JLabel("Password");
+		pwLabel.setHorizontalAlignment(JLabel.CENTER);
+		pwLabel.setPreferredSize(new Dimension((int)(width*0.1),(int)(height*.04)));
+		
+		JTextField password = new JTextField();
+		password.setPreferredSize(new Dimension((int)(width*.15),25));
 
-		Frame.add(initialScreen);
+		JButton login = new JButton("Login");
+		login.setPreferredSize(buttonDimension);
+		login.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String selected = userName.getText();
+				String selected1 = password.getText();
+				System.out.println("Login: Username - " + selected + " Password - " + selected1);
+				Frame.remove(loginPanel);
+				Frame.add(initialScreen);
+				Frame.revalidate();
+				Frame.repaint();
+			}
+		});
+		
+		JButton register = new JButton("Register");
+		register.setPreferredSize(buttonDimension);
+		register.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String selected = userName.getText();
+				String selected1 = password.getText();
+				System.out.println("Register: Username - " + selected + " Password - " + selected1);
+			}
+		});
+		
+		loginPanel.add(unLabel);
+		loginPanel.add(userName);
+		loginPanel.add(pwLabel);
+		loginPanel.add(password);
+		loginPanel.add(login);
+		loginPanel.add(register);
+
+		Frame.add(loginPanel,BorderLayout.CENTER);
 
 		Frame.revalidate();
 		Frame.repaint();
 	}
 
-	public static JPanel createDeckBuilder(int width, int height, Dimension buttonDimension, JPanel initialScreen, JFrame Frame, String text1, String text2){
+	public static JPanel createDeckBuilder(int width, int height, Dimension buttonDimension, JPanel initialScreen, JFrame Frame, String text1, String text2) throws SQLException{
 		JPanel deckBuilder = new JPanel();
 		deckBuilder.setLayout(new FlowLayout());
 
 		int strLength = 1000;
 		String[] str = new String[strLength];
-		String[] lol = SQLDatabaseConnection.getCollectionCardNames("jim");
-
-		for(int i = 0; i< strLength; i++){
-			if(i < lol.length)
-				str[i] = lol[i];
-			else
-				str[i] = "" + i;
+		//String[] lol = SQLDatabaseConnection.getCollectionCardNames("jim");
+		String[] lol = str;
+		
+		if(text1.equals("Card List")){
+			str = SQLDatabaseConnection.getCardList();
+		} else {
+		
+			for(int i = 0; i< strLength; i++){
+				if(i < lol.length)
+					str[i] = lol[i];
+				else
+					str[i] = "" + i;
+			}
 		}
 
 		int strLength1 = 1000;
@@ -122,12 +238,34 @@ public class FrontEndWithDatabase {
 
 		JLabel label1 = new JLabel(text1);
 		label1.setHorizontalAlignment(JLabel.CENTER);
-		label1.setPreferredSize(new Dimension((int)(width*0.5),(int)(height*.04)));
+		label1.setPreferredSize(new Dimension((int)(width*0.35),(int)(height*.04)));
 
+		String[] leftDropText = {"lol1","redDeck","bazaartrader"};
+		
+		JComboBox<String> dropDownLeft = new JComboBox<String>(leftDropText);
+		dropDownLeft.setPreferredSize(new Dimension((int)(width*.15),25));
+		dropDownLeft.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(dropDownLeft.getSelectedItem());
+			}
+		});
+		
+		String[] rightDropText  = {"lol1","redDeck","bazaartrader"};
+		
 		JLabel label2 = new JLabel(text2);
 		label2.setHorizontalAlignment(JLabel.CENTER);
-		label2.setPreferredSize(new Dimension((int)(width*0.5),(int)(height*.04)));
+		label2.setPreferredSize(new Dimension((int)(width*0.35),(int)(height*.04)));
 
+		JComboBox<String> dropDownRight = new JComboBox<String>(rightDropText);
+		dropDownRight.setPreferredSize(new Dimension((int)(width*.15),25));
+		dropDownRight.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(dropDownRight.getSelectedItem());
+			}
+		});
+		
 		JScrollPane listScroller = new JScrollPane(jlist);
 		listScroller.setPreferredSize(new Dimension((int)(width*.5),(int)(height*.8)));
 		JScrollPane listScroller1 = new JScrollPane(jlist1);
@@ -181,6 +319,19 @@ public class FrontEndWithDatabase {
 				System.out.println(selected);
 			}
 		});
+		
+		JTextField newDeckName = new JTextField();
+		newDeckName.setPreferredSize(new Dimension((int)(width*.15),25));
+		
+		JButton newDeck = new JButton("Create new " + text2);
+		newDeck.setPreferredSize(buttonDimension);
+		newDeck.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String selected = newDeckName.getText();
+				System.out.println(selected);
+			}
+		});
 
 		JButton mainMenu = new JButton("Return to Main Menu");
 		mainMenu.setPreferredSize(buttonDimension);
@@ -199,10 +350,14 @@ public class FrontEndWithDatabase {
 		buttonPanel.add(search);
 		buttonPanel.add(add);
 		buttonPanel.add(remove);
+		buttonPanel.add(newDeckName);
+		buttonPanel.add(newDeck);
 		buttonPanel.add(mainMenu);
 
 		labelPanel.add(label1);
+		labelPanel.add(dropDownLeft);
 		labelPanel.add(label2);
+		labelPanel.add(dropDownRight);
 
 		deckBuilder.add(labelPanel);
 		deckBuilder.add(listScroller);
