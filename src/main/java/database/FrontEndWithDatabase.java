@@ -2,10 +2,12 @@ package database;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -31,13 +33,13 @@ public class FrontEndWithDatabase {
 		Frame.setTitle("MTG Deck Maker");
 		Frame.setBounds(0, 0, width, height);
 		Frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		Frame.setLayout(new FlowLayout());
 
 		JPanel initialScreen = new JPanel();
 		initialScreen.setPreferredSize(new Dimension(width, height));
 
 		JPanel loginPanel = new JPanel();
-		initialScreen.setMaximumSize(new Dimension(width, height));
-		loginPanel.setMaximumSize(new Dimension((int)(width*0.5), (int)(height*0.8)));
+		loginPanel.setPreferredSize(new Dimension((int)(width*0.3), (int)(height*0.8)));
 		
 		JPanel deckBuilder = createDeckBuilder(width, height, buttonDimension, initialScreen, Frame, "Card List", "Deck");
 
@@ -93,13 +95,13 @@ public class FrontEndWithDatabase {
 			}
 		});
 		
-		JLabel deck1 = new JLabel("Deck 1");
-		deck1.setHorizontalAlignment(JLabel.CENTER);
-		deck1.setPreferredSize(new Dimension((int)(width*0.3),(int)(height*.04)));
-		
 		String[] decks1 = {"lol1","redDeck","bazaartrader"};
 		
 		String[] decks2 = {"lol1","redDeck","bazaartrader"};
+		
+		JLabel deck1 = new JLabel("Deck 1");
+		deck1.setHorizontalAlignment(JLabel.CENTER);
+		deck1.setPreferredSize(new Dimension((int)(width*0.2),(int)(height*.04)));
 		
 		JList<String> deck1List = new JList<String>(decks1);
 		deck1List.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -111,7 +113,7 @@ public class FrontEndWithDatabase {
 		
 		JLabel deck2 = new JLabel("Deck 2");
 		deck2.setHorizontalAlignment(JLabel.CENTER);
-		deck2.setPreferredSize(new Dimension((int)(width*0.25),(int)(height*.04)));
+		deck2.setPreferredSize(new Dimension((int)(width*0.2),(int)(height*.04)));
 		
 		JList<String> deck2List = new JList<String>(decks2);
 		deck2List.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -198,6 +200,7 @@ public class FrontEndWithDatabase {
 
 	public static JPanel createDeckBuilder(int width, int height, Dimension buttonDimension, JPanel initialScreen, JFrame Frame, String text1, String text2) throws SQLException{
 		JPanel deckBuilder = new JPanel();
+		deckBuilder.setPreferredSize(new Dimension((int)(width*1.1), height));
 		deckBuilder.setLayout(new FlowLayout());
 
 		int strLength = 1000;
@@ -206,7 +209,7 @@ public class FrontEndWithDatabase {
 		String[] lol = str;
 		
 		if(text1.equals("Card List")){
-			str = SQLDatabaseConnection.getCardList();
+			//str = SQLDatabaseConnection.getCardList();
 		} else {
 		
 			for(int i = 0; i< strLength; i++){
@@ -342,6 +345,7 @@ public class FrontEndWithDatabase {
 				Frame.add(initialScreen);
 				Frame.revalidate();
 				Frame.repaint();
+				Frame.setLayout(new FlowLayout());
 			}
 		});
 
