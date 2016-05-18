@@ -123,34 +123,79 @@ public class FrontEndWithDatabase {
 		Frame.repaint();
 	}
 
-	public JPanel createDeckBuilder(Connection connection, int width, int height, Dimension buttonDimension, JPanel initialScreen, JFrame Frame, String text1, String text2) throws SQLException{
+	public JPanel createDeckBuilder(Connection connection, int width, int height, Dimension buttonDimension, JPanel initialScreen, JFrame Frame, String text1, String text2, String username, String password) throws SQLException{
+		String[] str;
+		String[] str1;
+		String[] lol = {"str"};
+		
 		JPanel deckBuilder = new JPanel();
 		deckBuilder.setPreferredSize(new Dimension((int)(width*1.1), height));
 		deckBuilder.setLayout(new FlowLayout());
 
-		int strLength = 1000;
-		String[] str = new String[strLength];
-		//String[] lol = SQLDatabaseConnection.getCollectionCardNames("jim");
-		String[] lol = {"swag","swag"};
+		JPanel labelPanel = new JPanel();
+		labelPanel.setPreferredSize(new Dimension((int)(width*1.5),(int)(height*.05)));
+
+		JLabel label1 = new JLabel(text1);
+		label1.setHorizontalAlignment(JLabel.CENTER);
+		label1.setPreferredSize(new Dimension((int)(width*0.35),(int)(height*.04)));
+
+		String[] leftDropText;
 		
+		if(text1.equals("Card List")){
+			leftDropText = new String[0];
+		} else {
+			leftDropText = SQLDatabaseConnection.getDeckNames(connection, username, password);
+		}
+		
+		JComboBox<String> dropDownLeft = new JComboBox<String>(leftDropText);
+		dropDownLeft.setPreferredSize(new Dimension((int)(width*.15),25));
+		
+		String[] rightDropText;
+		
+		if(text2.equals("Deck")){
+			rightDropText = SQLDatabaseConnection.getDeckNames(connection, username, password);
+		} else {
+			rightDropText = SQLDatabaseConnection.getDeckNames(connection, username, password);
+		}
+		
+		JLabel label2 = new JLabel(text2);
+		label2.setHorizontalAlignment(JLabel.CENTER);
+		label2.setPreferredSize(new Dimension((int)(width*0.35),(int)(height*.04)));
+
+		JComboBox<String> dropDownRight = new JComboBox<String>(rightDropText);
+		dropDownRight.setPreferredSize(new Dimension((int)(width*.15),25));
 		
 		if(text1.equals("Card List")){
 			str = SQLDatabaseConnection.getCardList(connection);
 		} else {
-		
-			for(int i = 0; i< strLength; i++){
-				if(i < lol.length)
-					str[i] = lol[i];
-				else
-					str[i] = "" + i;
-			}
+			str = lol;
 		}
 
-		int strLength1 = 1000;
-		String[] str1 = new String[strLength1];
-		for(int i = 0; i< strLength1; i++){
-			str1[i] = "1" + i;
+		if(text2.equals("Card List")){
+			str1 = SQLDatabaseConnection.getCardList(connection);
+		} else if (text2.equals("Deck")){
+			str1 = SQLDatabaseConnection.getCardsinDeck(connection, username, password,dropDownRight.getSelectedItem().toString());
+		} else {
+			str1 = lol;
 		}
+		
+		dropDownLeft.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				str[0] = "lol";
+				System.out.println(dropDownLeft.getSelectedItem());
+			}
+		});
+		dropDownRight.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					str = SQLDatabaseConnection.getCardsinDeck(connection, username, password,dropDownRight.getSelectedItem().toString());
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				};
+			}
+		});
 
 		JList<String> jlist = new JList<String>(str);
 		jlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -161,39 +206,6 @@ public class FrontEndWithDatabase {
 		jlist1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		jlist1.setLayoutOrientation(JList.VERTICAL);
 		jlist1.setVisibleRowCount(-1);
-
-		JPanel labelPanel = new JPanel();
-		labelPanel.setPreferredSize(new Dimension((int)(width*1.5),(int)(height*.05)));
-
-		JLabel label1 = new JLabel(text1);
-		label1.setHorizontalAlignment(JLabel.CENTER);
-		label1.setPreferredSize(new Dimension((int)(width*0.35),(int)(height*.04)));
-
-		String[] leftDropText = {"lol1","redDeck","bazaartrader"};
-		
-		JComboBox<String> dropDownLeft = new JComboBox<String>(leftDropText);
-		dropDownLeft.setPreferredSize(new Dimension((int)(width*.15),25));
-		dropDownLeft.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println(dropDownLeft.getSelectedItem());
-			}
-		});
-		
-		String[] rightDropText  = {"lol1","redDeck","bazaartrader"};
-		
-		JLabel label2 = new JLabel(text2);
-		label2.setHorizontalAlignment(JLabel.CENTER);
-		label2.setPreferredSize(new Dimension((int)(width*0.35),(int)(height*.04)));
-
-		JComboBox<String> dropDownRight = new JComboBox<String>(rightDropText);
-		dropDownRight.setPreferredSize(new Dimension((int)(width*.15),25));
-		dropDownRight.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println(dropDownRight.getSelectedItem());
-			}
-		});
 		
 		JScrollPane listScroller = new JScrollPane(jlist);
 		listScroller.setPreferredSize(new Dimension((int)(width*.5),(int)(height*.8)));
@@ -310,7 +322,7 @@ public class FrontEndWithDatabase {
 			public void actionPerformed(ActionEvent e) {
 				Frame.remove(initialScreen);
 				try {
-					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, initialScreen, Frame, "Card List", "Deck"));
+					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, initialScreen, Frame, "Card List", "Deck", username, password));
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -326,7 +338,7 @@ public class FrontEndWithDatabase {
 			public void actionPerformed(ActionEvent e) {
 				Frame.remove(initialScreen);
 				try {
-					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, initialScreen, Frame, "Card List", "Collection"));
+					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, initialScreen, Frame, "Card List", "Collection",  username, password));
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -342,7 +354,7 @@ public class FrontEndWithDatabase {
 			public void actionPerformed(ActionEvent e) {
 				Frame.remove(initialScreen);
 				try {
-					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, initialScreen, Frame, "Collection", "Deck"));
+					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, initialScreen, Frame, "Collection", "Deck",  username, password));
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -363,9 +375,9 @@ public class FrontEndWithDatabase {
 			}
 		});
 		
-		String[] decks1 = {"lol1","redDeck","bazaartrader"};
+		String[] decks1 = SQLDatabaseConnection.getDeckNames(connection, username, password);
 		
-		String[] decks2 = {"lol1","redDeck","bazaartrader"};
+		String[] decks2 = SQLDatabaseConnection.getDeckNames(connection, username, password);
 		
 		JLabel deck1 = new JLabel("Deck 1");
 		deck1.setHorizontalAlignment(JLabel.CENTER);
