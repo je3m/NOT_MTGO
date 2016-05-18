@@ -1,7 +1,6 @@
 package database;
 // Use the JDBC driver
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +10,24 @@ import java.util.ArrayList;
 
 public class SQLDatabaseConnection {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
+		String connectionString =
+				"jdbc:sqlserver://titan.csse.rose-hulman.edu;"
+						+ "database=!MTGO;"
+						+ "user=malinocr;"
+						+ "password=#blue1baby1;"
+						+ "encrypt=true;"
+						+ "trustServerCertificate=true;"
+						+ "hostNameInCertificate=*.database.windows.net;"
+						+ "loginTimeout=30;";
+
+		// Declare the JDBC objects.
+		final Connection connection = DriverManager.getConnection(connectionString);
+
+		String[] strs = getCardsinDeck(connection, "jim", "swag", "elves");
+
+		for(String s: strs)
+			System.out.println(s);
 	}
 
 	public static String[] getCardList(Connection connection) throws SQLException{
@@ -20,21 +36,21 @@ public class SQLDatabaseConnection {
 		String query = "SELECT Name from Card Order by name ASC";
 
 		ResultSet rs = st.executeQuery(query);
-		
+
 		rs.last();
 		int size = rs.getRow();
 		rs.beforeFirst();
 		String[] ret = new String[size];
-		
+
 		int index = 0;
 		while(rs.next()){
 			ret[index] = rs.getString(1);
 			index++;
 		}
-		
+
 		return ret;
 	}
-	
+
 	public static boolean isRegistered(Connection connection, String username, String password) throws SQLException{
 		String query = "Select [!MTGO].dbo.isValidLogin (?, ?)";
 		PreparedStatement prepquery = connection.prepareStatement(query);
@@ -48,14 +64,14 @@ public class SQLDatabaseConnection {
 			return true;
 		}
 	}
-	
+
 	public static boolean register(Connection connection, String username, String password) throws SQLException{
 		String query = "EXEC [!MTGO].dbo.registerUser @name=?, @password=?";
 		PreparedStatement prepquery = connection.prepareStatement(query);
-		
+
 		prepquery.setString(1, username);
 		prepquery.setString(2, password);
-		
+
 		try{
 			prepquery.execute();
 			return true;
@@ -63,39 +79,39 @@ public class SQLDatabaseConnection {
 			return false;
 		}
 	}
-	
+
 	public static String[] getDeckNames(Connection connection, String username, String password) throws SQLException{
 		String query = "select * from [!MTGO].dbo.getPlayerDecks (?,?)";
 		PreparedStatement prepquery = connection.prepareStatement(query);
-		
+
 		prepquery.setString(1, username);
 		prepquery.setString(2, password);
-		
+
 		ResultSet rs = prepquery.executeQuery();
-		
+
 		ArrayList<String> ar = new ArrayList<String>();
 		while(rs.next()){
 			ar.add(rs.getString(1));
 		}
-		
+
 		return ar.toArray(new String[0]);
 	}
-	
+
 	public static String[] getCardsinDeck(Connection connection, String username, String password, String deck) throws SQLException{
-		String query = "select CardName from [!MTGO].dbo.getDeckContents(?,?,?)";
+		String query = "select * from [!MTGO].dbo.getDeckContents(?,?,?)";
 		PreparedStatement prepquery = connection.prepareStatement(query);
-		
+
 		prepquery.setString(1, username);
 		prepquery.setString(2, password);
 		prepquery.setString(3, deck);
-		
+
 		ResultSet rs = prepquery.executeQuery();
-		
+
 		ArrayList<String> ar = new ArrayList<String>();
 		while(rs.next()){
-			ar.add(rs.getString(1));
+			ar.add(rs.getString(1) + ": " + rs.getString(2));
 		}
-		
+
 		return ar.toArray(new String[0]);
 	}
 }
