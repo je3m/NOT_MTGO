@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import javax.swing.BoxLayout;
@@ -13,7 +15,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -22,6 +26,23 @@ import javax.swing.ListSelectionModel;
 
 public class FrontEndWithDatabase {
 	public static void main(String[] args) throws SQLException{
+		FrontEndWithDatabase fd = new FrontEndWithDatabase();
+	}
+		
+	FrontEndWithDatabase() throws SQLException{
+		String connectionString =
+				"jdbc:sqlserver://titan.csse.rose-hulman.edu;"
+						+ "database=!MTGO;"
+						+ "user=malinocr;"
+						+ "password=#blue1baby1;"
+						+ "encrypt=true;"
+						+ "trustServerCertificate=true;"
+						+ "hostNameInCertificate=*.database.windows.net;"
+						+ "loginTimeout=30;";
+
+		// Declare the JDBC objects.
+		final Connection connection = DriverManager.getConnection(connectionString);
+			
 		int width = 1000;
 		int height = 1000;
 		Dimension buttonDimension = new Dimension((int)(width*.2),25);
@@ -35,115 +56,8 @@ public class FrontEndWithDatabase {
 		Frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		Frame.setLayout(new FlowLayout());
 
-		JPanel initialScreen = new JPanel();
-		initialScreen.setPreferredSize(new Dimension(width, height));
-
 		JPanel loginPanel = new JPanel();
 		loginPanel.setPreferredSize(new Dimension((int)(width*0.3), (int)(height*0.8)));
-		
-		JPanel deckBuilder = createDeckBuilder(width, height, buttonDimension, initialScreen, Frame, "Card List", "Deck");
-
-		JPanel collectionBuilder = createDeckBuilder(width, height, buttonDimension, initialScreen, Frame, "Card List", "Collection");
-
-		JPanel collectionDeckBuilder = createDeckBuilder(width, height, buttonDimension, initialScreen, Frame, "Collection", "Deck");
-
-		JButton goToDB = new JButton("Go to Deck Builder");
-		goToDB.setPreferredSize(bigButtonDimension);
-		goToDB.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Frame.remove(initialScreen);
-				Frame.add(deckBuilder);
-				Frame.revalidate();
-				Frame.repaint();
-			}
-		});
-
-		JButton goToCB = new JButton("Go to Collection Builder");
-		goToCB.setPreferredSize(bigButtonDimension);
-		goToCB.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Frame.remove(initialScreen);
-				Frame.add(collectionBuilder);
-				Frame.revalidate();
-				Frame.repaint();
-			}
-		});
-
-		JButton goToCDB = new JButton("Go to Collection Deck Builder");
-		goToCDB.setPreferredSize(bigButtonDimension);
-		goToCDB.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Frame.remove(initialScreen);
-				Frame.add(collectionDeckBuilder);
-				Frame.revalidate();
-				Frame.repaint();
-			}
-		});
-		
-		JButton logOut = new JButton("Log Out");
-		logOut.setPreferredSize(bigButtonDimension);
-		logOut.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Frame.remove(initialScreen);
-				Frame.add(loginPanel);
-				Frame.revalidate();
-				Frame.repaint();
-			}
-		});
-		
-		String[] decks1 = {"lol1","redDeck","bazaartrader"};
-		
-		String[] decks2 = {"lol1","redDeck","bazaartrader"};
-		
-		JLabel deck1 = new JLabel("Deck 1");
-		deck1.setHorizontalAlignment(JLabel.CENTER);
-		deck1.setPreferredSize(new Dimension((int)(width*0.2),(int)(height*.04)));
-		
-		JList<String> deck1List = new JList<String>(decks1);
-		deck1List.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		deck1List.setLayoutOrientation(JList.VERTICAL);
-		deck1List.setVisibleRowCount(-1);
-		
-		JScrollPane deck1listScroller = new JScrollPane(deck1List);
-		deck1listScroller.setPreferredSize(new Dimension((int)(width*.2),(int)(height*.1)));
-		
-		JLabel deck2 = new JLabel("Deck 2");
-		deck2.setHorizontalAlignment(JLabel.CENTER);
-		deck2.setPreferredSize(new Dimension((int)(width*0.2),(int)(height*.04)));
-		
-		JList<String> deck2List = new JList<String>(decks2);
-		deck2List.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		deck2List.setLayoutOrientation(JList.VERTICAL);
-		deck2List.setVisibleRowCount(-1);
-		
-		JScrollPane deck2listScroller = new JScrollPane(deck2List);
-		deck2listScroller.setPreferredSize(new Dimension((int)(width*.2),(int)(height*.1)));
-		
-		JButton playGame = new JButton("Play Game");
-		playGame.setPreferredSize(bigButtonDimension);
-		playGame.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String selected = deck1List.getSelectedValue();
-				String selected1 = deck2List.getSelectedValue();
-				System.out.println("Play game with " + selected + " against " + selected1);
-			}
-		});
-
-		initialScreen.add(goToDB);
-		initialScreen.add(goToCB);
-		initialScreen.add(goToCDB);
-		initialScreen.add(logOut);
-		
-		initialScreen.add(deck1);
-		initialScreen.add(deck1listScroller);
-		initialScreen.add(deck2);
-		initialScreen.add(deck2listScroller);
-		initialScreen.add(playGame);
 		
 		JLabel unLabel = new JLabel("Username");
 		unLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -156,7 +70,7 @@ public class FrontEndWithDatabase {
 		pwLabel.setHorizontalAlignment(JLabel.CENTER);
 		pwLabel.setPreferredSize(new Dimension((int)(width*0.1),(int)(height*.04)));
 		
-		JTextField password = new JTextField();
+		JPasswordField password = new JPasswordField();
 		password.setPreferredSize(new Dimension((int)(width*.15),25));
 
 		JButton login = new JButton("Login");
@@ -164,13 +78,18 @@ public class FrontEndWithDatabase {
 		login.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String selected = userName.getText();
-				String selected1 = password.getText();
-				System.out.println("Login: Username - " + selected + " Password - " + selected1);
-				Frame.remove(loginPanel);
-				Frame.add(initialScreen);
-				Frame.revalidate();
-				Frame.repaint();
+				try {
+					if(SQLDatabaseConnection.isRegistered(connection, userName.getText(), password.getText())){
+						Frame.remove(loginPanel);
+						Frame.add(createInitialScreen(connection, width, height, bigButtonDimension, buttonDimension, Frame, loginPanel, userName.getText(), password.getText()));
+						Frame.revalidate();
+						Frame.repaint();
+					} else {
+						JOptionPane.showMessageDialog(null, "Username or password was not valid. Please try again.");
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		
@@ -179,9 +98,15 @@ public class FrontEndWithDatabase {
 		register.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String selected = userName.getText();
-				String selected1 = password.getText();
-				System.out.println("Register: Username - " + selected + " Password - " + selected1);
+				try {
+					if(SQLDatabaseConnection.register(connection, userName.getText(), password.getText())){
+						JOptionPane.showMessageDialog(null, "Registration successful.");
+					} else {
+						JOptionPane.showMessageDialog(null, "Username is already in use. Please try again.");
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		
@@ -198,7 +123,7 @@ public class FrontEndWithDatabase {
 		Frame.repaint();
 	}
 
-	public static JPanel createDeckBuilder(int width, int height, Dimension buttonDimension, JPanel initialScreen, JFrame Frame, String text1, String text2) throws SQLException{
+	public JPanel createDeckBuilder(Connection connection, int width, int height, Dimension buttonDimension, JPanel initialScreen, JFrame Frame, String text1, String text2) throws SQLException{
 		JPanel deckBuilder = new JPanel();
 		deckBuilder.setPreferredSize(new Dimension((int)(width*1.1), height));
 		deckBuilder.setLayout(new FlowLayout());
@@ -206,10 +131,11 @@ public class FrontEndWithDatabase {
 		int strLength = 1000;
 		String[] str = new String[strLength];
 		//String[] lol = SQLDatabaseConnection.getCollectionCardNames("jim");
-		String[] lol = str;
+		String[] lol = {"swag","swag"};
+		
 		
 		if(text1.equals("Card List")){
-			//str = SQLDatabaseConnection.getCardList();
+			str = SQLDatabaseConnection.getCardList(connection);
 		} else {
 		
 			for(int i = 0; i< strLength; i++){
@@ -367,8 +293,126 @@ public class FrontEndWithDatabase {
 		deckBuilder.add(listScroller);
 		deckBuilder.add(listScroller1);
 		deckBuilder.add(buttonPanel);
-
+		
 		return deckBuilder;
+		
+		
+	}
+	
+	public JPanel createInitialScreen(Connection connection, int width, int height, Dimension bigButtonDimension, Dimension buttonDimension, JFrame Frame, JPanel loginPanel, String username, String password) throws SQLException{
+		JPanel initialScreen = new JPanel();
+		initialScreen.setPreferredSize(new Dimension(width, height));
+		
+		JButton goToDB = new JButton("Go to Deck Builder");
+		goToDB.setPreferredSize(bigButtonDimension);
+		goToDB.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Frame.remove(initialScreen);
+				try {
+					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, initialScreen, Frame, "Card List", "Deck"));
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				Frame.revalidate();
+				Frame.repaint();
+			}
+		});
+
+		JButton goToCB = new JButton("Go to Collection Builder");
+		goToCB.setPreferredSize(bigButtonDimension);
+		goToCB.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Frame.remove(initialScreen);
+				try {
+					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, initialScreen, Frame, "Card List", "Collection"));
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				Frame.revalidate();
+				Frame.repaint();
+			}
+		});
+
+		JButton goToCDB = new JButton("Go to Collection Deck Builder");
+		goToCDB.setPreferredSize(bigButtonDimension);
+		goToCDB.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Frame.remove(initialScreen);
+				try {
+					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, initialScreen, Frame, "Collection", "Deck"));
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				Frame.revalidate();
+				Frame.repaint();
+			}
+		});
+		
+		JButton logOut = new JButton("Log Out");
+		logOut.setPreferredSize(bigButtonDimension);
+		logOut.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Frame.remove(initialScreen);
+				Frame.add(loginPanel);
+				Frame.revalidate();
+				Frame.repaint();
+			}
+		});
+		
+		String[] decks1 = {"lol1","redDeck","bazaartrader"};
+		
+		String[] decks2 = {"lol1","redDeck","bazaartrader"};
+		
+		JLabel deck1 = new JLabel("Deck 1");
+		deck1.setHorizontalAlignment(JLabel.CENTER);
+		deck1.setPreferredSize(new Dimension((int)(width*0.2),(int)(height*.04)));
+		
+		JList<String> deck1List = new JList<String>(decks1);
+		deck1List.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		deck1List.setLayoutOrientation(JList.VERTICAL);
+		deck1List.setVisibleRowCount(-1);
+		
+		JScrollPane deck1listScroller = new JScrollPane(deck1List);
+		deck1listScroller.setPreferredSize(new Dimension((int)(width*.2),(int)(height*.1)));
+		
+		JLabel deck2 = new JLabel("Deck 2");
+		deck2.setHorizontalAlignment(JLabel.CENTER);
+		deck2.setPreferredSize(new Dimension((int)(width*0.2),(int)(height*.04)));
+		
+		JList<String> deck2List = new JList<String>(decks2);
+		deck2List.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		deck2List.setLayoutOrientation(JList.VERTICAL);
+		deck2List.setVisibleRowCount(-1);
+		
+		JScrollPane deck2listScroller = new JScrollPane(deck2List);
+		deck2listScroller.setPreferredSize(new Dimension((int)(width*.2),(int)(height*.1)));
+		
+		JButton playGame = new JButton("Play Game");
+		playGame.setPreferredSize(bigButtonDimension);
+		playGame.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String selected = deck1List.getSelectedValue();
+				String selected1 = deck2List.getSelectedValue();
+				System.out.println("Play game with " + selected + " against " + selected1);
+			}
+		});
+
+		initialScreen.add(goToDB);
+		initialScreen.add(goToCB);
+		initialScreen.add(goToCDB);
+		initialScreen.add(logOut);
+		
+		initialScreen.add(deck1);
+		initialScreen.add(deck1listScroller);
+		initialScreen.add(deck2);
+		initialScreen.add(deck2listScroller);
+		initialScreen.add(playGame);
+		return initialScreen;
 	}
 
 }
