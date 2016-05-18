@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -144,7 +145,7 @@ public class FrontEndWithDatabase {
 		if(text1.equals("Card List")){
 			leftDropText = new String[0];
 		} else {
-			leftDropText = SQLDatabaseConnection.getDeckNames(connection, username, password);
+			leftDropText = SQLDatabaseConnection.getCollectionNames(connection, username, password);
 		}
 		
 		JComboBox<String> dropDownLeft = new JComboBox<String>(leftDropText);
@@ -155,7 +156,7 @@ public class FrontEndWithDatabase {
 		if(text2.equals("Deck")){
 			rightDropText = SQLDatabaseConnection.getDeckNames(connection, username, password);
 		} else {
-			rightDropText = SQLDatabaseConnection.getDeckNames(connection, username, password);
+			rightDropText = SQLDatabaseConnection.getCollectionNames(connection, username, password);
 		}
 		
 		JLabel label2 = new JLabel(text2);
@@ -168,35 +169,23 @@ public class FrontEndWithDatabase {
 		if(text1.equals("Card List")){
 			str = SQLDatabaseConnection.getCardList(connection);
 		} else {
-			str = lol;
+			if(dropDownLeft.getSelectedItem() != null){
+				str = SQLDatabaseConnection.getCardsinCollection(connection, username, password, dropDownLeft.getSelectedItem().toString());
+			} else {
+				str = new String[0];
+			}
 		}
 
-		if(text2.equals("Card List")){
-			str1 = SQLDatabaseConnection.getCardList(connection);
-		} else if (text2.equals("Deck")){
-			str1 = SQLDatabaseConnection.getCardsinDeck(connection, username, password,dropDownRight.getSelectedItem().toString());
+		if(dropDownRight.getSelectedItem() != null){
+			if(text2.equals("Collection")){
+				str1 = SQLDatabaseConnection.getCardsinCollection(connection, username, password, dropDownRight.getSelectedItem().toString());
+			} else {
+				str1 = SQLDatabaseConnection.getCardsinDeck(connection, username, password,dropDownRight.getSelectedItem().toString());
+			}
 		} else {
-			str1 = lol;
+			str1 = new String[0];
 		}
 		
-		dropDownLeft.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				str[0] = "lol";
-				System.out.println(dropDownLeft.getSelectedItem());
-			}
-		});
-		dropDownRight.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					str = SQLDatabaseConnection.getCardsinDeck(connection, username, password,dropDownRight.getSelectedItem().toString());
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				};
-			}
-		});
-
 		JList<String> jlist = new JList<String>(str);
 		jlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		jlist.setLayoutOrientation(JList.VERTICAL);
@@ -206,6 +195,39 @@ public class FrontEndWithDatabase {
 		jlist1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		jlist1.setLayoutOrientation(JList.VERTICAL);
 		jlist1.setVisibleRowCount(-1);
+		
+		dropDownLeft.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(text2.equals("Card List")){
+				} else {
+					try {
+						jlist.setListData(SQLDatabaseConnection.getCardsinCollection(connection, username, password,dropDownLeft.getSelectedItem().toString()));
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		
+		dropDownRight.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(text2.equals("Deck")){
+					try {
+						jlist1.setListData(SQLDatabaseConnection.getCardsinDeck(connection, username, password,dropDownRight.getSelectedItem().toString()));
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else {
+					try {
+						jlist1.setListData(SQLDatabaseConnection.getCardsinCollection(connection, username, password,dropDownRight.getSelectedItem().toString()));
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
 		
 		JScrollPane listScroller = new JScrollPane(jlist);
 		listScroller.setPreferredSize(new Dimension((int)(width*.5),(int)(height*.8)));
@@ -219,12 +241,13 @@ public class FrontEndWithDatabase {
 		JTextField searchBar = new JTextField();
 		searchBar.setPreferredSize(new Dimension((int)(width*.15),25));
 
-		String[] dropDownOptions = new String[5];
+		String[] dropDownOptions = new String[6];
 		dropDownOptions[0] = "Name";
 		dropDownOptions[1] = "Mana Cost";
-		dropDownOptions[2] = "Color";
-		dropDownOptions[3] = "Power";
-		dropDownOptions[4] = "Toughness";
+		dropDownOptions[2] = "Type";
+		dropDownOptions[3] = "Color";
+		dropDownOptions[4] = "Power";
+		dropDownOptions[5] = "Thoughness";
 
 		JComboBox<String> dropDown = new JComboBox<String>(dropDownOptions);
 		dropDown.setPreferredSize(new Dimension((int)(width*.15),25));
@@ -246,8 +269,27 @@ public class FrontEndWithDatabase {
 		add.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String selected = jlist.getSelectedValue();
-				System.out.println(selected);
+				if(text2.equals("Deck")){
+					if(SQLDatabaseConnection.addCardtoDeck(connection, username, password, dropDownRight.getSelectedItem().toString(), jlist.getSelectedValue().toString(), "1")){
+						try {
+							jlist1.setListData(SQLDatabaseConnection.getCardsinDeck(connection, username, password,dropDownRight.getSelectedItem().toString()));
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Card cannot be added to deck.");
+					}
+				} else {
+					if(SQLDatabaseConnection.addCardtoCollection(connection, username, password, dropDownRight.getSelectedItem().toString(), jlist.getSelectedValue().toString(), "1")){
+						try {
+							jlist1.setListData(SQLDatabaseConnection.getCardsinCollection(connection, username, password,dropDownRight.getSelectedItem().toString()));
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Card cannot be added to collection.");
+					}
+				}
 			}
 		});
 
@@ -256,8 +298,27 @@ public class FrontEndWithDatabase {
 		remove.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String selected = jlist1.getSelectedValue();
-				System.out.println(selected);
+				if(text2.equals("Deck")){
+					if(SQLDatabaseConnection.addCardtoDeck(connection, username, password, dropDownRight.getSelectedItem().toString(), jlist1.getSelectedValue().toString().split(":")[0], "-1")){
+						try {
+							jlist1.setListData(SQLDatabaseConnection.getCardsinDeck(connection, username, password,dropDownRight.getSelectedItem().toString()));
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Card cannot be added to deck.");
+					}
+				} else {
+					if(SQLDatabaseConnection.addCardtoCollection(connection, username, password, dropDownRight.getSelectedItem().toString(), jlist1.getSelectedValue().toString().split(":")[0], "-1")){
+						try {
+							jlist1.setListData(SQLDatabaseConnection.getCardsinCollection(connection, username, password,dropDownRight.getSelectedItem().toString()));
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Card cannot be added to collection.");
+					}
+				}
 			}
 		});
 		
@@ -269,8 +330,21 @@ public class FrontEndWithDatabase {
 		newDeck.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String selected = newDeckName.getText();
-				System.out.println(selected);
+				if(text2.equals("Deck")){
+					if(SQLDatabaseConnection.addNewDeck(connection, username, password,newDeckName.getText())){
+						JOptionPane.showMessageDialog(null, "New deck created!");
+						dropDownRight.addItem(newDeckName.getText());
+					} else {
+						JOptionPane.showMessageDialog(null, "Deck name already exists. Please choose another.");
+					}
+				} else {
+					if(SQLDatabaseConnection.addNewCollection(connection, username, password,newDeckName.getText())){
+						JOptionPane.showMessageDialog(null, "New collection created!");
+						dropDownRight.addItem(newDeckName.getText());
+					} else {
+						JOptionPane.showMessageDialog(null, "Collection name already exists. Please choose another.");
+					}
+				}
 			}
 		});
 
