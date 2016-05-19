@@ -100,6 +100,7 @@ public class Backend {
 	 * @param currIndex the index that that card currently occupies in that zone
 	 * @param c the card that's being moved from its current zone
 	 */
+	@Deprecated
 	public static void handleCardClicked(Zone z, int currIndex, Card c) {
 		if(currIndex < 0){
 			throw new IllegalArgumentException(currIndex + " is not a valid index for card click events.");
