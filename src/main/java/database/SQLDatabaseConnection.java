@@ -96,7 +96,24 @@ public class SQLDatabaseConnection {
 
 		return ar.toArray(new String[0]);
 	}
-
+	
+	public static String[] getCollectionNames(Connection connection, String username, String password) throws SQLException{
+		String query = "select * from [!MTGO].dbo.getPlayerCollections (?,?)";
+		PreparedStatement prepquery = connection.prepareStatement(query);
+		
+		prepquery.setString(1, username);
+		prepquery.setString(2, password);
+		
+		ResultSet rs = prepquery.executeQuery();
+		
+		ArrayList<String> ar = new ArrayList<String>();
+		while(rs.next()){
+			ar.add(rs.getString(1));
+		}
+		
+		return ar.toArray(new String[0]);
+	}
+	
 	public static String[] getCardsinDeck(Connection connection, String username, String password, String deck) throws SQLException{
 		String query = "select * from [!MTGO].dbo.getDeckContents(?,?,?)";
 		PreparedStatement prepquery = connection.prepareStatement(query);
@@ -109,9 +126,101 @@ public class SQLDatabaseConnection {
 
 		ArrayList<String> ar = new ArrayList<String>();
 		while(rs.next()){
-			ar.add(rs.getString(1) + ": " + rs.getString(2));
+			ar.add(rs.getString(1) + ": " + rs.getInt(2));
 		}
 
 		return ar.toArray(new String[0]);
+	}
+	
+	public static String[] getCardsinCollection(Connection connection, String username, String password, String collection) throws SQLException{
+		String query = "select * from [!MTGO].dbo.getCollection(?,?,?)";
+		PreparedStatement prepquery = connection.prepareStatement(query);
+		
+		prepquery.setString(1, username);
+		prepquery.setString(2, password);
+		prepquery.setString(3, collection);
+		
+		ResultSet rs = prepquery.executeQuery();
+		
+		ArrayList<String> ar = new ArrayList<String>();
+		while(rs.next()){
+			ar.add(rs.getString(1) + ": " + rs.getInt(2));
+		}
+		
+		return ar.toArray(new String[0]);
+	}
+	
+	public static boolean addNewDeck(Connection connection, String username, String password, String deckName){
+		try{
+			String query = "EXEC [!MTGO].dbo.createDeck @player=?,@password=?,@deckName=?";
+			PreparedStatement prepquery = connection.prepareStatement(query);
+			
+			prepquery.setString(1, username);
+			prepquery.setString(2, password);
+			prepquery.setString(3, deckName);
+			
+			prepquery.execute();
+			
+			return true;
+		} catch (Exception e){
+			return false;
+		}
+	}
+
+	public static boolean addNewCollection(Connection connection, String username, String password, String deckName){
+		try{
+			String query = "EXEC [!MTGO].dbo.createCollection @player=?,@password=?,@collectionName=?";
+			PreparedStatement prepquery = connection.prepareStatement(query);
+			
+			prepquery.setString(1, username);
+			prepquery.setString(2, password);
+			prepquery.setString(3, deckName);
+			
+			prepquery.execute();
+			
+			return true;
+		} catch (Exception e){
+			return false;
+		}
+	}
+	
+	public static boolean addCardtoDeck(Connection connection, String username, String password, String deckName, String cardName, String amount){
+		try{
+			String query = "EXEC [!MTGO].dbo.setCardInDeck @player=?,@psswd=?,@deckName=?,@cardName=?,@quantity=?";
+			PreparedStatement prepquery = connection.prepareStatement(query);
+			
+			prepquery.setString(1, username);
+			prepquery.setString(2, password);
+			prepquery.setString(3, deckName);
+			prepquery.setString(4, cardName);
+			prepquery.setString(5, amount);
+			
+			prepquery.execute();
+			
+			return true;
+		} catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public static boolean addCardtoCollection(Connection connection, String username, String password, String colName, String cardName, String amount){
+		try{
+			String query = "EXEC [!MTGO].dbo.setCardInCollection @player=?,@psswd=?,@collectionName=?,@cardName=?,@quantity=?";
+			PreparedStatement prepquery = connection.prepareStatement(query);
+			
+			prepquery.setString(1, username);
+			prepquery.setString(2, password);
+			prepquery.setString(3, colName);
+			prepquery.setString(4, cardName);
+			prepquery.setString(5, amount);
+			
+			prepquery.execute();
+			
+			return true;
+		} catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
