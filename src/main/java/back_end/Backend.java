@@ -337,19 +337,20 @@ public class Backend {
 
 		//handle untap-step case
 		if((this.phase == Phase.UNTAP1) || (this.phase == Phase.UNTAP2)) {
-			for(Card c : Zone.BATTLE_FIELD.getCards()) {
+			for(Card c : Zone.getZoneFromString("BATTLE_FIELD", this.turn).getCards()) {
 				if(c.getTapped()) {
 					c.untap();
 				}
 			}
-			for(Card c : Zone.BATTLE_FIELD1.getCards()) {
-				if(c.getTapped()) {
-					c.untap();
-				}
-			}
+
 			this.phase = Phase.values()[(((this.phase.ordinal() + 1) % (Phase.CLEANUP2.ordinal() + 1)))];
 		}
 
+		if((this.phase == Phase.DRAW1))
+			this.draw(true, 1);
+
+		if((this.phase == Phase.DRAW2))
+			this.draw(false, 1);
 
 	}
 

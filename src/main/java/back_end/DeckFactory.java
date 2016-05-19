@@ -57,7 +57,8 @@ public class DeckFactory {
 
 
 		PreparedStatement prepquery = this.connection.prepareStatement(query);
-		Card[] ret = new Card[cards.size()];
+
+		ArrayList<Card> ret = new ArrayList<>();
 
 		Iterator itr = cards.entrySet().iterator();
 
@@ -79,13 +80,13 @@ public class DeckFactory {
 
 
 				Card c = new Card(name, manaCost, color, type, null, new ArrayList<String>(), power, toughness, image, false);
-				ret[i] = c;
+				ret.add(c);
 
 			}
 
 			i++;
 		}
-		return ret;
+		return ret.toArray(new Card[0]);
 	}
 
 
