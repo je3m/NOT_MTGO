@@ -131,6 +131,20 @@ public class Backend {
 	}
 
 
+	/**
+	 * Draws a card for a player
+	 * @param player player to draw
+	 * @param amount amount of cards to draw
+	 */
+	public void draw(boolean player, int amount){
+		Zone hand = Zone.getZoneFromString("HAND", player);
+		Zone library = Zone.getZoneFromString("LIBRARY", player);
+		for(int i = 0; i < amount; i++){
+			Card c = library.getCards()[0];
+			library.remove(0);
+			hand.addCard(c, i);
+		}
+	}
 
 	/**
 	 * temporary fix to different ways to call activate ability

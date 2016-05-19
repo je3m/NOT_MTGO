@@ -65,22 +65,23 @@ public class DeckFactory {
 		while(itr.hasNext()){
 			Entry entry = (Entry) itr.next();
 
-			prepquery.setString(1, (String) entry.getKey());
-			ResultSet rs = prepquery.executeQuery();
-			rs.next();
-			String name = rs.getString(1);
-			String manaCost = rs.getString(2);
-			String color = rs.getString(3);
-			String type = rs.getString(4);
-			int power = rs.getInt(5);
-			int toughness = rs.getInt(6);
-			String image = "res/" + rs.getString(7) + ".png";
+			for(int j = 0; j < (int) entry.getValue(); j++){
+				prepquery.setString(1, (String) entry.getKey());
+				ResultSet rs = prepquery.executeQuery();
+				rs.next();
+				String name = rs.getString(1);
+				String manaCost = rs.getString(2);
+				String color = rs.getString(3);
+				String type = rs.getString(4);
+				int power = rs.getInt(5);
+				int toughness = rs.getInt(6);
+				String image = "res/" + rs.getString(7) + ".png";
 
 
-			Card c = new Card(name, manaCost, color, type, null, new ArrayList<String>(), power, toughness, image, false);
-			ret[i] = c;
+				Card c = new Card(name, manaCost, color, type, null, new ArrayList<String>(), power, toughness, image, false);
+				ret[i] = c;
 
-
+			}
 
 			i++;
 		}

@@ -1,6 +1,7 @@
 package back_end;
 
 import java.util.ArrayList;
+import java.util.Collections;
 /**
  * Represents the zones in MTG
  *
@@ -93,7 +94,7 @@ public enum Zone {
 	 * @return index of the card
 	 */
 	public int getIndex(Card c){
-		return cards.lastIndexOf(c);
+		return this.cards.lastIndexOf(c);
 	}
 
 	/**
@@ -101,20 +102,20 @@ public enum Zone {
 	 * @param i index of card to remove
 	 */
 	public void remove(int i)  throws IndexOutOfBoundsException {
-		if(i>= this.getSize() || i<0) {
+		if((i>= this.getSize()) || (i<0)) {
 			throw new IndexOutOfBoundsException("No object exists in the " + this + " zone at index " + i);
 		}
 		this.cards.remove(i);
 
 	}
-	
+
 	//TODO:Test this
 	/**
 	 * Removes a card from the zone
 	 * @param c Card to be removed
 	 */
 	public void remove(Card c) {
-		cards.remove(c);
+		this.cards.remove(c);
 	}
 
 	/**
@@ -123,7 +124,7 @@ public enum Zone {
 	 * @return Zone enum that matches that string
 	 */
 	public static Zone getZoneFromString(String string) {
-		
+
 		if(string == null) {
 			throw new IllegalArgumentException("Zone name string cannot be null.");
 		}
@@ -156,7 +157,7 @@ public enum Zone {
 		if(string == null) {
 			throw new IllegalArgumentException("Zone name string cannot be null.");
 		}
-		
+
 		if(!player)
 			string = string.concat("1");
 		for (Zone z: Zone.values()){
@@ -167,6 +168,10 @@ public enum Zone {
 		return null;
 	}
 
-
-
+	/**
+	 * shuffles the current zone
+	 */
+	public void shuffle(){
+		Collections.shuffle(this.cards);
+	}
 }

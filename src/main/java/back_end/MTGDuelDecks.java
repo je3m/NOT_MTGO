@@ -66,13 +66,15 @@ public class MTGDuelDecks {
 
 		Card[] cards = DeckFactory.getInstance().generateDeck(cardmap);
 
+		Zone lib = Zone.getZoneFromString("LIBRARY", player);
 		for(int i = 0; i < cards.length; i++){
-			if(i < 7){
-				Zone.getZoneFromString("HAND", player).addCard(cards[i], i);
-			} else{
-				Zone.getZoneFromString("LIBRARY", player).addCard(cards[i], i-7);
-			}
+			lib.addCard(cards[i], i);
 		}
+
+		lib.shuffle();
+
+		Backend.getInstance().draw(player, 7);
+
 	}
 
 	/**
