@@ -124,7 +124,7 @@ public class FrontEndWithDatabase {
 		Frame.repaint();
 	}
 
-	public JPanel createDeckBuilder(Connection connection, int width, int height, Dimension buttonDimension, JPanel initialScreen, JFrame Frame, String text1, String text2, String username, String password) throws SQLException{
+	public JPanel createDeckBuilder(Connection connection, int width, int height, Dimension buttonDimension, Dimension bigButtonDimension, JPanel initialScreen, JFrame Frame, String text1, String text2, String username, String password, JPanel loginPanel) throws SQLException{
 		String[] str;
 		String[] str1;
 		String[] lol = {"str"};
@@ -354,7 +354,11 @@ public class FrontEndWithDatabase {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Frame.remove(deckBuilder);
-				Frame.add(initialScreen);
+				try {
+					Frame.add(createInitialScreen(connection, width, height, bigButtonDimension, buttonDimension, Frame, loginPanel, username, password));
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				Frame.revalidate();
 				Frame.repaint();
 				Frame.setLayout(new FlowLayout());
@@ -396,7 +400,7 @@ public class FrontEndWithDatabase {
 			public void actionPerformed(ActionEvent e) {
 				Frame.remove(initialScreen);
 				try {
-					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, initialScreen, Frame, "Card List", "Deck", username, password));
+					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, bigButtonDimension, initialScreen, Frame, "Card List", "Deck", username, password, loginPanel));
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -412,7 +416,7 @@ public class FrontEndWithDatabase {
 			public void actionPerformed(ActionEvent e) {
 				Frame.remove(initialScreen);
 				try {
-					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, initialScreen, Frame, "Card List", "Collection",  username, password));
+					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, bigButtonDimension, initialScreen, Frame, "Card List", "Collection",  username, password,loginPanel));
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -428,7 +432,7 @@ public class FrontEndWithDatabase {
 			public void actionPerformed(ActionEvent e) {
 				Frame.remove(initialScreen);
 				try {
-					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, initialScreen, Frame, "Collection", "Deck",  username, password));
+					Frame.add(createDeckBuilder(connection, width, height, buttonDimension, bigButtonDimension, initialScreen, Frame, "Collection", "Deck",  username, password, loginPanel));
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
