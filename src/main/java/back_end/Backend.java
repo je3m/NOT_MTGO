@@ -42,8 +42,12 @@ public class Backend {
 	/**
 	 * Puts an item directly onto the stack
 	 * @param stackItem item to be put on the stack
+	 * @throws IllegalArgumentException
 	 */
 	public void putItemOnStack(ItemOnStack stackItem){
+		if(stackItem == null){
+			throw new IllegalArgumentException("Item pushed on stack cannot be null");
+		}
 		this.stack.push(stackItem);
 	}
 
@@ -99,6 +103,8 @@ public class Backend {
 	 * @param z the zone the card's being moved from
 	 * @param currIndex the index that that card currently occupies in that zone
 	 * @param c the card that's being moved from its current zone
+	 * @throws IllegalArgumentException
+	 * @throws IndexOutOfBoundsException
 	 */
 	@Deprecated
 	public static void handleCardClicked(Zone z, int currIndex, Card c) {
@@ -108,6 +114,7 @@ public class Backend {
 		if(c == null){
 			throw new IllegalArgumentException("Null is not a valid card for card click events.");
 		}
+		
 		switch(z) {
 		case HAND:
 			Zone.BATTLE_FIELD.addCard(c, 0);
@@ -142,8 +149,9 @@ public class Backend {
 	 * @param target the card being targeted by the ability
 	 * @param targetPlayer the player being targeted by the ability
 	 * @param targetZone the zone of the card being targeted
+	 * @throws RuntimeException thrown if you don't have priority, can't cast the spell, have an invalid target, or try to play too many lands in a turn
 	 */
-	public void activateAbility(Card c, Zone z, int i, int abInd, Card target, Boolean targetPlayer, Zone targetZone) {
+	public void activateAbility(Card c, Zone z, int i, int abInd, Card target, Boolean targetPlayer, Zone targetZone) {	
 		Ability a =	c.getAbilities()[abInd];
 
 		if(this.priority != Zone.getPlayerFromZone(z))
@@ -185,7 +193,6 @@ public class Backend {
 				this.stack.push(new ItemOnStack(c,a,player,target,targetPlayer, targetZone));
 				this.passed = false;
 			}
-			//TODO:Lol an exception or something
 			break;
 		case ETB:
 			break;
@@ -198,7 +205,6 @@ public class Backend {
 		}
 	}
 
-	//TODO:Test this more
 	/**
 	 * Handles paying the cost for an ability
 	 * @param cost cost of the ability
@@ -257,8 +263,15 @@ public class Backend {
 	 * Simply adds the card to the given zone at the end of that zone's list
 	 * @param z the zone being added to
 	 * @param c the card being added
+	 * @throws IllegalArgumentException
 	 */
 	public static void addCard(Zone z, Card c) {
+		if(z == null){
+			throw new IllegalArgumentException("Zone cannot be null");
+		}
+		if(c == null){
+			throw new IllegalArgumentException("Card cannot be null");
+		}
 		z.addCard(c, z.getSize());
 	}
 
@@ -267,6 +280,7 @@ public class Backend {
 	 * @param z Zone to add card to
 	 * @param c Card to add
 	 * @param i	position of the zone to add card
+	 * @throws IndexOutOfBoundsException
 	 */
 	public void addCard(Zone z, Card c, int i){
 		try {
@@ -290,8 +304,13 @@ public class Backend {
 	 * Removes the card at the given index from the zone
 	 * @param z zone to remove card from
 	 * @param i index to remove the card
+	 * @throws IllegalArgumentException
+	 * @throws IndexOutOfBoundsException
 	 */
 	public void removeCard(Zone z, int i){
+		if(z == null){
+			throw new IllegalArgumentException("Zone cannot be null");
+		}
 		try {
 			z.remove(i);
 		} catch (IndexOutOfBoundsException e) {
@@ -418,8 +437,13 @@ public class Backend {
 	 * Activates the mana ability of a card
 	 * @param c card with the mana ability
 	 * @param player player who activated the mana ability
+	 * @throws IllegalArgumentException
+	 * @throws RejectedExecutionException thrown if you cannot pay the cost of the mana ability
 	 */
 	public void activateManaAbility(Card c, Boolean player) {
+		if(c == null){
+			throw new IllegalArgumentException("Card cannot be null");
+		}
 		StringTokenizer strToken = new StringTokenizer(c.getManaAbility(),":");
 		if(strToken.nextToken().equals("T")){
 			if(c.getTapped()){
@@ -472,13 +496,16 @@ public class Backend {
 		}
 	}
 
-	//TODO: improve input checking
 	/**
 	 * Parses a cost string and returns an array of costs
 	 * @param s String of cost
 	 * @return array of cost amounts in WUBRGC
+	 * @throws IllegalArgumentException
 	 */
 	public int[] parseCost(String s){
+		if(s == null){
+			throw new IllegalArgumentException("Cannot parse a null string");
+		}
 		int cost[] = new int[6];
 
 		if(s.length() == 0){
@@ -511,6 +538,8 @@ public class Backend {
 			case "G":
 				cost[4]++;
 				break;
+			default:
+				throw new IllegalArgumentException("Cannot parse cards with characters other than WUBRG");
 			}
 		}
 		return cost;
@@ -528,6 +557,7 @@ public class Backend {
 	 * @param targetPlayer the player being targeted
 	 * @param targetZone the zone the targeted card is in
 	 * @return true if the spell is cast, false if not
+	 * @throws IllegalArgumentException
 	 */
 	public boolean castSpell(Zone zone, Ability a, Card c, int index, String cost, Boolean player, Card target, Boolean targetPlayer, Zone targetZone) {
 
@@ -581,8 +611,12 @@ public class Backend {
 	 * @param manaPool mana pool to play mana with
 	 * @param genericCost amount of generic mana to pay
 	 * @return amount of mana left to pay
+	 * @throws IllegalArgumentException
 	 */
 	public int handleGeneric(ManaPool manaPool, int genericCost){
+		if(manaPool == null){
+			throw new IllegalArgumentException("ManaPool cannot be null");
+		}
 		if(genericCost > 0){
 			if(manaPool.getAmount() >= genericCost){
 				manaPool.remove(genericCost);
@@ -615,8 +649,22 @@ public class Backend {
 	 * @param targetC the card that is being targeting
 	 * @param targetZ the zone that the targeted card is in
 	 * @return whether the source card in the source zone can target the target card in the target zone
+	 * @throws IllegalArgumentException
 	 */
 	public static boolean canTarget(Card sourceC, Zone sourceZ, Card targetC, Zone targetZ) {
+		if(sourceC == null){
+			throw new IllegalArgumentException("Source card cannot be null when targeting.");
+		}
+		if(targetC == null){
+			throw new IllegalArgumentException("Source zone cannot be null when targeting.");
+		}
+		if(sourceZ == null){
+			throw new IllegalArgumentException("Target card cannot be null when targeting.");
+		}
+		if(targetZ == null){
+			throw new IllegalArgumentException("Target zone cannot be null when targeting.");
+		}
+		
 		boolean h1ToB2 = (sourceZ == Zone.HAND)  && (targetZ == Zone.BATTLE_FIELD1);
 		boolean h1ToB1 = (sourceZ == Zone.HAND)  && (targetZ == Zone.BATTLE_FIELD);
 		boolean h2ToB1 = (sourceZ == Zone.HAND1)  && (targetZ == Zone.BATTLE_FIELD);
