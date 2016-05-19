@@ -50,7 +50,7 @@ public class MTGDuelDecks {
 		setUpJFrame(bkd);
 
 		initPlayerDB(conn, true, args[0], args[1], args[2]);
-		//		initPlayerDB(conn, false, args[0], args[1], args[3]);
+		initPlayerDB(conn, false, args[0], args[1], args[3]);
 		//		initializePlayer();
 		//		initializePlayer1();
 	}
