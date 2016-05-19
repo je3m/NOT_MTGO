@@ -29,7 +29,7 @@ public class Card {
 		for(String s : abilities){
 			this.addAbility(s);;
 		}
-
+		type = type.replaceFirst(" —", "-");
 		try{
 			this.setCost(manaCost);
 			this.setColor(color);
@@ -206,7 +206,7 @@ public class Card {
 		if(s == null){
 			throw new IllegalArgumentException("Card " + this.name + ": null is not a valid card type");
 		}
-		String regex = "(Basic )?[A-Z][a-z]*(\\- [A-Z][a-z]*( [A-Z][a-z]*)*)?";
+		String regex = "(Tribal )?(Basic )?[A-Z][a-z]*(\\- [A-Z][a-z]*( [A-Z][a-z]*)*)?";
 		if(!s.matches(regex)) {
 			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid card typeline", regex, -1);
 		}

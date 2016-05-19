@@ -2,10 +2,15 @@ package back_end;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JFrame;
 
+import database.SQLDatabaseConnection;
 import front_end.ClickHandler;
 import front_end.KeyBoardHandler;
 import front_end.MTGComponent;
@@ -23,16 +28,52 @@ public class MTGDuelDecks {
 
 	/**
 	 * Main method that runs the game and sets up the GUI frame.
-	 * @param args
+	 * @param args Username, Password, Deck1, Deck2
+	 * @throws SQLException
 	 */
-	public static void main(String[] args){
+	public static void main(String[] args) throws SQLException{
 		Backend bkd = Backend.getInstance();
+		String connectionString =
+				"jdbc:sqlserver://titan.csse.rose-hulman.edu;"
+						+ "database=!MTGO;"
+						+ "user=malinocr;"
+						+ "password=#blue1baby1;"
+						+ "encrypt=true;"
+						+ "trustServerCertificate=true;"
+						+ "hostNameInCertificate=*.database.windows.net;"
+						+ "loginTimeout=30;";
+
+		// Declare the JDBC objects.
+		final Connection conn = DriverManager.getConnection(connectionString);
+
+
 		setUpJFrame(bkd);
 
-		initializePlayer();
-		initializePlayer1();
+		initPlayerDB(conn, true, args[0], args[1], args[2]);
+		//		initPlayerDB(conn, false, args[0], args[1], args[3]);
+		//		initializePlayer();
+		//		initializePlayer1();
 	}
 
+	private static void initPlayerDB(Connection conn, Boolean player, String user, String pass, String deck) throws SQLException{
+		String[] cardString = SQLDatabaseConnection.getCardsinDeck(conn, user, pass, deck);
+		HashMap<String, Integer> cardmap = new HashMap<String, Integer>();
+
+		for(String s: cardString){
+			String[] tmp = s.split(": ");
+			cardmap.put(tmp[0], Integer.parseInt(tmp[1]));
+		}
+
+		Card[] cards = DeckFactory.getInstance().generateDeck(cardmap);
+
+		for(int i = 0; i < cards.length; i++){
+			if(i < 7){
+				Zone.getZoneFromString("HAND", player).addCard(cards[i], i);
+			} else{
+				Zone.getZoneFromString("LIBRARY", player).addCard(cards[i], i-7);
+			}
+		}
+	}
 
 	/**
 	 * Initializes the game data for the first player
@@ -40,12 +81,12 @@ public class MTGDuelDecks {
 	 */
 	private static void initializePlayer() {
 		//Test
-		Zone.GRAVEYARD.addCard(new Card("Forest", "", "", "Basic Land- Forest", "T:G", 
+		Zone.GRAVEYARD.addCard(new Card("Forest", "", "", "Basic Land- Forest", "T:G",
 				new ArrayList<String>(), 0, 0, FOREST_PATH, false), 0);
-		Zone.LIBRARY.addCard(new Card("Forest", "", "", "Basic Land- Forest", "T:G", 
+		Zone.LIBRARY.addCard(new Card("Forest", "", "", "Basic Land- Forest", "T:G",
 				new ArrayList<String>(), 0, 0, FOREST_PATH, false), 0);
 
-		Card hand1 = new Card("Forest", "", "", "Basic Land- Forest", "T:G", 
+		Card hand1 = new Card("Forest", "", "", "Basic Land- Forest", "T:G",
 				new ArrayList<String>(), 0, 0, FOREST_PATH, false);
 
 		hand1.addAbility("TYPE {PLAY} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Play}");
@@ -53,14 +94,14 @@ public class MTGDuelDecks {
 
 		Zone.HAND.addCard(hand1,0);
 
-		Card hand2 = new Card("Forest", "", "", "Basic Land- Forest", "T:G", 
+		Card hand2 = new Card("Forest", "", "", "Basic Land- Forest", "T:G",
 				new ArrayList<String>(), 0, 0, FOREST_PATH, false);
 		hand2.addAbility("TYPE {PLAY} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Play}");
 		hand2.addAbility("TYPE {MANA} COST {TAP} EFFECT {G} ZONE {BATTLE_FIELD} TEXT {Add G to your mana pool}");
 
 		Zone.HAND.addCard(hand2, 0);
 
-		Card hand3 = new Card("Arbor Elf", "G", "G", "Creature- Elf Druid", "T:G", 
+		Card hand3 = new Card("Arbor Elf", "G", "G", "Creature- Elf Druid", "T:G",
 				new ArrayList<String>(), 1, 1, LLANOWAR_ELVES_PATH, false);
 		hand3.addAbility("TYPE {CAST} COST {G} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Cast}");
 		hand3.addAbility("TYPE {MANA} COST {TAP} EFFECT {G} ZONE {BATTLE_FIELD} TEXT {Add G to your mana pool}");
@@ -69,7 +110,7 @@ public class MTGDuelDecks {
 
 		Zone.HAND.addCard(hand3, 0);
 
-		Card hand4 = new Card("Imperious Perfect", "2G", "G", "Creature- Elf Warrior", null, 
+		Card hand4 = new Card("Imperious Perfect", "2G", "G", "Creature- Elf Warrior", null,
 				new ArrayList<String>(), 2, 2, IMPERIOUS_PERFECT_PATH, false);
 		hand4.addAbility("TYPE {CAST} COST {2G} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Cast}");
 		hand4.addAbility("TYPE {ACTIVATED} COST {G,TAP} EFFECT {ELF_TOKEN} ZONE {BATTLE_FIELD} TEXT {Put a 1/1 green Elf Warrior token into play}");
@@ -78,7 +119,7 @@ public class MTGDuelDecks {
 		Zone.HAND.addCard(hand4, 0);
 
 
-		Card BF1 = new Card("Forest", "", "", "Creature- Elf Druid", "T:G", 
+		Card BF1 = new Card("Forest", "", "", "Creature- Elf Druid", "T:G",
 				new ArrayList<String>(), 0, 0, FOREST_PATH, false);
 
 		BF1.addAbility("TYPE {PLAY} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Play}");
@@ -96,25 +137,25 @@ public class MTGDuelDecks {
 	 */
 	private static void initializePlayer1() {
 		//Test
-		Zone.GRAVEYARD1.addCard(new Card("Mountain", "", "", "Basic Land- Mountain", "", 
+		Zone.GRAVEYARD1.addCard(new Card("Mountain", "", "", "Basic Land- Mountain", "",
 				new ArrayList<String>(), 0, 0, MOUNTAIN_PATH, false), 0);
-		Zone.LIBRARY1.addCard(new Card("Mountain", "", "", "Basic Land- Mountain", "", 
+		Zone.LIBRARY1.addCard(new Card("Mountain", "", "", "Basic Land- Mountain", "",
 				new ArrayList<String>(), 0, 0, MOUNTAIN_PATH, false), 0);
 
 
-		Card hand1 = new Card("Mountain", "", "", "Basic Land- Mountain", "T:R", 
+		Card hand1 = new Card("Mountain", "", "", "Basic Land- Mountain", "T:R",
 				new ArrayList<String>(), 0, 0, MOUNTAIN_PATH, false);
 		hand1.addAbility("TYPE {PLAY} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Play}");
 		hand1.addAbility("TYPE {MANA} COST {TAP} EFFECT {R} ZONE {BATTLE_FIELD} TEXT {Add R to your mana pool}");
 
-		Card hand2 = new Card("Tarfire", "R", "R", "Instant- Goblin", "", 
+		Card hand2 = new Card("Tarfire", "R", "R", "Instant- Goblin", "",
 				new ArrayList<String>(), 0, 0, TARFIRE_PATH, true);
 		hand2.addAbility("TYPE {CAST} COST {R} TARGET {CREATURE} EFFECT {DAMAGE} ZONE {HAND} RESOLVE {GRAVEYARD} TEXT {Deal 2 damage to target creature}");
 
 		Zone.HAND1.addCard(hand1, 0);
 		Zone.HAND1.addCard(hand2, 0);
 
-		Card BF2 = new Card("Mountain", "", "", "Basic Land- Mountain", "T:R", 
+		Card BF2 = new Card("Mountain", "", "", "Basic Land- Mountain", "T:R",
 				new ArrayList<String>(), 0, 0, MOUNTAIN_PATH, false);
 		BF2.addAbility("TYPE {PLAY} ZONE {HAND} RESOLVE {BATTLE_FIELD} TEXT {Play}");
 		BF2.addAbility("TYPE {MANA} COST {TAP} EFFECT {R} ZONE {BATTLE_FIELD} TEXT {Add R to your mana pool}");

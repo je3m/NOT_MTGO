@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class DeckFactory {
-	private DeckFactory fac;
+	private static DeckFactory fac;
 	private String connectionString =
 			"jdbc:sqlserver://titan.csse.rose-hulman.edu;"
 					+ "database=!MTGO;"
@@ -34,16 +34,16 @@ public class DeckFactory {
 
 	}
 
-	public DeckFactory getInstance(){
-		if(this.fac == null){
+	public static DeckFactory getInstance(){
+		if(fac == null){
 			try {
-				this.fac = new DeckFactory();
+				fac = new DeckFactory();
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 			}
 		}
-		return this.fac;
+		return fac;
 	}
 
 	/**
@@ -53,9 +53,7 @@ public class DeckFactory {
 	 * @throws SQLException
 	 */
 	private Card[] getCards(HashMap<String, Integer> cards) throws SQLException{
-		String query = "FROM name, manacost, color, type, power, toughness, image" +
-				"FROM Cards"
-				+ "WHERE Cards.name = ? ";
+		String query = "SELECT * FROM getCardInfo(?)";
 
 
 		PreparedStatement prepquery = this.connection.prepareStatement(query);
@@ -69,17 +67,20 @@ public class DeckFactory {
 
 			prepquery.setString(1, (String) entry.getKey());
 			ResultSet rs = prepquery.executeQuery();
-
+			rs.next();
 			String name = rs.getString(1);
 			String manaCost = rs.getString(2);
 			String color = rs.getString(3);
 			String type = rs.getString(4);
 			int power = rs.getInt(5);
 			int toughness = rs.getInt(6);
-			String image = rs.getString(7);
+			String image = "res/" + rs.getString(7) + ".png";
+
 
 			Card c = new Card(name, manaCost, color, type, null, new ArrayList<String>(), power, toughness, image, false);
 			ret[i] = c;
+
+
 
 			i++;
 		}
