@@ -114,7 +114,7 @@ public class Backend {
 		if(c == null){
 			throw new IllegalArgumentException("Null is not a valid card for card click events.");
 		}
-		
+
 		switch(z) {
 		case HAND:
 			Zone.BATTLE_FIELD.addCard(c, 0);
@@ -151,7 +151,7 @@ public class Backend {
 	 * @param targetZone the zone of the card being targeted
 	 * @throws RuntimeException thrown if you don't have priority, can't cast the spell, have an invalid target, or try to play too many lands in a turn
 	 */
-	public void activateAbility(Card c, Zone z, int i, int abInd, Card target, Boolean targetPlayer, Zone targetZone) {	
+	public void activateAbility(Card c, Zone z, int i, int abInd, Card target, Boolean targetPlayer, Zone targetZone) {
 		Ability a =	c.getAbilities()[abInd];
 
 		if(this.priority != Zone.getPlayerFromZone(z))
@@ -538,6 +538,8 @@ public class Backend {
 			case "G":
 				cost[4]++;
 				break;
+			case ",":
+				return cost;
 			default:
 				throw new IllegalArgumentException("Cannot parse cards with characters other than WUBRG");
 			}
@@ -664,7 +666,7 @@ public class Backend {
 		if(targetZ == null){
 			throw new IllegalArgumentException("Target zone cannot be null when targeting.");
 		}
-		
+
 		boolean h1ToB2 = (sourceZ == Zone.HAND)  && (targetZ == Zone.BATTLE_FIELD1);
 		boolean h1ToB1 = (sourceZ == Zone.HAND)  && (targetZ == Zone.BATTLE_FIELD);
 		boolean h2ToB1 = (sourceZ == Zone.HAND1)  && (targetZ == Zone.BATTLE_FIELD);
