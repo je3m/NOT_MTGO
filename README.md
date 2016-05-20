@@ -144,3 +144,92 @@ Jim
   -removed multiple calls and tests to castspell (we now use abilities for everything)
   -asserted priority on every action in the game
   
+  ---------------------------------------------------------------------------------------
+  Milestone 8
+  
+  Chris
+  -Fuzz Tested each class using RandomTester
+  -Found bug in backend for removing cards at negative indexes
+  
+  Jim
+  -Used bottom-up integration to integrate all the components of the project
+  
+  ---------------------------------------------------------------------------------------
+  Milestone 9
+  
+  Chris
+  -Added to README the completed features, unimplemented features, and known issues
+
+  Jim
+  -added en_GB language
+  
+  ----------------------------------------------------------------------------------------
+  Summary of Features
+  
+  Completed Features
+  -Zones
+  	-Adding Cards
+  	-Removing Cards
+  	-Getting size
+  
+  -Mana Pools
+  	-Adding Mana
+  	-Removing Mana
+  	-Reseting all Mana to 0
+  
+  -Cards
+  	-Creating Cards
+  	-Type-checking for each field
+  	-Tracking damage
+  	-Tapping and untapping
+  	-Flash
+  
+  -Phases
+  	-Basic phase changing and simple functions
+  
+  -Priority
+  	-Changing phase and removing items from the stack properly
+  	-Players only have priority in phases when they can have priority
+  
+  -Stack
+  	-Spells and abilities both use the stack properly
+  	-Mana Abilities do not use the stack
+  	-Lands can only be played once a turn  and don't use the stack
+  
+  -Casting spells
+  	-Mana cost for spells handled properly
+  	-Spells with abilities can properly target according to the backend (not GUI)
+  	-All spells with targets are currently assumed to deal damage to the target
+  
+  -Activating Abilities
+  	-Mana cost and tapping for activated abilities work properly
+  	-Framework for other activated abilities (currently assumes all make a 1/1 elf or makes G mana)
+  
+  -Specific Cards
+  	-Tarfire (except for GUI targeting)
+  	-Forest
+  	-Mountain
+  	-Arbor Elf
+  	-Imperious Perfect (except for static ability)
+  	-1/1 Elf Token
+  
+  Unimplemented Features
+  -Drawing Cards during draw step
+  -State-based actions
+  -Combat
+  -Summoning Sickness
+  -Triggered Abilities
+  -Static Abilities
+  -Layers
+  -Paying costs other than Mana costs and Taping
+  -Activated Abilities other than Arbor Elf and Imperious Perfect's
+  -Effects for instants and sorceries other than dealing damage
+  -Cards not listed in the Specific Cards implemented section
+  -Displaying a players graveyard and exile in GUI
+  -Displaying the stack when necessary in GUI
+  
+  Known Issues
+  -GUI's targeting does not work properly and has no support for players
+  -GUI is very slow
+  -Untap step untaps all player permanents, not just the player whos tern it is
+  
