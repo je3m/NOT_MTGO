@@ -226,6 +226,7 @@ public class SQLDatabaseConnection {
 	
 	public static String[] getSearchResults(Connection connection, int select, String search){
 		try{
+			
 			String query = "";
 			switch(select){
 			case 0:
@@ -235,6 +236,7 @@ public class SQLDatabaseConnection {
 				query = "select Name from [!MTGO].dbo.Card Where ManaCost = ? Order by Name ASC";
 				break;
 			case 2:
+				search = search.replace('-', '—');
 				query = "select Name from [!MTGO].dbo.Card Where Type = ? Order by Name ASC";
 				break;
 			case 3:
