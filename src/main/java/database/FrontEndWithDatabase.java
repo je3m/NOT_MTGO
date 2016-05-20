@@ -23,6 +23,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import back_end.MTGDuelDecks;
+
 
 
 public class FrontEndWithDatabase {
@@ -257,9 +259,11 @@ public class FrontEndWithDatabase {
 		search.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String selected = dropDown.getSelectedItem().toString();
-				String otherSelected = searchBar.getText();
-				System.out.println("Searching by " +  selected + " for " + otherSelected);
+				if(text1.equals("Collection")){
+					JOptionPane.showMessageDialog(null, "Searching not supported for collections");
+				} else {
+					jlist.setListData(SQLDatabaseConnection.getSearchResults(connection, dropDown.getSelectedIndex(), searchBar.getText()));
+				}
 			}
 		});
 
@@ -486,9 +490,12 @@ public class FrontEndWithDatabase {
 		playGame.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String selected = deck1List.getSelectedValue();
-				String selected1 = deck2List.getSelectedValue();
-				System.out.println("Play game with " + selected + " against " + selected1);
+				String[] input = {username,password,deck1List.getSelectedValue(),deck2List.getSelectedValue()};
+				try {
+					MTGDuelDecks.main(input);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 

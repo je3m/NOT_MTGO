@@ -81,7 +81,7 @@ public class SQLDatabaseConnection {
 	}
 
 	public static String[] getDeckNames(Connection connection, String username, String password) throws SQLException{
-		String query = "select * from [!MTGO].dbo.getPlayerDecks (?,?)";
+		String query = "select * from [!MTGO].dbo.getPlayerDecks (?,?) Order by deckName ASC";
 		PreparedStatement prepquery = connection.prepareStatement(query);
 
 		prepquery.setString(1, username);
@@ -98,7 +98,7 @@ public class SQLDatabaseConnection {
 	}
 	
 	public static String[] getCollectionNames(Connection connection, String username, String password) throws SQLException{
-		String query = "select * from [!MTGO].dbo.getPlayerCollections (?,?)";
+		String query = "select * from [!MTGO].dbo.getPlayerCollections (?,?) Order by collectionName ASC";
 		PreparedStatement prepquery = connection.prepareStatement(query);
 		
 		prepquery.setString(1, username);
@@ -115,7 +115,7 @@ public class SQLDatabaseConnection {
 	}
 	
 	public static String[] getCardsinDeck(Connection connection, String username, String password, String deck) throws SQLException{
-		String query = "select * from [!MTGO].dbo.getDeckContents(?,?,?)";
+		String query = "select * from [!MTGO].dbo.getDeckContents(?,?,?) Order by CardName ASC";
 		PreparedStatement prepquery = connection.prepareStatement(query);
 
 		prepquery.setString(1, username);
@@ -133,7 +133,7 @@ public class SQLDatabaseConnection {
 	}
 	
 	public static String[] getCardsinCollection(Connection connection, String username, String password, String collection) throws SQLException{
-		String query = "select * from [!MTGO].dbo.getCollection(?,?,?)";
+		String query = "select * from [!MTGO].dbo.getCollection(?,?,?) Order by CardName ASC";
 		PreparedStatement prepquery = connection.prepareStatement(query);
 		
 		prepquery.setString(1, username);
@@ -221,6 +221,47 @@ public class SQLDatabaseConnection {
 		} catch (Exception e){
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	public static String[] getSearchResults(Connection connection, int select, String search){
+		try{
+			String query = "";
+			switch(select){
+			case 0:
+				query = "select Name from [!MTGO].dbo.Card Where Name = ? Order by Name ASC";
+				break;
+			case 1:
+				query = "select Name from [!MTGO].dbo.Card Where ManaCost = ? Order by Name ASC";
+				break;
+			case 2:
+				query = "select Name from [!MTGO].dbo.Card Where Type = ? Order by Name ASC";
+				break;
+			case 3:
+				query = "select Name from [!MTGO].dbo.Card Where Color = ? Order by Name ASC";
+				break;
+			case 4:
+				query = "select Name from [!MTGO].dbo.Card Where Power = ? Order by Name ASC";
+				break;
+			case 5:
+				query = "select Name from [!MTGO].dbo.Card Where Toughness = ? Order by Name ASC";
+				break;
+			}
+			PreparedStatement prepquery = connection.prepareStatement(query);
+			
+			prepquery.setString(1, search);
+			
+			ResultSet rs = prepquery.executeQuery();
+			
+			ArrayList<String> ar = new ArrayList<String>();
+			while(rs.next()){
+				ar.add(rs.getString(1));
+			}
+			
+			return ar.toArray(new String[0]);
+		} catch (Exception e){
+			e.printStackTrace();
+			return new String[0];
 		}
 	}
 }
