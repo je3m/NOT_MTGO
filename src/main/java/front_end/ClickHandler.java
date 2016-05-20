@@ -67,9 +67,9 @@ public class ClickHandler implements MouseListener {
 		}
 		if(graveyardButton.contains(this.MTGComp.getMousePosition())) {
 			if(player){
-				JOptionPane.showMessageDialog(this.MTGComp, "Grave1");
+				JOptionPane.showMessageDialog(this.MTGComp, Messages.getString("ClickHandler.0")); //$NON-NLS-1$
 			} else {
-				JOptionPane.showMessageDialog(this.MTGComp, "Grave2");
+				JOptionPane.showMessageDialog(this.MTGComp, Messages.getString("ClickHandler.1")); //$NON-NLS-1$
 			}
 			return true;
 		}
@@ -112,7 +112,7 @@ public class ClickHandler implements MouseListener {
 								this.targetPlayer = player;
 								this.MTGComp.setDispGUICard1(null);
 								this.MTGComp.setDispGUICard2(null);
-								JOptionPane.showMessageDialog(this.MTGComp, "Select a target");
+								JOptionPane.showMessageDialog(this.MTGComp, Messages.getString("ClickHandler.2")); //$NON-NLS-1$
 								return true;
 							}
 							

@@ -15,7 +15,7 @@ public enum AbilityType {
 
 	public static AbilityType getTypeFromString(String s){
 		if(s == null) {
-			throw new IllegalArgumentException("Ability type string cannot be null.");
+			throw new IllegalArgumentException(Messages.getString("AbilityType.0")); //$NON-NLS-1$
 		}
 		
 		for (AbilityType z: AbilityType.values()){

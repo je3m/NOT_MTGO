@@ -29,7 +29,7 @@ public class FrontEndWithDatabase {
 		final JFrame Frame = new JFrame();
 		Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Frame.setVisible(true);
-		Frame.setTitle("MTG Deck Maker");
+		Frame.setTitle(Messages.getString("FrontEndWithDatabase.0")); //$NON-NLS-1$
 		Frame.setBounds(0, 0, width, height);
 		Frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
@@ -37,13 +37,13 @@ public class FrontEndWithDatabase {
 		initialScreen.setMaximumSize(new Dimension(width, height));
 		initialScreen.setLayout(new FlowLayout());
 		
-		JPanel deckBuilder = createDeckBuilder(width, height, buttonDimension, initialScreen, Frame, "Card List", "Deck");
+		JPanel deckBuilder = createDeckBuilder(width, height, buttonDimension, initialScreen, Frame, Messages.getString("FrontEndWithDatabase.1"), Messages.getString("FrontEndWithDatabase.2")); //$NON-NLS-1$ //$NON-NLS-2$
 		
-		JPanel collectionBuilder = createDeckBuilder(width, height, buttonDimension, initialScreen, Frame, "Card List", "Collection");
+		JPanel collectionBuilder = createDeckBuilder(width, height, buttonDimension, initialScreen, Frame, Messages.getString("FrontEndWithDatabase.3"), Messages.getString("FrontEndWithDatabase.4")); //$NON-NLS-1$ //$NON-NLS-2$
 		
-		JPanel collectionDeckBuilder = createDeckBuilder(width, height, buttonDimension, initialScreen, Frame, "Collection", "Deck");
+		JPanel collectionDeckBuilder = createDeckBuilder(width, height, buttonDimension, initialScreen, Frame, Messages.getString("FrontEndWithDatabase.5"), Messages.getString("FrontEndWithDatabase.6")); //$NON-NLS-1$ //$NON-NLS-2$
 		
-		JButton goToDB = new JButton("Go to Deck Builder");
+		JButton goToDB = new JButton(Messages.getString("FrontEndWithDatabase.7")); //$NON-NLS-1$
 		goToDB.setPreferredSize(bigButtonDimension);
 		goToDB.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) { 
@@ -54,7 +54,7 @@ public class FrontEndWithDatabase {
 			}
 		});
 		
-		JButton goToCB = new JButton("Go to Collection Builder");
+		JButton goToCB = new JButton(Messages.getString("FrontEndWithDatabase.8")); //$NON-NLS-1$
 		goToCB.setPreferredSize(bigButtonDimension);
 		goToCB.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) { 
@@ -65,7 +65,7 @@ public class FrontEndWithDatabase {
 			}
 		});
 		
-		JButton goToCDB = new JButton("Go to Collection Deck Builder");
+		JButton goToCDB = new JButton(Messages.getString("FrontEndWithDatabase.9")); //$NON-NLS-1$
 		goToCDB.setPreferredSize(bigButtonDimension);
 		goToCDB.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) { 
@@ -93,13 +93,13 @@ public class FrontEndWithDatabase {
 		int strLength = 1000;
 		String[] str = new String[strLength];
 		for(int i = 0; i< strLength; i++){
-			str[i] = "" + i;
+			str[i] = Messages.getString("FrontEndWithDatabase.10") + i; //$NON-NLS-1$
 		}
 		
 		int strLength1 = 1000;
 		String[] str1 = new String[strLength1];
 		for(int i = 0; i< strLength1; i++){
-			str1[i] = "1" + i;
+			str1[i] = Messages.getString("FrontEndWithDatabase.11") + i; //$NON-NLS-1$
 		}
 		
 		JList<String> jlist = new JList<String>(str);
@@ -136,27 +136,27 @@ public class FrontEndWithDatabase {
 		searchBar.setPreferredSize(new Dimension((int)(width*.15),25));
 		
 		String[] dropDownOptions = new String[5];
-		dropDownOptions[0] = "Name";
-		dropDownOptions[1] = "Mana Cost";
-		dropDownOptions[2] = "Color";
-		dropDownOptions[3] = "Power";
-		dropDownOptions[4] = "Toughness";
+		dropDownOptions[0] = Messages.getString("FrontEndWithDatabase.12"); //$NON-NLS-1$
+		dropDownOptions[1] = Messages.getString("FrontEndWithDatabase.13"); //$NON-NLS-1$
+		dropDownOptions[2] = Messages.getString("FrontEndWithDatabase.14"); //$NON-NLS-1$
+		dropDownOptions[3] = Messages.getString("FrontEndWithDatabase.15"); //$NON-NLS-1$
+		dropDownOptions[4] = Messages.getString("FrontEndWithDatabase.16"); //$NON-NLS-1$
 		
 		JComboBox<String> dropDown = new JComboBox<String>(dropDownOptions);
 		dropDown.setPreferredSize(new Dimension((int)(width*.15),25));
 		
-		JButton search = new JButton("Search");
+		JButton search = new JButton(Messages.getString("FrontEndWithDatabase.17")); //$NON-NLS-1$
 		search.setPreferredSize(buttonDimension);
 		search.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) { 
 				String selected = dropDown.getSelectedItem().toString();
 				String otherSelected = searchBar.getText();
-				System.out.println("Searching by " +  selected + " for " + otherSelected);
+				System.out.println(Messages.getString("FrontEndWithDatabase.18") +  selected + Messages.getString("FrontEndWithDatabase.19") + otherSelected); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		});
 		
 		
-		JButton add = new JButton("Add to " + text2);
+		JButton add = new JButton(Messages.getString("FrontEndWithDatabase.20") + text2); //$NON-NLS-1$
 		add.setPreferredSize(buttonDimension);
 		add.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) { 
@@ -165,7 +165,7 @@ public class FrontEndWithDatabase {
 			}
 		});
 		
-		JButton remove = new JButton("Remove from " + text2);
+		JButton remove = new JButton(Messages.getString("FrontEndWithDatabase.21") + text2); //$NON-NLS-1$
 		remove.setPreferredSize(buttonDimension);
 		remove.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) { 
@@ -174,7 +174,7 @@ public class FrontEndWithDatabase {
 			}
 		});
 		
-		JButton mainMenu = new JButton("Return to Main Menu");
+		JButton mainMenu = new JButton(Messages.getString("FrontEndWithDatabase.22")); //$NON-NLS-1$
 		mainMenu.setPreferredSize(buttonDimension);
 		mainMenu.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) { 

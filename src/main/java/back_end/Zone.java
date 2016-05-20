@@ -27,7 +27,7 @@ public enum Zone {
 	 */
 	public void addCard(Card c, int i){
 		if((i > this.getSize()) || (i < 0)) {
-			throw new IndexOutOfBoundsException("Index " + i + " is not valid for the " + this + " zone");
+			throw new IndexOutOfBoundsException(Messages.getString("Zone.0") + i + Messages.getString("Zone.1") + this + Messages.getString("Zone.2")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		this.cards.add(i, c);
 	}
@@ -102,7 +102,7 @@ public enum Zone {
 	 */
 	public void remove(int i)  throws IndexOutOfBoundsException {
 		if(i>= this.getSize() || i<0) {
-			throw new IndexOutOfBoundsException("No object exists in the " + this + " zone at index " + i);
+			throw new IndexOutOfBoundsException(Messages.getString("Zone.3") + this + Messages.getString("Zone.4") + i); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		this.cards.remove(i);
 
@@ -125,14 +125,14 @@ public enum Zone {
 	public static Zone getZoneFromString(String string) {
 		
 		if(string == null) {
-			throw new IllegalArgumentException("Zone name string cannot be null.");
+			throw new IllegalArgumentException(Messages.getString("Zone.5")); //$NON-NLS-1$
 		}
 		for (Zone z: Zone.values()){
 			if (string.equals(z.name())){
 				return z;
 			}
 		}
-		throw new IllegalArgumentException("invalid zone " + string);
+		throw new IllegalArgumentException(Messages.getString("Zone.6") + string); //$NON-NLS-1$
 	}
 
 	/**
@@ -154,11 +154,11 @@ public enum Zone {
 
 
 		if(string == null) {
-			throw new IllegalArgumentException("Zone name string cannot be null.");
+			throw new IllegalArgumentException(Messages.getString("Zone.7")); //$NON-NLS-1$
 		}
 		
 		if(!player)
-			string = string.concat("1");
+			string = string.concat(Messages.getString("Zone.8")); //$NON-NLS-1$
 		for (Zone z: Zone.values()){
 			if (string.equals(z.name())){
 				return z;

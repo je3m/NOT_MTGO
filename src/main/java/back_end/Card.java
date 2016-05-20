@@ -23,7 +23,7 @@ public class Card {
 		this.name = name;
 		this.damage = 0;
 		if(abilities == null){
-			throw new IllegalArgumentException("Error creating card " + name + ": null is not a valid ability list");
+			throw new IllegalArgumentException(Messages.getString("Card.0") + name + Messages.getString("Card.1")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		for(String s : abilities){
@@ -38,7 +38,7 @@ public class Card {
 			this.setPT(power, toughness);
 			this.setImage(image);
 		} catch (Exception e){
-			throw new IllegalArgumentException("Error creating card " + name + ": " + e.getMessage());
+			throw new IllegalArgumentException(Messages.getString("Card.2") + name + Messages.getString("Card.3") + e.getMessage()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		this.tapped = false;
 		this.flash = flash;
@@ -126,9 +126,9 @@ public class Card {
 	 * @param string color of card represented by W?U?B?R?G?
 	 */
 	public void setColor(String string) {
-		String regex = "W?U?B?R?G?C?";
+		String regex = Messages.getString("Card.4"); //$NON-NLS-1$
 		if(!string.matches(regex)) {
-			throw new PatternSyntaxException("Card " + this.name + ": " + string + " is not a valid color", regex, -1);
+			throw new PatternSyntaxException(Messages.getString("Card.5") + this.name + Messages.getString("Card.6") + string + Messages.getString("Card.7"), regex, -1); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		this.color = string;
 
@@ -144,13 +144,13 @@ public class Card {
 	 */
 	public void setCost(String s){
 		if (s == null){
-			this.manaCost = "";
+			this.manaCost = Messages.getString("Card.8"); //$NON-NLS-1$
 			return;
 		}
 
-		String regex = "[0-9]*W*U*B*R*G*";
+		String regex = Messages.getString("Card.9"); //$NON-NLS-1$
 		if(!s.matches(regex)) {
-			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid mana cost", regex, -1);
+			throw new PatternSyntaxException(Messages.getString("Card.10") + this.name + Messages.getString("Card.11") + s + Messages.getString("Card.12"), regex, -1); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		this.manaCost = s;
 	}
@@ -162,7 +162,7 @@ public class Card {
 	public void setImage(String string) {
 		File test = new File(string);
 		if(!test.exists()) {
-			throw new IllegalArgumentException("Card " + this.name + ": " + string + " is not a valid file name");
+			throw new IllegalArgumentException(Messages.getString("Card.13") + this.name + Messages.getString("Card.14") + string + Messages.getString("Card.15")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		this.image = string;
 
@@ -204,11 +204,11 @@ public class Card {
 	 */
 	public void setType(String s) {
 		if(s == null){
-			throw new IllegalArgumentException("Card " + this.name + ": null is not a valid card type");
+			throw new IllegalArgumentException(Messages.getString("Card.16") + this.name + Messages.getString("Card.17")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		String regex = "(Basic )?[A-Z][a-z]*(\\- [A-Z][a-z]*( [A-Z][a-z]*)*)?";
+		String regex = Messages.getString("Card.18"); //$NON-NLS-1$
 		if(!s.matches(regex)) {
-			throw new PatternSyntaxException("Card " + this.name + ": " + s + " is not a valid card typeline", regex, -1);
+			throw new PatternSyntaxException(Messages.getString("Card.19") + this.name + Messages.getString("Card.20") + s + Messages.getString("Card.21"), regex, -1); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		this.type = s;
 	}
@@ -255,7 +255,7 @@ public class Card {
 	 * @return whether this card can be cast at instant speed
 	 */
 	public Boolean isFlash() {
-		return this.flash || this.type.contains("Instant");
+		return this.flash || this.type.contains(Messages.getString("Card.22")); //$NON-NLS-1$
 	}
 
 	/**

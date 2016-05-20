@@ -33,7 +33,7 @@ public class DispGUICard extends GUICard{
 		ArrayList<String> abilityStr = new ArrayList<String>();
 		ArrayList<Integer> abilityInt = new ArrayList<Integer>();
 		for (int i = 0; i < a.length; i++){
-			if(Zone.getZoneFromString(a[i].getZone()) == zone || Zone.getZoneFromString(a[i].getZone() + "1") == zone){
+			if(Zone.getZoneFromString(a[i].getZone()) == zone || Zone.getZoneFromString(a[i].getZone() + Messages.getString("DispGUICard.0")) == zone){ //$NON-NLS-1$
 				abilityStr.add(a[i].getText());
 				abilityInt.add(i);
 			}
@@ -42,8 +42,8 @@ public class DispGUICard extends GUICard{
 		this.abilityIndecies = abilityInt.toArray(new Integer[0]);
 
 		if(index > zone.getSize()) {
-			throw new IllegalArgumentException("DispGUICard " + card.getName() +
-					": " + index + " is not a valid index for zone " + zone);
+			throw new IllegalArgumentException(Messages.getString("DispGUICard.1") + card.getName() + //$NON-NLS-1$
+					Messages.getString("DispGUICard.2") + index + Messages.getString("DispGUICard.3") + zone); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		this.index = index;
 		this.zone = zone;

@@ -110,12 +110,12 @@ public class MTGComponent extends JComponent{
 	 */
 	public MTGComponent(int x, int y, Backend bkd){
 		if(x < 0) {
-			throw new IllegalArgumentException("MTGComponent: " + x + " is not a valid window width");
+			throw new IllegalArgumentException(Messages.getString("MTGComponent.0") + x + Messages.getString("MTGComponent.1")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		this.windowX = x;
 
 		if(y < 0) {
-			throw new IllegalArgumentException("MTGComponent: " + y + " is not a valid window height");
+			throw new IllegalArgumentException(Messages.getString("MTGComponent.2") + y + Messages.getString("MTGComponent.3")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		this.windowY = y;
 
@@ -176,7 +176,7 @@ public class MTGComponent extends JComponent{
 	 */
 	public void setWindowX(int x){
 		if(x < 0) {
-			throw new IllegalArgumentException("MTGComponent: " + x + " is not a valid window width");
+			throw new IllegalArgumentException(Messages.getString("MTGComponent.4") + x + Messages.getString("MTGComponent.5")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		this.windowX = x;
 	}
@@ -187,7 +187,7 @@ public class MTGComponent extends JComponent{
 	 */
 	public void setWindowY(int y){
 		if(y < 0) {
-			throw new IllegalArgumentException("MTGComponent: " + y + " is not a valid window height");
+			throw new IllegalArgumentException(Messages.getString("MTGComponent.6") + y + Messages.getString("MTGComponent.7")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		this.windowY = y;
 	}
@@ -259,12 +259,12 @@ public class MTGComponent extends JComponent{
 	 * @param graphics2
 	 */
 	private void drawManaPools(Graphics2D graphics2) {
-		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(this.windowY*MANA_POOLS_MAX_FONT_HEIGHT), (int)(this.windowX*MANA_POOLS_MAX_FONT_WIDTH))));
+		graphics2.setFont(new Font(Messages.getString("MTGComponent.8"), Font.PLAIN, Math.min((int)(this.windowY*MANA_POOLS_MAX_FONT_HEIGHT), (int)(this.windowX*MANA_POOLS_MAX_FONT_WIDTH)))); //$NON-NLS-1$
 
-		String[] labels = {"W", "U", "B","R","G","C", "W","U","B","R","G","C"};
+		String[] labels = {Messages.getString("MTGComponent.9"), Messages.getString("MTGComponent.10"), Messages.getString("MTGComponent.11"),Messages.getString("MTGComponent.12"),Messages.getString("MTGComponent.13"),Messages.getString("MTGComponent.14"), Messages.getString("MTGComponent.15"),Messages.getString("MTGComponent.16"),Messages.getString("MTGComponent.17"),Messages.getString("MTGComponent.18"),Messages.getString("MTGComponent.19"),Messages.getString("MTGComponent.20")}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$ //$NON-NLS-12$
 		ManaPool[] pools = ManaPool.values();
 		for(int p = 0; p < pools.length; p++) {
-			graphics2.drawString(labels[p] + ":" + String.valueOf(pools[p].getAmount()),
+			graphics2.drawString(labels[p] + Messages.getString("MTGComponent.21") + String.valueOf(pools[p].getAmount()), //$NON-NLS-1$
 					(int)((this.windowX*MANA_POOLS_X_POSITION) + (p*this.windowX*MANA_POOL_COLOR_WIDTH)), (int)((this.windowY*MANA_POOLS_Y_POSITION) + (this.windowY*MANA_POOLS_ADJUSTMENT*MANA_POOL_HEIGHT)));
 		}
 
@@ -275,7 +275,7 @@ public class MTGComponent extends JComponent{
 	 * @param graphics2
 	 */
 	private void drawPhases(Graphics2D graphics2) {
-		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(this.windowY*PHASES_MAX_FONT_HEIGHT), (int)(this.windowX*PHASES_MAX_FONT_WIDTH))));
+		graphics2.setFont(new Font(Messages.getString("MTGComponent.22"), Font.PLAIN, Math.min((int)(this.windowY*PHASES_MAX_FONT_HEIGHT), (int)(this.windowX*PHASES_MAX_FONT_WIDTH)))); //$NON-NLS-1$
 
 		Phase[] phases = Phase.values();
 		for(int p=0; p< 12; p++) {
@@ -300,17 +300,17 @@ public class MTGComponent extends JComponent{
 	 * @param graphics2
 	 */
 	private void drawPassButtons(Graphics2D graphics2) {
-		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(this.windowY*PASS_BUTTONS_MAX_FONT_HEIGHT), (int)(this.windowX*PASS_BUTTONS_MAX_FONT_WIDTH))));
+		graphics2.setFont(new Font(Messages.getString("MTGComponent.23"), Font.PLAIN, Math.min((int)(this.windowY*PASS_BUTTONS_MAX_FONT_HEIGHT), (int)(this.windowX*PASS_BUTTONS_MAX_FONT_WIDTH)))); //$NON-NLS-1$
 		graphics2.setColor(Color.RED);
 
-		graphics2.drawString("PASS", (int)(this.windowX*PASS_BUTTON_X_POSITION), (int)((this.windowY*PASS_BUTTON_Y_POSITION) + (this.windowY*PASS_BUTTONS_ADJUSTMENT*PASS_BUTTONS_HEIGHT)));
-		graphics2.drawString("PASS", (int)(this.windowX*PASS_BUTTON1_X_POSITION), (int)((this.windowY*PASS_BUTTON1_Y_POSITION) + (this.windowY*PASS_BUTTONS_ADJUSTMENT*PASS_BUTTONS_HEIGHT)));
+		graphics2.drawString(Messages.getString("MTGComponent.24"), (int)(this.windowX*PASS_BUTTON_X_POSITION), (int)((this.windowY*PASS_BUTTON_Y_POSITION) + (this.windowY*PASS_BUTTONS_ADJUSTMENT*PASS_BUTTONS_HEIGHT))); //$NON-NLS-1$
+		graphics2.drawString(Messages.getString("MTGComponent.25"), (int)(this.windowX*PASS_BUTTON1_X_POSITION), (int)((this.windowY*PASS_BUTTON1_Y_POSITION) + (this.windowY*PASS_BUTTONS_ADJUSTMENT*PASS_BUTTONS_HEIGHT))); //$NON-NLS-1$
 
 		graphics2.setColor(Color.BLUE);
 		if(this.bkd.getPriority()) {
-			graphics2.drawString("***", (int)(this.windowX*PASS_BUTTON_X_POSITION), (int)((this.windowY*PASS_BUTTON_Y_POSITION) + (this.windowY*PRIORITY_ADJUSTMENT*PASS_BUTTONS_HEIGHT)));
+			graphics2.drawString(Messages.getString("MTGComponent.26"), (int)(this.windowX*PASS_BUTTON_X_POSITION), (int)((this.windowY*PASS_BUTTON_Y_POSITION) + (this.windowY*PRIORITY_ADJUSTMENT*PASS_BUTTONS_HEIGHT))); //$NON-NLS-1$
 		} else {
-			graphics2.drawString("***", (int)(this.windowX*PASS_BUTTON1_X_POSITION), (int)((this.windowY*PASS_BUTTON1_Y_POSITION) + (this.windowY*PRIORITY_ADJUSTMENT*PASS_BUTTONS_HEIGHT)));
+			graphics2.drawString(Messages.getString("MTGComponent.27"), (int)(this.windowX*PASS_BUTTON1_X_POSITION), (int)((this.windowY*PASS_BUTTON1_Y_POSITION) + (this.windowY*PRIORITY_ADJUSTMENT*PASS_BUTTONS_HEIGHT))); //$NON-NLS-1$
 		}
 
 		graphics2.setColor(Color.BLACK);
@@ -321,7 +321,7 @@ public class MTGComponent extends JComponent{
 	 * @param graphics2
 	 */
 	private void drawCountedZones1(Graphics2D graphics2){
-		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(this.windowY*ZONES_MAX_FONT_HEIGHT), (int)(this.windowX*ZONES_MAX_FONT_WIDTH))));
+		graphics2.setFont(new Font(Messages.getString("MTGComponent.28"), Font.PLAIN, Math.min((int)(this.windowY*ZONES_MAX_FONT_HEIGHT), (int)(this.windowX*ZONES_MAX_FONT_WIDTH)))); //$NON-NLS-1$
 		graphics2.drawString(String.valueOf(Zone.LIBRARY.getSize()),(int)(this.windowX*LIBRARY_COUNT_X_POSITION),(int)(this.windowY*LIBRARY_COUNT_Y_POSITION));
 		graphics2.drawString(String.valueOf(Zone.GRAVEYARD.getSize()),(int)(this.windowX*GRAVEYARD_COUNT_X_POSITION),(int)(this.windowY*GRAVEYARD_COUNT_Y_POSITION));
 		graphics2.drawString(String.valueOf(Zone.EXILE.getSize()),(int)(this.windowX*EXILE_COUNT_X_POSITION),(int)(this.windowY*GRAVEYARD_COUNT_Y_POSITION));
@@ -332,7 +332,7 @@ public class MTGComponent extends JComponent{
 	 * @param graphics2
 	 */
 	private void drawCountedZones2(Graphics2D graphics2){
-		graphics2.setFont(new Font("TimesRoman", Font.PLAIN, Math.min((int)(this.windowY*ZONES_MAX_FONT_HEIGHT), (int)(this.windowX*ZONES_MAX_FONT_WIDTH))));
+		graphics2.setFont(new Font(Messages.getString("MTGComponent.29"), Font.PLAIN, Math.min((int)(this.windowY*ZONES_MAX_FONT_HEIGHT), (int)(this.windowX*ZONES_MAX_FONT_WIDTH)))); //$NON-NLS-1$
 		graphics2.drawString(String.valueOf(Zone.LIBRARY1.getSize()),(int)(this.windowX*LIBRARY1_COUNT_X_POSITION),(int)(this.windowY*LIBRARY_COUNT_Y_POSITION));
 		graphics2.drawString(String.valueOf(Zone.GRAVEYARD1.getSize()),(int)(this.windowX*GRAVEYARD1_COUNT_X_POSITION),(int)(this.windowY*GRAVEYARD_COUNT_Y_POSITION));
 		graphics2.drawString(String.valueOf(Zone.EXILE1.getSize()),(int)(this.windowX*EXILE1_COUNT_X_POSITION),(int)(this.windowY*GRAVEYARD_COUNT_Y_POSITION));
@@ -379,7 +379,7 @@ public class MTGComponent extends JComponent{
 		for(int i = 0; i < cardsAL.size(); i++){
 			if(cardsAL.get(i).getImage() == null){
 				graphics2.draw(cardsAL.get(i).getRec());
-				graphics2.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+				graphics2.setFont(new Font(Messages.getString("MTGComponent.30"), Font.PLAIN, 15)); //$NON-NLS-1$
 				graphics2.drawString(cardsAL.get(i).getCard().getName(), (int)cardsAL.get(i).getRec().getCenterX(), (int)cardsAL.get(i).getRec().getCenterY());
 			} else {
 				Rectangle rec = cardsAL.get(i).getRec();
@@ -428,7 +428,7 @@ public class MTGComponent extends JComponent{
 		if(dispCard != null){
 			if(dispCard.getCard().getImage() == null){
 				graphics2.draw(dispCard.getRec());
-				graphics2.setFont(new Font("Futura", Font.PLAIN, ABILITY_FONT_SIZE));
+				graphics2.setFont(new Font(Messages.getString("MTGComponent.31"), Font.PLAIN, ABILITY_FONT_SIZE)); //$NON-NLS-1$
 				graphics2.drawString(dispCard.getCard().getName(), (int)dispCard.getRec().getCenterX(), (int)dispCard.getRec().getCenterY());
 			} else {
 				Rectangle rec = dispCard.getRec();

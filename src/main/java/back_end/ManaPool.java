@@ -112,7 +112,7 @@ public enum ManaPool {
 			return ManaPool.COLORLESS2;
 
 		default:
-			throw new IllegalArgumentException("invalid color '" + color + "'");
+			throw new IllegalArgumentException(Messages.getString("ManaPool.0") + color + Messages.getString("ManaPool.1")); //$NON-NLS-1$ //$NON-NLS-2$
 
 		}
 	}
