@@ -159,6 +159,9 @@ Jim
   
   Chris
   -Added to README the completed features, unimplemented features, and known issues
+
+  Jim
+  -added en_GB language
   
   ----------------------------------------------------------------------------------------
   Summary of Features
